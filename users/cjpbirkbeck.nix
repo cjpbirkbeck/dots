@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let
+  unstable = import <unstable> {};
 in
 {
   imports = [
@@ -12,7 +13,7 @@ in
     home = {
       stateVersion = "19.09";
       sessionVariables = {
-        TEST_VAR = "Hello world";
+        # TEST_VAR = "Hello world";
       };
     };
 
@@ -84,6 +85,38 @@ in
           selection-clipboard = "clipboard";
           page-padding = 3;
         };
+      };
+    };
+
+    services = {
+      mpd = {
+        enable = true;
+        musicDirectory = /home/cjpbirkbeck/Music;
+        extraConfig = ''
+          auto_update "yes"
+
+          restore_paused "yes"
+          max_output_buffer_size "16384"
+
+          audio_output {
+                type  "pulse"
+                name  "pulse audio"
+                mixer_type "software"
+          }
+
+          audio_output {
+            type               "fifo"
+            name               "toggle_visualizer"
+            path               "/tmp/mpd.fifo"
+            format             "44100:16:2"
+          }
+        '';
+      };
+
+      mpdris2 = {
+        enable = true;
+        multimediaKeys = true;
+        notifications = true;
       };
     };
 
