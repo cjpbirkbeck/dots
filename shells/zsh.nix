@@ -8,7 +8,7 @@
 
   environment = {
     variables = {
-      ZDOTDIR = "$HOME/.config/zsh";
+      # ZDOTDIR = "$HOME/.config/zsh";
     };
   };
 
@@ -29,7 +29,7 @@
       };
       histSize = 2147483647;
       histFile = "$HOME/.local/share/zsh/history";
-
+      vteIntegration = true;
       setOptions = [
         # History options
         "APPEND_HISTORY"     # Sessions will append to history file.

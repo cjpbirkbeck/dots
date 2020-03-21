@@ -16,6 +16,9 @@
     ./sys/upgrades.nix
     ./sys/backup.nix
 
+    # User-specific configurations
+    ./users/cjpbirkbeck.nix
+
     # Shell configuration
     ./shells/shells.nix
     ./shells/bash.nix

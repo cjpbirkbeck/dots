@@ -55,7 +55,7 @@ in {
           let g:ale_completion_enabled = 1
 
           " common.vim should hold all the settings to be used across all systems.
-          source $HOME/.config/nvim/common.vim
+          source $HOME/.config/nvim/init.vim
 
           " Add NixOS' of the GNU collection's dictionaries to nvim's dictionaries list.
           " Useful for autocompletions.
