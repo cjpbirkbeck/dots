@@ -38,6 +38,21 @@ in
         fileWidgetOptions = [ "--preview='$HOME/.local/bin/peekat {} $FZF_PREVIEW_COLUMNS'" ];
       };
 
+      git = {
+        enable = true;
+        package = pkgs.gitAndTools.gitFull;
+        userName = "Christopher Birkbeck";
+        userEmail = "cjpbirkbeck@gmail.com";
+      };
+
+      mpv = {
+        enable = true;
+        config = {
+          input-ipc-server = "/tmp/mpv";
+          slang = "en";
+        };
+      };
+
       jq = {
         enable = true;
       };
