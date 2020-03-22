@@ -57,6 +57,24 @@ in
         enable = true;
       };
 
+      rofi = {
+        enable = true;
+        theme = "paper-float";
+        extraConfig = ''
+
+          ! Opacity
+          rofi.opacity: 80
+
+          ! Enable modes
+          rofi.modi: window,run,combi,drun
+        '';
+      };
+
+      taskwarrior = {
+        enable = true;
+        dataLocation = "~/.local/share/task";
+      };
+
       termite = {
         enable = true;
         iconName = "utilities-terminal";
@@ -144,6 +162,13 @@ in
     # Use nix to manage the plugins globally, while configuring them per-user.
     xdg.configFile."nvim/init.vim" = {
       source = ./dotfiles/common.vim;
+    };
+
+    xdg.configFile = {
+      "vifm" = {
+        source = ./dotfiles/vifm;
+        recursive = true;
+      };
     };
   };
 
