@@ -33,7 +33,6 @@
     # Application specific settings
     ./apps/applications.nix
     ./apps/security.nix
-    ./apps/custom/emacs.nix
     ./apps/custom/nvim.nix
     ./apps/custom/scripts.nix
     ./apps/dev/lisp.nix

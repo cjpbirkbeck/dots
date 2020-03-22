@@ -55,7 +55,7 @@
       ls = "ls --human-readable --color=auto --group-directories-first";
 
       l  = "ls -l";     # List directories with a long format.
-      ll = "ls -lA";    # List directories with a long format
+      ll = "ls -lA";    # List all directories with a long format
       lx = "ls -lXB";   # List files by file extension
       lz = "ls -lSr";   # List files by size
       la = "ls -A";     # list hidden files
@@ -69,7 +69,6 @@
       egrep = "egrep --color=auto";
 
       ## Program aliases
-      "_"   = "sudo";
       more  = "less";
 
       # Aliases for nix programs.

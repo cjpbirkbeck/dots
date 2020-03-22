@@ -1,4 +1,4 @@
-# User settings
+# Locale settings
 
 { config, pkgs, ... }:
 
@@ -12,12 +12,4 @@
     consoleKeyMap = "us";
     defaultLocale = "en_CA.UTF-8";
   };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.cjpbirkbeck = {
-    description = "Christopher Birkbeck";
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "lp" ]; # Enable ‘sudo’ for the user.
-  };
-
 }

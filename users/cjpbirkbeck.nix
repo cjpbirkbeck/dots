@@ -1,3 +1,5 @@
+# Configures my local, home settings
+
 { config, pkgs, ... }:
 
 let
@@ -7,6 +9,13 @@ in
   imports = [
     <home-manager/nixos>
   ];
+
+  # Define my basic user details.
+  users.users.cjpbirkbeck = {
+    description = "Christopher Birkbeck";
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "lp" ]; # Enable ‘sudo’ for the user.
+  };
 
   home-manager.users.cjpbirkbeck = { pkgs, ... }: {
 
@@ -168,6 +177,19 @@ in
       "vifm" = {
         source = ./dotfiles/vifm;
         recursive = true;
+      };
+
+      "neofetch/config.conf" = {
+        source = ./dotfiles/neofetch/config.conf;
+      };
+
+      "sxiv/exec/key-handler" = {
+        source = ./dotfiles/sxiv/exec/key-handler;
+        executable = true;
+      };
+
+      "sxiv/exec/image-info" = {
+        source = ./dotfiles/sxiv/exec/image-info;
       };
     };
   };
