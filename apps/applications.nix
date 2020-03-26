@@ -25,9 +25,9 @@ in
     vimpc               # TUI frontend for mpd
     mpd-mpris           # Interfaces mpris with mpd
     mpv-with-scripts    # Lightweight music player
-    playerctl           # 
+    playerctl           # Command-line MPRIS controller
     ffmpeg              # Video encoder
-    ffmpegthumbnailer
+    ffmpegthumbnailer   # Create video thumbnails
 
     # Web browsers
     firefox

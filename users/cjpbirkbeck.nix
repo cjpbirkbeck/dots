@@ -22,7 +22,8 @@ in
     home = {
       stateVersion = "19.09";
       sessionVariables = {
-        # TEST_VAR = "Hello world";
+        XCOMPOSEFILE = "~/.config/X11/XCompose";
+        XCOMPOSECACHE = "~/.config/X11/XCompose";
       };
     };
 
@@ -81,7 +82,6 @@ in
 
       taskwarrior = {
         enable = true;
-        dataLocation = "~/.local/share/task";
       };
 
       termite = {
@@ -111,11 +111,16 @@ in
         history = {
           path = ".local/share/zsh/history";
         };
-        initExtra = builtins.readFile ./dotfiles/functions.sh;
+        initExtra = builtins.readFile ./cfg/zsh/functions.sh;
         shellAliases = {
           "_" = "sudo";
           "__" = "sudo -i";
         };
+      };
+
+      bash = {
+        enable = true;
+        historyFile = ".local/share/bash/history";
       };
 
       zathura = {
@@ -133,7 +138,7 @@ in
     services = {
       mpd = {
         enable = true;
-        musicDirectory = /home/cjpbirkbeck/Music;
+        musicDirectory = /home/cjpbirkbeck/Audio;
         extraConfig = ''
           auto_update "yes"
 
@@ -162,36 +167,51 @@ in
       };
     };
 
-    home.packages = [ pkgs.bash ];
-    programs.bash.enable = true;
-    programs.bash.shellAliases = {
-      "..." = "cd ../..";
-    };
-
     # Use nix to manage the plugins globally, while configuring them per-user.
-    xdg.configFile."nvim/init.vim" = {
-      source = ./dotfiles/common.vim;
-    };
+    xdg = {
+      configFile = {
+        "khard/config,conf" = {
+          source = ./cfg/khard/khard.conf;
+        };
 
-    xdg.configFile = {
-      "vifm" = {
-        source = ./dotfiles/vifm;
-        recursive = true;
+        "rofi-pass/config" = {
+          source = ./cfg/rofi-pass/config;
+        };
+
+        "vifm" = {
+          source = ./cfg/vifm;
+          recursive = true;
+        };
+
+        "neofetch/config.conf" = {
+          source = ./cfg/neofetch/config.conf;
+        };
+
+        "sxiv/exec/key-handler" = {
+          source = ./cfg/sxiv/exec/key-handler;
+          executable = true;
+        };
+
+        "sxiv/exec/image-info" = {
+          source = ./cfg/sxiv/exec/image-info;
+        };
+
+        # These files *should* point to the root directory,
+        # assuming that xdg.configFile symlinks to ~/.config
+        "X11/XCompose" = {
+          source = ./cfg/XCompose;
+        };
+
+        "../.weatherrc" = {
+          source = ./cfg/weatherrc;
+        };
       };
 
-      "neofetch/config.conf" = {
-        source = ./dotfiles/neofetch/config.conf;
-      };
-
-      "sxiv/exec/key-handler" = {
-        source = ./dotfiles/sxiv/exec/key-handler;
-        executable = true;
-      };
-
-      "sxiv/exec/image-info" = {
-        source = ./dotfiles/sxiv/exec/image-info;
+      userDirs = {
+        enable = true;
+        music = "\$HOME/Audio";
+        pictures = "\$Home/Images";
       };
     };
   };
-
 }
