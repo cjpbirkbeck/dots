@@ -1,4 +1,4 @@
-# Various hardware settings common across all currently used machines with NixOS.
+# Setting for working with various disks.
 
 { pkgs, config, ... }:
 
@@ -19,8 +19,4 @@
 
   # System information command line ultity
   environment.systemPackages = with pkgs; [ inxi smartmontools ];
-
-  # Sounds
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
 }
