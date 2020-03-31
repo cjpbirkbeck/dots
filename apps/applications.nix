@@ -9,6 +9,20 @@ in
   programs.java.enable = true;
 
   environment.systemPackages = with pkgs; [
+    vifm        # Terminal file manager
+
+    libcaca              # Image to text converter
+    catimg               # A much better image to text converter
+    highlight            # Highlights syntax in a file
+    atool                # Print archive file infomation
+    poppler_utils        # Converts pdf to text
+    exiftool             # Image file information
+    mediainfo            # Multimedia file information
+    odt2txt              # Converts odt (LibreOffice) to text
+    catdoc               # Converts Mircosoft Office to text
+    catdocx              # Converts Mircosoft Office (post-2007) to text
+
+    spacefm     # Graphical file manager
 
     # Documents
     zathura     # Lightweight PDF/EPUB/Dejv reader
@@ -40,6 +54,11 @@ in
     dante         # SOCKS Client, need for aerc
     khard         # Command line address book
 
+    # Calendars and task.
+    calcurse
+    taskopen
+    vit
+
     # RSS Feed Reader
     newsboat
 
@@ -61,6 +80,11 @@ in
     ncdu            # TUI filesystem size browser
     qrencode        # Prints out QR codes, when given a string of letters.
   ];
+
+  environment.shellAliases = {
+    ncdu = "ncdu --color dark";
+    calcurse = "calcurse --confdir $HOME/.config/calcurse --datadir $HOME/.local/share/calcurse";
+  };
 
   environment.variables = {
     BROWSER = "firefox";

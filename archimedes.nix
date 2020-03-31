@@ -10,7 +10,7 @@
   };
 
   time.hardwareClockInLocalTime = true;
-  
+
   networking = {
     hostName = "archimedes";
 

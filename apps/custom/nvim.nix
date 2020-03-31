@@ -90,14 +90,21 @@ in {
           set dictionary+=${pkgs.miscfiles}/share/web2,${pkgs.miscfiles}/share/web2a
         '';
         packages.neovim = with pkgs.vimPlugins // customPlugins; { start = [
-            # Basic plugins: Test plugins extends what is arguably the core of vim,
-            # working text with {operator}{motion/text object}.
+            # Interface enhancements
+            lightline-vim       # Lightweight but pretty statusline.
+            vim-lastplace       # Open files with cursor at last cursor position.
+            vim-charazterize    # Display Unicode character metadata.
+            vim-css-color       # Displays hex codes in the colour they are describing.
+            vim-signature       # Displays marks in the gutter.
+            undotree            # Visual Vim's undos with a tree.
+            neoterm             # Neovim terminal enhancements.
+
             # Custom operators
-            surround            # Manipulate elements that surround text elements.
+            surround            # Manipulate elements that surrounds text, like brackets or quotation marks.
             ReplaceWithRegister # Replace text objects with register contents directly.
-            commentary          # Toggles commenting for a given series of lines.
-            vim-swap            # Swap elements of element.
-            repeat              # Repeat custom operators.
+            commentary          # Toggles commenting.
+            vim-swap            # Swap elements of list structures.
+            repeat              # Repeat compatible custom operators.
 
             # Custom text objects
             vim-textobj-user             # Easily create your own text objects
@@ -107,29 +114,27 @@ in {
             vim-indent-object            # Manipulate lines of same indentation as a single object.
             argtextobj-vim               # Text object for function arguments.
 
-            # Other text manipulation plugins
-            vim-visualstar      # Allows */# operators to use arbitrarily defined text (with visual mode).
-            vim-easy-align      # Align text elements.
+            # Other text manipulation
+            vim-visualstar      # Allows */# keys to use arbitrarily defined text (with visual mode).
+            vim-easy-align      # Align text elements some characters.
             vim-speeddating     # Increment dates and times.
-            endwise-vim         # Adds ending elements to various elements.
-
-            # Some interface tools
-            vim-charazterize    # Show Unicode character metadata.
-            undotree            # Visual undotree.
-            neoterm             # Neovim terminal enhancements.
-            vim-lastplace       # Open files with cursor at closing position.
+            endwise-vim         # Adds ending elements for various structures.
 
             # Fuzzy finding
             fzfWrapper          # Fuzzy finding with fzf.
             fzf-vim             # Collection of commands using fzf.
 
-            # Tools for working with git.
-            gitgutter           # Shows git differences in line.
-            fugitive            # Git frontend for vim
+            # Git integration
+            gitgutter           # Shows Git changes in gutter.
+            fugitive            # Git frontend for Vim
 
             # IDE-like plugins
             ultisnips           # Snippet manager.
             vim-snippets        # Collection of prebuilt snippets.
+            ncm2                  # Autocompletion
+            ncm2-bufword          # Suggestion words for currently opened buffers
+            ncm2-path             # Generates suggestions from paths
+            ncm2-ultisnips        # Generates suggestions from snippets
             vim-test            # Automatic testing.
             ale                 # Multi-language linter.
 
@@ -139,11 +144,7 @@ in {
             customPlugins.tmux-vim # Adds support for modifying tmux config files.
           ];
           opt = [
-            ncm2                  # Autocompletion
-            ncm2-bufword          # Suggestion words for currently opened buffers
-            ncm2-path             # Generates suggestions from paths
-            ncm2-ultisnips        # Generates suggestions from snippets
-            LanguageClient-neovim # Language server client for neovim
+            # Stuff
           ];
         };
       };

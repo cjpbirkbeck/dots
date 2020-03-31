@@ -69,17 +69,6 @@
 
       weather              # Weather command line
 
-      libcaca              # Image to text converter
-      catimg               # A much better image to text converter
-      highlight            # Highlights syntax in a file
-      atool                # Print archive file infomation
-      poppler_utils        # Converts pdf to text
-      exiftool             # Image file information
-      mediainfo            # Multimedia file information
-      odt2txt              # Converts odt (LibreOffice) to text
-      catdoc               # Converts Mircosoft Office to text
-      catdocx              # Converts Mircosoft Office (post-2007) to text
-
       breeze-gtk
       breeze-icons
       breeze-plymouth

@@ -22,8 +22,10 @@ in
     home = {
       stateVersion = "19.09";
       sessionVariables = {
-        XCOMPOSEFILE = "~/.config/X11/XCompose";
-        XCOMPOSECACHE = "~/.config/X11/XCompose";
+        XCOMPOSEFILE = "$HOME/.config/X11/XCompose";
+        XCOMPOSECACHE = "$HOME/.config/X11/XCompose";
+        GTK_IM_MODULE = "xim";
+        QT_IM_MODULE = "xim";
       };
     };
 
@@ -115,6 +117,8 @@ in
         shellAliases = {
           "_" = "sudo";
           "__" = "sudo -i";
+
+          "nrb" = "sudo nixos-rebuild";
         };
       };
 

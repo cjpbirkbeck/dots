@@ -1,3 +1,6 @@
+# Keep zcompdump in the cache.
+compinit -d ~/.cache/zsh/zcompdump-"$ZSH_VERSION"
+
 # Write to the terminal window.
 case $TERM in
     (*xterm* | rxvt)

@@ -30,7 +30,13 @@
     ];
 
     variables = {
+      LESSHISTFILE = "$HOME/.local/share/less/history";
+      LESSKEY = "$HOME/.config/less/lesskey";
+
       BAT_STYLE = "full";
+
+      _FASD_DATA = "$HOME/.local/share/fasd/history";
+      _FASD_SHELL = "dash";
     };
 
     shellAliases = {
@@ -54,21 +60,24 @@
       # ls should have readable sizes, be coloured and list directories first.
       ls = "ls --human-readable --color=auto --group-directories-first";
 
-      l  = "ls -l";     # List directories with a long format.
-      ll = "ls -lA";    # List all directories with a long format
-      lx = "ls -lXB";   # List files by file extension
-      lz = "ls -lSr";   # List files by size
-      la = "ls -A";     # list hidden files
+      l  = "ls -l";   # List directories with a long format.
+      ll = "ls -lA";  # List all directories with a long format
+      lt = "ls -lt";  # List files by time (newest first)
+      lT = "ls -ltr"; # List files by time (oldest first)
+      lx = "ls -lXB"; # List files by file extension
+      lz = "ls -lSr"; # List files by size
+      la = "ls -A";   # list hidden files
 
       # Appearance
 
       # Colourize commands.
-      tree  = "tree -C";
+      less  = "less -R";
+      tree  = "tree -C --dirsfirst";
       grep  = "grep --color=auto";
       fgrep = "fgrep --color=auto";
       egrep = "egrep --color=auto";
 
-      ## Program aliases
+      # Program aliases
       more  = "less";
 
       # Aliases for nix programs.
