@@ -3,7 +3,6 @@
 { config, pkgs, ... } :
 
 {
-
   users.defaultUserShell = pkgs.zsh;
 
   environment = {
@@ -153,7 +152,6 @@
 
         export PATH="$HOME/.local/bin/:$PATH"
       '';
-
     };
   };
 }

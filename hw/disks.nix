@@ -15,8 +15,6 @@
     };
   };
 
-  programs.gnome-disks.enable = true;
-
   # System information command line ultity
   environment.systemPackages = with pkgs; [ inxi smartmontools ];
 }

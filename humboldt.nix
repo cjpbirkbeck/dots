@@ -5,14 +5,15 @@
 {
   imports = [
     # Hardware-specific settings
-    ./hw/hardware.nix
+    ./hw/disks.nix
+    ./hw/sound.nix
     ./hw/printer.nix
     ./hw/yubikey.nix
 
     # System-wide settings
     ./sys/boot.nix
     ./sys/fonts.nix
-    ./sys/users.nix
+    ./sys/locale.nix
     ./sys/upgrades.nix
     ./sys/backup.nix
 
@@ -31,10 +32,10 @@
     ./xorg/awesome.nix
 
     # Application specific settings
-    ./apps/applications.nix
+    ./apps/desktop.nix
+    ./apps/tui.nix
+    ./apps/command-line.nix
     ./apps/security.nix
-    ./apps/custom/nvim.nix
-    ./apps/custom/scripts.nix
     ./apps/dev/lisp.nix
     ./apps/dev/golang.nix
     ./apps/dev/rust.nix

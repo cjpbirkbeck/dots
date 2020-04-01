@@ -56,12 +56,4 @@
       '';
     };
   };
-
-  environment = {
-    systemPackages = with pkgs; [
-      bashdb          # Bash debugger.
-      bats            # Automated tests with bash scripts.
-      checkbashisms   # Check for bash-specific syntax in POSIX scripts.
-    ];
-  };
 }

@@ -113,7 +113,7 @@ in
         history = {
           path = ".local/share/zsh/history";
         };
-        initExtra = builtins.readFile ./cfg/zsh/functions.sh;
+        initExtra = builtins.readFile ./home-manager/zsh/functions.sh;
         shellAliases = {
           "_" = "sudo";
           "__" = "sudo -i";
@@ -175,39 +175,39 @@ in
     xdg = {
       configFile = {
         "khard/config,conf" = {
-          source = ./cfg/khard/khard.conf;
+          source = ./home-manager/khard/khard.conf;
         };
 
         "rofi-pass/config" = {
-          source = ./cfg/rofi-pass/config;
+          source = ./home-manager/rofi-pass/config;
         };
 
         "vifm" = {
-          source = ./cfg/vifm;
+          source = ./home-manager/vifm;
           recursive = true;
         };
 
         "neofetch/config.conf" = {
-          source = ./cfg/neofetch/config.conf;
+          source = ./home-manager/neofetch/config.conf;
         };
 
         "sxiv/exec/key-handler" = {
-          source = ./cfg/sxiv/exec/key-handler;
+          source = ./home-manager/sxiv/exec/key-handler;
           executable = true;
         };
 
         "sxiv/exec/image-info" = {
-          source = ./cfg/sxiv/exec/image-info;
+          source = ./home-manager/sxiv/exec/image-info;
         };
 
         # These files *should* point to the root directory,
         # assuming that xdg.configFile symlinks to ~/.config
         "X11/XCompose" = {
-          source = ./cfg/XCompose;
+          source = ./home-manager/XCompose;
         };
 
         "../.weatherrc" = {
-          source = ./cfg/weatherrc;
+          source = ./home-manager/weatherrc;
         };
       };
 
