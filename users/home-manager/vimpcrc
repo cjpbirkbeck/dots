@@ -1,0 +1,59 @@
+" VIMPC settings
+" Note that this program uses vi(m) conventions in many places.
+
+" Show numbers in the browser window.
+set browsenumbers
+
+" Show numbers in the playlist windows.
+set playlistnumbers
+
+" Show progress present.
+set showpercent
+
+" :q(uit) exits vimpc totally.
+set singlequit
+
+" Show numbers in various windows.
+set songnumbers
+
+" Show numbers in tabbar.
+set windownumbers
+
+" Ignore "the" in groups.
+set groupignorethe
+
+" Ignore "the" when sort.
+set sortignorethe
+
+" Highlight search results
+set hlsearch
+
+" Search case insensitive
+set ignorecase
+
+" Show incremental search results
+set incsearch
+
+" Only case sensitively when using an upper case character.
+set smartcase
+
+" Rearrange windows and set default as list.
+set windows list,library,browse,playlist,directory,help
+set window list
+
+hi error red bold_white
+hi status black bold_blue
+hi tab green black
+hi progress default bold_green
+hi id default yellow
+hi song default white
+hi match bold_white yellow
+hi song default bold_white
+hi current default green
+" hi current bold_green bold_white
+
+" Make going back and forth between tabs easier.
+map J gt
+map K gT
+
+map <F1> :help<Enter>
