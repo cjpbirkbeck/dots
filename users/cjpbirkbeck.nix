@@ -37,7 +37,7 @@ in
       bat = {
         enable = true;
         config = {
-          theme = "ansi-dark";
+          theme = "zenburn";
           style = "full";
         };
       };
@@ -57,13 +57,13 @@ in
         userEmail = "cjpbirkbeck@gmail.com";
       };
 
-      mpv = {
-        enable = true;
-        config = {
-          input-ipc-server = "/tmp/mpv";
-          slang = "en";
-        };
-      };
+      # mpv = {
+      #   enable = true;
+      #   config = {
+      #     input-ipc-server = "/tmp/mpv";
+      #     slang = "en";
+      #   };
+      # };
 
       jq = {
         enable = true;
@@ -125,6 +125,7 @@ in
         font = "Deja Vu Sans Mono 11";
         modifyOtherKeys = false;
         scrollbackLines = -1;
+        sizeHints = false;
         hintsFont = "Inconsolata 12";
         hintsForegroundColor = "#dcdccc";
         hintsBackgroundColor = "#3f3f3f";
@@ -232,6 +233,17 @@ in
         "../.weatherrc" = {
           source = ./home-manager/weatherrc;
         };
+
+        # Right now, vimpc does not seem be able to read the XDG
+        # config file. Not sure why; keeping both versions until that is fixed.
+        "./vimpc/.vimpcrc" = {
+          source = ./home-manager/vimpcrc;
+        };
+
+        "../.vimpcrc" = {
+          source = ./home-manager/vimpcrc;
+        };
+
       };
 
       userDirs = {

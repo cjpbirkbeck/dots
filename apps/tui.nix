@@ -9,6 +9,8 @@ in
 {
   imports = [
     ./overrides/nvim.nix
+    ./overrides/mpv.nix
+    ./overrides/st.nix
   ];
 
   environment = {
@@ -59,7 +61,7 @@ in
       mpc_cli              # Barebones command line interface for mpd
       vimpc                # TUI frontend for mpd
       mpd-mpris            # Interfaces mpris with mpd
-      mpv-with-scripts     # Lightweight music player
+      # mpv-with-scripts     # Lightweight music player
       playerctl            # Command-line MPRIS controller
 
       w3m                  # Web browser

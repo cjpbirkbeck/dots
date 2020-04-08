@@ -3,7 +3,7 @@ compinit -d ~/.cache/zsh/zcompdump-"$ZSH_VERSION"
 
 # Write to the terminal window.
 case $TERM in
-    (*xterm* | rxvt)
+    (*xterm* | rxvt | st* | alacritty )
 
     # Write some info to terminal title.
     # This is seen when the shell prompts for input.

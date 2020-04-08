@@ -47,7 +47,7 @@ let
     };
   };
 
-customPlugins.vim-textobj-brace = pkgs.vimUtils.buildVimPlugin {
+  customPlugins.vim-textobj-brace = pkgs.vimUtils.buildVimPlugin {
     name = "vim-textobj-brace";
     src = pkgs.fetchFromGitHub {
       owner = "julian";
@@ -142,6 +142,9 @@ in {
             vim-nix                # Adds nix syntax colouring and file detection to vim.
             vim-orgmode            # Add support for org file.
             customPlugins.tmux-vim # Adds support for modifying tmux config files.
+            vim-pandoc
+            vim-pandoc-syntax
+            vimpreviewpandoc
           ];
           opt = [
             # Stuff
@@ -171,7 +174,7 @@ in {
     neovim-qt_with_plugins # GUI frontend using Qt.
     neovim-remote          # Control remote instances of neovim.
 
-    miscfiles              # Misc files have a dictionary list that is useful to vim autocompletions.
-    universal-ctags        # Tags file that will hold keyword information.
+    miscfiles              # Misc files have a dictionary list that is useful for vim autocompletions.
+    universal-ctags        # Tags files that will hold keyword information.
   ];
 }
