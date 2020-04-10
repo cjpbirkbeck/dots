@@ -54,16 +54,7 @@ set wrap                       " Turns on word wrap.
 
 syntax enable                   " Enable syntax colouring.
 set termguicolors               " Use the true (24-bit) colours instead of the terminal options.
-colorscheme desert              " Use this theme, with the following modifications.
-
-" Italize comments
-highlight Comment gui=italic
-
-" Change Signature.vim mark colours.
-highlight SignatureMarkText guifg=Yellow gui=bold
-
-" Make the mispelling indicator more visible.
-highlight SpellBad guisp=LightRed
+colorscheme desert2             " Use this theme, with the following modifications.
 
 " Changes cursor shape depending on the current mode.
 " Normal mode     = box
