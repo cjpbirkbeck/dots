@@ -4,6 +4,9 @@
 
 {
   imports = [
+    # Import the auto generated hardware settings
+    /etc/nixos/hardware-configuration.nix
+
     # Hardware-specific settings
     ./hw/disks.nix
     ./hw/sound.nix
@@ -16,9 +19,7 @@
     ./sys/locale.nix
     ./sys/upgrades.nix
     ./sys/backup.nix
-
-    # User-specific configurations
-    ./users/cjpbirkbeck.nix
+    ./sys/cjpbirkbeck.nix
 
     # Shell configuration
     ./shells/shells.nix
@@ -33,12 +34,10 @@
 
     # Application specific settings
     ./apps/desktop.nix
-    ./apps/tui.nix
-    ./apps/command-line.nix
-    ./apps/security.nix
-    ./apps/dev/lisp.nix
-    ./apps/dev/golang.nix
-    ./apps/dev/rust.nix
+    ./apps/minimal.nix
+    # ./apps/dev/lisp.nix
+    # ./apps/dev/golang.nix
+    # ./apps/dev/rust.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;

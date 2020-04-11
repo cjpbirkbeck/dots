@@ -7,6 +7,7 @@ let
   unstable = import <unstable> {};
 in
 {
+  # Import various overriden packages.
   imports = [
     ./overrides/nvim.nix
     ./overrides/mpv.nix
@@ -15,8 +16,8 @@ in
 
   environment = {
     systemPackages = with pkgs; [
-      termite              # Terminal emuator
-      xorg.xmodmap         # For rebinding keys
+      alacritty            # Terminal emuator
+      # xorg.xmodmap         # For rebinding keys
       xcape                # Binding a modifier key when press by itself.
       trash-cli            # CLI program for working with Trash bin.
 
@@ -37,7 +38,6 @@ in
       screenkey            # Show keypress on the screen.
       notify-desktop       # Desktop notify
       maim                 # Simple screenshot utility
-      xsecurelock          # Simple screenlocker
 
       weather              # Weather command line
 
@@ -57,22 +57,20 @@ in
       sxiv                 # Lightweight image viewer
       zathura              # Lightweight PDF/EPUB/Dejv reader
 
-      mpd                  # Music player daemon
       mpc_cli              # Barebones command line interface for mpd
       vimpc                # TUI frontend for mpd
-      mpd-mpris            # Interfaces mpris with mpd
-      # mpv-with-scripts     # Lightweight music player
+      # mpd-mpris            # Interfaces mpris with mpd
       playerctl            # Command-line MPRIS controller
 
-      w3m                  # Web browser
+      w3m                  # Terminal web browser
       unstable.aerc        # Email client
       dante                # SOCKS server; need for aerc
       khard                # Address books
       calcurse             # Calendar
       taskwarrior          # Tasks and TODOs
+      jrnl                 # Command line journal system.
       taskopen             # Open Taskwarrior annotations in various programs
       vit                  # Frontend for taskwarrior
-      vimpc                # Frontend for mpd
       newsboat             # RSS/Atom feed reader
       tig                  # Git frontend
       htop                 # System resources monitor

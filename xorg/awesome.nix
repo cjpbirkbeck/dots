@@ -41,6 +41,8 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [ xsecurelock ];
+
   environment = {
     etc = {
       "weatherrc" = {

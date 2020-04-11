@@ -94,5 +94,9 @@
       enableBrowserSocket = true;
       enableExtraSocket = true;
     };
+
+    ssh = {
+      startAgent = true;
+    };
   };
 }

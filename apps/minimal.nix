@@ -24,20 +24,14 @@
       checkbashisms     # Check for bash-specific syntax in POSIX scripts.
       youtube-dl        # Video downloader
       pandoc            # Text converter
+      gnupg
 
+      acpi                 # Required for battery information
+      networkmanagerapplet # Applet for connecting to wifi
+      udiskie              # Frontend of udisks.
       rsync             # Simple archival program
       rclone            # rsync for cloud storage
       borgbackup        # Deduplication backup tool
-
-      neofetch          # An "About" screen for the terminal
-      ddgr              # Search DuckDuckGo from the command line
-      pdd               # Date/time calculator
-      gcal              # Prints out almost any calendar and some holidays.
-      translate-shell   # Search for translations (e.g. Google, Yandex) from the command line.
-      qrencode          # Prints out QR codes, when given a string of letters.
-
-      ffmpeg            # Video encoder
-      ffmpegthumbnailer # Create video thumbnails
     ];
 
     variables = {
