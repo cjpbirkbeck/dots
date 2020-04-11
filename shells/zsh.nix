@@ -58,11 +58,11 @@
       promptInit = ''
         if [ $TERM = "linux" ]; then
           PROMPT="%B%F{red}[%t]%f%F{green}[%n@%M]%f%F{blue}[%~]%f%F{white}%(0#,#,$)%f%b "
+          RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
         else
-          PROMPT="%B%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%~]%f%F{white}%(0#,#,$)%f%b "
+          PROMPT="%B%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%~]%f%F{#FFFFFF}%(0#,#,$)%f%b "
+          RPROMPT="%(?,,%B%F{#FFFFFF}%K{red}[%?]%k%f%b)%(1j,%B%F{#FFFFFF}%K{blue}[%j]%k%f%b,)"
         fi
-
-        RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
       '';
 
       interactiveShellInit = ''

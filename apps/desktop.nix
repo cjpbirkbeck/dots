@@ -8,6 +8,7 @@ let
   kp = pkgs.kdeApplications.kolourpaint;
 in
 {
+  # Import my overrides.
   imports = [
     <home-manager/nixos>
     ./overrides/nvim.nix
@@ -23,75 +24,68 @@ in
   programs.gnome-disks.enable = true;
 
   users.users.cjpbirkbeck.packages = with pkgs; [
-    alacritty            # Terminal emuator
-    # xorg.xmodmap         # For rebinding keys
-    xcape                # Binding a modifier key when press by itself.
-    trash-cli            # CLI program for working with Trash bin.
-
-    rofi                 # Program launcher/Window switcher/dmenu replacement
-    conky                # GUI System Monitor
-    lxappearance-gtk3    # Theme programs using gtk3
-
-    arc-theme            # Theme for GUI programs
-
-    pass                 # Password manager
-    rofi-pass            # Frontend for quickly entering passwords with rofi.
-
-    xclip                # Command line ultity for manuplating the system clipboard.
-
-    screenkey            # Show keypress on the screen.
-    notify-desktop       # Desktop notify
-    maim                 # Simple screenshot utility
-
-    weather              # Weather command line
-
-    vifm                 # Terminal file manager
-    firefox
-    thunderbird
-    kp
-    libcaca              # Image to text converter
-    catimg               # A much better image to text converter
-    highlight            # Highlights syntax in a file
-    atool                # Print archive file infomation
-    poppler_utils        # Converts pdf to text
-    exiftool             # Image file information
-    mediainfo            # Multimedia file information
-    odt2txt              # Converts odt (LibreOffice) to text
-    catdoc               # Converts Mircosoft Office to text
-    catdocx              # Converts Mircosoft Office (post-2007) to text
-    xlsx2csv             # Converts Excel (post-2007) files to csv files
-
-    sxiv                 # Lightweight image viewer
-    zathura              # Lightweight PDF/EPUB/Dejv reader
-
-    mpc_cli              # Barebones command line interface for mpd
-    vimpc                # TUI frontend for mpd
-    # mpd-mpris            # Interfaces mpris with mpd
-    playerctl            # Command-line MPRIS controller
-
+    # Command line tools
+    atool             # Print archive file infomation
+    catdoc            # Converts Mircosoft Office to text
+    catdocx           # Converts Mircosoft Office (post-2007) to text
+    catimg            # A much better image to text converter
+    dante             # SOCKS server; need for aerc
+    ddgr              # Search DuckDuckGo from the command line
+    exiftool          # Image file information
     ffmpeg            # Video encoder
     ffmpegthumbnailer # Create video thumbnails
-
-    w3m                  # Terminal web browser
-    unstable.aerc        # Email client
-    dante                # SOCKS server; need for aerc
-    khard                # Address books
-    calcurse             # Calendar
-    taskwarrior          # Tasks and TODOs
-    jrnl                 # Command line journal system.
-    taskopen             # Open Taskwarrior annotations in various programs
-    vit                  # Frontend for taskwarrior
-    newsboat             # RSS/Atom feed reader
-    tig                  # Git frontend
-    htop                 # System resources monitor
-    ncdu                 # Filesystem size browser
-
-    neofetch          # An "About" screen for the terminal
-    ddgr              # Search DuckDuckGo from the command line
-    pdd               # Date/time calculator
     gcal              # Prints out almost any calendar and some holidays.
-    translate-shell   # Search for translations (e.g. Google, Yandex) from the command line.
+    highlight         # Highlights syntax in a file
+    jrnl              # Command line journal system.
+    khard             # Address books
+    libcaca           # Image to text converter
+    maim              # Simple screenshot utility
+    mediainfo         # Multimedia file information
+    mpc_cli           # Barebones command line interface for mpd
+    neofetch          # An "About" screen for the terminal
+    odt2txt           # Converts odt (LibreOffice) to text
+    pass              # Password manager
+    pdd               # Date/time calculator
+    playerctl         # Command-line MPRIS controller
+    poppler_utils     # Converts pdf to text
     qrencode          # Prints out QR codes, when given a string of letters.
+    taskopen          # Open Taskwarrior annotations in various programs
+    taskwarrior       # Tasks and TODOs
+    translate-shell   # Search for translations (e.g. Google, Yandex) from the command line.
+    trash-cli         # CLI program for working with Trash bin.
+    unstable.ueberzug # Real images in the terminal!
+    weather           # Weather command line
+    xcape             # Binding a modifier key when press by itself.
+    xclip             # Command line ultity for manuplating the system clipboard.
+    xlsx2csv          # Converts Excel (post-2007) files to csv files
+
+    # TUI programs
+    calcurse          # Calendar
+    htop              # System resources monitor
+    ncdu              # Filesystem size browser
+    newsboat          # RSS/Atom feed reader
+    tig               # Git frontend
+    unstable.aerc     # Terminal email client
+    unstable.tuir     # Read reddit in a terminal
+    vifm              # Terminal file manager
+    vimpc             # TUI frontend for mpd
+    vit               # Frontend for taskwarrior
+    w3m               # Terminal web browser
+
+    # GUI applications
+    alacritty         # Terminal emuator
+    arc-theme         # Theme for GUI programs
+    conky             # GUI System Monitor
+    firefox           # GUI web browser
+    kp                # Kolourpaint, a simple MS Paint clone
+    lxappearance-gtk3 # Theme programs using gtk3
+    notify-desktop    # Desktop notify
+    rofi              # Program launcher/Window switcher/dmenu replacement
+    rofi-pass         # Frontend for quickly entering passwords with rofi.
+    screenkey         # Show keypress on the screen.
+    sxiv              # Lightweight image viewer
+    thunderbird       # GUI email client
+    zathura           # Lightweight PDF/EPUB/Dejv reader
   ];
 
   home-manager.users.cjpbirkbeck = { pkgs, ... }: {
