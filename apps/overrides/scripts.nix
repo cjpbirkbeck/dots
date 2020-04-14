@@ -3,19 +3,39 @@
 { pkgs, config, ... }:
 
 let
-  nixos-upgrade = pkgs.writeScriptBin "nixos-upgrade" ''
+  nixos-rebuild-wrapper = pkgs.writeScriptBin "nixos" ''
     #!${pkgs.stdenv.shell}
 
-    if [ $UID -ne 0 ]; then
-       echo "Operations must be done by root user."
-       exit 1
-    fi
-
-    nixos-rebuild switch --upgrade && \
-    nix-collect-garbage --delete-older-than 14d && \
-    nix optimise-store && \
-    mandb --create
-    '';
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            "-l"|"--label")
+                shift
+                NIXOS_LABEL_VERSION=$(echo "$1" | sed -e 's/ /_/g')
+                export NIXOS_LABEL_VERSION
+                shift
+                ;;
+            "switch"|"boot"|"build"|"dry-build"|"dry-activate"|"build-vm"|"build-vm-with-bootloader")
+                nixos-rebuild "$@"
+                exit
+                ;;
+            "edit")
+                $EDITOR /etc/nixos/configuration.nix
+                exit
+                ;;
+            "option")
+                nixos-option "$@"
+                exit
+                ;;
+            "version"|"-v")
+                nixos-version "$@"
+                exit
+                ;;
+            *)
+                exit 10
+                ;;
+        esac
+    done
+  '';
 in {
-  environment.systemPackages = [ nixos-upgrade ];
+  environment.systemPackages = [ nixos-rebuild-wrapper ];
 }
