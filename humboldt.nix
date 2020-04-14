@@ -35,6 +35,8 @@
     # Application specific settings
     ./apps/desktop.nix
     ./apps/minimal.nix
+    ./apps/overrides/scripts.nix
+    ./apps/scripts/rofi-as-dmenu.nix
     # ./apps/dev/lisp.nix
     # ./apps/dev/golang.nix
     # ./apps/dev/rust.nix
@@ -45,6 +47,22 @@
   hardware = {
     trackpoint = {
       enable = true;
+    };
+  };
+
+  home-manager.users.cjpbirkbeck = { pkgs, ... }: {
+    home.keyboard = {
+      layout = "us";
+      options = [ "compose:menu" "ctrl:nocaps" "altwin:prtsc_rwin" "shift:both_capslock" ];
+    };
+
+    services.xcape = {
+      enable = true;
+      mapExpression = {
+        Control_L = "Escape";
+        Super_R = "Print";
+        Super_L = "#135";
+      };
     };
   };
 

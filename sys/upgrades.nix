@@ -3,53 +3,43 @@
 { config, pkgs, ... }:
 
 let
-  nixos-upgrade = pkgs.writeScriptBin "nixos-upgrade" ''
+  # My customized upgrade script, which will upgrade the system.
+  # Then preform miscellaneous system administration tasks after.
+  auto-nixos-upgrade = pkgs.writeScriptBin "auto-nixos-upgrade" ''
     #!${pkgs.stdenv.shell}
 
-    if [ $UID -ne 0 ]; then
-       echo "Operations must be done by root user."
-       exit 1
-    fi
+    NIXOS_LABEL_VERSION="Automatic_upgrade-on-$(date '+%H%M%z')"
 
-    if [ $1 != "switch" ] || [ $1 != "boot" ] || [ $1 != "test" ] ||
-       [ $1 != "build" ]  || [ $1 != "build-vm"] ||
-       [ $1 != "build-vm-with-bootloader" ]; then
-       echo "Need to specify upgrade action."
-       exit 2
-    fi
-
-    if [ -n $2 ]; then
-       export NIXOS_LABEL="$(echo $2 | sed -E 's/\s/_/g')"
-    fi
-
-    nixos-rebuild $1 --upgrade
-  '';
-
-  nixos-full-upgrade = pkgs.writeScriptBin "nixos-full-upgrade" ''
-    #!${pkgs.stdenv.shell}
-
-    nixos-upgrade $1 $2  && \
-    nix-collect-garbage --delete-older-than 15d && \
-    nix optimise-store && \
-    mandb --create
-  '';
-
-  nixos-estimate = pkgs.writeScriptBin "nixos-estimate" ''
-    #!${pkgs.stdenv.shell}
-
-    nixos dry-run --upgrade > $NIXOS_ESTIMATE
+    ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch --upgrade || exit 1
+    ${config.nix.package.out}/bin/nix-collect-garbage --delete-older-than 14d
+    ${config.nix.package.out}/bin/nix optimise-store
+    # mandb --create
   '';
 in {
-  nix = {
-    gc = {
-      automatic = true;
-      dates = "23:00";
-      options = "--delete-older-than 15d";
-    };
+  # nix = {
+  #   gc = {
+  #     automatic = true;
+  #     dates = "23:00";
+  #     options = "--delete-older-than 15d";
+  #   };
 
-    optimise = {
-      automatic = true;
-      dates = [ "23:05" ];
+  #   optimise = {
+  #     automatic = true;
+  #     dates = [ "23:05" ];
+  #   };
+  # };
+
+  systemd = {
+    services = {
+      auto-upgrades = {
+        description = "Customized System Upgrade";
+        script = "exec ${auto-nixos-upgrade}/bin/auto-nixos-upgrade";
+        environment = config.nix.envVars //
+          { inherit (config.environment.sessionVariables) NIX_PATH;
+            HOME = "/root";
+          } // config.networking.proxy.envVars;path = with pkgs; [ coreutils gnutar xz.bin gzip gitMinimal config.nix.package.out ];
+        startAt = "23:00";
+      };
     };
   };
 

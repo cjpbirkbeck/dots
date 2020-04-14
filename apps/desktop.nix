@@ -101,6 +101,28 @@ in
         PASSWORD_STORE_DIR = "$HOME/.secrets/pass";
         PASSWORD_STORE_GENERATED_LENGTH = "31";
       };
+
+      file = {
+        weatherrc = {
+          source = ./home-manager/weatherrc;
+          target = ".weatherc";
+        };
+
+        vimpc = {
+          source = ./home-manager/vimpcrc;
+          target = ".vimpcrc";
+        };
+      };
+    };
+
+    gtk = {
+      gtk3 = {
+        extraConfig = ''
+        VteTerminal, vte-terminal {
+          padding: 4px;
+        }
+        '';
+      };
     };
 
     manual = {
@@ -314,26 +336,29 @@ in
           source = ./home-manager/XCompose;
         };
 
-        "../.weatherrc" = {
-          source = ./home-manager/weatherrc;
-        };
-
         # Right now, vimpc does not seem be able to read the XDG
         # config file. Not sure why; keeping both versions until that is fixed.
         "./vimpc/.vimpcrc" = {
           source = ./home-manager/vimpcrc;
         };
-
-        "../.vimpcrc" = {
-          source = ./home-manager/vimpcrc;
-        };
-
       };
 
       userDirs = {
         enable = true;
         music = "\$HOME/Audio";
         pictures = "\$Home/Images";
+      };
+    };
+
+    xsession = {
+      enable = true;
+
+      windowManager.awesome = {
+        enable = true;
+
+        luaModules = with pkgs.luaPackages; [
+          vicious
+        ];
       };
     };
   };
