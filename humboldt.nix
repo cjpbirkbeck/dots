@@ -42,8 +42,6 @@
     # ./apps/dev/rust.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   hardware = {
     trackpoint = {
       enable = true;

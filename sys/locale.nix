@@ -6,10 +6,11 @@
   # Set your time zone.
   time.timeZone = "America/Montreal";
 
+  i18n.defaultLocale = "en_CA.UTF-8";
+
   # Select internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_CA.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
   };
 }

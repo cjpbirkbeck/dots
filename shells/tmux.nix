@@ -13,7 +13,7 @@
       baseIndex = 1;
       historyLimit = 10000;
       terminal = "screen-256color";
-      extraTmuxConf = ''
+      extraConfig = ''
         # Use emacs-style keybindings for the status-line
         set -g status-keys emacs
 
