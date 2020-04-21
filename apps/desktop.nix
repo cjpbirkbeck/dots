@@ -212,6 +212,20 @@ in
         shortcut = "Space";
         sensibleOnTop = false;
         terminal = "screen-256color";
+        plugins = with pkgs.tmuxPlugins; [
+          {
+            plugin = resurrect;
+            extraConfig = ''
+              set -g @resurrect-dir '$HOME/.local/share/tmux/resurrect'
+            '';
+          }
+          {
+            plugin = copycat;
+          }
+          {
+            plugin = open;
+          }
+        ];
         extraConfig = ''
           # Use emacs-style keybindings for the status-line
           set -g status-keys emacs
@@ -227,11 +241,9 @@ in
 
           # Set the default status bar style.
           set -g status-left '#[reverse]#S #[noreverse]'
-          # set -g window-status-separator ''
-          # set -g window-status-current-style 'reverse'
           set -g window-status-current-format '#[reverse] #I  #W* #[noreverse]'
           set -g window-status-format ' #I  #W#{?window_last_flag,-,}'
-          set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{=24:pane_title} #[reverse] #h'
+          set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{pane_title} #[reverse] #h'
           set -g status-style 'fg=#87ceeb,bold,bg=#4e4e4e'
           set -g status-position top
 
