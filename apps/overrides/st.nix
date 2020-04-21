@@ -6,8 +6,8 @@
       src = fetchFromGitHub {
         owner = "cjpbirkbeck";
         repo = "cjpb-st";
-        rev = "101d7dfb1090a3495580397d20536b35af33f986";
-        sha256 = "047dd9z7mxp2ialcf8xwfagw37k3927aamhj0y6k3yjqbjwx5gws";
+        rev = "0d759a069fcb115e86ad0285ae86010c0e6ae482";
+        sha256 = "0d5nh9qb3015rnpmk4484jakdph7p40jw3fhqhhyl4mndm8xiqc0";
       };
 
       postInstall = ''

@@ -61,9 +61,11 @@ in
 
     # TUI programs
     calcurse          # Calendar
+    cava              # Visualiser for the terminal
     htop              # System resources monitor
     ncdu              # Filesystem size browser
     newsboat          # RSS/Atom feed reader
+    sc-im             # Terminal spreadsheet program
     tig               # Git frontend
     unstable.aerc     # Terminal email client
     unstable.tuir     # Read reddit in a terminal
@@ -85,6 +87,7 @@ in
     screenkey         # Show keypress on the screen.
     sxiv              # Lightweight image viewer
     thunderbird       # GUI email client
+    torbrowser        # Browser using the tor network
     zathura           # Lightweight PDF/EPUB/Dejv reader
   ];
 
@@ -116,10 +119,28 @@ in
     };
 
     gtk = {
+      enable = true;
       gtk3 = {
-        extraConfig = ''
+        extraConfig = {
+          gtk-button-images = 0;
+          # gtk-cursor-theme-name = "breeze_cursors";
+          gtk-cursor-theme-size = 0;
+          gtk-enable-event-sounds = 1;
+          gtk-enable-input-feedback-sounds = 1;
+          gtk-font-name = "Sans 10";
+          gtk-icon-theme-name = "breeze-dark";
+          gtk-menu-images = 0;
+          gtk-theme-name = "Breeze-Dark";
+          gtk-toolbar-icon-size = "GTK_ICON_SIZE_LARGE_TOOLBAR";
+          gtk-toolbar-style = "GTK_TOOLBAR_BOTH_HORIZ";
+          gtk-xft-antialias = 1;
+          gtk-xft-hinting = 1;
+          gtk-xft-hintstyle = "hintslight";
+          gtk-xft-rgba = "rgb";
+        };
+        extraCss = ''
         VteTerminal, vte-terminal {
-          padding: 4px;
+          padding: 1px;
         }
         '';
       };
@@ -182,8 +203,45 @@ in
         enable = true;
       };
 
-      termite = {
+      tmux = {
         enable = true;
+        baseIndex = 1;
+        escapeTime = 10;
+        keyMode = "vi";
+        customPaneNavigationAndResize = true;
+        shortcut = "Space";
+        sensibleOnTop = false;
+        terminal = "screen-256color";
+        extraConfig = ''
+          # Use emacs-style keybindings for the status-line
+          set -g status-keys emacs
+
+          # Split windows with more intuitive keybindings
+          bind | split-window -h
+          bind - split-window -v
+
+          bind C-- delete-buffer
+
+          # Enable the mouse
+          set -g mouse on
+
+          # Set the default status bar style.
+          set -g status-left '#[reverse]#S #[noreverse]'
+          # set -g window-status-separator ''
+          # set -g window-status-current-style 'reverse'
+          set -g window-status-current-format '#[reverse] #I  #W* #[noreverse]'
+          set -g window-status-format ' #I  #W#{?window_last_flag,-,}'
+          set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{=24:pane_title} #[reverse] #h'
+          set -g status-style 'fg=#87ceeb,bold,bg=#4e4e4e'
+          set -g status-position top
+
+          # Pane border style
+          set -g pane-active-border-style 'fg=#ffffff,bg=#00FF7F'
+        '';
+      };
+
+      termite = {
+        enable = false;
         backgroundColor = "rgba(29,40,55,1.0)";
         colorsExtra = ''
           cursor = #bbbbbb

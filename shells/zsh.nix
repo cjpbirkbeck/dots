@@ -65,11 +65,16 @@
         fi
       '';
 
+      shellInit = ''
+        export PATH="$HOME/.local/bin/:$PATH"
+      '';
+
       interactiveShellInit = ''
         stty -ixon    # Disable C-s and C-q in terminals
 
-        bindkey -e
+        bindkey -e    # Use Emacs-like keybindings
 
+        # The follow was from the arch wiki.
         # create a zkbd compatible hash;
         # to add other keys to this hash, see: man 5 terminfo
         typeset -g -A key
@@ -143,14 +148,6 @@
         zstyle ':completion:*' list-suffixes
         zstyle ':completion:*' expand prefix suffix
 
-        # fasd hooks
-        eval "$(fasd --init auto)"
-
-        # Load fzf completions
-        source ${pkgs.fzf}/share/fzf/completion.zsh
-        source ${pkgs.fzf}/share/fzf/key-bindings.zsh
-
-        export PATH="$HOME/.local/bin/:$PATH"
       '';
     };
   };

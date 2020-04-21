@@ -50,6 +50,7 @@
     };
   };
 
+  # Customize the T430 keyboard
   home-manager.users.cjpbirkbeck = { pkgs, ... }: {
     home.keyboard = {
       layout = "us";
@@ -61,7 +62,7 @@
       mapExpression = {
         Control_L = "Escape";
         Super_R = "Print";
-        Super_L = "#135";
+        Super_L = "#135"; # Menu key
       };
     };
   };

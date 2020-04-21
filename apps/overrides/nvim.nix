@@ -144,7 +144,9 @@ in {
             customPlugins.tmux-vim # Adds support for modifying tmux config files.
             vim-pandoc
             vim-pandoc-syntax
-            vimpreviewpandoc
+
+            # External plugins
+            vim-ghost
           ];
           opt = [
             # Stuff

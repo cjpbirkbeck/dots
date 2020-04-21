@@ -42,3 +42,6 @@ function _mkdir_cd {
 
 alias ncd="_nix_store_open"
 alias md="_mkdir_cd"
+
+# fasd hooks
+eval "$(fasd --init auto)"
