@@ -80,6 +80,11 @@ let
 in {
   nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
     neovim_with_plugins = neovim.override {
+      viAlias = true;
+      vimAlias = true;
+
+      extraPython3Packages = [ pkgs.python37Packages.simple-websocket-server ];
+
       configure = {
         customRC = ''
           " common.vim should hold all the settings to be used across all systems.
@@ -166,8 +171,7 @@ in {
   };
 
   environment.shellAliases = {
-    vi    = "nvim";
-    vim   = "nvim";
+    v = "nvim";
     view  = "nvim -R";
   };
 

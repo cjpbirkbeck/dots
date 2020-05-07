@@ -14,7 +14,6 @@
       dash                # POSIX Shell
       file                # Determine the type of a file.
       tree                # Show contents of directories in a tree format.
-      fasd                # Jump to commonly used directories.
       fzf                 # Fuzzy finder user interface.
       gitAndTools.gitFull # Defacto standard version control
       bat                 # cat(1) clone with syntax highlighting.
@@ -34,9 +33,6 @@
       LESSKEY = "$HOME/.config/less/lesskey";
 
       BAT_STYLE = "full";
-
-      _FASD_DATA = "$HOME/.local/share/fasd/history";
-      _FASD_SHELL = "dash";
     };
 
     shellAliases = {
@@ -55,6 +51,9 @@
 
       # Alias for making symlinks.
       sl = "ln -s";
+
+      # Quickly pop directory list.
+      p = "popd";
 
       # ls Aliases
       # ls should have readable sizes, be coloured and list directories first.

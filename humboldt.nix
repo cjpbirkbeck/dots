@@ -8,18 +8,18 @@
     /etc/nixos/hardware-configuration.nix
 
     # Hardware-specific settings
-    ./hw/disks.nix
-    ./hw/sound.nix
-    ./hw/printer.nix
-    ./hw/yubikey.nix
+    ./hardware/disks.nix
+    ./hardware/sound.nix
+    ./hardware/printer.nix
+    ./hardware/yubikey.nix
 
     # System-wide settings
-    ./sys/boot.nix
-    ./sys/fonts.nix
-    ./sys/locale.nix
-    ./sys/upgrades.nix
-    ./sys/backup.nix
-    ./sys/cjpbirkbeck.nix
+    ./system/boot.nix
+    ./system/fonts.nix
+    ./system/locale.nix
+    ./system/upgrades.nix
+    ./system/backup.nix
+    ./system/cjpbirkbeck.nix
 
     # Shell configuration
     ./shells/shells.nix

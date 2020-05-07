@@ -4,11 +4,12 @@ compinit -d ~/.cache/zsh/zcompdump-"$ZSH_VERSION"
 # Write to the terminal window.
 case $TERM in
     (*xterm* | rxvt | st* | alacritty )
+        tty_id="$(basename $(tty))"
 
     # Write some info to terminal title.
     # This is seen when the shell prompts for input.
         function precmd {
-            print -Pn "\e]0;zsh %(1j,%j job%(2j|s|); ,)%~\a"
+            print -Pn "\e]0;zsh [$tty_id] %(1j,%j job%(2j|s|); ,)%~\a"
         }
     # Write command and args to terminal title.
     # This is seen while the shell waits for a command to complete.
@@ -40,8 +41,9 @@ function _mkdir_cd {
     fi
 }
 
+function _fuzzy_change_dir {
+    cd "$(pazi view | fzf --no-sort -d " " --nth=1 | cut -f 2)" || exit 1
+}
+
 alias ncd="_nix_store_open"
 alias md="_mkdir_cd"
-
-# fasd hooks
-eval "$(fasd --init auto)"

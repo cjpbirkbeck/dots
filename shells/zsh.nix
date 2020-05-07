@@ -60,7 +60,8 @@
           PROMPT="%B%F{red}[%t]%f%F{green}[%n@%M]%f%F{blue}[%~]%f%F{white}%(0#,#,$)%f%b "
           RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
         else
-          PROMPT="%B%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%~]%f%F{#FFFFFF}%(0#,#,$)%f%b "
+          pts_id="$(basename $(tty))"
+          PROMPT="%B%F{#FFFF00}[$pts_id]%f%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%~]%f%F{#FFFFFF}%(0#,#,$)%f%b "
           RPROMPT="%(?,,%B%F{#FFFFFF}%K{red}[%?]%k%f%b)%(1j,%B%F{#FFFFFF}%K{blue}[%j]%k%f%b,)"
         fi
       '';
@@ -73,6 +74,8 @@
         stty -ixon    # Disable C-s and C-q in terminals
 
         bindkey -e    # Use Emacs-like keybindings
+        autoload -U select-word-style
+        select-word-style bash
 
         # The follow was from the arch wiki.
         # create a zkbd compatible hash;

@@ -80,7 +80,6 @@ in
     conky             # GUI System Monitor
     firefox           # GUI web browser
     kp                # Kolourpaint, a simple MS Paint clone
-    lxappearance-gtk3 # Theme programs using gtk3
     notify-desktop    # Desktop notify
     rofi              # Program launcher/Window switcher/dmenu replacement
     rofi-pass         # Frontend for quickly entering passwords with rofi.
@@ -100,9 +99,7 @@ in
         XCOMPOSECACHE = "$HOME/.config/X11/XCompose";
         GTK_IM_MODULE = "xim";
         QT_IM_MODULE = "xim";
-        GNUPGHOME = "$HOME/.secrets/gnupg";
-        PASSWORD_STORE_DIR = "$HOME/.secrets/pass";
-        PASSWORD_STORE_GENERATED_LENGTH = "31";
+        # GNUPGHOME = "$HOME/.secrets/gnupg";
       };
 
       file = {
@@ -115,12 +112,57 @@ in
           source = ./home-manager/vimpcrc;
           target = ".vimpcrc";
         };
+
+        peekat = {
+          source = ./home-manager/bin/peekat;
+          target = ".local/bin/peekat";
+          executable = true;
+        };
+
+        openup = {
+          source = ./home-manager/bin/openup;
+          target = ".local/bin/openup";
+          executable = true;
+        };
+
+        localbackup = {
+          source = ./home-manager/bin/localbackup;
+          target = ".local/bin/localbackup";
+          executable = true;
+        };
+
+        takepicof = {
+          source = ./home-manager/bin/takepicof;
+          target = ".local/bin/takepicof";
+          executable = true;
+        };
       };
     };
 
     gtk = {
       enable = true;
+      gtk2.extraConfig = ''
+        gtk-theme-name="Breeze-Dark"
+        gtk-icon-theme-name="breeze-dark"
+        gtk-font-name="Sans 10"
+        gtk-cursor-theme-name="breeze_cursors"
+        gtk-cursor-theme-size=0
+        gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
+        gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+        gtk-button-images=0
+        gtk-menu-images=0
+        gtk-enable-event-sounds=1
+        gtk-enable-input-feedback-sounds=1
+        gtk-xft-antialias=1
+        gtk-xft-hinting=1
+        gtk-xft-hintstyle="hintslight"
+        gtk-xft-rgba="rgb"
+      '';
       gtk3 = {
+        bookmarks = [
+          "file:///home/cjpbirkbeck/Audio"
+          "file:///home/cjpbirkbeck/Images"
+        ];
         extraConfig = {
           gtk-button-images = 0;
           # gtk-cursor-theme-name = "breeze_cursors";
@@ -139,9 +181,9 @@ in
           gtk-xft-rgba = "rgb";
         };
         extraCss = ''
-        VteTerminal, vte-terminal {
-          padding: 1px;
-        }
+          VteTerminal, vte-terminal {
+            padding: 1px;
+          }
         '';
       };
     };
@@ -159,6 +201,12 @@ in
         };
       };
 
+      direnv = {
+        enable = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true;
+      };
+
       fzf = {
         enable = true;
         enableBashIntegration = true;
@@ -173,6 +221,10 @@ in
         userName = "Christopher Birkbeck";
         userEmail = "cjpbirkbeck@gmail.com";
       };
+
+      # gpg = {
+      #   enable = true;
+      # };
 
       # mpv = {
       #   enable = true;
@@ -190,13 +242,26 @@ in
         enable = true;
         theme = "paper-float";
         extraConfig = ''
-
           ! Opacity
           rofi.opacity: 80
 
           ! Enable modes
           rofi.modi: window,run,combi,drun
         '';
+      };
+
+      password-store = {
+        enable = true;
+        settings = {
+          PASSWORD_STORE_DIR = "$HOME/.secrets/pass";
+          PASSWORD_STORE_GENERATED_LENGTH = "31";
+        };
+      };
+
+      pazi = {
+        enable = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true;
       };
 
       taskwarrior = {
@@ -211,12 +276,21 @@ in
         customPaneNavigationAndResize = true;
         shortcut = "Space";
         sensibleOnTop = false;
-        terminal = "screen-256color";
+        terminal = "tmux-256color";
         plugins = with pkgs.tmuxPlugins; [
           {
             plugin = resurrect;
             extraConfig = ''
               set -g @resurrect-dir '$HOME/.local/share/tmux/resurrect'
+            '';
+          }
+          {
+            plugin = yank;
+          }
+          {
+            plugin = logging;
+            extraConfig = ''
+              set -g @logging-path '$HOME/.local/share/tmux/logs'
             '';
           }
           {
@@ -227,6 +301,13 @@ in
           }
         ];
         extraConfig = ''
+          # Enable true color and dynamic cusors shapes.
+          set-option -sa terminal-overrides ',alacritty:RGB,st-256color:RGB'
+          set-option -sa terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+
+          # Show title in terminal emulator title
+          set-option set-titles on
+
           # Use emacs-style keybindings for the status-line
           set -g status-keys emacs
 
@@ -240,10 +321,10 @@ in
           set -g mouse on
 
           # Set the default status bar style.
-          set -g status-left '#[reverse]#S #[noreverse]'
+          set -g status-left '#[reverse] #S #[noreverse]'
           set -g window-status-current-format '#[reverse] #I  #W* #[noreverse]'
           set -g window-status-format ' #I  #W#{?window_last_flag,-,}'
-          set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{pane_title} #[reverse] #h'
+          set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{pane_title}'
           set -g status-style 'fg=#87ceeb,bold,bg=#4e4e4e'
           set -g status-position top
 
@@ -253,7 +334,7 @@ in
       };
 
       termite = {
-        enable = false;
+        enable = true;
         backgroundColor = "rgba(29,40,55,1.0)";
         colorsExtra = ''
           cursor = #bbbbbb

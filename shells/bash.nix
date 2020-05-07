@@ -43,7 +43,7 @@
         HISTTIMEFORMAT='%c '
 
         # Initialize fasd except for the aliases.
-        eval "$(fasd --init auto)"
+        # eval "$(fasd --init auto)"
 
         # Store each line in history immediately.
         PROMPT_COMMAND="$PROMPT_COMMAND history -a"

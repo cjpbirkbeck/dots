@@ -7,7 +7,7 @@
     systemPackages = with pkgs; [
       file              # Determine the type of a file.
       tree              # Show contents of directories in a tree format.
-      fasd              # Jump to commonly used directories.
+      # fasd              # Jump to commonly used directories.
       fzf               # Fuzzy finder user interface.
       git               # Defacto standard version control
       bat               # cat(1) clone with syntax highlighting.
@@ -40,8 +40,8 @@
 
       BAT_STYLE = "full";
 
-      _FASD_DATA = "$HOME/.local/share/fasd/history";
-      _FASD_SHELL = "dash";
+      # _FASD_DATA = "$HOME/.local/share/fasd/history";
+      # _FASD_SHELL = "dash";
     };
   };
 }
