@@ -47,6 +47,7 @@ Plug 'tpope/vim-fugitive'     " Git frontend for Vim
 " IDE-like plugins
 Plug 'SirVer/ultisnips'    " Snippet manager.
 Plug 'honza/vim-snippets'  " Collection of prebuilt snippets.
+Plug 'roxma/nvim-yarp'     " Remote Plugin framework.
 Plug 'ncm2/ncm2'           " Autocompletion
 Plug 'ncm2/ncm2-bufword'   " Suggestion words for currently opened buffers
 Plug 'ncm2/ncm2-path'      " Generates suggestions from paths
@@ -58,7 +59,7 @@ Plug 'dense-analysis/ale'  " Multi-language linter.
 Plug 'LnL7/vim-nix'           " Adds nix syntax colouring and file detection to vim.
 Plug 'jceb/vim-orgmode'       " Add support for org file.
 im-orgmode'       " Add support for org file.
-Plug 'customPlugins.tmux-vim' " Adds support for modifying tmux config files.
+" Plug 'customPlugins.tmux-vim' " Adds support for modifying tmux config files.
 call plug#end()
 
 source $HOME/.config/nvim/common.vim
