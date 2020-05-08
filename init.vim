@@ -57,8 +57,12 @@ Plug 'dense-analysis/ale'  " Multi-language linter.
 " Filetype specific plugins
 Plug 'LnL7/vim-nix'           " Adds nix syntax colouring and file detection to vim.
 Plug 'jceb/vim-orgmode'       " Add support for org file.
-im-orgmode'       " Add support for org file.
-Plug 'customPlugins.tmux-vim' " Adds support for modifying tmux config files.
+Plug 'tmux-plugins/tmux-vim' " Adds support for modifying tmux config files.
 call plug#end()
 
-source $HOME/.config/nvim/common.vim
+if has('win32')
+	source $HOME\AppData\Local\nvim\common.vim
+        let g:python3_host_prog = 'C:\Users\cjpbi\AppData\Local\Programs\Python\Python37-32\python.exe'
+else
+	source $HOME/.config/nvim/common.vim
+endif

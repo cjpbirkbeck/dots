@@ -90,6 +90,11 @@ let g:lightline = {
     \ }
     \ }
 
+if has('win32')
+    let g:lightline.separator = { 'left': '', 'right': '' }
+    let g:lightline.subseparator = { 'left': '|', 'right': '|' }
+endif
+
 " }}}
 
 " Windows {{{
@@ -273,7 +278,7 @@ let g:UltiSnipsSnippetsDir="~/.config/nvim/custom_snippets"
 " Autocompletion {{{
 
 " Enable the Ncm2 completion engine.
-if has('nvim')
+if has('nvim') && has('unix')
     autocmd BufEnter * call ncm2#enable_for_buffer()
 endif
 
