@@ -47,6 +47,7 @@ Plug 'tpope/vim-fugitive'     " Git frontend for Vim
 " IDE-like plugins
 Plug 'SirVer/ultisnips'    " Snippet manager.
 Plug 'honza/vim-snippets'  " Collection of prebuilt snippets.
+Plug 'roxma/nvim-yarp'     " Remote Plugin framework.
 Plug 'ncm2/ncm2'           " Autocompletion
 Plug 'ncm2/ncm2-bufword'   " Suggestion words for currently opened buffers
 Plug 'ncm2/ncm2-path'      " Generates suggestions from paths
