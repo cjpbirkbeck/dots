@@ -4,6 +4,11 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 
+-- Modifier keys
+super   = "Mod4"
+shift   = "Shift"
+control = "Control"
+
 local clientkeys = gears.table.join(
     -- General window commands
     awful.key({ super, shift }, "f",

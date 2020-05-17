@@ -11,6 +11,11 @@ local exec_d   = config_d .. "bin/"
 local lib_d    = config_d .. "lib/"
 local theme_d  = config_d .. "theme/"
 
+-- Modifier keys
+super   = "Mod4"
+shift   = "Shift"
+control = "Control"
+
 -- Programs
 local terminal = "st"
 local launcher = "rofi -show combi window drun run -combi-modi \"window,drun,run\""
