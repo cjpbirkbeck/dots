@@ -1,8 +1,16 @@
 --[[
+    This layout has one master window that is always tiled to the left,
+    with all other slave windows stack over each other column to the right.
+    It has one varient, which has the master window on top and the stacked
+    slave windows below.
+
+    Based off the cascade layout from the Lain repository.
+
      Licensed under GNU General Public License v2
       * (c) 2014,      projektile
       * (c) 2013,      Luca CPZ
       * (c) 2010-2012, Peter Hofmann
+      * (c) 2020       Christopher Birkbeck
 --]]
 
 local floor  = math.floor

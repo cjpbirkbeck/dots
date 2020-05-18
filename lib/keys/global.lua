@@ -1,24 +1,15 @@
+-- Returns the globally set keybindings
+
 -- Import Libraries
 local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 
--- Directories
-local home_d   = os.getenv("HOME")
-local config_d = gears.filesystem.get_dir("config")
-local exec_d   = config_d .. "bin/"
-local lib_d    = config_d .. "lib/"
-local theme_d  = config_d .. "theme/"
-
 -- Modifier keys
 local super   = "Mod4"
 local shift   = "Shift"
 local control = "Control"
-
--- Programs
-local terminal = "st"
-local launcher = "rofi -show combi window drun run -combi-modi \"window,drun,run\""
 
 -- Defaults
 local mwf_increment = 0.05

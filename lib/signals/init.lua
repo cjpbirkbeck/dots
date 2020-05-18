@@ -1,3 +1,7 @@
+--[[
+    Set signals for various requests, including adding titlebars.
+--]]
+
 local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")

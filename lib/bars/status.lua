@@ -1,3 +1,5 @@
+-- Returns a function creating a status bar at the top of the screen.
+
 local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")

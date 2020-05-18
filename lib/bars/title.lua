@@ -1,3 +1,5 @@
+-- Returns a titlebar for any window requesting one.
+
 local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")

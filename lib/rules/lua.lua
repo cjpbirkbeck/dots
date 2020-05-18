@@ -1,3 +1,6 @@
+-- Returns the rules that all matching clients follow.
+-- Note that it does not stop them from being changed or moved after placement.
+
 -- Import Libraries
 local gears = require("gears")
 local awful = require("awful")

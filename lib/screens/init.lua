@@ -1,3 +1,8 @@
+-- Sets up each connected screen, including:
+-- * Setup up the wallpapers
+-- * Creating all the tags
+-- * Creating the wibar and its widgets.
+
 local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
