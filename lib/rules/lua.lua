@@ -66,10 +66,10 @@ local rules = {
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         },
         type = { "dialog" }
-      }, properties = { floating = true, placement = awful.placment.centered }},
+      }, properties = { floating = true, placement = awful.placement.centered }},
 
     -- Assign applications to tags
-    { rule_any = { class = { "Firefox", "Brave" } },
+    { rule_any = { class = { "Firefox", "Brave", "Tor Browser" } },
       properties = { tag = "Web" } },
 
     { rule_any = { class = { "Daily", "Thunderbird" } },

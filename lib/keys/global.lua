@@ -12,9 +12,9 @@ local lib_d    = config_d .. "lib/"
 local theme_d  = config_d .. "theme/"
 
 -- Modifier keys
-super   = "Mod4"
-shift   = "Shift"
-control = "Control"
+local super   = "Mod4"
+local shift   = "Shift"
+local control = "Control"
 
 -- Programs
 local terminal = "st"
@@ -29,7 +29,7 @@ local function create_prompt(question, action)
     awful.spawn.with_shell(exec_d .. "./rofi-prompt.sh " .. question .. " " .. action)
 end
 
-global_keys = gears.table.join(
+local global_keys = gears.table.join(
     -- Spawn new programs or switch to existing programs, using rofi as a launcher
     awful.key({ super }, "f", function() awful.spawn.with_shell("export XDG_CURRENT_DESKTOP=kde && " .. launcher) end,
               { description = "Find program to run", group = "Launch"}),
@@ -148,7 +148,7 @@ global_keys = gears.table.join(
     awful.key( { super }, "i", function() awful.tag.incmwfact(mwf_increment) end,
         { description = "Increase master width factor" , group = "Tag" }),
 
-    awful.key( { super, shift }, "i", function() awful.tag.incmwfact(mwf_increment) end,
+    awful.key( { super, shift }, "i", function() awful.tag.incmwfact(-mwf_increment) end,
         { description = "Decrease master width factor" , group = "Tag" }),
 
     awful.key( { super, control }, "i", function() client.focus.first_tag.master_width_factor = mwf_default end,
@@ -262,5 +262,59 @@ global_keys = gears.table.join(
         end,
         { description = "Unmount mounted drives", group = "System"})
 )
+
+-- Bind all key numbers to tags.
+-- Be careful: we use keycodes to make it work on any keyboard layout.
+-- This should map on the top row of your keyboard, usually 1 to 9.
+for i = 1, 9 do
+    global_keys = gears.table.join(global_keys,
+        -- Toggle tag display
+        awful.key({ super }, "#" .. i + 9,
+                  function ()
+                        local screen = awful.screen.focused()
+                        local current = screen.selected_tags
+                        local first = screen.selected_tag
+                        local tag = screen.tags[i]
+
+                        -- Do not toggle the last remaining tag
+                        if tag and #current > 1 or tag ~= first then
+                            awful.tag.viewtoggle(tag)
+                        end
+                  end,
+                  {description = "Toggle tag #"..i, group = "tag"}),
+        -- Toggle only viewing that tag.
+        awful.key({ super, "Control" }, "#" .. i + 9,
+                  function ()
+                      local screen = awful.screen.focused()
+                      local tag = screen.tags[i]
+                      if tag then
+                           tag:view_only()
+                      end
+                  end,
+                  {description = "Toggle tag #" .. i, group = "tag"}),
+        -- Move client to tag.
+        awful.key({ super, "Shift" }, "#" .. i + 9,
+                  function ()
+                      if client.focus then
+                          local tag = client.focus.screen.tags[i]
+                          if tag then
+                              client.focus:move_to_tag(tag)
+                          end
+                     end
+                  end,
+                  {description = "move focused client to tag #"..i, group = "tag"}),
+        -- Toggle tag on focused client.
+        awful.key({ super, "Control", "Shift" }, "#" .. i + 9,
+                  function ()
+                      if client.focus then
+                          local tag = client.focus.screen.tags[i]
+                          if tag then
+                              client.focus:toggle_tag(tag)
+                          end
+                      end
+                  end,
+                  {description = "toggle focused client on tag #" .. i, group = "tag"})
+    )
+end
 
 return global_keys

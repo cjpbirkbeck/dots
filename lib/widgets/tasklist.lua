@@ -1,5 +1,6 @@
 local gears = require("gears")
 local awful = require("awful")
+local wibox = require("wibox")
 
 local task_buttons = gears.table.join(
     awful.button({ }, 1, function (c)

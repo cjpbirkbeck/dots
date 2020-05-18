@@ -2,7 +2,7 @@ local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
 
-local tag_symbols = require("lib.vars.tag_symbols")
+local tag_symbols = require("lib.vars.tags")
 local setup_status_bar = require("lib.bars.status")
 
 local function set_wallpaper(s)

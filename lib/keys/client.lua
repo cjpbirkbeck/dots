@@ -32,13 +32,13 @@ local clientkeys = gears.table.join(
     awful.key({ super }, "c",  awful.placement.centered,
                { description = "Center floating window", group = "Floating"} ),
 
-    -- awful.key({ super }, "x",
-    --     function(c)
-    --         if c.floating == true then
-    --             float_controls:show({ coords = { x = c.x, y = c.y } })
-    --         end
-    --     end,
-    --     {description = "Opening floating control menu", group = "floating"}),
+    awful.key({ super }, "x",
+        function(c)
+            if c.floating == true then
+                float_controls:show({ coords = { x = c.x, y = c.y } })
+            end
+        end,
+        {description = "Opening floating control menu", group = "floating"}),
 
     awful.key({ super,           }, "t", function(c) if c.floating == true then c.ontop = not c.ontop end end,
       {description = "toggle keep on top", group = "Client"}),

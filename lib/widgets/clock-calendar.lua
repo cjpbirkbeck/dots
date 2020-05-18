@@ -1,5 +1,6 @@
 local gears = require("gears")
 local awful = require("awful")
+local wibox = require("wibox")
 
 -- Calendar widget
 -- When hovered, given a calendar of the current month with the current day highlighted.

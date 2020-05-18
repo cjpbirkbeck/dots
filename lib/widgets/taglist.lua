@@ -1,6 +1,8 @@
 local gears = require("gears")
 local awful = require("awful")
-local tag_symbols = require("lib.vars.tag_symbols")
+local wibox = require("wibox")
+
+local tag_symbols = require("lib.vars.tags")
 
 local taglist_buttons = gears.table.join(
     awful.button({ }, 1, awful.tag.viewtoggle),
@@ -16,7 +18,7 @@ local taglist_buttons = gears.table.join(
         end
     end))
 
-function screen_tags(s)
+local function screen_tags(s)
     local taglist = awful.widget.taglist {
             screen  = s,
             filter  = awful.widget.taglist.filter.all,
