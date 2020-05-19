@@ -45,6 +45,7 @@ in
     neofetch          # An "About" screen for the terminal
     odt2txt           # Converts odt (LibreOffice) to text
     pass              # Password manager
+    pamixer           # Pulse Audio mixer
     pdd               # Date/time calculator
     playerctl         # Command-line MPRIS controller
     poppler_utils     # Converts pdf to text
@@ -99,6 +100,7 @@ in
         XCOMPOSECACHE = "$HOME/.config/X11/XCompose";
         GTK_IM_MODULE = "xim";
         QT_IM_MODULE = "xim";
+        TMUXP_CONFIGDIR = "$HOME/.config/tmuxp";
         # GNUPGHOME = "$HOME/.secrets/gnupg";
       };
 
@@ -277,6 +279,7 @@ in
         shortcut = "Space";
         sensibleOnTop = false;
         terminal = "tmux-256color";
+        tmuxp.enable = true;
         plugins = with pkgs.tmuxPlugins; [
           {
             plugin = resurrect;
@@ -306,7 +309,8 @@ in
           set-option -sa terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
 
           # Show title in terminal emulator title
-          set-option set-titles on
+          set-option -g set-titles on
+          set-option -g set-titles-string "#S:#W [#I/#{session_windows}]:#T [#P/#{window_panes}] - Tmux"
 
           # Use emacs-style keybindings for the status-line
           set -g status-keys emacs
@@ -317,15 +321,19 @@ in
 
           bind C-- delete-buffer
 
+          # Reload source code
+          bind r source $HOME/.tmux.conf
+
           # Enable the mouse
           set -g mouse on
 
           # Set the default status bar style.
           set -g status-left '#[reverse] #S #[noreverse]'
+          set -g status-left-length 20
           set -g window-status-current-format '#[reverse] #I  #W* #[noreverse]'
-          set -g window-status-format ' #I  #W#{?window_last_flag,-,}'
+          set -g window-status-format ' #I  #W#F'
           set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{pane_title}'
-          set -g status-style 'fg=#87ceeb,bold,bg=#4e4e4e'
+          set -g status-style 'fg=#87ceeb,bold,bg=#4d4d4d'
           set -g status-position top
 
           # Pane border style
@@ -334,7 +342,7 @@ in
       };
 
       termite = {
-        enable = true;
+        enable = false;
         backgroundColor = "rgba(29,40,55,1.0)";
         colorsExtra = ''
           cursor = #bbbbbb
@@ -440,6 +448,13 @@ in
         multimediaKeys = true;
         notifications = true;
       };
+
+      picom = {
+        enable = true;
+        # extraOptions = ''
+        #   "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
+        # '';
+      };
     };
 
     # Use nix to manage the plugins globally, while configuring them per-user.
@@ -459,7 +474,6 @@ in
 
         "vifm" = {
           source = ./home-manager/vifm;
-          recursive = true;
         };
 
         "neofetch/config.conf" = {
@@ -479,6 +493,10 @@ in
         "sxiv/exec/rename.sh" = {
           source = ./home-manager/sxiv/exec/rename.sh;
           executable = true;
+        };
+
+        "rofi/themes/Material-Ocean.rasi" = {
+          source = ./home-manager/rofi/Material-Ocean.rasi;
         };
 
         # These files *should* point to the root directory,

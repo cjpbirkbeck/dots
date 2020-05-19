@@ -12,6 +12,7 @@
       weather-icons
       font-awesome
       emacs-all-the-icons-fonts
+      noto-fonts-emoji
       inconsolata
       ubuntu_font_family
     ];

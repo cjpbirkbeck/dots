@@ -38,9 +38,10 @@ set incsearch
 set smartcase
 
 " Rearrange windows and set default as list.
-set windows list,library,browse,playlist,directory,help
-set window list
+set windows lists,library,browse,playlist,directory,help
+set window lists
 
+" Colours
 hi error red bold_white
 hi status black bold_blue
 hi tab green black

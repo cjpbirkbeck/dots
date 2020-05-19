@@ -3,7 +3,7 @@
 # with rsync and borgbackup, respectively.
 
 double_backup() {
-    if test -f /run/media/cjpbirkbeck/"${1}"/; then
+    if test -e /run/media/cjpbirkbeck/"${1}"/; then
         cd /run/media/cjpbirkbeck/"${1}"/ || exit 1
 
         mkdir -p "$(uname -n)"/{rsync,borg} && cd "$(uname -n)" || exit 2

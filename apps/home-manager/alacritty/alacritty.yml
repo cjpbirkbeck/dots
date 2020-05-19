@@ -99,7 +99,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux) monospace
     #   - (Windows) Consolas
-    family: DeJaVu Sans Mono
+    family: DejaVu Sans Mono
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
@@ -196,30 +196,31 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '0x1d2837'
-    foreground: '0xffffff'
+    background: '0x1c262b'
+    foreground: '0xc2c8d7'
 
   # Normal colors
   normal:
     black:   '0x000000'
-    red:     '0xf9555f'
-    green:   '0x21b089'
-    yellow:  '0xfef02a'
-    blue:    '0x589df6'
-    magenta: '0x944d95'
-    cyan:    '0x1f9ee7'
-    white:   '0xbbbbbb'
+    red:     '0xee2b2a'
+    green:   '0x40a33f'
+    yellow:  '0xffea2e'
+    blue:    '0x1e80f0'
+    magenta: '0x8800a0'
+    cyan:    '0x16afca'
+    white:   '0xa4a4a4'
 
   # Bright colors
   bright:
-    black:   '0x555555'
-    red:     '0xfa8c8f'
-    green:   '0x35bb9a'
-    yellow:  '0xffff55'
-    blue:    '0x589df6'
-    magenta: '0xe75699'
-    cyan:    '0x3979bc'
+    black:   '0x777777'
+    red:     '0xdc5c60'
+    green:   '0x70be71'
+    yellow:  '0xfff163'
+    blue:    '0x54a4f3'
+    magenta: '0xaa4dbc'
+    cyan:    '0x42c7da'
     white:   '0xffffff'
+
   # Dim colors
   #
   # If the dim colors are not set, they will be calculated automatically based
@@ -505,15 +506,15 @@ debug:
 #   - AppKeypad
 key_bindings:
   # (Windows/Linux only)
-  #- { key: V,        mods: Control|Shift, action: Paste            }
-  #- { key: C,        mods: Control|Shift, action: Copy             }
-  #- { key: Insert,   mods: Shift,         action: PasteSelection   }
-  #- { key: Key0,     mods: Control,       action: ResetFontSize    }
-  #- { key: Equals,   mods: Control,       action: IncreaseFontSize }
-  #- { key: Add,      mods: Control,       action: IncreaseFontSize }
-  #- { key: Subtract, mods: Control,       action: DecreaseFontSize }
-  #- { key: Minus,    mods: Control,       action: DecreaseFontSize }
-  #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
+  - { key: V,        mods: Control|Shift, action: Paste            }
+  - { key: C,        mods: Control|Shift, action: Copy             }
+  - { key: Insert,   mods: Shift,         action: PasteSelection   }
+  - { key: Key0,     mods: Control,       action: ResetFontSize    }
+  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  - { key: Add,      mods: Control,       action: IncreaseFontSize }
+  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  - { key: Return,   mods: Alt,           action: ToggleFullscreen }
 
   # (macOS only)
   #- { key: Key0,   mods: Command,         action: ResetFontSize    }
