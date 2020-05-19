@@ -22,37 +22,31 @@ end
 
 local global_keys = gears.table.join(
     -- Spawn new programs or switch to existing programs, using rofi as a launcher
-    awful.key({ super }, "f", function() awful.spawn.with_shell("export XDG_CURRENT_DESKTOP=kde && " .. launcher) end,
+    awful.key({ super }, "f", function() awful.spawn.with_shell(launcher) end,
               { description = "Find program to run", group = "Launch"}),
-
-    -- awful.key({ super, shift }, "f", awful.spawn.with_shell("export XDG_CURRENT_DESKTOP=kde && " .. "rofi -show combi window drun run -combi-modi \"window,run\""),
-    --           { description = "Find any program to run", group = "Launch"}),
 
     -- Spawn specific programs
     awful.key({ super }, "Return", function () awful.spawn(terminal) end,
               {description = "Spawn a terminal", group = "Launch"}),
 
     awful.key({ super, shift }, "Return", function () awful.spawn(exec_d .. "rofi-tmux.sh") end,
-              {description = "Attach to tmux session in new terminal", group = "Launch"}),
+              {description = "Create new tmux client", group = "Launch"}),
 
-    -- awful.key({ super }, "w", function() awful.spawn.raise_or_spawn(browser) end,
-    --           { description = "Open web browser", group = "Launch"}),
+    awful.key({ super, control }, "Return", function () awful.spawn(exec_d .. "rofi-tmuxp.sh") end,
+              {description = "Create new tmuxp session", group = "Launch"}),
 
-    -- awful.key({ super }, "e", function() awful.spawn.raise_or_spawn(email) end,
-    --           { description = "Open email", group = "Launch"}),
+    awful.key({ super }, "\\", function() awful.spawn.with_shell("st -c st-float") end,
+              { description = "Create a floating terminal", group = "Launch"}),
 
     awful.key({ super }, "p", function() awful.spawn.with_shell("rofi-pass --last-used") end,
               { description = "Open passwords", group = "Launch"}),
 
     -- Search for files
-    awful.key({ super }, "s", function() awful.spawn.with_shell(terminal .. " -c st-dialog " .. " -t Directories" .. " -g 160x45 " .. " -e " .. exec_d .. "find-dirs.sh") end,
+    awful.key({ super }, "s", function() awful.spawn.with_shell(terminal .. " -c st-dialog " .. " -t Directories" .. " -g 160x45 " .. " -e " .. exec_d .. "find-file.sh") end,
               { description = "Search for files to open", group = "Launch"}),
 
-    awful.key({ super }, "d", function() awful.spawn(terminal .. " -c st-dialog " .. "-g 160x45 " .. " -t Finder " .. " -e " .. exec_d .. "find-file.sh") end,
+    awful.key({ super }, "d", function() awful.spawn(terminal .. " -c st-dialog " .. "-g 160x45 " .. " -t Finder " .. " -e " .. exec_d .. "find-dirs.sh") end,
        { description = "Find directories to open", group = "Launch"}),
-
-    -- awful.key({ super }, "F1", lookfor_manpages,
-    --    { description = "Find manpages to open", group = "Launch"}),
 
     -- Screen controls
     awful.key({ super, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
@@ -272,7 +266,7 @@ for i = 1, 9 do
                             awful.tag.viewtoggle(tag)
                         end
                   end,
-                  {description = "Toggle tag #"..i, group = "tag"}),
+                  {description = "Toggle tag #"..i, group = "Tag"}),
         -- Toggle only viewing that tag.
         awful.key({ super, "Control" }, "#" .. i + 9,
                   function ()
@@ -282,29 +276,19 @@ for i = 1, 9 do
                            tag:view_only()
                       end
                   end,
-                  {description = "Toggle tag #" .. i, group = "tag"}),
+                  {description = "View only tag #" .. i, group = "Tag"}),
         -- Move client to tag.
         awful.key({ super, "Shift" }, "#" .. i + 9,
                   function ()
                       if client.focus then
                           local tag = client.focus.screen.tags[i]
                           if tag then
-                              client.focus:move_to_tag(tag)
+                              client.focus:toggle_tag(tag)
                           end
                      end
                   end,
-                  {description = "move focused client to tag #"..i, group = "tag"}),
+                  {description = "Toggle focused client to tag #"..i, group = "Tag"})
         -- Toggle tag on focused client.
-        awful.key({ super, "Control", "Shift" }, "#" .. i + 9,
-                  function ()
-                      if client.focus then
-                          local tag = client.focus.screen.tags[i]
-                          if tag then
-                              client.focus:toggle_tag(tag)
-                          end
-                      end
-                  end,
-                  {description = "toggle focused client on tag #" .. i, group = "tag"})
     )
 end
 

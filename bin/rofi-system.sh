@@ -10,7 +10,7 @@ shutdown="Shutdown <small><i>(Shutdown machine<sup>2</sup>.)</i></small>"
 
 msg="<sup>1</sup> Requires password entry. <sup>2</sup> All current work will be lost!"
 
-action="$(printf "%s|%s|%s|%s|%s|%s|%s" "$switch_user" "$restart" "$exit_wm" "$lock" "$suspend_wm" "$reboot" "$shutdown" | rofi -dmenu -sep '|' -p "Which action?" -mesg "$msg" -markup-rows | cut -d " " -f 1)"
+action="$(printf "%s|%s|%s|%s|%s|%s|%s" "$switch_user" "$restart" "$exit_wm" "$lock" "$suspend_wm" "$reboot" "$shutdown" | rofi -dmenu -i -sep '|' -p "Which action?" -mesg "$msg" -markup-rows | cut -d " " -f 1)"
 
 case "$action" in
     "Switch") dm-tool switch-to-greeter ;;

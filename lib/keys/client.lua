@@ -75,7 +75,7 @@ local pos_controls = create_pos_menu(fwin_menu.position)
 
 local clientkeys = gears.table.join(
     -- General window commands
-    awful.key({ super, shift }, "f",
+    awful.key({ super }, "z",
         function (c)
             c.fullscreen = not c.fullscreen
             c:raise()
@@ -113,17 +113,13 @@ local clientkeys = gears.table.join(
         {description = "Opening position menu", group = "Floating"}),
 
     awful.key({ super,           }, "t", function(c) if c.floating == true then c.ontop = not c.ontop end end,
-      {description = "toggle keep on top", group = "Client"}),
+      {description = "Toggle keep on top", group = "Client"}),
 
-    awful.key({super, shift }, "t", function(c) if c.floating == true then awful.titlebar.toggle(c) end end,
-    { description = "Show/Hide Titlebars", group = "Client"} ),
+    awful.key({ super, shift }, "t", function(c) c.sticky = not c.sticky end)
 
-    awful.key({ super,           }, "m",
-        function (c)
-            c.maximized = not c.maximized
-            c:raise()
-        end ,
-        {description = "(un)maximize", group = "Client"})
+    -- awful.key({super, shift }, "t", function(c) if c.floating == true then awful.titlebar.toggle(c) end end,
+    -- { description = "Show/Hide Titlebars", group = "Client"} )
+
 )
 
 return clientkeys
