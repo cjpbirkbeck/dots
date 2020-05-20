@@ -5,6 +5,7 @@ local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
+local deck = require("lib.layouts.deck")
 
 -- Modifier keys
 local super   = "Mod4"
@@ -66,6 +67,41 @@ local global_keys = gears.table.join(
               {description = "Restore previous tag(s)", group = "tag"}),
 
     -- Layout controls
+    awful.key({ super }, "x",
+        function()
+            local s = awful.client.focus.screen
+            local curr = awful.layout.getname(awful.layout.get(s))
+            local t = client.focus and client.focus.first_tag or nil
+
+            t.layout = awful.layout.suit.max
+        end),
+
+    awful.key({ super }, "v",
+        function ()
+            local s = awful.client.focus.screen
+            local curr = awful.layout.getname(awful.layout.get(s))
+            local t = client.focus and client.focus.first_tag or nil
+
+            if curr == "deck" then
+                t.layout = awful.layout.suit.tile
+            else
+                t.layout = deck
+            end
+        end),
+
+    awful.key({ super }, "z",
+        function ()
+            local s = awful.client.focus.screen
+            local curr = awful.layout.getname(awful.layout.get(s))
+            local t = client.focus and client.focus.first_tag or nil
+
+            if curr == "horideck" then
+                t.layout = awful.layout.suit.tile.bottom
+            else
+                t.layout = deck.horizontal
+            end
+        end),
+
     awful.key({ super }, "space", function () awful.layout.inc( 1) end,
               {description = "Select next", group = "Layout"}),
 
@@ -126,7 +162,7 @@ local global_keys = gears.table.join(
         end,
         {description = "Focus previous client", group = "Client"}),
 
-    awful.key({ super,           }, "u", function() awful.client.urgent.jumpto() end,
+    awful.key({ super,           }, "u", function() awful.client.urgent.jumpto(true) end,
               {description = "Jump to urgent client", group = "Client"}),
 
     -- Modify master width factor
