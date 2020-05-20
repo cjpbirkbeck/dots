@@ -69,8 +69,6 @@ local global_keys = gears.table.join(
     -- Layout controls
     awful.key({ super }, "x",
         function()
-            local s = awful.client.focus.screen
-            local curr = awful.layout.getname(awful.layout.get(s))
             local t = client.focus and client.focus.first_tag or nil
 
             t.layout = awful.layout.suit.max
@@ -89,6 +87,13 @@ local global_keys = gears.table.join(
             end
         end),
 
+    awful.key({ super, shift }, "v",
+        function ()
+            local t = client.focus and client.focus.first_tag or nil
+
+            t.layout = awful.layout.suit.tile
+        end),
+
     awful.key({ super }, "z",
         function ()
             local s = awful.client.focus.screen
@@ -102,11 +107,18 @@ local global_keys = gears.table.join(
             end
         end),
 
-    awful.key({ super }, "space", function () awful.layout.inc( 1) end,
-              {description = "Select next", group = "Layout"}),
+    awful.key({ super, shift }, "z",
+        function()
+            local t = client.focus and client.focus.first_tag or nil
 
-    awful.key({ super, "Shift" }, "space", function () awful.layout.inc(-1) end,
-              {description = "Select previous", group = "Layout"}),
+            t.layout = awful.layout.suit.tile.bottom
+        end),
+
+    -- awful.key({ super }, "space", function () awful.layout.inc( 1) end,
+    --           {description = "Select next", group = "Layout"}),
+
+    -- awful.key({ super, "Shift" }, "space", function () awful.layout.inc(-1) end,
+    --           {description = "Select previous", group = "Layout"}),
 
     -- General window controls
     awful.key({ super, shift }, "n",
@@ -163,6 +175,9 @@ local global_keys = gears.table.join(
         {description = "Focus previous client", group = "Client"}),
 
     awful.key({ super,           }, "u", function() awful.client.urgent.jumpto(true) end,
+              {description = "Jump to urgent client", group = "Client"}),
+
+    awful.key({ super,           }, "u", function() awful.client.urgent.jumpto() end,
               {description = "Jump to urgent client", group = "Client"}),
 
     -- Modify master width factor

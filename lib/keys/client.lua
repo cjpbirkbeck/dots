@@ -75,7 +75,7 @@ local pos_controls = create_pos_menu(fwin_menu.position)
 
 local clientkeys = gears.table.join(
     -- General window commands
-    awful.key({ super }, "z",
+    awful.key({ super, shift }, "x",
         function (c)
             c.fullscreen = not c.fullscreen
             c:raise()
