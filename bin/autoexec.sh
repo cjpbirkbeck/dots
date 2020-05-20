@@ -8,5 +8,5 @@ function run {
 }
 
 run udiskie
-# run nm-applet
 run conky
+run tmux start-server
