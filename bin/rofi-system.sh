@@ -14,7 +14,7 @@ action="$(printf "%s|%s|%s|%s|%s|%s|%s" "$switch_user" "$restart" "$exit_wm" "$l
 
 case "$action" in
     "Switch") dm-tool switch-to-greeter ;;
-    "Restart") awesome-client "awesome-restart" ;;
+    "Restart") awesome-client "awesome-restart()" ;;
     "Exit") awesome-client "awesome-quit()" ;;
     "Lock") xautolock -locknow ;;
     "Suspend") systemctl suspend ;;

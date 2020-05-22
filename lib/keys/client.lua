@@ -13,6 +13,12 @@ super   = "Mod4"
 shift   = "Shift"
 control = "Control"
 
+-- Options
+local reposition_inc = 5
+local resize_inc = 5
+local min_width = 12
+local min_height = 20
+
 local fwin_menu = {
     position = {
         { "Centered", awful.placement.centered },
@@ -85,6 +91,18 @@ local clientkeys = gears.table.join(
     awful.key({ super }, "n", function (c) c.minimized = true end ,
         { description = "Minimize", group = "Client"}),
 
+    awful.key({ super }, "h",
+        function(c)
+            local s = c.screen
+            local tiled = s:get_tiled_clients(false)
+            local first_tiled = tiled[1]
+
+            -- naughty.notify { text = tostring(#tiled) .. " " .. first_tiled.name }
+
+            awful.client.focus.byidx(0, first_tiled)
+        end,
+        { description = "Focus first master", group = "Client" }),
+
     -- Kill Window
     awful.key({ super }, "BackSpace", function (c) c:kill() end,
               {description = "Close", group = "Client"}),
@@ -95,6 +113,69 @@ local clientkeys = gears.table.join(
 
     awful.key({ super }, "c",  awful.placement.centered,
                { description = "Center floating window", group = "Floating"} ),
+
+    awful.key({ super }, "b",  function(c) if c.floating then c.below = not c.below end end,
+               { description = "Center floating window", group = "Floating"} ),
+
+    awful.key({ super }, "Right",
+        function(c)
+            if c.floating then c.x = c.x + reposition_inc end
+
+            awful.placement.no_offscreen(c)
+        end),
+
+    awful.key({ super }, "Left",
+        function(c)
+            if c.floating then c.x = c.x - reposition_inc end
+
+            awful.placement.no_offscreen(c)
+        end),
+
+    awful.key({ super }, "Down",
+        function(c)
+            if c.floating then c.y = c.y + reposition_inc end
+
+            awful.placement.no_offscreen(c)
+        end),
+
+    awful.key({ super }, "Up",
+        function(c)
+            if c.floating then c.y = c.y - reposition_inc end
+
+            awful.placement.no_offscreen(c)
+        end),
+
+    awful.key({ super, shift }, "Right",
+        function(c)
+            local max_width = c.screen.geometry.width
+            local new = c.width + resize_inc
+
+            if c.floating and new >= min_width and new <= max_width then c.width = new end
+        end),
+
+    awful.key({ super, shift }, "Left",
+        function(c)
+            local max_width = c.screen.geometry.width
+            local new = c.width - resize_inc
+
+            if c.floating and new >= min_width and new <= max_width then c.width = new end
+        end),
+
+    awful.key({ super, shift }, "Down",
+        function(c)
+            local max_height = c.screen.geometry.height
+            local new = c.height + resize_inc
+
+            if c.floating and new >= min_height and new <= max_height then c.height = new end
+        end),
+
+    awful.key({ super, shift }, "Up",
+        function(c)
+            local max_height = c.screen.geometry.height
+            local new = c.height - resize_inc
+
+            if c.floating and new >= min_height and new <= max_height then c.height = new end
+        end),
 
     awful.key({ super }, "w",
         function(c)

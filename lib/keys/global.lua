@@ -78,7 +78,7 @@ local global_keys = gears.table.join(
         function ()
             local s = awful.client.focus.screen
             local curr = awful.layout.getname(awful.layout.get(s))
-            local t = client.focus and client.focus.first_tag or nil
+            local t = awful.screen.focused().selected_tag
 
             if curr == "deck" then
                 t.layout = awful.layout.suit.tile
@@ -89,7 +89,7 @@ local global_keys = gears.table.join(
 
     awful.key({ super, shift }, "v",
         function ()
-            local t = client.focus and client.focus.first_tag or nil
+            local t = awful.screen.focused().selected_tag
 
             t.layout = awful.layout.suit.tile
         end),
@@ -98,7 +98,7 @@ local global_keys = gears.table.join(
         function ()
             local s = awful.client.focus.screen
             local curr = awful.layout.getname(awful.layout.get(s))
-            local t = client.focus and client.focus.first_tag or nil
+            local t = awful.screen.focused().selected_tag
 
             if curr == "horideck" then
                 t.layout = awful.layout.suit.tile.bottom
@@ -140,8 +140,6 @@ local global_keys = gears.table.join(
         { description = "Restore all minimized", group = "Client"}),
 
     -- Tilled/stacked window controls
-    awful.key({ super }, "h", function() awful.client.focus.byidx(0, awful.client.getmaster()) end,
-        { description = "Focus first master", group = "Client" }),
 
     awful.key({ super, shift }, "h", function() client.focus:swap(awful.client.getmaster()) end,
         { description = "Swap with master", group = "Client"}),
@@ -177,7 +175,7 @@ local global_keys = gears.table.join(
     awful.key({ super,           }, "u", function() awful.client.urgent.jumpto(true) end,
               {description = "Jump to urgent client", group = "Client"}),
 
-    awful.key({ super,           }, "u", function() awful.client.urgent.jumpto() end,
+    awful.key({ super, shift     }, "u", function() awful.client.urgent.jumpto() end,
               {description = "Jump to urgent client", group = "Client"}),
 
     -- Modify master width factor
@@ -244,8 +242,13 @@ local global_keys = gears.table.join(
               { description = "Screenshot menu", group = "Screenshots"}),
 
     -- Miscellaneous
-    awful.key({ super, "Control" }, "c",  function () year_calendar:toggle() end,
-               { description = "Show yearly calendar", group = "Miscellaneous"}),
+
+    awful.key({ super }, "c", function() awful.spawn.with_shell(exec_d .. "rofi-unicode.sh") end),
+
+    awful.key({ super, shift }, "c", function() awful.spawn.with_shell(exec_d .. "rofi-unicode.sh clipboard") end),
+
+    -- awful.key({ super, "Control" }, "c",  function () year_calendar:toggle() end,
+    --            { description = "Show yearly calendar", group = "Miscellaneous"}),
 
     -- awful.key({ super, control   }, "s",      hotkeys_popup.show_help,
     --           {description="Show shortcuts", group="awesome"}),
@@ -304,6 +307,7 @@ local global_keys = gears.table.join(
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
     global_keys = gears.table.join(global_keys,
+
         -- Toggle tag display
         awful.key({ super }, "#" .. i + 9,
                   function ()
@@ -318,6 +322,7 @@ for i = 1, 9 do
                         end
                   end,
                   {description = "Toggle tag #"..i, group = "Tag"}),
+
         -- Toggle only viewing that tag.
         awful.key({ super, "Control" }, "#" .. i + 9,
                   function ()
@@ -328,7 +333,8 @@ for i = 1, 9 do
                       end
                   end,
                   {description = "View only tag #" .. i, group = "Tag"}),
-        -- Move client to tag.
+
+        -- Toggle tag on focused client.
         awful.key({ super, "Shift" }, "#" .. i + 9,
                   function ()
                       if client.focus then
@@ -339,7 +345,6 @@ for i = 1, 9 do
                      end
                   end,
                   {description = "Toggle focused client to tag #"..i, group = "Tag"})
-        -- Toggle tag on focused client.
     )
 end
 
