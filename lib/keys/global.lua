@@ -42,6 +42,12 @@ local global_keys = gears.table.join(
     awful.key({ super }, "p", function() awful.spawn.with_shell("rofi-pass --last-used") end,
               { description = "Open passwords", group = "Launch"}),
 
+    awful.key({}, "XF86HomePage", function() awful.spawn.raise_or_spawn("firefox") end,
+              { description = "Open passwords", group = "Launch"}),
+
+    awful.key({}, "XF86Mail", function() awful.spawn.raise_or_spawn("thunderbird") end,
+              { description = "Open passwords", group = "Launch"}),
+
     -- Search for files
     awful.key({ super }, "s", function() awful.spawn.with_shell(terminal .. " -c st-dialog " .. " -t Directories" .. " -g 160x45 " .. " -e " .. exec_d .. "find-file.sh") end,
               { description = "Search for files to open", group = "Launch"}),
@@ -56,7 +62,7 @@ local global_keys = gears.table.join(
     awful.key({ super, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
               {description = "Focus previous screen", group = "Screen"}),
 
-    awful.key({ super, "Control" }, "h", function () client.focus:move_to_screen(-1) end,
+    awful.key({ super, "Control" }, "h", function () client.focus:move_to_screen() end,
               {description = "Move focused to previous screen", group = "Screen"}),
 
     awful.key({ super, "Control" }, "l", function () client.focus:move_to_screen() end,

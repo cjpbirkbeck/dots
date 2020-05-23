@@ -87,10 +87,10 @@ local rules = {
     { rule_any = { class = { "mpv" } },
       properties = { tag = "Video" } },
 
-    { rule_any = { class = { "steam" } },
+    { rule_any = { class = { "Steam", "Rftg" } },
       properties = { tag = "Games" } },
 
-    { rule_any = { class = { "VirtualBox" } },
+    { rule_any = { class = { "VirtualBox Manager" } },
       properties = { tag = "Virtual" } },
 
     -- Conky should be present in all windows
