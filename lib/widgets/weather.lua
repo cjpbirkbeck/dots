@@ -19,7 +19,7 @@ function(_, _, _, button)
 end)
 local weather_t = awful.tooltip {
     objects = { weather },
-    timer_function = function() awful.spawn.easy_async_with_shell("weather --metric cyul", function(out) m_text = out end) return m_text end
+    timer_function = function() awful.spawn.easy_async_with_shell("weather --metric cyul", function(out) w_text = out end) return w_text end
 }
 
 return weather
