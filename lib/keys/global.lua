@@ -69,7 +69,7 @@ local global_keys = gears.table.join(
     -- Layout controls
     awful.key({ super }, "x",
         function()
-            local t = client.focus and client.focus.first_tag or nil
+            local t = awful.screen.focused().selected_tag
 
             t.layout = awful.layout.suit.max
         end),
@@ -141,26 +141,26 @@ local global_keys = gears.table.join(
 
     -- Tilled/stacked window controls
 
-    awful.key({ super, shift }, "h", function() client.focus:swap(awful.client.getmaster()) end,
-        { description = "Swap with master", group = "Client"}),
+    -- awful.key({ super, shift }, "h", function() client.focus:swap(awful.client.getmaster()) end,
+    --     { description = "Swap with master", group = "Client"}),
 
-    awful.key({ super }, "j", function () awful.client.focus.byidx( 1) end,
-        { description = "Focus next by index", group = "Client"}),
+    -- awful.key({ super }, "j", function () awful.client.focus.byidx( 1) end,
+    --     { description = "Focus next by index", group = "Client"}),
 
-    awful.key({ super, "Shift"   }, "j", function () awful.client.swap.byidx(1) end,
-        { description = "Swap with next client by index", group = "Client"}),
+    -- awful.key({ super, "Shift"   }, "j", function () awful.client.swap.byidx(1) end,
+    --     { description = "Swap with next client by index", group = "Client"}),
 
-    awful.key({ super }, "k", function () awful.client.focus.byidx(-1) end,
-        { description = "Focus previous by index", group = "Client"}),
+    -- awful.key({ super }, "k", function () awful.client.focus.byidx(-1) end,
+    --     { description = "Focus previous by index", group = "Client"}),
 
-    awful.key({ super, "Shift"   }, "k", function () awful.client.swap.byidx( -1) end,
-        { description = "Swap with previous client by index", group = "Client"}),
+    -- awful.key({ super, "Shift"   }, "k", function () awful.client.swap.byidx( -1) end,
+    --     { description = "Swap with previous client by index", group = "Client"}),
 
-    awful.key({ super }, "l", function() awful.client.focus.byidx(1, awful.client.getmaster()) end,
-        { description = "Focus first slave", group = "Client" }),
+    -- awful.key({ super }, "l", function() awful.client.focus.byidx(1, awful.client.getmaster()) end,
+    --     { description = "Focus first slave", group = "Client" }),
 
-    awful.key({ super, shift }, "l", function() awful.client.focus.byidx(-1, awful.client.getmaster()) end,
-        { description = "Focus last slave", group = "Client" }),
+    -- awful.key({ super, shift }, "l", function() awful.client.focus.byidx(-1, awful.client.getmaster()) end,
+    --     { description = "Focus last slave", group = "Client" }),
 
     -- Special focus changes
     awful.key({ super,           }, "Tab",
