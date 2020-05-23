@@ -47,14 +47,17 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- No borders with the max layout or if there is only a single tile client.
 screen.connect_signal("arrange",
     function (s)
-        local t = s.selected_tag
-        local l = t.layout
+        local selected = s.selected_tags
+        if #selected > 0 then
+            local t = s.selected_tag
+            local l = t.layout
 
-        for _, c in pairs(s.clients) do
-            if #s.tiled_clients == 1 or l == awful.layout.suit.max then
-                c.border_width = 0
-            else
-                c.border_width = beautiful.border_width
+            for _, c in pairs(s.clients) do
+                if #s.tiled_clients == 1 or l == awful.layout.suit.max then
+                    c.border_width = 0
+                else
+                    c.border_width = beautiful.border_width
+                end
             end
         end
     end)

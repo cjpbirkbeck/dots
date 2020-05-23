@@ -63,6 +63,30 @@ local global_keys = gears.table.join(
               {description = "Move focused to next screen", group = "Screen"}),
 
     -- Tag controls
+
+    awful.key({ super }, "0",
+        function()
+            local s = awful.screen.focused()
+            local tags = s.tags
+
+            awful.tag.viewmore(tags)
+        end),
+
+    awful.key({ super, shift }, "0",
+        function()
+            local s = awful.screen.focused()
+            local tags = s.tags
+
+            for i,t in pairs(tags) do
+                awful.tag.viewtoggle(t)
+            end
+        end),
+
+    awful.key({ super, control }, "0",
+        function()
+            awful.tag.viewnone()
+        end),
+
     awful.key({ super,           }, "grave", awful.tag.history.restore,
               {description = "Restore previous tag(s)", group = "tag"}),
 

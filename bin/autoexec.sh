@@ -1,7 +1,7 @@
-#!/usr/bin/env sh
+#!/usr/bin/env dash
 # This file will autorun any of the programs if it isn't already running.
 
-function run {
+run() {
     if ! pgrep -f "$1" ; then
         "$@" &
     fi
