@@ -101,6 +101,7 @@ in
         GTK_IM_MODULE = "xim";
         QT_IM_MODULE = "xim";
         TMUXP_CONFIGDIR = "$HOME/.config/tmuxp";
+        UNICODE_CHARS = "$HOME/.local/share/unicode-chars";
         # GNUPGHOME = "$HOME/.secrets/gnupg";
       };
 
@@ -119,6 +120,11 @@ in
           source = ./home-manager/bin/peekat;
           target = ".local/bin/peekat";
           executable = true;
+        };
+
+        unicode-chars = {
+          source = ./home-manager/unicode-chars;
+          target = ".local/share/unicode-chars";
         };
 
         openup = {

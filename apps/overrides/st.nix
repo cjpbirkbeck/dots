@@ -5,9 +5,9 @@
     st_patched = st.overrideAttrs ( oldAttr: rec {
       src = fetchFromGitHub {
         owner = "cjpbirkbeck";
-        repo = "cjpb-st";
-        rev = "851b73123f9822d39ff43017bcaca35080080bda";
-        sha256 = "1r2vvmiyc4lcw37m1lyh44xhgssv6y4jfcbpfc4d8rxvaxaj4vff";
+        repo = "st";
+        rev = "a6be7ed01a89e467261f5ac1fb4ce70d877dc66b";
+        sha256 = "1z8nfficjirsbc7z3ckd4z9806lcawadgs0znypz5gpd6p15lcw0";
       };
 
       buildInputs = with pkgs.xorg; [ libX11 libXft libXcursor ];
