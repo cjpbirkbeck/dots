@@ -215,6 +215,9 @@ local function l_shift_key(c)
 end
 
 local clientkeys = gears.table.join(
+    -- Tilled/stacked window controls
+    -- Relative controls; key will act different depending on the floating context.
+    -- Covers both the vim direction keys of hjkl and standard left, up, down and right.
     awful.key({ super }, "h", function(c) h_key(c) end,
         { description = "Focus first master", group = "Client" }),
 
@@ -262,6 +265,26 @@ local clientkeys = gears.table.join(
 
     awful.key({ super, shift }, "Right", function(c) l_shift_key(c) end,
         { description = "Focus first slave", group = "Client" }),
+
+    -- Absolute keys; these operate on the whole current client list,
+    -- regardless of floating status.
+    awful.key({ super }, "m", function(c) awful.client.focus.byidx(0, awful.client.getmaster()) end,
+        { description = "Swap with master", group = "Client"}),
+
+    awful.key({ super, shift }, "m", function(c) c:swap(awful.client.getmaster()) end,
+        { description = "Swap with master", group = "Client"}),
+
+    awful.key({ super }, "[", function (c) awful.client.focus.byidx( 1) end,
+        { description = "Focus next by index", group = "Client"}),
+
+    awful.key({ super, "Shift"   }, "[", function (c) awful.client.swap.byidx(1) end,
+        { description = "Swap with next client by index", group = "Client"}),
+
+    awful.key({ super }, "]", function (c) awful.client.focus.byidx(-1) end,
+        { description = "Focus previous by index", group = "Client"}),
+
+    awful.key({ super, "Shift"   }, "]", function (c) awful.client.swap.byidx( -1) end,
+        { description = "Swap with previous client by index", group = "Client"}),
 
     -- General window commands
     awful.key({ super, shift }, "x",

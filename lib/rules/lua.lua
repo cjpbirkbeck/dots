@@ -87,7 +87,7 @@ local rules = {
     { rule_any = { class = { "mpv" } },
       properties = { tag = "Video" } },
 
-    { rule_any = { class = { "Steam", "Rftg" } },
+    { rule_any = { class = { "Gnome-mines", "Steam", "Rftg" } },
       properties = { tag = "Games" } },
 
     { rule_any = { class = { "VirtualBox Manager", "VirtualBox Machine" } },
