@@ -169,24 +169,15 @@ local global_keys = gears.table.join(
         end,
         { description = "Restore all minimized", group = "Client"}),
 
-    -- Tilled/stacked window controls
-
-
-    -- awful.key({ super }, "l", function() awful.client.focus.byidx(1, awful.client.getmaster()) end,
-    --     { description = "Focus first slave", group = "Client" }),
-
-    -- awful.key({ super, shift }, "l", function() awful.client.focus.byidx(-1, awful.client.getmaster()) end,
-    --     { description = "Focus last slave", group = "Client" }),
-
     -- Special focus changes
-    awful.key({ super,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end,
-        {description = "Focus previous client", group = "Client"}),
+    -- awful.key({ super,           }, "Tab",
+    --     function ()
+    --         awful.client.focus.history.previous()
+    --         if client.focus then
+    --             client.focus:raise()
+    --         end
+    --     end,
+    --     {description = "Focus previous client", group = "Client"}),
 
     awful.key({ super,           }, "u", function() awful.client.urgent.jumpto(true) end,
               {description = "Jump to urgent client", group = "Client"}),
