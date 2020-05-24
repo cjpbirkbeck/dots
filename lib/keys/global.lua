@@ -170,14 +170,14 @@ local global_keys = gears.table.join(
         { description = "Restore all minimized", group = "Client"}),
 
     -- Special focus changes
-    -- awful.key({ super,           }, "Tab",
-    --     function ()
-    --         awful.client.focus.history.previous()
-    --         if client.focus then
-    --             client.focus:raise()
-    --         end
-    --     end,
-    --     {description = "Focus previous client", group = "Client"}),
+    awful.key({ super,           }, "Tab",
+        function ()
+            awful.client.focus.history.previous()
+            if client.focus then
+                client.focus:raise()
+            end
+        end,
+        {description = "Focus previous client", group = "Client"}),
 
     awful.key({ super,           }, "u", function() awful.client.urgent.jumpto(true) end,
               {description = "Jump to urgent client", group = "Client"}),

@@ -321,7 +321,7 @@ local clientkeys = gears.table.join(
     awful.key({ super, "Control" }, "space",  awful.client.floating.toggle,
               {description = "Toggle floating", group = "Client"}),
 
-    awful.key({ super }, "Tab",
+    awful.key({ super }, "Prior",
         function(c)
             if c.floating then
                 local s = c.screen
@@ -338,7 +338,24 @@ local clientkeys = gears.table.join(
             end
         end),
 
-    awful.key({ super, shift }, "Tab",
+    awful.key({ super, shift }, "Prior",
+        function(c)
+            if c.floating then
+                local s = c.screen
+                local other = not c.floating
+                local cls = s.clients
+                if #cls > 1 then
+                    local n = awful.client.next(1)
+                    for i = 1,#cls,1 do
+                        if n.floating then break end
+                        n = awful.client.next(1, n)
+                    end
+                    c:swap(n)
+                end
+            end
+        end),
+
+    awful.key({ super }, "Next",
         function(c)
             if c.floating then
                 local s = c.screen
@@ -351,6 +368,23 @@ local clientkeys = gears.table.join(
                         n = awful.client.next(-1, n)
                     end
                     awful.client.focus.byidx(0, n)
+                end
+            end
+        end),
+
+    awful.key({ super, shift }, "Next",
+        function(c)
+            if c.floating then
+                local s = c.screen
+                local other = not c.floating
+                local cls = s.clients
+                if #cls > 1 then
+                    local n = awful.client.next(-1)
+                    for i = 1,#cls,1 do
+                        if n.floating then break end
+                        n = awful.client.next(-1, n)
+                    end
+                    c:swap(n)
                 end
             end
         end),
