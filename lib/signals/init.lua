@@ -22,7 +22,7 @@ client.connect_signal("manage", function (c)
     end
 end)
 
--- When toggling floating mode, force clients to have a titlebar.k
+-- When toggling floating mode, force clients to have a titlebar.
 client.connect_signal("property::floating",
     function(c)
         if c.floating and c.class ~= 'Conky' then
@@ -41,8 +41,17 @@ client.connect_signal("mouse::enter", function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("focus",
+function(c)
+    c.opacity = 1
+    c.border_color = beautiful.border_focus
+end)
+
+client.connect_signal("unfocus",
+function(c)
+    -- c.opacity = 0.8
+    c.border_color = beautiful.border_normal
+end)
 
 -- No borders with the max layout or if there is only a single tile client.
 screen.connect_signal("arrange",
