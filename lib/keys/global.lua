@@ -18,7 +18,7 @@ local mwf_default = 0.5
 
 -- Functions
 local function create_prompt(question, action)
-    awful.spawn.with_shell(exec_d .. "./rofi-prompt.sh " .. question .. " " .. action)
+    awful.spawn.with_shell(exec_d .. "rofi-prompt.sh " .. question .. " " .. action)
 end
 
 local global_keys = gears.table.join(
