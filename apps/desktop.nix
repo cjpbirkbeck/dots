@@ -248,7 +248,7 @@ in
 
       rofi = {
         enable = true;
-        theme = "paper-float";
+        theme = "~/.config/rofi/themes/flat-ocean";
         extraConfig = ''
           ! Opacity
           rofi.opacity: 80
@@ -503,6 +503,14 @@ in
 
         "rofi/themes/Material-Ocean.rasi" = {
           source = ./home-manager/rofi/Material-Ocean.rasi;
+        };
+
+        "rofi/themes/flat-orange.rasi" = {
+          source = ./home-manager/rofi/flat-orange.rasi;
+        };
+
+        "rofi/themes/flat-ocean.rasi" = {
+          source = ./home-manager/rofi/flat-ocean.rasi;
         };
 
         # These files *should* point to the root directory,
