@@ -14,12 +14,6 @@
   };
 
   services = {
-    compton = {
-      # enable = true;
-
-      # backend = "glx";
-    };
-
     gnome3.gnome-keyring.enable = true;
 
     xserver = {

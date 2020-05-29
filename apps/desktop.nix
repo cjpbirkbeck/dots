@@ -30,11 +30,14 @@ in
     catdocx           # Converts Mircosoft Office (post-2007) to text
     catimg            # A much better image to text converter
     dante             # SOCKS server; need for aerc
+    detox             # Automatically make cli-friendly file names
     ddgr              # Search DuckDuckGo from the command line
     exiftool          # Image file information
+    fd                # Faster find(1) command
     ffmpeg            # Video encoder
     ffmpegthumbnailer # Create video thumbnails
     gcal              # Prints out almost any calendar and some holidays.
+    graphicsmagick    # Command line graphic process
     highlight         # Highlights syntax in a file
     jrnl              # Command line journal system.
     khard             # Address books
@@ -43,6 +46,7 @@ in
     mediainfo         # Multimedia file information
     mpc_cli           # Barebones command line interface for mpd
     neofetch          # An "About" screen for the terminal
+    nix-index         # Locate for nix
     odt2txt           # Converts odt (LibreOffice) to text
     pass              # Password manager
     pamixer           # Pulse Audio mixer
@@ -55,10 +59,12 @@ in
     translate-shell   # Search for translations (e.g. Google, Yandex) from the command line.
     trash-cli         # CLI program for working with Trash bin.
     unstable.ueberzug # Real images in the terminal!
+    unzip             # List and extact zip file
     weather           # Weather command line
     xcape             # Binding a modifier key when press by itself.
     xclip             # Command line ultity for manuplating the system clipboard.
     xlsx2csv          # Converts Excel (post-2007) files to csv files
+    zip               # Compress zip files
 
     # TUI programs
     calcurse          # Calendar
@@ -457,9 +463,9 @@ in
 
       picom = {
         enable = true;
-        # extraOptions = ''
-        #   "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
-        # '';
+        extraOptions = ''
+          "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
+        '';
       };
     };
 

@@ -3,6 +3,13 @@
 
 { pkgs, config, ... }:
 
+let
+  gnomePackages = with pkgs.gnome3; [
+    gnome-mines   # Minesweeper
+    quadrapassel  # Tetris
+    gnome-chess   # Chess
+  ];
+in
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -16,8 +23,11 @@
     pulseaudio.support32Bit = true;
   };
 
-  environment.systemPackages = with pkgs; [
+  users.users.cjpbirkbeck.packages = with pkgs; [
+    gnuchess  # Chess engine
+    rftg      # Race for the Galaxy
+
     steam
     steam-run
-  ];
+  ] ++ gnomePackages;
 }

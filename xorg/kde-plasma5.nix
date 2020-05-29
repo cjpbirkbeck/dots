@@ -3,5 +3,16 @@
 { pkgs, config, ... }:
 
 {
-  services.xserver.desktopManager.plasma5.enable = true;
+  environment.systemPackages = with pkgs; [
+    ark
+    gwenview
+    okular
+  ];
+
+  services.xserver = {
+    enable = true;
+
+    desktopManager.plasma5.enable = true;
+    desktopManager.xterm.enable = false;
+  };
 }

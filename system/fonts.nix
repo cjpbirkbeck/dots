@@ -14,6 +14,7 @@
       emacs-all-the-icons-fonts
       noto-fonts-emoji
       inconsolata
+      fira-mono
       ubuntu_font_family
     ];
   };
