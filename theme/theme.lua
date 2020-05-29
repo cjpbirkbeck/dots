@@ -10,7 +10,7 @@ local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
 -- Colours
--- From the Oceanic Material theme
+-- From the Oceanic Material theme, using in my terminal
 local om = {
     foreground    = "#C2C8D7",
     background    = "#1C262B",
@@ -43,12 +43,12 @@ local om = {
 
 -- Theming from vim's desert colourscheme
 local desert = {
-    blue = "#87CEEB",
-    green = "#98FB98",
-    red = "#FFA0A0",
-    yellow = "#F0E68C",
+    blue     = "#87CEEB",
+    green    = "#98FB98",
+    red      = "#FFA0A0",
+    yellow   = "#F0E68C",
 
-    normal = "#333333",
+    normal   = "#333333",
     non_text = "#4D4D4D",
     ll_green = "#98C379"
 }
@@ -57,16 +57,16 @@ local theme = {}
 
 theme.font          = "DejaVu Sans 10"
 
-theme.bg_normal     = "#4D4D4D"
-theme.bg_focus      = "#98C379"
-theme.bg_urgent     = "#CD5C5C"
-theme.bg_minimize   = "#2F4F4F"
+theme.bg_normal     = desert.normal
+theme.bg_focus      = om.light_green
+theme.bg_urgent     = om.red
+theme.bg_minimize   = desert.non_text
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#FFFFFF"
-theme.fg_focus      = "#000000"
-theme.fg_urgent     = "#FFFFFF"
-theme.fg_minimize   = "#FFFFFF"
+theme.fg_normal     = om.light_white
+theme.fg_focus      = om.black
+theme.fg_urgent     = om.light_white
+theme.fg_minimize   = om.light_white
 
 theme.taglist_font_focus = "DejaVu Sans bold 10"
 theme.taglist_fg_focus = "#000000"
