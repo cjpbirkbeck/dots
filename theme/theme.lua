@@ -9,6 +9,50 @@ local dpi = xresources.apply_dpi
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
+-- Colours
+-- From the Oceanic Material theme
+local om = {
+    foreground    = "#C2C8D7",
+    background    = "#1C262B",
+    cursor        = "#B3B8C3",
+
+    black         = "#000000",
+    light_black   = "#777777",
+
+    red           = "#EE2B2A",
+    light_red     = "#DC5C60",
+
+    green         = "#40A33F",
+    light_green   = "#70BE71",
+
+    yellow        = "#FFEA2E",
+    light_yellow  = "#FFF163",
+
+    blue          = "#1E80F0",
+    light_blue    = "#54A4F3",
+
+    magenta       = "#8800A0",
+    light_magenta = "#AA4DBC",
+
+    cyan          = "#16AFCA",
+    light_cyan    = "#42C7DA",
+
+    white         = "#A4A4A4",
+    light_white   = "#FFFFFF"
+}
+
+-- Theming from vim's desert colourscheme
+local desert = {
+    blue = "#87CEEB",
+    green = "#98FB98",
+    red = "#FFA0A0",
+    yellow = "#F0E68C",
+
+    normal = "#333333",
+    non_text = "#4D4D4D",
+    ll_green = "#98C379"
+}
+
 local theme = {}
 
 theme.font          = "DejaVu Sans 10"
@@ -123,12 +167,12 @@ theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
 theme.layout_fairv = themes_path.."default/layouts/fairvw.png"
 theme.layout_floating  = themes_path.."default/layouts/floatingw.png"
 theme.layout_magnifier = themes_path.."default/layouts/magnifierw.png"
-theme.layout_max =themes_path.."default/layouts/max.png"
+theme.layout_max = themes_path.."default/layouts/maxw.png"
 theme.layout_fullscreen = themes_path.."default/layouts/fullscreenw.png"
 theme.layout_tilebottom = themes_path.."default/layouts/tilebottomw.png"
 theme.layout_tileleft   = themes_path.."default/layouts/tileleftw.png"
-theme.layout_tile =themes_path.."default/layouts/tile.png"
-theme.layout_tiletop =themes_path.."default/layouts/tiletop.png"
+theme.layout_tile = themes_path.."default/layouts/tilew.png"
+theme.layout_tiletop = themes_path.."default/layouts/twiletopw.png"
 theme.layout_spiral  = themes_path.."default/layouts/spiralw.png"
 theme.layout_dwindle = themes_path.."default/layouts/dwindlew.png"
 theme.layout_cornernw = themes_path.."default/layouts/cornernww.png"
