@@ -1,0 +1,26 @@
+priority 1
+
+# For setup a nixos file
+snippet nos "{ config, pkgs ...}"
+\{ config, pkgs, ... \}:
+let
+  ${1}
+in
+\{
+  ${2}
+\}
+endsnippet
+
+# Make a larger set
+snippet set
+${1:with pkgs;} \{
+  ${2}
+\};
+endsnippet
+
+# Make a multiline list
+snippet ls
+${1:with pkgs;} [
+  ${2}
+];
+endsnippet

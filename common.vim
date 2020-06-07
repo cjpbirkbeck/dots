@@ -13,14 +13,14 @@
 
 " Prelude {{{
 
-set modelines=0                          " Modelines set to 0.
-set nomodeline                           " Turns off modelines for security.
+set modelines=0                              " Modelines set to 0.
+set nomodeline                               " Turns off modelines for security.
 if has('nvim')
     set shada=!,'100,<50,s10,h,%,r/run/media " Sets the shada settings
     set inccommand=nosplit                   " Show the incremental effects of typing in an command.
     set clipboard+=unnamedplus               " Use the system clipboard by default.
 endif
-filetype indent plugin on                " Detect file types.
+filetype indent plugin on                    " Detect file types.
 
 " Set leader to spacebar.
 let mapleader=" "
@@ -44,7 +44,7 @@ set confirm                    " Prints a confirmation command.
 set scrolloff=3                " Cursor will always be 3 lines above or below the screen margins.
 set list                       " Show tabs and EOL.
 set wildmenu                   " Use the advanced 'wildcard' menu for completion.
-set wildmode=longest,list,full " Complete to longest string, list all match, complete to next fullest match.
+set wildmode=longest,list,full " Complete to longest string, list all matches, complete to next fullest match.
 set mouse=a                    " Allow mouse usage in all modes.
 set wrap                       " Turns on word wrap.
 
@@ -54,12 +54,12 @@ set wrap                       " Turns on word wrap.
 
 syntax enable                   " Enable syntax colouring.
 set termguicolors               " Use the true (24-bit) colours instead of the terminal options.
-colorscheme desert2             " Use this theme, with the following modifications.
+colorscheme cjpb-desert         " Use this theme, with the following modifications.
 
 " Changes cursor shape depending on the current mode.
 " Normal mode     = box
 " Insert mode     = line
-" Overstrike mode = line
+" Overstrike mode = underline
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
  \,a:blinkwait700-blinkoff400-blinkon250
  \,sm:block-blinkwait175-blinkoff150-blinkon175
@@ -105,20 +105,12 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-l> <C-\><C-n><C-w>l
-
 " }}}
 
 " Files {{{
 
-" Map double leader to save but not quit.
+" Map double leader (double space) to save but not quit.
 map <leader><leader> :w<CR>
-
-" Quickly change working directory.
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Expand the path of the current file within command mode.
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -183,9 +175,9 @@ vnoremap / /\v
 nnoremap ? ?\v
 vnoremap ? ?\v
 
-set ignorecase                  " Ignores case in searches.
-set smartcase                   " Enables case-sensitivity with uppercase characters.
-set infercase                   " Will match cases in auto-completions.
+set ignorecase " Ignores case in searches.
+set smartcase  " Enables case-sensitivity with uppercase characters.
+set infercase  " Will match cases in auto-completions.
 
 " Clear search highlighting.
 nnoremap <silent> <leader>l :nohlsearch<CR>
@@ -195,9 +187,9 @@ nnoremap <silent> <leader>l :nohlsearch<CR>
 " Insertion {{{
 
 " Tabbing and indenting
-set smartindent                  " Turns on smart-indenting.
-set expandtab                    " Replaces default tab with number of spaces.
-set shiftwidth=4                 " Set the number of space for each indent.
+set smartindent  " Turns on smart-indenting.
+set expandtab    " Replaces default tab with number of spaces.
+set shiftwidth=4 " Set the number of space for each indent.
 
 " Insert brackets and quotation marks with their matching pair.
 inoremap ( ()<ESC>i
@@ -267,17 +259,17 @@ map <silent> <leader>s :setlocal spell!<cr>
 
 " Snippets {{{
 
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<a-j>"
 let g:UltiSnipsJumpForwardTrigger="<a-j>"
 let g:UltiSnipsJumpBackwardTrigger="<a-k>"
 
-let g:UltiSnipsSnippetsDir="~/.config/nvim/custom_snippets"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
 
 " }}}
 
 " Autocompletion {{{
 
-" Enable the Ncm2 completion engine.
+" Enable the Ncm2 completion engine, only for neovim only
 if has('nvim') && has('unix')
     autocmd BufEnter * call ncm2#enable_for_buffer()
 endif
@@ -294,43 +286,11 @@ set complete+=kspell
 
 " Autocommands  {{{
 
-" Templates {{{
-" Automatically populate new files with templates.
-augroup templates
-    autocmd!
-    autocmd BufNewFile /etc/nixos/*.nix 0r $HOME/.config/nvim/templates/nixos.nix
-    autocmd BufNewFile *.html,*.htm 0r $HOME/.config/nvim/templates/blank.html
-augroup END
-
-" }}}
-
-" i3 config file {{{
-augroup i3config
-    autocmd!
-    autocmd BufRead */i3/config* set filetype=i3config
-augroup END
-" }}}
-
-" AwesomeWM config file {{{
-
-" Automatically set folding for the awesomeWM with marker.
-augroup awesomeWM
-    autocmd!
-    autocmd BufRead */awesome/rc.lua set foldmethod=marker
-augroup END
-" }}}
-
-" Vifm config file {{{
+" Vim-like Programs {{{
 augroup vifm
     autocmd!
     autocmd BufRead */vifmrc set filetype=vim
-augroup END
-" }}}
-
-" Python {{{
-augroup py_files
-    autocmd!
-    autocmd FileType python setlocal foldmethod=syntax
+    autocmd BufRead */vimpcrc set filetype=vim
 augroup END
 " }}}
 
