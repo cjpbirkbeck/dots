@@ -77,6 +77,17 @@ let
     };
   };
 
+  customPlugins.vim-textobj-matchit = pkgs.vimUtils.buildVimPlugin {
+    name = "vim-textobj-matchit";
+    src = pkgs.fetchFromGitHub {
+      owner = "adriaanzon";
+      repo = "vim-textobj-matchit";
+      rev = "d1cdd34e6b43e18272b570fa32f94467fdd8f3e0";
+      sha256 = "1vc435bbxhcc9g062s10whhs7n8b9m1vsqxqq3bmqfmbsbkzq5qh";
+    };
+    preBuild = "rm Makefile";
+  };
+
 in {
   nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
     neovim_with_plugins = neovim.override {
@@ -99,7 +110,6 @@ in {
             lightline-vim       # Lightweight but pretty statusline.
             vim-lastplace       # Open files with cursor at last cursor position.
             vim-charazterize    # Display Unicode character metadata.
-            vim-css-color       # Displays hex codes in the colour they are describing.
             vim-signature       # Displays marks in the gutter.
             undotree            # Visual Vim's undos with a tree.
             neoterm             # Neovim terminal enhancements.
@@ -114,7 +124,10 @@ in {
             # Custom text objects
             vim-textobj-user             # Easily create your own text objects
             vim-textobj-brace            # Generic braces text objects
+            vim-textobj-comment          # Comment block text objects
             vim-textobj-variable-segment # Snake/CamelCase text objects
+            # vim-textobj-punctuation      #
+            vim-textobj-matchit          # Text object for matchit elements
             textobj-gitgutter            # Git Gutter text objects
             vim-indent-object            # Manipulate lines of same indentation as a single object.
             argtextobj-vim               # Text object for function arguments.
@@ -131,30 +144,34 @@ in {
 
             # Git integration
             gitgutter           # Shows Git changes in gutter.
-            fugitive            # Git frontend for Vim
+            fugitive            # Git frontend for Vim.
 
             # IDE-like plugins
             ultisnips           # Snippet manager.
             vim-snippets        # Collection of prebuilt snippets.
-            ncm2                  # Autocompletion
-            ncm2-bufword          # Suggestion words for currently opened buffers
-            ncm2-path             # Generates suggestions from paths
-            ncm2-ultisnips        # Generates suggestions from snippets
+            ncm2                # Autocompletion
+            ncm2-bufword        # Suggestion words for currently opened buffers
+            ncm2-path           # Generates suggestions from paths
+            ncm2-ultisnips      # Generates suggestions from snippets
             vim-test            # Automatic testing.
             ale                 # Multi-language linter.
 
             # Filetype specific plugins
             vim-nix                # Adds nix syntax colouring and file detection to vim.
-            vim-orgmode            # Add support for org file.
             customPlugins.tmux-vim # Adds support for modifying tmux config files.
-            vim-pandoc
-            vim-pandoc-syntax
+            # vim-pandoc             # Integrate pandoc with neovim
+            # vim-pandoc-syntax      # Add syntax highlighting for pandoc's markdown files.
+            vim-go                 # Plugin for extra support with Go
+            vim-orgmode            # Add support for org file.
 
             # External plugins
             vim-ghost
           ];
+          # For optional plugins, loaded only when meeting certain conditions:
+          # e.g. autocmd FileType foo :packadd fooCompletion
           opt = [
-            # Stuff
+            # vim-go      # Plugin for extra support with Go
+            # vim-orgmode # Add support for org file.
           ];
         };
       };

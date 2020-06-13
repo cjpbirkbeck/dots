@@ -10,6 +10,7 @@
     fonts = with pkgs; [
       # corefonts
       weather-icons
+      powerline-fonts
       font-awesome
       emacs-all-the-icons-fonts
       noto-fonts-emoji
