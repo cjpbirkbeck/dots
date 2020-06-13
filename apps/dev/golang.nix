@@ -3,7 +3,14 @@
 { config, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    go
-  ];
+  environment = {
+    variables = {
+      GOPATH = "$HOME/Code/go:$HOME/go";
+      # GOBIN = "$HOME/.local/bin";
+    };
+
+    systemPackages = with pkgs; [
+      go
+    ];
+  };
 }

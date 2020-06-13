@@ -8,6 +8,7 @@
   services = {
     udev.packages = with pkgs; [ yubikey-personalization ];
 
+    # Smart card daemon
     pcscd.enable = true;
   };
 

@@ -38,7 +38,7 @@
     ./apps/overrides/scripts.nix
     ./apps/scripts/rofi-as-dmenu.nix
     # ./apps/dev/lisp.nix
-    # ./apps/dev/golang.nix
+    ./apps/dev/golang.nix
     # ./apps/dev/rust.nix
   ];
 

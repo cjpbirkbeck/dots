@@ -26,6 +26,7 @@ in
   users.users.cjpbirkbeck.packages = with pkgs; [
     # Command line tools
     atool             # Print archive file infomation
+    asciidoctor       # Convertor for asciidoc files
     catdoc            # Converts Mircosoft Office to text
     catdocx           # Converts Mircosoft Office (post-2007) to text
     catimg            # A much better image to text converter
