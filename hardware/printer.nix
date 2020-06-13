@@ -5,7 +5,10 @@
 
 {
   hardware = {
-    sane.enable = true;
+    sane = {
+      enable = true;
+      extraBackends = [ pkgs.hplipWithPlugin ];
+    };
   };
 
   networking.firewall.allowedTCPPorts = [ 9100 ];

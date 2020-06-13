@@ -463,9 +463,9 @@ in
 
       picom = {
         enable = true;
-        extraOptions = ''
-          "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
-        '';
+        # extraOptions = ''
+        #   "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
+        # '';
       };
     };
 

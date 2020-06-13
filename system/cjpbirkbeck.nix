@@ -17,6 +17,6 @@
   users.users.cjpbirkbeck = {
     description = "Christopher Birkbeck";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "lp" "networkmanager" "vboxusers" ];
+    extraGroups = [ "wheel" "networkmanager" "lp" "scanner" "networkmanager" "vboxusers" ];
   };
 }
