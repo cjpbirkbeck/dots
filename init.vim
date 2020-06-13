@@ -11,7 +11,6 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'itchyny/lightline.vim'    " Lightweight but pretty statusline.
 Plug 'farmergreg/vim-lastplace' " Open files with cursor at last cursor position.
 Plug 'tpope/vim-characterize'   " Display Unicode character metadata.
-Plug 'ap/vim-css-color'         " Displays hex codes in the colour they are describing.
 Plug 'kshenoy/vim-signature'    " Displays marks in the gutter.
 Plug 'mbbill/undotree'          " Visual Vim's undos with a tree.
 Plug 'kassio/neoterm'           " Neovim terminal enhancements.
@@ -27,6 +26,7 @@ Plug 'tpope/vim-repeat'                " Repeat compatible custom operators.
 Plug 'kana/vim-textobj-user'               " Easily create your own text objects
 Plug 'Julian/vim-textobj-brace'            " Generic braces text objects
 Plug 'Julian/vim-textobj-variable-segment' " Snake/CamelCase text objects
+Plug 'adriaanzon/vim-textobj-matchit'      " Matchit text objects
 Plug 'gilligan/textobj-gitgutter'          " Git Gutter text objects
 Plug 'michaeljsmith/vim-indent-object'     " Manipulate lines of same indentation as a single object.
 Plug 'vim-scripts/argtextobj.vim'          " Text object for function arguments.
@@ -59,11 +59,12 @@ Plug 'dense-analysis/ale'  " Multi-language linter.
 Plug 'LnL7/vim-nix'          " Adds nix syntax colouring and file detection to vim.
 Plug 'jceb/vim-orgmode'      " Add support for org file.
 Plug 'tmux-plugins/tmux-vim' " Adds support for modifying tmux config files.
+Plug 'fatih/vim-go'          " Extra support for working the Go language.
 call plug#end()
 
 if has('win32')
     source $HOME\AppData\Local\nvim\common.vim
-    let g:python3_host_prog = 'C:\Users\cjpbi\AppData\Local\Programs\Python\Python37-32\python.exe'
+    let g:python3_host_prog = '$HOME\Local\Programs\Python\Python37-32\python.exe'
 else
     source $HOME/.config/nvim/common.vim
 endif

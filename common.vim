@@ -216,6 +216,8 @@ nnoremap <leader>O m`ko<ESC>``
 " Undos {{{
 
 set undofile " Keep persistent undos.
+let g:undotree_WindowLayout = 2
+let g:undotree_ShortIndicators = 1
 
 " Toggle Undo Tree
 nnoremap <leader>u :UndotreeToggle<CR><C-w><C-h>
@@ -293,5 +295,10 @@ augroup vifm
     autocmd BufRead */vimpcrc set filetype=vim
 augroup END
 " }}}
+
+" augroup govim
+"     autocmd!
+"     autocmd FileType go :packadd vim-go
+" augroup END
 
 " }}}
