@@ -14,7 +14,7 @@
     ./hardware/yubikey.nix
 
     # System-wide settings
-    ./system/boot.nix
+    # ./system/boot.nix
     ./system/fonts.nix
     ./system/locale.nix
     ./system/upgrades.nix
@@ -45,11 +45,20 @@
     # ./apps/dev/rust.nix
   ];
 
-  boot.loader = {
-    timeout = 10;
+  # boot.loader = {
+    # timeout = 10;
 
-    grub.useOSProber = true;
-  };
+    # grub.useOSProber = true;
+
+    # grub.memtest86.enable = true;
+
+    # # grub.efiInstallAsRemovable = true;
+  # };
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.consoleMode = "auto";
+  boot.loader.timeout = 10;
+  boot.loader.systemd-boot.configurationLimit = 50;
 
   # Customize the keyboard
   home-manager.users.cjpbirkbeck = { pkgs, ... }: {
