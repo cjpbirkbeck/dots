@@ -57,11 +57,11 @@
 
       promptInit = ''
         if [ $TERM = "linux" ]; then
-          PROMPT="%B%F{red}[%t]%f%F{green}[%n@%M]%f%F{blue}[%~]%f%F{white}%(0#,#,$)%f%b "
+          PROMPT="%B%F{red}[%t]%f%F{green}[%n@%M]%f%F{blue}[%(5~|-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
           RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
         else
           pts_id="$(basename $(tty))"
-          PROMPT="%B%F{#FFFF00}[$pts_id]%f%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%~]%f%F{#FFFFFF}%(0#,#,$)%f%b "
+          PROMPT="%B%F{#FFFF00}[$pts_id]%f%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%(5~|%-1~/…/%3~|%4~)]%f%F{#FFFFFF}%(0#,#,$)%f%b "
           RPROMPT="%(?,,%B%F{#FFFFFF}%K{red}[%?]%k%f%b)%(1j,%B%F{#FFFFFF}%K{blue}[%j]%k%f%b,)"
         fi
       '';

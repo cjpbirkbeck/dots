@@ -73,6 +73,7 @@ in
     htop              # System resources monitor
     ncdu              # Filesystem size browser
     newsboat          # RSS/Atom feed reader
+    gotop             # Terminal base system monitor
     sc-im             # Terminal spreadsheet program
     tig               # Git frontend
     unstable.aerc     # Terminal email client

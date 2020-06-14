@@ -7,13 +7,14 @@
     bash = {
       enableCompletion = true;
       shellInit = ''
-        export HISTFILE=$HOME/.local/share/bash/history
+        export HISTFILE="$HOME/.local/share/bash/history"
       '';
       promptInit = ''
         if [ "$TERM" = "dumb" -o -n "$INSIDE_EMACS" ]; then
           PS1="[\w]\$ "
         else
-          PS1="\[\033[1;32m\][\u@\h]\[\033[1;34m\][\w]\$\[\033[0m\] "
+          pts_id="$(basename $(tty))"
+          PS1="\[\033[1;33m\][$pts_id]\[\033[1;32m\][\u@\h]\[\033[1;34m\][\w]\[\033[1;97m\]\$\[\033[0m\] "
         fi
       '';
       interactiveShellInit = ''
@@ -42,17 +43,11 @@
         # Save date in the locales date-time representation.
         HISTTIMEFORMAT='%c '
 
-        # Initialize fasd except for the aliases.
-        # eval "$(fasd --init auto)"
-
         # Store each line in history immediately.
         PROMPT_COMMAND="$PROMPT_COMMAND history -a"
 
-        # Load fzf completions
-        source ${pkgs.fzf}/share/fzf/completion.bash
-
-        # Load fzf key bindings
-        source ${pkgs.fzf}/share/fzf/key-bindings.bash
+        # Trim any paths with more than 5 elements
+        PROMPT_DIRTRIM=3
       '';
     };
   };

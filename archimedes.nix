@@ -27,6 +27,7 @@
     ./shells/bash.nix
     ./shells/zsh.nix
     ./shells/tmux.nix
+    ./shells/ssh.nix
 
     # Xorg Server configuration
     ./xorg/lightdm.nix
@@ -40,7 +41,7 @@
     ./apps/gaming.nix
     ./apps/overrides/scripts.nix
     ./apps/scripts/rofi-as-dmenu.nix
-    # ./apps/dev/lisp.nix
+    ./apps/dev/lisp.nix
     # ./apps/dev/golang.nix
     # ./apps/dev/rust.nix
   ];
