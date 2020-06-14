@@ -8,5 +8,5 @@ run() {
 }
 
 run udiskie
-run conky
+# run conky
 run tmux start-server

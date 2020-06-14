@@ -1,7 +1,8 @@
 local gears = require("gears")
 local awful = require("awful")
 
-location = "cyul"
+local location = "cyul"
+local weather_page = "https://weather.gc.ca/city/pages/qc-147_metric_e.html"
 
 -- Weather widget
 -- Widget uses weather(1) to give a simple weather report.
