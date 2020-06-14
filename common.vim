@@ -302,3 +302,16 @@ augroup END
 " augroup END
 
 " }}}
+
+" {{{ Direnv integration
+
+" Allows direnv to load additional configuration (which could override
+" defaults), allowing for customized per-project configurations
+
+if exists("$EXTRA_VIM")
+  for path in split($EXTRA_VIM, ':')
+    exec "source ".path
+  endfor
+endif
+
+" }}}
