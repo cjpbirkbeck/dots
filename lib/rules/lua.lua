@@ -98,6 +98,9 @@ local rules = {
       properties = { sticky = true,
                      skip_taskbar = true }},
 
+    { rule = { class = "Brave" },
+      properties = { maximized = false } },
+
     { rule = { class = "st-256color" },
       properties = { icon = "utilities-terminal"} },
 }
