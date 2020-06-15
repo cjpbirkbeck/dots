@@ -68,7 +68,7 @@ beautiful.gap_single_client = false
 
 -- Programs
 terminal = "st"
-launcher = "export XDG_CURRENT_DESKTOP=kde && rofi -show combi window drun run -combi-modi \"window,drun,run\""
+launcher = "export XDG_CURRENT_DESKTOP=kde && rofi -show-icons -show combi window drun run -combi-modi \"window,drun,run\""
 browser = "firefox"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
