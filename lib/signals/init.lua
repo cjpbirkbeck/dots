@@ -4,6 +4,7 @@
 
 local gears = require("gears")
 local awful = require("awful")
+local menubar = require("menubar")
 local beautiful = require("beautiful")
 
 local titlebars = require("lib.bars.title")
@@ -70,3 +71,11 @@ screen.connect_signal("arrange",
             end
         end
     end)
+
+client.connect_signal("manage", function(c)
+    if c.class == "st-256color" then
+        -- local desktop_entry = menubar.utils.parse_desktop_file("/run/current-system/sw/share/applications/st.desktop")
+        local new_icon = gears.surface(menubar.utils.lookup_icon("/run/current-system/sw/share/icons/breeze/apps/32/utilities-terminal.svg"))
+        c.icon = new_icon._native
+    end
+end)
