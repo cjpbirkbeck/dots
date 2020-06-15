@@ -73,8 +73,7 @@ screen.connect_signal("arrange",
     end)
 
 client.connect_signal("manage", function(c)
-    if c.class == "st-256color" then
-        -- local desktop_entry = menubar.utils.parse_desktop_file("/run/current-system/sw/share/applications/st.desktop")
+    if c.class == "st-256color" or c.class == "st-dialog" or c.class == "st-float" then
         local new_icon = gears.surface(menubar.utils.lookup_icon(theme_d .. "st.svg"))
         c.icon = new_icon._native
     end
