@@ -58,7 +58,7 @@ Plug 'dense-analysis/ale'  " Multi-language linter.
 " Filetype specific plugins
 Plug 'LnL7/vim-nix'          " Adds nix syntax colouring and file detection to vim.
 Plug 'jceb/vim-orgmode'      " Add support for org file.
-Plug 'tmux-plugins/tmux-vim' " Adds support for modifying tmux config files.
+Plug 'tmux-plugins/vim-tmux' " Adds support for modifying tmux config files.
 Plug 'fatih/vim-go'          " Extra support for working the Go language.
 call plug#end()
 
