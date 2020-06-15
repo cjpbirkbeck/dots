@@ -94,7 +94,7 @@ in {
       viAlias = true;
       vimAlias = true;
 
-      extraPython3Packages = [ pkgs.python37Packages.simple-websocket-server ];
+      extraPython3Packages = (ps: with ps; [ simple-websocket-server python-slugify ]);
 
       configure = {
         customRC = ''
