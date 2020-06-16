@@ -6,6 +6,7 @@ projpath="$HOME/Code/${name}"
 
 mkdir -p "${projpath}" && cd "${projpath}" || exit 2
 cp "$HOME/Templates/.tmuxp.yaml" "${projpath}" && ln -s "${projpath}/.tmux.yaml" "${TMUXP_CONFIGDIR}/${name}.yaml"
+sed --in-place -e "s/NAME/${name}/g" "${projpath}/.tmuxp.yaml"
 
 lorri init
 git init
