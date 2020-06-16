@@ -293,12 +293,7 @@ local global_keys = gears.table.join(
 
     awful.key({ super }, "y",
         function()
-            for _,c in ipairs(client.get()) do
-                if c.class == "Conky" then
-                    c.ontop = not c.ontop
-                    return
-                end
-            end
+            awful.spawn.with_shell("st -e gotop")
         end,
         {description = "Toggle System Monitor", group = "System"}),
 
