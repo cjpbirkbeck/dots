@@ -1,0 +1,17 @@
+session_name: NAME
+windows:
+    - window_name: Main
+      layout: main-horizontal
+      shell_command_before:
+          - cd ~/Code/nixos
+      options:
+          main-pane-height: 30
+      panes:
+          - shell_command:
+              - nvim
+          - shell_command:
+              - nixos-version
+    - window_name: Shell
+      panes:
+          - shell_command:
+              - null

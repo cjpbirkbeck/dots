@@ -114,6 +114,11 @@ in
       };
 
       file = {
+        tmuxp-default = {
+          source = ./home-manager/tmuxp.yaml;
+          target = "Templates/.tmuxp.yaml";
+        };
+
         weatherrc = {
           source = ./home-manager/weatherrc;
           target = ".weatherc";
@@ -234,6 +239,7 @@ in
       git = {
         enable = true;
         package = pkgs.gitAndTools.gitFull;
+        # ignores = [ ".envrc" "shell.nix" ".tmuxp.yaml" ];
         userName = "Christopher Birkbeck";
         userEmail = "cjpbirkbeck@gmail.com";
       };
@@ -519,6 +525,10 @@ in
 
         "rofi/themes/flat-ocean.rasi" = {
           source = ./home-manager/rofi/flat-ocean.rasi;
+        };
+
+        "tmuxp/general.yaml" = {
+          source = ./home-manager/tmuxp/general.yaml;
         };
 
         # These files *should* point to the root directory,

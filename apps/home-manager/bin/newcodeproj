@@ -1,0 +1,12 @@
+#!/usr/bin/env dash
+
+test -n "${1}" && name="${1}" || exit 1
+
+projpath="$HOME/Code/${name}"
+
+mkdir -p "${projpath}" && cd "${projpath}" || exit 2
+cp "$HOME/Templates/.tmuxp.yaml" "${projpath}" && ln -s "${projpath}/.tmux.yaml" "${TMUXP_CONFIGDIR}/${name}.yaml"
+
+lorri init
+git init
+printf '%b\n%b\n%b\n' .direnv shell.nix .tmux.yaml > .gitignore
