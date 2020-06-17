@@ -10,23 +10,23 @@
   environment = {
     shells = with pkgs; [ bashInteractive zsh ];
 
-   systemPackages = with pkgs; [
-      dash                # POSIX Shell
-      file                # Determine the type of a file.
-      tree                # Show contents of directories in a tree format.
-      fzf                 # Fuzzy finder user interface.
-      gitAndTools.gitFull # Defacto standard version control
-      bat                 # cat(1) clone with syntax highlighting.
-      fd                  # find clone
-      ripgrep             # grep clone
-      lsof                # Lists open files
-      zip                 # Create ZIP files
-      unzip               # Extact files from ZIP files.
-      wget                # Command line file downloader
-      curl                # Command line file downloader
-      shellcheck          # Linter for shell scripts.
-      stow                # Symlink manager
-    ];
+   # systemPackages = with pkgs; [
+   #    dash                # POSIX Shell
+   #    file                # Determine the type of a file.
+   #    tree                # Show contents of directories in a tree format.
+   #    fzf                 # Fuzzy finder user interface.
+   #    gitAndTools.gitFull # Defacto standard version control
+   #    bat                 # cat(1) clone with syntax highlighting.
+   #    fd                  # find clone
+   #    ripgrep             # grep clone
+   #    lsof                # Lists open files
+   #    zip                 # Create ZIP files
+   #    unzip               # Extact files from ZIP files.
+   #    wget                # Command line file downloader
+   #    curl                # Command line file downloader
+   #    shellcheck          # Linter for shell scripts.
+   #    stow                # Symlink manager
+   #  ];
 
     variables = {
       LESSHISTFILE = "$HOME/.local/share/less/history";

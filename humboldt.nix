@@ -34,7 +34,8 @@
 
     # Application specific settings
     ./apps/desktop.nix
-    ./apps/minimal.nix
+    # ./apps/minimal.nix
+    ./apps/applications.nix
     ./apps/overrides/scripts.nix
     ./apps/scripts/rofi-as-dmenu.nix
     # ./apps/dev/lisp.nix
