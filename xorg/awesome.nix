@@ -27,11 +27,6 @@
 
       desktopManager.xterm.enable = false;
 
-      xautolock = {
-        enable = true;
-
-        locker = "${pkgs.xsecurelock}/bin/xsecurelock";
-      };
     };
   };
 

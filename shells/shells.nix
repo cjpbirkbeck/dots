@@ -90,8 +90,8 @@
   programs = {
     gnupg.agent = {
       enable = true;
-      enableBrowserSocket = true;
-      enableExtraSocket = true;
+      # enableBrowserSocket = true;
+      # enableExtraSocket = true;
     };
 
     ssh = {

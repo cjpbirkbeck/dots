@@ -69,6 +69,12 @@
     tlp = {
       enable = true;
     };
+
+    xserver.xautolock = {
+      enable = true;
+
+      locker = "${pkgs.xsecurelock}/bin/xsecurelock";
+    };
   };
 
   networking = {
