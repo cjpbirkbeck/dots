@@ -87,13 +87,22 @@ let
     firefox           # GUI web browser
     kp                # Kolourpaint, a simple MS Paint clone
     notify-desktop    # Desktop notify
+    mpv-with-scripts
     rofi              # Program launcher/Window switcher/dmenu replacement
     rofi-pass         # Frontend for quickly entering passwords with rofi.
     screenkey         # Show keypress on the screen.
     sxiv              # Lightweight image viewer
+    st_patched
     thunderbird       # GUI email client
     torbrowser        # Browser using the tor network
     zathura           # Lightweight PDF/EPUB/Dejv reader
+
+    neovim_with_plugins    # Customized neovim.
+    neovim-qt_with_plugins # GUI frontend using Qt.
+    neovim-remote          # Control remote instances of neovim.
+
+    miscfiles              # Misc files have a dictionary list that is useful for vim autocompletions.
+    universal-ctags        # Tags files that will hold keyword information.
   ];
 
   # Packages that only need to be on my desktop
@@ -110,6 +119,13 @@ let
   ];
 in
 {
+  imports = [
+    <home-manager/nixos>
+    ./overrides/nvim.nix
+    ./overrides/mpv.nix
+    ./overrides/st.nix
+  ];
+
   # Packages that should be accessible to all user, including root.
   environment.systemPackages = with pkgs; [
     dash                 # POSIX Shell

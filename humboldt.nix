@@ -27,6 +27,7 @@
     ./shells/bash.nix
     ./shells/zsh.nix
     ./shells/tmux.nix
+    ./shells/ssh.nix
 
     # Xorg Server configuration
     ./xorg/lightdm.nix
@@ -39,33 +40,10 @@
     ./apps/applications.nix
     ./apps/overrides/scripts.nix
     ./apps/scripts/rofi-as-dmenu.nix
-    # ./apps/dev/lisp.nix
-    ./apps/dev/golang.nix
-    # ./apps/dev/rust.nix
+    # ./apps/dev-env/lisp.nix
+    ./apps/dev-env/golang.nix
+    # ./apps/dev-env/rust.nix
   ];
-
-  # hardware = {
-  #   trackpoint = {
-  #     enable = true;
-  #   };
-  # };
-
-  # # Customize the T430 keyboard
-  # home-manager.users.cjpbirkbeck = { pkgs, ... }: {
-  #   home.keyboard = {
-  #     layout = "us";
-  #     options = [ "compose:menu" "ctrl:nocaps" "altwin:prtsc_rwin" "shift:both_capslock" ];
-  #   };
-
-    # services.xcape = {
-    #   enable = true;
-    #   mapExpression = {
-    #     Control_L = "Escape";
-    #     Super_R = "Print";
-    #     Super_L = "#135"; # Menu key
-    #   };
-    # };
-  # };
 
   services = {
     tlp = {

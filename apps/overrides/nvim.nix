@@ -5,6 +5,15 @@
 { config, pkgs, ... }:
 
 let
+  neovim-pkgs = with pkgs; [
+    neovim_with_plugins    # Customized neovim.
+    neovim-qt_with_plugins # GUI frontend using Qt.
+    neovim-remote          # Control remote instances of neovim.
+
+    miscfiles              # Misc files have a dictionary list that is useful for vim autocompletions.
+    universal-ctags        # Tags files that will hold keyword information.
+  ];
+
   unstable = import <unstable> {};
 
   customPlugins.tmux-vim = pkgs.vimUtils.buildVimPlugin {
@@ -192,12 +201,12 @@ in {
     view  = "nvim -R";
   };
 
-  environment.systemPackages = with pkgs; [
-    neovim_with_plugins    # Customized neovim.
-    neovim-qt_with_plugins # GUI frontend using Qt.
-    neovim-remote          # Control remote instances of neovim.
+  # environment.systemPackages = with pkgs; [
+  #   neovim_with_plugins    # Customized neovim.
+  #   neovim-qt_with_plugins # GUI frontend using Qt.
+  #   neovim-remote          # Control remote instances of neovim.
 
-    miscfiles              # Misc files have a dictionary list that is useful for vim autocompletions.
-    universal-ctags        # Tags files that will hold keyword information.
-  ];
+  #   miscfiles              # Misc files have a dictionary list that is useful for vim autocompletions.
+  #   universal-ctags        # Tags files that will hold keyword information.
+  # ];
 }

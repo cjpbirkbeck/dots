@@ -25,5 +25,5 @@
     } );
   };
 
-  environment.systemPackages = with pkgs; [ st_patched ];
+  # environment.systemPackages = with pkgs; [ st_patched ];
 }

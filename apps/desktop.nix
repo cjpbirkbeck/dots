@@ -4,16 +4,11 @@
 
 let
   unstable = import <unstable> {};
-
-  kp = pkgs.kdeApplications.kolourpaint;
 in
 {
-  # Import my overrides.
+  # Import home-manager
   imports = [
     <home-manager/nixos>
-    ./overrides/nvim.nix
-    ./overrides/mpv.nix
-    ./overrides/st.nix
   ];
 
   environment.shellAliases = {

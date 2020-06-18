@@ -9,7 +9,5 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    mpv-with-scripts
-  ];
+  # environment.systemPackages = with pkgs; [ mpv-with-scripts ];
 }
