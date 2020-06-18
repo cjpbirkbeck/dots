@@ -327,6 +327,7 @@ in
 
       ssh = {
         enable = true;
+        forwardAgent = true;
       };
 
       zsh = {
