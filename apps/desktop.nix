@@ -328,6 +328,7 @@ in
       ssh = {
         enable = true;
         forwardAgent = true;
+        hashKnownHosts = true;
       };
 
       zsh = {
