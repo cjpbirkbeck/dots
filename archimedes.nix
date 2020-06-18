@@ -12,13 +12,13 @@
     ./hardware/sound.nix
     ./hardware/printer.nix
     ./hardware/yubikey.nix
+    ./hardware/io.nix
 
     # System-wide settings
     # ./system/boot.nix
     ./system/fonts.nix
     ./system/locale.nix
     ./system/upgrades.nix
-    ./system/backup.nix
     ./system/cjpbirkbeck.nix
     ./system/elma.nix
 
@@ -36,8 +36,7 @@
 
     # Application specific settings
     ./apps/desktop.nix
-    ./apps/minimal.nix
-    ./apps/additional.nix
+    ./apps/applications.nix
     ./apps/gaming.nix
     ./apps/overrides/scripts.nix
     ./apps/scripts/rofi-as-dmenu.nix
@@ -53,7 +52,6 @@
 
     # grub.memtest86.enable = true;
 
-    # # grub.efiInstallAsRemovable = true;
   # };
 
   boot.loader.systemd-boot.enable = true;
@@ -61,28 +59,16 @@
   boot.loader.timeout = 10;
   boot.loader.systemd-boot.configurationLimit = 50;
 
-  # Customize the keyboard
-  home-manager.users.cjpbirkbeck = { pkgs, ... }: {
-    home.keyboard = {
-      layout = "us";
-      options = [ "compose:menu" "ctrl:nocaps" "shift:both_capslock" ];
-    };
-
-    services.xcape = {
-      enable = true;
-      mapExpression = {
-        Control_L = "Escape";
-        Super_L = "#135"; # Menu key
-      };
-    };
-  };
-
   time.hardwareClockInLocalTime = true;
 
   networking = {
     hostName = "archimedes";
 
     nameservers = [ "192.168.1.11" ];
+
+    useDHCP = false;
+
+    interfaces.eno1.useDHCP = true;
   };
 
   services = {
@@ -104,6 +90,8 @@
   };
 
   virtualisation = {
+    anbox.enable = true;
+
     virtualbox.host = {
       enable = true;
     };

@@ -15,6 +15,6 @@
     };
   };
 
-  # System information command line ultity
-  environment.systemPackages = with pkgs; [ inxi smartmontools ];
+  # Add disk monitoring tools
+  environment.systemPackages = with pkgs; [ smartmontools ];
 }

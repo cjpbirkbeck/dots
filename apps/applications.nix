@@ -18,6 +18,9 @@ let
   # Programs that should be on any machine with X server on it.
   general = with pkgs; [
     # Command line tools
+    bashdb               # Bash debugger.
+    bats                 # Automated tests with bash scripts.
+    checkbashisms        # Check for bash-specific syntax in POSIX scripts.
     atool             # Print archive file infomation
     asciidoctor       # Convertor for asciidoc files
     catdoc            # Converts Mircosoft Office to text
@@ -55,6 +58,7 @@ let
     unstable.ueberzug # Real images in the terminal!
     unzip             # List and extact zip file
     weather           # Weather command line
+    youtube-dl           # Video downloader
     xcape             # Binding a modifier key when press by itself.
     xclip             # Command line ultity for manuplating the system clipboard.
     xlsx2csv          # Converts Excel (post-2007) files to csv files
@@ -120,6 +124,7 @@ in
     rsync                # Simple archival program
     rclone               # rsync for cloud storage
     borgbackup           # Deduplication backup tool
+    inxi                 # Comand line system information
   ];
 
   users.users.cjpbirkbeck.packages = core ++

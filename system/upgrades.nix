@@ -15,6 +15,8 @@ let
     ${config.nix.package.out}/bin/nix optimise-store
     # mandb --create
   '';
+
+  name = config.networking.hostName;
 in {
   # nix = {
   #   gc = {
@@ -38,7 +40,7 @@ in {
           { inherit (config.environment.sessionVariables) NIX_PATH;
             HOME = "/root";
           } // config.networking.proxy.envVars;path = with pkgs; [ coreutils gnutar xz.bin gzip gitMinimal config.nix.package.out ];
-        startAt = "23:00";
+        startAt = (if name == "archimedes" then "22:00" else "23:00");
       };
     };
   };
