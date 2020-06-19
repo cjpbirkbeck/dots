@@ -28,4 +28,8 @@ in
       enable = (if name == "humboldt" then true else false);
     };
   };
+
+  services.xserver.libinput = {
+    enable = true;
+  };
 }

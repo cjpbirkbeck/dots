@@ -11,6 +11,8 @@
       # corefonts
       weather-icons
       powerline-fonts
+      noto-fonts
+      hack-font
       font-awesome
       emacs-all-the-icons-fonts
       noto-fonts-emoji

@@ -329,12 +329,15 @@ in
         enable = true;
         forwardAgent = true;
         hashKnownHosts = true;
+        extraConfig = ''
+          AddKeysToAgent yes
+        '';
       };
 
-      keychain = {
-        enable = true;
-        agents = [ "ssh" ];
-      };
+      # keychain = {
+      #   enable = true;
+      #   agents = [ "ssh" ];
+      # };
 
       zsh = {
         enable = true;
@@ -369,6 +372,11 @@ in
     };
 
     services = {
+
+      gnome-keyring = {
+        enable = true;
+      };
+
       mpd = {
         enable = true;
         musicDirectory = /home/cjpbirkbeck/Audio;

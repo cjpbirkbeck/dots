@@ -103,6 +103,11 @@ let
 
     miscfiles              # Misc files have a dictionary list that is useful for vim autocompletions.
     universal-ctags        # Tags files that will hold keyword information.
+
+    breeze-gtk
+    breeze-icons
+    breeze-qt5
+    gnome-breeze
   ];
 
   # Packages that only need to be on my desktop

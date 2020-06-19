@@ -9,12 +9,13 @@
         networkmanager = {
           enableGnomeKeyring = true;
         };
+        lightdm.enableGnomeKeyring = true;
       };
     };
   };
 
   services = {
-    # gnome3.gnome-keyring.enable = true;
+    gnome3.gnome-keyring.enable = true;
 
     xserver = {
       windowManager.awesome = {

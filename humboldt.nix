@@ -31,7 +31,7 @@
 
     # Xorg Server configuration
     ./xorg/lightdm.nix
-    ./xorg/kde-plasma5.nix
+    # ./xorg/kde-plasma5.nix
     ./xorg/awesome.nix
 
     # Application specific settings
