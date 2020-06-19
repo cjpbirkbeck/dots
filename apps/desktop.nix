@@ -331,6 +331,11 @@ in
         hashKnownHosts = true;
       };
 
+      keychain = {
+        enable = true;
+        agents = [ "ssh-agent" ];
+      };
+
       zsh = {
         enable = true;
         dotDir = ".config/zsh";
