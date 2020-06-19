@@ -333,7 +333,7 @@ in
 
       keychain = {
         enable = true;
-        agents = [ "ssh-agent" ];
+        agents = [ "ssh" ];
       };
 
       zsh = {
