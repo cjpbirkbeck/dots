@@ -1,1 +1,1 @@
-:packadd vim-go
+setlocal noexpandtab
