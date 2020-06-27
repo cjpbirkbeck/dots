@@ -280,51 +280,6 @@ in
         '';
       };
 
-      termite = {
-        enable = false;
-        backgroundColor = "rgba(29,40,55,1.0)";
-        colorsExtra = ''
-          cursor = #bbbbbb
-          foreground = #ffffff
-          color0 = #000000
-          color1 = #f9555f
-          color2 = #21b089
-          color3 = #fef02a
-          color4 = #589df6
-          color5 = #944d95
-          color6 = #1f9ee7
-          color7 = #bbbbbb
-          color8 = #555555
-          color9 = #fa8c8f
-          color10 = #35bb9a
-          color11 = #ffff55
-          color12 = #589df6
-          color13 = #e75699
-          color14 = #3979bc
-          color15 = #ffffff
-          colorBD = #ffffff
-          colorIT =
-          colorUL =
-        '';
-        iconName = "utilities-terminal";
-        searchWrap = true;
-        scrollbar = "off";
-        filterUnmatchedUrls = true;
-        allowBold = true;
-        browser = "firefox";
-        clickableUrl = true;
-        cursorBlink = "system";
-        cursorShape = "block";
-        dynamicTitle = true;
-        font = "Deja Vu Sans Mono 11";
-        modifyOtherKeys = false;
-        scrollbackLines = -1;
-        sizeHints = false;
-        hintsFont = "Inconsolata 12";
-        hintsForegroundColor = "#dcdccc";
-        hintsBackgroundColor = "#3f3f3f";
-      };
-
       ssh = {
         enable = true;
         forwardAgent = true;
@@ -372,9 +327,8 @@ in
     };
 
     services = {
-
       gnome-keyring = {
-        enable = true;
+        enable = (if config.networking.hostName == "humboldt" then true else false);
       };
 
       mpd = {

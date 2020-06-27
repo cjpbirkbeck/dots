@@ -86,6 +86,7 @@ let
     conky             # GUI System Monitor
     firefox           # GUI web browser
     kp                # Kolourpaint, a simple MS Paint clone
+    networkmanagerapplet # Applet for connecting to wifi
     notify-desktop    # Desktop notify
     mpv-with-scripts
     rofi              # Program launcher/Window switcher/dmenu replacement
@@ -140,7 +141,6 @@ in
     lsof                 # Lists open files
     shellcheck           # Linter for shell scripts.
     acpi                 # Required for battery information
-    networkmanagerapplet # Applet for connecting to wifi
     udiskie              # Frontend of udisks.
     rsync                # Simple archival program
     rclone               # rsync for cloud storage

@@ -5,12 +5,6 @@
 {
   users.defaultUserShell = pkgs.zsh;
 
-  environment = {
-    variables = {
-      # ZDOTDIR = "$HOME/.config/zsh";
-    };
-  };
-
   programs = {
     zsh = {
       enable = true;
@@ -23,7 +17,7 @@
         highlighters = [
           "main"
           "brackets"
-          # "cursor"
+          "root"
         ];
       };
       histSize = 2147483647;

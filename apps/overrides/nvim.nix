@@ -158,10 +158,11 @@ in {
             # IDE-like plugins
             ultisnips           # Snippet manager.
             vim-snippets        # Collection of prebuilt snippets.
-            ncm2                # Autocompletion
-            ncm2-bufword        # Suggestion words for currently opened buffers
-            ncm2-path           # Generates suggestions from paths
-            ncm2-ultisnips      # Generates suggestions from snippets
+            LanguageClient-neovim # Language server for neovim
+            # ncm2                # Autocompletion
+            # ncm2-bufword        # Suggestion words for currently opened buffers
+            # ncm2-path           # Generates suggestions from paths
+            # ncm2-ultisnips      # Generates suggestions from snippets
             vim-test            # Automatic testing.
             ale                 # Multi-language linter.
 

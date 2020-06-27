@@ -20,5 +20,11 @@
       fira-mono
       ubuntu_font_family
     ];
+
+    fontconfig.defaultFonts = {
+      monospace = [ "Hack" "Noto Mono"];
+      sansSerif = [ "Noto Sans" ];
+      serif = [ "Noto Serif" ];
+    };
   };
 }

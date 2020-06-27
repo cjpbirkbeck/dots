@@ -8,7 +8,7 @@ let
   auto-nixos-upgrade = pkgs.writeScriptBin "auto-nixos-upgrade" ''
     #!${pkgs.stdenv.shell}
 
-    NIXOS_LABEL_VERSION="Automatic_upgrade-on-$(date '+%H%M%z')"
+    export NIXOS_LABEL_VERSION="Automatic_upgrade-on-$(date '+%H%M%z')"
 
     ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch --upgrade || exit 1
     ${config.nix.package.out}/bin/nix-collect-garbage --delete-older-than 14d
