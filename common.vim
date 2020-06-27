@@ -262,6 +262,8 @@ map <silent> <leader>s :setlocal spell!<cr>
 " Snippets {{{
 
 let g:UltiSnipsExpandTrigger="<a-j>"
+let g:UltiSnipsListSnippets="<a-S-j>"
+
 let g:UltiSnipsJumpForwardTrigger="<a-j>"
 let g:UltiSnipsJumpBackwardTrigger="<a-k>"
 
@@ -272,15 +274,15 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
 " Autocompletion {{{
 
 " Enable the Ncm2 completion engine, only for neovim only
-if has('nvim') && has('unix')
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-endif
+" if has('nvim') && has('unix')
+"     autocmd BufEnter * call ncm2#enable_for_buffer()
+" endif
 
 " Autocompletion should never insert nor select a suggestion until the user choose an option.
 " Also should always show a menu, even if there is only one choice.
 set completeopt=menu,preview,noinsert,menuone,noselect
 " Enable omni-completion.
-set omnifunc=syntaxcomplete#Complete
+setlocal omnifunc=syntaxcomplete#Complete
 " When using generic autocompletion, also get suggestions from the spelling dictionary.
 set complete+=kspell
 
