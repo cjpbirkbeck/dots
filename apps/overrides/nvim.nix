@@ -180,8 +180,7 @@ in {
           # For optional plugins, loaded only when meeting certain conditions:
           # e.g. autocmd FileType foo :packadd fooCompletion
           opt = [
-            # vim-go      # Plugin for extra support with Go
-            # vim-orgmode # Add support for org file.
+            # Stuff
           ];
         };
       };
