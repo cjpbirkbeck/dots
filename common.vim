@@ -2,12 +2,41 @@
 "                                                                             "
 " COMMON.VIM                                                                  "
 " Holds all commands and settings to be used across all OS'es at all times.   "
-" For NixOS and Guix System(?), the plugins are managed by the OS             "
-" For all others, I am using vim plug for plugin management.                  "
+" For NixOS, the plugins are managed by the OS                                "
+" For all others OS'es, I am using vim plug for plugin management.            "
 "                                                                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Functions {{{
+
+function! functions#ListSnippets(findstart, base) abort
+    if empty(UltiSnips#SnippetsInCurrentScope(1))
+        return ''
+    endif
+
+    if a:findstart
+        " locate the start of the word
+        let line = getline('.')
+        let start = col('.') - 1
+        while start > 0 && (line[start - 1] =~ '\a')
+            let start -= 1
+        endwhile
+        return start
+    else
+        " find classes matching "a:base"
+        let res = []
+        for m in keys(g:current_ulti_dict_info)
+            if m =~ a:base
+                let n = {
+                            \ 'word': m,
+                            \ 'menu': '[snip] '. g:current_ulti_dict_info[m]['description']
+                            \ }
+                call add(res, n)
+            endif
+        endfor
+        return res
+    endif
+endfunction
 
 " }}}
 
@@ -269,6 +298,8 @@ let g:UltiSnipsJumpBackwardTrigger="<a-k>"
 
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
 
+setlocal completefunc=functions#ListSnippets
+
 " }}}
 
 " Autocompletion {{{
@@ -291,17 +322,14 @@ set complete+=kspell
 " Autocommands  {{{
 
 " Vim-like Programs {{{
+
 augroup vifm
     autocmd!
     autocmd BufRead */vifmrc set filetype=vim
     autocmd BufRead */vimpcrc set filetype=vim
 augroup END
-" }}}
 
-" augroup govim
-"     autocmd!
-"     autocmd FileType go :packadd vim-go
-" augroup END
+" }}}
 
 " }}}
 
