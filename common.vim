@@ -9,7 +9,7 @@
 
 " Functions {{{
 
-function! functions#ListSnippets(findstart, base) abort
+function! ListSnippets(findstart, base) abort
     if empty(UltiSnips#SnippetsInCurrentScope(1))
         return ''
     endif
@@ -298,7 +298,7 @@ let g:UltiSnipsJumpBackwardTrigger="<a-k>"
 
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
 
-setlocal completefunc=functions#ListSnippets
+setlocal completefunc=ListSnippets
 
 " }}}
 
