@@ -36,11 +36,10 @@
 
     # Application specific settings
     ./apps/desktop.nix
-    # ./apps/minimal.nix
     ./apps/applications.nix
     ./apps/overrides/scripts.nix
     ./apps/scripts/rofi-as-dmenu.nix
-    # ./apps/dev-env/lisp.nix
+    ./apps/dev-env/lisp.nix
     ./apps/dev-env/golang.nix
     # ./apps/dev-env/rust.nix
   ];

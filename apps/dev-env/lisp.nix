@@ -7,5 +7,8 @@
     # Scheme
     chez
     chicken
+    guile
+    gauche
+    racket-minimal
   ];
 }

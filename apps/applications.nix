@@ -29,6 +29,7 @@ let
     dante             # SOCKS server; need for aerc
     detox             # Automatically make cli-friendly file names
     ddgr              # Search DuckDuckGo from the command line
+    dict              # Command line dictionary
     exiftool          # Image file information
     ffmpeg            # Video encoder
     ffmpegthumbnailer # Create video thumbnails
@@ -46,16 +47,18 @@ let
     odt2txt           # Converts odt (LibreOffice) to text
     pass              # Password manager
     pamixer           # Pulse Audio mixer
-    pandoc
+    pandoc            # Universal document converter
     pdd               # Date/time calculator
     playerctl         # Command-line MPRIS controller
     poppler_utils     # Converts pdf to text
     qrencode          # Prints out QR codes, when given a string of letters.
+    sent              # Suckless's presentation software (default unpatched version)
     taskopen          # Open Taskwarrior annotations in various programs
     taskwarrior       # Tasks and TODOs
     translate-shell   # Search for translations (e.g. Google, Yandex) from the command line.
     trash-cli         # CLI program for working with Trash bin.
     unstable.ueberzug # Real images in the terminal!
+    units             # Convert between units
     unzip             # List and extact zip file
     weather           # Weather command line
     youtube-dl           # Video downloader
