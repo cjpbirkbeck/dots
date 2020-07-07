@@ -173,6 +173,7 @@ in {
             # vim-pandoc-syntax      # Add syntax highlighting for pandoc's markdown files.
             vim-go                 # Plugin for extra support with Go
             vim-orgmode            # Add support for org file.
+            zig-vim                # Add support for the Zig language
 
             # External plugins
             vim-ghost

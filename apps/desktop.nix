@@ -221,12 +221,6 @@ in
         tmuxp.enable = true;
         plugins = with pkgs.tmuxPlugins; [
           {
-            plugin = resurrect;
-            extraConfig = ''
-              set -g @resurrect-dir '$HOME/.local/share/tmux/resurrect'
-            '';
-          }
-          {
             plugin = yank;
           }
           {
@@ -249,7 +243,7 @@ in
 
           # Show title in terminal emulator title
           set-option -g set-titles on
-          set-option -g set-titles-string "#S:#W [#I/#{session_windows}]:#T [#P/#{window_panes}] - Tmux"
+          set-option -g set-titles-string "#S:#W:#T [#I/#{session_windows}:#P/#{window_panes}] - Tmux"
 
           # Use emacs-style keybindings for the status-line
           set -g status-keys emacs
@@ -260,6 +254,9 @@ in
 
           bind C-- delete-buffer
 
+          # Cycle layouts with C-i, which should be the same as Tab
+          bind C-i next-layout
+
           # Reload source code
           bind r source $HOME/.tmux.conf
 
@@ -267,11 +264,11 @@ in
           set -g mouse on
 
           # Set the default status bar style.
-          set -g status-left '#[reverse] #S #[noreverse]'
+          set -g status-left '#[reverse] #{=/16/…:session_name} #[noreverse]'
           set -g status-left-length 20
-          set -g window-status-current-format '#[reverse] #I  #W* #[noreverse]'
-          set -g window-status-format ' #I  #W#F'
-          set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{pane_title}'
+          set -g window-status-current-format '#[reverse] #I  #{=/16/…:window_name}#F #[noreverse]'
+          set -g window-status-format ' #I  #{=/16/…:window_name}#F'
+          set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{=/16/…:pane_title}'
           set -g status-style 'fg=#87ceeb,bold,bg=#4d4d4d'
           set -g status-position top
 
