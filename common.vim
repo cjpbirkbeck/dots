@@ -244,9 +244,9 @@ nnoremap <leader>O m`ko<ESC>``
 
 " Undos {{{
 
-set undofile " Keep persistent undos.
-let g:undotree_WindowLayout = 2
-let g:undotree_ShortIndicators = 1
+set undofile                       " Keep persistent undos.
+let g:undotree_WindowLayout = 2    " Show undo differences in large window at the bottom.
+let g:undotree_ShortIndicators = 1 " Times should written in shorthand.
 
 " Toggle Undo Tree
 nnoremap <leader>u :UndotreeToggle<CR><C-w><C-h>
@@ -298,7 +298,7 @@ let g:UltiSnipsJumpBackwardTrigger="<a-k>"
 
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
 
-setlocal completefunc=ListSnippets
+set completefunc=ListSnippets
 
 " }}}
 
