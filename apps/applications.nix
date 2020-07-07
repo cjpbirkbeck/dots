@@ -61,7 +61,7 @@ let
     units             # Convert between units
     unzip             # List and extact zip file
     weather           # Weather command line
-    youtube-dl           # Video downloader
+    youtube-dl        # Video downloader
     xcape             # Binding a modifier key when press by itself.
     xclip             # Command line ultity for manuplating the system clipboard.
     xlsx2csv          # Converts Excel (post-2007) files to csv files
@@ -84,22 +84,22 @@ let
     w3m               # Terminal web browser
 
     # GUI applications
-    alacritty         # Terminal emuator
-    arc-theme         # Theme for GUI programs
-    conky             # GUI System Monitor
-    firefox           # GUI web browser
-    kp                # Kolourpaint, a simple MS Paint clone
+    alacritty            # Terminal emuator
+    arc-theme            # Theme for GUI programs
+    conky                # GUI System Monitor
+    firefox              # GUI web browser
+    kp                   # Kolourpaint, a simple MS Paint clone
     networkmanagerapplet # Applet for connecting to wifi
-    notify-desktop    # Desktop notify
-    mpv-with-scripts
-    rofi              # Program launcher/Window switcher/dmenu replacement
-    rofi-pass         # Frontend for quickly entering passwords with rofi.
-    screenkey         # Show keypress on the screen.
-    sxiv              # Lightweight image viewer
-    st_patched
-    thunderbird       # GUI email client
-    torbrowser        # Browser using the tor network
-    zathura           # Lightweight PDF/EPUB/Dejv reader
+    notify-desktop       # Desktop notify
+    mpv-with-scripts     # Customized mpv file
+    rofi                 # Program launcher/Window switcher/dmenu replacement
+    rofi-pass            # Frontend for quickly entering passwords with rofi.
+    screenkey            # Show keypress on the screen.
+    sxiv                 # Lightweight image viewer
+    st_patched           # Terminal emulator
+    thunderbird          # GUI email client
+    torbrowser           # Browser using the tor network
+    zathura              # Lightweight PDF/EPUB/Dejv reader
 
     neovim_with_plugins    # Customized neovim.
     neovim-qt_with_plugins # GUI frontend using Qt.
