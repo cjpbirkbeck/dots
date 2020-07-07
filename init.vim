@@ -2,10 +2,11 @@
 "                                                                             "
 " INIT.VIM                                                                    "
 " For most OS'es, this file will initalize the editor and mangae plugins.     "
-" For NixOS and Guix System(?), the plugins are managed by the OS             "
-" For all others, I am using vim plug for plugin management.                  "
+" For NixOS, the plugins are managed by the OS                                "
+" For all others, I am using vim-plug for plugin management.                  "
 "                                                                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 call plug#begin(stdpath('data') . '/plugged')
 " Interface enhancements
 Plug 'itchyny/lightline.vim'    " Lightweight but pretty statusline.

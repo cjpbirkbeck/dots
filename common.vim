@@ -283,6 +283,8 @@ xmap gl <Plug>(EasyAlign)
 
 " Spell Check {{{
 
+setlocal spelllang=en
+
 " Quickly toggle spell check.
 map <silent> <leader>s :setlocal spell!<cr>
 
