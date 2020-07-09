@@ -1,0 +1,5 @@
+set font	"monospace normal 12"
+set incremental-search	"true"
+set page-padding	"3"
+set selection-clipboard	"clipboard"
+set window-title-page	"true"
