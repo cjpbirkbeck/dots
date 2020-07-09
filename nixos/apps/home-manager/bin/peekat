@@ -1,0 +1,273 @@
+#!/usr/bin/env bash
+# Generates a previews of a file, based on its file extension and mimetype.
+# Otherwise, it prints out what finds.
+
+# Based off Ranger's scope.sh and a suggested revision for lf.
+# Latest Ranger scope.sh: https://github.com/ranger/ranger/blob/master/ranger/data/scope.sh
+# Suggested lf scope.sh: https://github.com/gokcehan/lf/wiki/Ranger
+
+set -C -f
+IFS=$'\n'
+WINDOW_WIDTH="${COLUMNS}"
+PAGE_LIMIT=10
+ROW_LIMIT=90
+FULLSCREEN=false
+VIEW_SOURCE=true
+
+# Process the file path and find its file extension.
+examine_file_path() {
+    local path="${1}"
+
+    FILE_PATH="$path"
+    FILE_EXT="${FILE_PATH##*.}"
+    FILE_EXT_LOWER=$(echo "${FILE_EXT}" | tr '[:upper:]' '[:lower:]')
+}
+
+# Print out the dash to fill the screen.
+printbreak() {
+    for ((i=0; i<WINDOW_WIDTH; i++)); do printf '—'; done
+}
+
+# Various processing functions for converting various file formats into useful text-based representations.
+
+process_pdf () {
+    echo "${WINDOW_WIDTH}"
+    pdftotext -l "${PAGE_LIMIT}" -nopgbrk -q -- "${FILE_PATH}" - | fold --spaces --width="${WINDOW_WIDTH}"
+    printbreak
+    exiftool "${FILE_PATH}" | fold --spaces --width="${WINDOW_WIDTH}"
+    exit 0
+}
+
+process_epub () {
+    # NOTE: pandoc is quite slow, slower than should allowed for a script
+    # like this. It should be replace with something like epub2txt2, if I
+    # can get it to work.
+    pandoc -i "${FILE_PATH}" --to=plain --spaces --width="${WINDOW_WIDTH}"
+    printbreak
+    exiftool "${FILE_PATH}" | fold --spaces --width="${WINDOW_WIDTH}"
+    exit 0
+}
+
+process_compressed() {
+    atool --list -- "${FILE_PATH}"
+    exit 0
+}
+
+process_torrent() {
+    transmission-show -- "${FILE_PATH}"
+    exit 0
+}
+
+process_opendocs() {
+    odt2txt "${FILE_PATH}" --width="${WINDOW_WIDTH}"
+    exit 0
+}
+
+process_ms_word() {
+    catdoc "${FILE_PATH}"
+    exit 0
+}
+
+process_ms_wordx() {
+    catdocx "${FILE_PATH}"
+    exit 0
+}
+
+process_json() {
+    jq --color-output . "${FILE_PATH}"
+    exit 0
+}
+
+process_html() {
+    if test "${VIEW_SOURCE}"; then
+        process_struct_text
+        exit 0
+    fi
+    w3m -dump "${FILE_PATH}"
+    exit 0
+}
+
+process_struct_text() {
+    bat --style="numbers,changes" --color=always --italic-text=always "${FILE_PATH}"
+    exit 0
+}
+
+process_image() {
+    if "$FULLSCREEN" = true; then
+        catimg -w "$WINDOW_WIDTH" "${FILE_PATH}"
+        exit 0
+    fi
+
+    if test "$TRUE_IMAGE" = true && test "$COLORTERM" = "truecolor"; then
+        source "$(ueberzug library)"
+
+        {
+            ImageLayer::add [idenifier]="peekat-preview" \
+                [x]="${UEBERZUG_X}" \
+                [y]="${UEBERZUG_Y}" \
+                [path]="${FILE_PATH}"
+        } | ImageLayer
+    exit 0
+    else
+        img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
+        printbreak
+        exiftool "${FILE_PATH}"
+    fi
+    exit 0
+}
+
+process_multimedia() {
+    mediainfo "${FILE_PATH}" | fold --width="${WINDOW_WIDTH}" --spaces
+    printbreak
+    exiftool "${FILE_PATH}" | fold --width="${WINDOW_WIDTH}" --spaces
+    exit 0
+}
+
+process_ms_excel() {
+    xls2csv -- "${FILE_PATH}"
+}
+
+process_ms_excelx() {
+    xlsx2csv -- "${FILE_PATH}"
+}
+
+process_directory() {
+    ls -l --group-directories-first --color=always --human-readable "${FILE_PATH}"
+    exit 0
+}
+
+handle_extension() {
+    case "${FILE_EXT_LOWER}" in
+        a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\
+        rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
+            process_compressed
+            ;;
+        nix|md|markdown|txt)
+            process_struct_text
+            ;;
+        pdf)
+            process_pdf
+            ;;
+        epub)
+            process_epub
+            ;;
+        torrent)
+            process_torrent
+            ;;
+        odt|ods|odp|sxw)
+            process_opendocs
+            ;;
+        htm|html|xhtml)
+            process_html
+            ;;
+        json)
+            process_json
+            ;;
+        doc)
+            process_ms_word
+            ;;
+        docx)
+            process_ms_wordx
+            ;;
+        xls)
+            process_ms_excel
+            ;;
+        xlsx)
+            process_ms_excelx
+            ;;
+    esac
+}
+
+handle_mime() {
+    local MIMETYPE="${1}"
+
+    case "${MIMETYPE}" in
+        text/* | */*xml)
+            process_struct_text
+            ;;
+        application/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+            process_ms_excelx
+            ;;
+        image/*)
+            process_image
+            ;;
+        video/*|audio/*|application/octet-stream)
+            process_multimedia
+            ;;
+        inode/directory)
+            process_directory
+            ;;
+        inode/x-empty)
+            echo "Empty file" && exit 0
+            ;;
+    esac
+}
+
+handle_fallback() {
+    local mimetype="${1}"
+
+    echo "Previewer cannot generate a preview based on its extension or mimetype."
+    echo "File Path: ${FILE_PATH}"
+    echo "File Extension: ${FILE_EXT}"
+    echo "Mime Type: ${mimetype}"
+    exit 1
+}
+
+while test $# -gt 0; do
+    if test $# -eq 1; then
+        examine_file_path "${1}"
+        break
+    fi
+
+    case "$1" in
+        "-F"|"--fzf")
+            # Hack for working with fzf, as $FZF_PREVIEW_COLUMNS does work.
+            WINDOW_WIDTH=$(( COLUMNS / 2 - 4))
+            shift
+            ;;
+        "-f"|"--fullscreen")
+            FULLSCREEN=true
+            shift
+            ;;
+        "-p"|"--pages")
+            PAGE_LIMIT="${2}"
+            shift 2
+            ;;
+        "-r"|"--rows")
+            ROW_LIMIT="${2}"
+            shift 2
+            ;;
+        "-w"|"--width")
+            WINDOW_WIDTH="$2"
+            shift 2
+            ;;
+        "-s"|"--source")
+            VIEW_SOURCE=true
+            shift
+            ;;
+        "-t"|"--true-image")
+            TRUE_IMAGE=true
+            shift
+            ;;
+        "-x"|"--x")
+            UEBERZUG_X="${1}"
+            shift 2
+            ;;
+        "-y"|"--y")
+            UEBERZUG_Y="${1}"
+            shift 2
+            ;;
+        "--")
+            examine_file_path "${1}"
+            shift
+            ;;
+        *)
+            exit 1
+            ;;
+    esac
+done
+
+handle_extension
+MIMETYPE="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
+handle_mime "${MIMETYPE}"
+handle_fallback "${MIMETYPE}"
