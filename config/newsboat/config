@@ -1,0 +1,37 @@
+# Configuration
+
+# General
+
+# Colour scheme
+#       Element             foreg   backg       style
+color   listfocus           color231   color208    bold
+color   listnormal_unread   red     color231       bold
+color   listfocus_unread    color231   red         bold
+color   info                blue   black    bold
+
+# Keybindings
+
+unbind-key ^K
+
+# Bind keys for more vim-like navigation
+bind-key j down
+bind-key k up
+bind-key l open
+
+bind-key h quit      articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key l open      articlelist
+
+bind-key h quit article
+bind-key J next article
+bind-key K prev article
+
+bind-key ^F pagedown article
+bind-key ^B pageup   article
+
+bind-key g home
+bind-key G end
+
+bind-key s sort
+bind-key S rev-sort
