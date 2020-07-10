@@ -1,5 +1,5 @@
 config/nvim/plug.vim
-.tmux.yaml
+.tmuxp.yaml
 tags
 config/awesome/theme/*
 config/awesome/theme/!theme.lua
