@@ -1,1 +1,2 @@
 config/newsboat/urls filter=git-crypt diff=git-crypt
+test-git-cypt filter=git-crypt diff=git-cypt
