@@ -1,16 +1,26 @@
 # Configuration
 
 # General
+confirm-exit yes
+feed-sort-order firsttag
+save-path ~/Documents/Text/
+
+# Autoupdating settings
+auto-reload yes
+reload-threads 4
+reload-time 30
+notify-always yes
+notify-format "%d new items, %D feeds with new items (%n unread items in %f feeds)"
+notify-program ~/.config/newsboat/notify-new-items.sh
 
 # Colour scheme
-#       Element             foreg   backg       style
-color   listfocus           color231   color208    bold
-color   listnormal_unread   red     color231       bold
-color   listfocus_unread    color231   red         bold
-color   info                blue   black    bold
+#       Element           foreg      backg       style
+color listfocus           color231   color208    bold
+color listnormal_unread   red        color231    bold
+color listfocus_unread    color231   red         bold
+color info                blue       black       bold
 
 # Keybindings
-
 unbind-key ^K
 
 # Bind keys for more vim-like navigation
@@ -35,3 +45,6 @@ bind-key G end
 
 bind-key s sort
 bind-key S rev-sort
+
+# Set browser
+browser firefox
