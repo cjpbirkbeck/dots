@@ -9,6 +9,7 @@
 
 " Functions {{{
 
+" Lists all UltiSnips snippets at that point.
 function! ListSnippets(findstart, base) abort
     if empty(UltiSnips#SnippetsInCurrentScope(1))
         return ''
@@ -83,7 +84,7 @@ set wrap                       " Turns on word wrap.
 
 syntax enable                   " Enable syntax colouring.
 set termguicolors               " Use the true (24-bit) colours instead of the terminal options.
-colorscheme cjpb-desert         " Use this theme, with the following modifications.
+colorscheme cjpb-desert         " Use my customized theme, located at colors/cjpb-desert.vim.
 
 " Changes cursor shape depending on the current mode.
 " Normal mode     = box
@@ -127,6 +128,10 @@ endif
 " }}}
 
 " Windows {{{
+
+" Open new windows below and right of the current window.
+set splitbelow
+set splitright
 
 " Sets Control + h/j/k/l to move across windows.
 noremap <C-h> <C-w>h
@@ -218,22 +223,22 @@ nnoremap <silent> <leader>l :nohlsearch<CR>
 " Tabbing and indenting
 set smartindent  " Turns on smart-indenting.
 set expandtab    " Replaces default tab with number of spaces.
-set shiftwidth=4 " Set the number of space for each indent.
+set shiftwidth=4 " Set the number of spaces for each indent.
 
 " Insert brackets and quotation marks with their matching pair.
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap { {}<ESC>i
-inoremap " ""<ESC>i
+" inoremap ( ()<ESC>i
+" inoremap [ []<ESC>i
+" inoremap { {}<ESC>i
+" inoremap " ""<ESC>i
 
 " Either insert pairs for punctation that can, but normally isn't used for
 " pairs, or insert a opening bracket with the matching pair.
-inoremap <A-(> (
-inoremap <A-[> [
-inoremap <A-{> {
+inoremap <A-(> ()<ESC>i
+inoremap <A-[> []<ESC>i
+inoremap <A-{> {}<ESC>i
 inoremap <A-<> <><ESC>i
 inoremap <A-'> ''<ESC>i
-inoremap <A-"> "
+inoremap <A-"> ""<ESC>i
 inoremap <A-`> ``<ESC>i
 
 " Insert blank lines above or below the current line.
@@ -306,16 +311,11 @@ set completefunc=ListSnippets
 
 " Autocompletion {{{
 
-" Enable the Ncm2 completion engine, only for neovim only
-" if has('nvim') && has('unix')
-"     autocmd BufEnter * call ncm2#enable_for_buffer()
-" endif
-
 " Autocompletion should never insert nor select a suggestion until the user choose an option.
 " Also should always show a menu, even if there is only one choice.
 set completeopt=menu,preview,noinsert,menuone,noselect
 " Enable omni-completion.
-setlocal omnifunc=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 " When using generic autocompletion, also get suggestions from the spelling dictionary.
 set complete+=kspell
 
@@ -325,6 +325,8 @@ set complete+=kspell
 
 " Vim-like Programs {{{
 
+" These programs use very similar (but not exact!) syntax as vim,
+" so use the same syntax file for those files
 augroup vifm
     autocmd!
     autocmd BufRead */vifmrc set filetype=vim
