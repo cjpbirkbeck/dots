@@ -11,7 +11,7 @@ reload-threads 4
 reload-time 30
 notify-always yes
 notify-format "%d new items, %D feeds with new items (%n unread items in %f feeds)"
-# notify-program ~/.config/newsboat/notify-new-items.sh
+notify-program notify-desktop
 
 # Colour scheme
 #       Element           foreg      backg       style
