@@ -7,6 +7,10 @@
 ### General ###
 
 stty -ixon # Disable C-s and C-q in terminals.
+KERNEL="$(uname)"
+
+test $KERNEL = "Linux" && PREFIX="/usr/share/zsh/plugins"
+test $KERNEL = "FreeBSD" && PREFIX="/usr/local/share"
 
 ### Keybindings ###
 
@@ -82,11 +86,11 @@ zstyle ':completion:*' cache-path $HOME/.cache/zsh/
 
 ### Source Plugins ###
 
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "${PREFIX}"/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7" # Use a lighter colour for autosuggestions
 ZSH_AUTOSUGGEST_USE_ASYNC=true         # Get suggestions asynchronously
 
-source /usr/local/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+test $KERNEL = "FreeBSD" && source "${PREFIX}"/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
 
 # This needs to be loaded last
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "${PREFIX}"/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
