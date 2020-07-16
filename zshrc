@@ -87,7 +87,7 @@ zstyle ':completion:*' cache-path $HOME/.cache/zsh/
 ### Source Plugins ###
 
 source "${PREFIX}"/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7" # Use a lighter colour for autosuggestions
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7" # Use a lighter colour for autosuggestions
 ZSH_AUTOSUGGEST_USE_ASYNC=true         # Get suggestions asynchronously
 
 test $KERNEL = "FreeBSD" && source "${PREFIX}"/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
