@@ -18,9 +18,9 @@ let
   # Programs that should be on any machine with X server on it.
   general = with pkgs; [
     # Command line tools
-    bashdb               # Bash debugger.
-    bats                 # Automated tests with bash scripts.
-    checkbashisms        # Check for bash-specific syntax in POSIX scripts.
+    bashdb            # Bash debugger.
+    bats              # Automated tests with bash scripts.
+    checkbashisms     # Check for bash-specific syntax in POSIX scripts.
     atool             # Print archive file infomation
     asciidoctor       # Convertor for asciidoc files
     catdoc            # Converts Mircosoft Office to text
@@ -35,7 +35,7 @@ let
     ffmpegthumbnailer # Create video thumbnails
     gcal              # Prints out almost any calendar and some holidays.
     graphicsmagick    # Command line graphic process
-    highlight         # Highlights syntax in a file
+    # highlight         # Highlights syntax in a file
     jrnl              # Command line journal system.
     khard             # Address books
     libcaca           # Image to text converter
@@ -86,7 +86,6 @@ let
     # GUI applications
     alacritty            # Terminal emuator
     arc-theme            # Theme for GUI programs
-    conky                # GUI System Monitor
     firefox              # GUI web browser
     kp                   # Kolourpaint, a simple MS Paint clone
     networkmanagerapplet # Applet for connecting to wifi
@@ -143,13 +142,13 @@ in
     gitAndTools.gitFull  # Defacto standard version control
     lsof                 # Lists open files
     shellcheck           # Linter for shell scripts.
-    acpi                 # Required for battery information
     udiskie              # Frontend of udisks.
     rsync                # Simple archival program
     rclone               # rsync for cloud storage
     borgbackup           # Deduplication backup tool
     inxi                 # Comand line system information
-  ];
+        # Battery information
+  ] ++ (if config.networking.hostName == "humboldt" then [ acpi ] else []);
 
   users.users.cjpbirkbeck.packages = core ++
     (if config.services.xserver.enable then general else []) ++

@@ -20,22 +20,23 @@ autoload -U select-word-style && select-word-style shell
 
 ### Prompt and Terminal Title ###
 
-# Outside of a virtual console, the tty is usually /dev/pts/X, so $pts_id should be a number only.
+# Outside of a virtual console, the tty is usually /dev/pts/X, so $TTY_BNAME should be a number only.
 # Vitual consoles should be ttyN (Linux) or ttyvN (FreeBSD)
-pts_id="$(basename $(tty))"
+TTY_BNAME="$(basename $(tty))"
 
 # Test if shell is running in a virtual console (without a X server).
-if [ $TERM = "linux" -o "${pts_id%%[0-9]*}" = "ttyv" ]; then
+# This should work for Linux and FreeBSD, have to test with the other BSDs.
+if [ $TERM = "linux" -o "${TTY_BNAME%%[0-9]*}" = "ttyv" ]; then
     PROMPT="%B%F{red}[%t]%f%F{green}[%n@%M]%f%F{blue}[%(5~|-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
     RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
 else
-    PROMPT="%B%F{#FFFF00}[$pts_id]%f%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%(5~|%-1~/…/%3~|%4~)]%f%F{#FFFFFF}%(0#,#,$)%f%b "
+    PROMPT="%B%F{#FFFF00}[$TTY_BNAME]%f%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%(5~|%-1~/…/%3~|%4~)]%f%F{#FFFFFF}%(0#,#,$)%f%b "
     RPROMPT="%(?,,%B%F{#FFFFFF}%K{red}[%?]%k%f%b)%(1j,%B%F{#FFFFFF}%K{blue}[%j]%k%f%b,)"
 
     # Write some info to terminal title.
     # This is seen when the shell prompts for input.
     function precmd {
-        print -Pn "\e]0;zsh [$pts_id]:%~ %(1j,[%j],)\a"
+        print -Pn "\e]0;zsh [$TTY_BNAME]:%~ %(1j,[%j],)\a"
     }
     # Write command and args to terminal title.
     # This is seen while the shell waits for a command to complete.
@@ -87,11 +88,16 @@ zstyle ':completion:*' cache-path $HOME/.cache/zsh/
 
 ### Source Plugins ###
 
-source "${PREFIX}"/zsh-autosuggestions/zsh-autosuggestions.zsh
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=7" # Use a lighter colour for autosuggestions
-ZSH_AUTOSUGGEST_USE_ASYNC=true         # Get suggestions asynchronously
+if test -e "${PREFIX}"/zsh-autosuggestions/; then
+    source "${PREFIX}"/zsh-autosuggestions/zsh-autosuggestions.zsh
+    ZSH_AUTOSUGGEST_USE_ASYNC=true         # Get suggestions asynchronously
+fi
 
-test $KERNEL = "FreeBSD" && source "${PREFIX}"/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+test -e "${PREFIX}"/zsh-navigation-tools && \
+    source "${PREFIX}"/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+
+unset KERNEL TTY_BNAME
 
 # This needs to be loaded last
-source "${PREFIX}"/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+test -e "${PREFIX}"/zsh-syntax-highlighting && \
+    source "${PREFIX}"/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
