@@ -24,6 +24,7 @@ autoload -U select-word-style && select-word-style shell
 TTY_BNAME="$(basename $(tty))"
 
 # Test if shell is running in a virtual console (without a X server).
+# This should work for Linux and FreeBSD, have to test with the other BSDs.
 if [ $TERM = "linux" -o "${TTY_BNAME%%[0-9]*}" = "ttyv" ]; then
     PROMPT="%B%F{red}[%t]%f%F{green}[%n@%M]%f%F{blue}[%(5~|-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
     RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
@@ -93,6 +94,8 @@ fi
 
 test -e "${PREFIX}"/zsh-navigation-tools && \
     source "${PREFIX}"/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+
+unset KERNEL TTY_BNAME
 
 # This needs to be loaded last
 test -e "${PREFIX}"/zsh-syntax-highlighting && \
