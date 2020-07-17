@@ -11,6 +11,7 @@ KERNEL="$(uname)"
 
 test $KERNEL = "Linux" && PREFIX="/usr/share/zsh/plugins"
 test $KERNEL = "FreeBSD" && PREFIX="/usr/local/share"
+test $KERNEL = "OpenBSD" && PREFIX="/usr/local/share"
 
 ### Keybindings ###
 
