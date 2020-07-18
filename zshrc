@@ -18,6 +18,8 @@ test $KERNEL = "OpenBSD" && PREFIX="/usr/local/share"
 bindkey -e # Use Emacs-like keybindings.
 autoload -U select-word-style && select-word-style shell
 
+typeset -g -A key
+
 # Set the following keys if not set.
 key[Home]="${terminfo[khome]}"
 key[End]="${terminfo[kend]}"
