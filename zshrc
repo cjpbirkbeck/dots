@@ -20,29 +20,30 @@ autoload -U select-word-style && select-word-style shell
 
 ### Prompt and Terminal Title ###
 
-# Outside of a virtual console, the tty is usually /dev/pts/X, so $TTY_BNAME should be a number only.
-# Vitual consoles should be ttyN (Linux) or ttyvN (FreeBSD)
+setopt PROMPT_SUBST       # Allow parameter expansion and command substitution.
 TTY_BNAME="$(basename $(tty))"
 
-# Test if shell is running in a virtual console (without a X server).
-# This should work for Linux and FreeBSD, have to test with the other BSDs.
-if [ $TERM = "linux" -o "${TTY_BNAME%%[0-9]*}" = "ttyv" ]; then
-    PROMPT="%B%F{red}[%t]%f%F{green}[%n@%M]%f%F{blue}[%(5~|-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
-    RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
-else
-    PROMPT="%B%F{#FFFF00}[$TTY_BNAME]%f%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%(5~|%-1~/…/%3~|%4~)]%f%F{#FFFFFF}%(0#,#,$)%f%b "
+# On Linux distros, FreeBSD, NetBSD and DragonFlyBSD (and presumably, any of their derrivatives),
+# pseudoterminal are have the path of /dev/pts/[0-9]+.
+# OpenBSD uses the older BSD system, where the pseudoterminals have the basename of tty[p-zP-Z].
+# From my testing, pseudoterminals have the basename of ttyp[0-9]+.
+if test -z "${TTY_BNAME%%[0-9]*}" || test "${TTY_BNAME%%[0-9]*}" = "ttyp"; then
+    PROMPT="%B%F{#FFFF00}["${TTY_BNAME##*[a-z]}"]%f%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%(5~|%-1~/…/%3~|%4~)]%f%F{#FFFFFF}%(0#,#,$)%f%b "
     RPROMPT="%(?,,%B%F{#FFFFFF}%K{red}[%?]%k%f%b)%(1j,%B%F{#FFFFFF}%K{blue}[%j]%k%f%b,)"
 
     # Write some info to terminal title.
     # This is seen when the shell prompts for input.
     function precmd {
-        print -Pn "\e]0;zsh [$TTY_BNAME]:%~ %(1j,[%j],)\a"
+        print -Pn "\e]0;zsh ["${TTY_BNAME##*[a-z]}"]:%~ %(1j,[%j],)\a"
     }
     # Write command and args to terminal title.
     # This is seen while the shell waits for a command to complete.
     function preexec {
         printf "\033]0;%s\a" "$1"
     }
+else
+    PROMPT="%B%F{red}[%t]%f%F{yellow}["${TTY_BNAME##*[a-z]}"]%f%F{green}[%n@%M]%f%F{blue}[%(5~|-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
+    RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
 fi
 
 ### Directory navigation ###
