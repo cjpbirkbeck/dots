@@ -124,6 +124,8 @@ let
     audacity  # Waveform editor
 
     brave     # Web browser
+
+    zoom-us
   ];
 in
 {
