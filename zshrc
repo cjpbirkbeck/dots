@@ -18,6 +18,23 @@ test $KERNEL = "OpenBSD" && PREFIX="/usr/local/share"
 bindkey -e # Use Emacs-like keybindings.
 autoload -U select-word-style && select-word-style shell
 
+# Set the following keys if not set.
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+key[Insert]="${terminfo[kich1]}"
+key[Delete]="${terminfo[kdch1]}"
+key[PageUp]="${terminfo[kpp]}"
+key[PageDown]="${terminfo[knp]}"
+key[ShiftTab]="${terminfo[kcbt]}"
+
+test -n "${key[Home]}"     && bindkey -- "${key[Home]}"      beginning-of-line
+test -n "${key[End]}"      && bindkey -- "${key[End]}"       end-of-line
+test -n "${key[Insert]}"   && bindkey -- "${key[Insert]}"    overwrite-mode
+test -n "${key[Delete]}"   && bindkey -- "${key[Delete]}"    delete-char
+test -n "${key[PageUp]}"   && bindkey -- "${key[PageUp]}"    beginning-of-buffer-or-history
+test -n "${key[PageDown]}" && bindkey -- "${key[PageDown]}"  end-of-buffer-or-history
+test -n "${key[ShiftTab]}" && bindkey -- "${key[ShiftTab]}"  reverse-menu-complete
+
 ### Prompt and Terminal Title ###
 
 setopt PROMPT_SUBST       # Allow parameter expansion and command substitution.
