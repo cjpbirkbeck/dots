@@ -8,6 +8,7 @@
 
 stty -ixon # Disable C-s and C-q in terminals.
 KERNEL="$(uname)"
+TTY_BNAME="$(basename $(tty))"
 
 test $KERNEL = "Linux" && PREFIX="/usr/share/zsh/plugins"
 test $KERNEL = "FreeBSD" && PREFIX="/usr/local/share"
@@ -15,12 +16,16 @@ test $KERNEL = "OpenBSD" && PREFIX="/usr/local/share"
 
 ### Keybindings ###
 
-bindkey -e # Use Emacs-like keybindings.
+# Use Emacs-like keybindings.
+# TODO: It would nice to use C-d to delete $SHELLCHAR-delimited words (cf words in vi),
+# while having C-S-d to delete whitespace-delimited words (cf WORDS in vi).
+# Not sure if that is possible.
+bindkey -e
 autoload -U select-word-style && select-word-style shell
 
+# Set keybindings for specialized keys on a standard keyboard.
 typeset -g -A key
 
-# Set the following keys if not set.
 key[Home]="${terminfo[khome]}"
 key[End]="${terminfo[kend]}"
 key[Insert]="${terminfo[kich1]}"
@@ -40,7 +45,6 @@ test -n "${key[ShiftTab]}" && bindkey -- "${key[ShiftTab]}"  reverse-menu-comple
 ### Prompt and Terminal Title ###
 
 setopt PROMPT_SUBST       # Allow parameter expansion and command substitution.
-TTY_BNAME="$(basename $(tty))"
 
 # On Linux distros, FreeBSD, NetBSD and DragonFlyBSD (and presumably, any of their derrivatives),
 # pseudoterminal are have the path of /dev/pts/[0-9]+.
@@ -53,7 +57,7 @@ if test -z "${TTY_BNAME%%[0-9]*}" || test "${TTY_BNAME%%[0-9]*}" = "ttyp"; then
     # Write some info to terminal title.
     # This is seen when the shell prompts for input.
     function precmd {
-        print -Pn "\e]0;zsh ["${TTY_BNAME##*[a-z]}"]:%~ %(1j,[%j],)\a"
+        print -Pn "\e]0;%~ %(1j,[%j],)\a"
     }
     # Write command and args to terminal title.
     # This is seen while the shell waits for a command to complete.
@@ -120,6 +124,6 @@ test -e "${PREFIX}"/bash-completion && autoload -U +X bashcompinit && bashcompin
 
 unset KERNEL TTY_BNAME
 
-# This needs to be loaded last
+# This needs to be loaded last.
 test -e "${PREFIX}"/zsh-syntax-highlighting && \
     source "${PREFIX}"/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
