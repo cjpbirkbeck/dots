@@ -4,3 +4,4 @@ tags
 config/awesome/theme/*
 config/awesome/theme/!theme.lua
 config/awesome/theme/!st.svg
+config/vifm/vifminfo
