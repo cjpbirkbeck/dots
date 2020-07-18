@@ -97,6 +97,8 @@ fi
 test -e "${PREFIX}"/zsh-navigation-tools && \
     source "${PREFIX}"/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
 
+test -e "${PREFIX}"/bash-completion && autoload -U +X bashcompinit && bashcompinit
+
 unset KERNEL TTY_BNAME
 
 # This needs to be loaded last
