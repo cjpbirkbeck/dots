@@ -1,42 +1,33 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-export XDG_CURRENT_DESKTOP=kde
+relocate() {
+    cd "$(dirname "${file}")" || exit 1
+
+    old_prefix="${file%%.*}"
+    ext="${file##*.}"
+    next_prefix="$(find . -maxdepth 1 | rofi -dmenu -p "Enter new name")"
+
+    if test -n "$next_prefix" ; then
+        if test -e "${next_prefix}.${ext}"; then
+            notify-desktop " sxiv" "ERROR: $old_prefix has not been renamed to $next_prefix."
+        else
+            "${1}" "$file" "${next_prefix}.${ext}" && \
+                notify-desktop " sxiv" "$old_prefix has been renamed to $next_prefix."
+        fi
+    fi
+}
 
 while read -r file; do
     case "${1}" in
         # Rename a file, will fail if it cannot do so.
-        "r")
-            cd "$(dirname "${file}")" || exit 1
-
-            old_prefix="${file%%.*}"
-            next_prefix="$(find . -maxdepth 1 | rofi -dmenu -p "Enter new name")"
-
-            if [[ -n "$next_prefix" ]]; then
-                if rename --verbose --no-overwrite "$old_prefix" "$next_prefix" "$file"; then
-                    notify-desktop " sxiv" "$old_prefix has been renamed to $next_prefix."
-                else
-                    notify-desktop " sxiv" "ERROR: $old_prefix has not been renamed to $next_prefix."
-                fi
-            fi
-            ;;
-        "d")
-            trash-put "$file" ;;
-        "g")
-            gimp "$file" & ;;
-        "k")
-            kolourpaint "$file" & ;;
-        # Open the folder in lf, with the file selected.
-        "o")
-             dolphin "$(dirname ${file})" & ;;
-        # Open new instances of sxiv, with all the images of the directory loaded.
-        "C-o")
-            sxiv -a -r "$(dirname "${file}")" & ;;
-        "y")
-            echo -n "$file" | xclip -selection clipboard && notify-desktop " sxiv" "$file name copied to clipboard"
-            ;;
+        "r"|"C-r") relocate "mv";;
+        "c"|"C-c") relocate "cp";;
+        "d"|"C-d") trash-put "$file" ;;
+        "o"|"C-o") gimp "$file" & ;;
+        "y"|"C-y") printf "%s\n" "$file" | xclip -selection clipboard && notify-desktop " sxiv" "$file name copied to clipboard" ;;
         "Y")
             full_path="$(readlink -f "$file")"
-            echo -n "$full_path" | xclip -selection clipboard && notify-desktop " sxiv"  "$file path copied to clipboard"
+            printf "%s\n" "$full_path" | xclip -selection clipboard && notify-desktop " sxiv"  "$file path copied to clipboard"
             ;;
     esac
 done
