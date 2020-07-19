@@ -286,11 +286,6 @@ in
         '';
       };
 
-      # keychain = {
-      #   enable = true;
-      #   agents = [ "ssh" ];
-      # };
-
       zsh = {
         enable = true;
         dotDir = ".config/zsh";
