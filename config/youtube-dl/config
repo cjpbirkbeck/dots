@@ -1,0 +1,4 @@
+# Automatically add these switches to default youtube-dl downloads.
+
+# Add metadata for the download.
+--add-metadata
