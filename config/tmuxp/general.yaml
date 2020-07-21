@@ -9,6 +9,9 @@ windows:
     - window_name: RSS Feeds
       panes:
           - newsboat
+    - window_name: IRC
+      panes:
+          - weechat
     - window_name: Music
       panes:
           - vimpc
