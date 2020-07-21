@@ -1,2 +1,4 @@
 config/newsboat/urls filter=git-crypt diff=git-crypt
 test-git-cypt filter=git-crypt diff=git-cypt
+homeroot/weechat/irc.conf filter=git-crypt diff=git-crypt
+homeroot/weechat/sec.conf filter=git-crypt diff=git-crypt
