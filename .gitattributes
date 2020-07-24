@@ -2,8 +2,11 @@
 test-git-cypt filter=git-crypt diff=git-cypt
 
 # Email config files
+config/mutt/muttrc filter=git-crypt diff=git-crypt
+config/mutt/accounts/* filter=git-crypt diff=git-crypt
 config/msmtp/config filter=git-crypt diff=git-crypt
 homeroot/mbsyncrc filter=git-crypt diff=git-crypt
+homeroot/notmuch-config filter=git-crypt diff=git-crypt
 
 # RSS Feeds
 config/newsboat/urls filter=git-crypt diff=git-crypt
