@@ -270,6 +270,8 @@ in
           set -g window-status-format ' #I  #{=/16/…:window_name}#F'
           set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{=/16/…:pane_title}'
           set -g status-style 'fg=#87ceeb,bold,bg=#4d4d4d'
+          set -g window-status-activity-style 'fg=#ee2b2a,bold,bg=#4d4d4d'
+          set -g window-status-bell-style 'fg=#ee2b2a,bold,bg=#4d4d4d'
           set -g status-position top
 
           # Pane border style
