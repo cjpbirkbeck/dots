@@ -3,12 +3,18 @@ windows:
     - window_name: Main
       panes:
           - null
+    - window_name: Calc
+      panes:
+          - calc
+    - window_name: Music
+      panes:
+          - vimpc
     - window_name: Reddit
       panes:
           - tuir
     - window_name: RSS Feeds
       panes:
           - newsboat
-    - window_name: Music
+    - window_name: IRC
       panes:
-          - vimpc
+          - weechat

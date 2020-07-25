@@ -5,3 +5,6 @@ config/awesome/theme/*
 config/awesome/theme/!theme.lua
 config/awesome/theme/!st.svg
 config/vifm/vifminfo
+homeroot/weechat/certs/*
+homeroot/weechat/logs/*
+homeroot/weechat/ecdsa.pem
