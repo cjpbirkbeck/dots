@@ -68,7 +68,7 @@ let
     zip               # Compress zip files
 
     # TUI programs
-    calcurse          # Calendar
+    # calcurse          # Calendar
     cava              # Visualiser for the terminal
     htop              # System resources monitor
     ncdu              # Filesystem size browser

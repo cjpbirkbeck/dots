@@ -13,7 +13,7 @@ in
 
   environment.shellAliases = {
     ncdu = "ncdu --color dark";
-    calcurse = "calcurse --confdir $HOME/.config/calcurse --datadir $HOME/.local/share/calcurse";
+    # calcurse = "calcurse --confdir $HOME/.config/calcurse --datadir $HOME/.local/share/calcurse";
   };
 
   programs.gnome-disks.enable = true;
