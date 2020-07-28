@@ -11,7 +11,7 @@ KERNEL="$(uname)"
 TTY_BNAME="$(basename $(tty))"
 
 test $KERNEL = "Linux" && USR_PATH="/usr/share/zsh/plugins"
-test $"${KERNEL##[A-Z]*[a-z]}" = "BSD" -o "${KERNEL}" = "Dragonfly" && USR_PATH="/usr/local/share"
+test "${KERNEL##[A-Z]*[a-z]}" = "BSD" -o "${KERNEL}" = "Dragonfly" && USR_PATH="/usr/local/share"
 
 ### Keybindings ###
 
