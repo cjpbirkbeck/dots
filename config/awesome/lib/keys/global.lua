@@ -297,6 +297,9 @@ local global_keys = gears.table.join(
     awful.key({ super, "Control" }, "r", function() awesome.restart() end,
         { description = "Restarts AwesomeWM", group = "System"}),
 
+    awful.key({ super }, "=", function() awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible end,
+        { description = "Toggle System Tray visiblity", group = "System"}),
+
     awful.key({ super, shift }, "d", function() awful.spawn.with_shell(exec_d .. "rofi-removable.sh") end,
         { description = "Unmount mounted drives", group = "System"})
 )
