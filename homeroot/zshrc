@@ -10,9 +10,8 @@ stty -ixon # Disable C-s and C-q in terminals.
 KERNEL="$(uname)"
 TTY_BNAME="$(basename $(tty))"
 
-test $KERNEL = "Linux" && PREFIX="/usr/share/zsh/plugins"
-test $KERNEL = "FreeBSD" && PREFIX="/usr/local/share"
-test $KERNEL = "OpenBSD" && PREFIX="/usr/local/share"
+test $KERNEL = "Linux" && USR_PATH="/usr/share/zsh/plugins"
+test $"${KERNEL##[A-Z]*[a-z]}" = "BSD" -o "${KERNEL}" = "Dragonfly" && USR_PATH="/usr/local/share"
 
 ### Keybindings ###
 
@@ -112,18 +111,18 @@ zstyle ':completion:*' cache-path $HOME/.cache/zsh/
 
 ### Source Plugins ###
 
-if test -e "${PREFIX}"/zsh-autosuggestions/; then
-    source "${PREFIX}"/zsh-autosuggestions/zsh-autosuggestions.zsh
+if test -e "${USR_PATH}"/zsh-autosuggestions/; then
+    source "${USR_PATH}"/zsh-autosuggestions/zsh-autosuggestions.zsh
     ZSH_AUTOSUGGEST_USE_ASYNC=true         # Get suggestions asynchronously
 fi
 
-test -e "${PREFIX}"/zsh-navigation-tools && \
-    source "${PREFIX}"/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+test -e "${USR_PATH}"/zsh-navigation-tools && \
+    source "${USR_PATH}"/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
 
-test -e "${PREFIX}"/bash-completion && autoload -U +X bashcompinit && bashcompinit
+test -e "${USR_PATH}"/bash-completion && autoload -U +X bashcompinit && bashcompinit
 
 unset KERNEL TTY_BNAME
 
 # This needs to be loaded last.
-test -e "${PREFIX}"/zsh-syntax-highlighting && \
-    source "${PREFIX}"/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+test -e "${USR_PATH}"/zsh-syntax-highlighting && \
+    source "${USR_PATH}"/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh && unset USR_PATH
