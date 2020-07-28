@@ -328,11 +328,12 @@ in
       mpd = {
         enable = true;
         musicDirectory = /home/cjpbirkbeck/Audio;
+        network.listenAddress = "127.0.0.1";
+        network.port = 6600;
         extraConfig = ''
           auto_update "yes"
 
           restore_paused "yes"
-          max_output_buffer_size "16384"
 
           audio_output {
                 type  "pulse"

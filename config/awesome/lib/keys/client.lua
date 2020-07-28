@@ -23,6 +23,7 @@ local min_width = 12
 local min_height = 20
 
 -- Functions
+-- TODO: These functions should be push into their own file, and refactored to be more concise.
 local function focus_tiled_master(c)
     local s = c.screen
     local tiled = s:get_tiled_clients(false)

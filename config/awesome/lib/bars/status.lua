@@ -34,8 +34,8 @@ function setup_bar_for_screen(s)
             removable,
             networking,
             volume,
-            mpd,
-            weather,
+            -- mpd,
+            -- weather,
             time
         }
     }
