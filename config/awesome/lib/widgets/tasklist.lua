@@ -59,9 +59,9 @@ local function screen_tasks(s)
                 widget = wibox.container.background,
             },
             create_callback = function(self, c, i, cls)
-                local tt = awful.tooltip {
+                awful.tooltip {
                     objects = { self },
-                    timer_function = function() return "Hello World!" end
+                    timer_function = function() return c.name end
                 }
             end
         }

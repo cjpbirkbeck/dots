@@ -71,8 +71,8 @@ theme.fg_minimize   = om.light_white
 theme.taglist_font_focus = "DejaVu Sans bold 10"
 theme.taglist_fg_focus = "#000000"
 
-theme.tasklist_font_focus = "DejaVu Sans bold 10"
-theme.tasklist_font_urgent = "DejaVu Sans bold 10"
+theme.tasklist_font_focus     = "DejaVu Sans bold 10"
+theme.tasklist_font_urgent    = "DejaVu Sans bold 10"
 theme.tasklist_font_minimized = "DejaVu Sans italic 10"
 
 theme.tooltip_bg = theme.bg_normal
@@ -83,7 +83,7 @@ theme.tooltip_border_width = dpi(1)
 theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
 theme.border_normal = theme.bg_normal
-theme.border_focus  = theme.bg_focus
+theme.border_focus  = om.yellow
 theme.border_marked = "#91231c"
 
 theme.gaps_single_client = false
@@ -120,8 +120,9 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = themes_path.."default/submenu.png"
+theme.menu_font = "DejaVu Sans 10"
 theme.menu_height = dpi(15)
-theme.menu_width  = dpi(100)
+theme.menu_width  = dpi(175)
 
 -- You can add as many variables as
 -- you wish and access them by using
@@ -179,7 +180,7 @@ theme.layout_cornernw = themes_path.."default/layouts/cornernww.png"
 theme.layout_cornerne = themes_path.."default/layouts/cornernew.png"
 theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
-theme.layout_deck = themes_path.."custom/cascadetilew.png"
+theme.layout_deck = themes_path.."default/layouts/cascadetilew.png"
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(

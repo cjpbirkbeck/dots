@@ -1,7 +1,7 @@
 --[[
     This layout has one master window that is always tiled to the left,
     with all other slave windows stack over each other column to the right.
-    It has one varient, which has the master window on top and the stacked
+    It has one variant, which has the master window on top and the stacked
     slave windows below.
 
     Based off the cascade layout from the Lain repository.
@@ -16,9 +16,12 @@
 local floor  = math.floor
 local screen = screen
 
+-- TODO: Add icon support (use lain's cascadetilew.png as an interm icon.
+
+-- @beautiful beautiful.layout_deck
 local deck = {
     name     = "deck",
-    icon = "/home/cjpbirkbeck/.config/awesome/themes/custom/layouts/cascadetilew.png",
+    icon = "/home/cjpbirkbeck/.config/awesome/theme/default/layouts/cascadetilew.png",
     horizontal     = {
         name          = "horideck",
     },
@@ -51,13 +54,13 @@ local function do_deck(p, splith)
         -- width is calculated according to mwfact. Other clients are
         -- decked or "tabbed" in a slave column on the right.
 
-        --   +--------------+
+        --   +------+-------+
         --   |      |       |
         --   |      |       |   1 = Column with a single master window.
         --   |   1  |   2   |
         --   |      |       |   2 = Column with all other windows, stacked
         --   |      |       |       over one another.
-        --   +--------------+
+        --   +------+-------+
 
         local mwfact = t.master_width_factor
         local mcount = t.master_count
@@ -72,6 +75,9 @@ local function do_deck(p, splith)
         local mainwid = floor(wa.width * mwfact)
         local slavewid = wa.width - mainwid
 
+        -- TODO: Allow for multiple master windows.
+        -- These will be tiled on top of each other in the first column.
+        -- This should completely optional; users could set single_master = true.
         g.width = mainwid
         g.height = wa.height
         g.x = wa.x
@@ -103,15 +109,15 @@ local function do_deck(p, splith)
         -- Horizontial split.
         -- Layout with one fixed column meant for a master window. Its
         -- height is calculated according to mwfact. Other clients are
-        -- deckd or "tabbed" in a slave column on the bottom.
+        -- decked or "tabbed" in a slave column on the bottom.
 
-        --   +----------+---+
+        --   +--------------+
         --   | 1            |
         --   |              |   1 = row with a single master
         --   +--------------+
         --   | 2            |   2 = row with all other windows stacked
         --   |              |       over another.
-        --   +----------+---+
+        --   +--------------+
 
         local mwfact = t.master_width_factor
         local mcount = t.master_count
@@ -126,6 +132,9 @@ local function do_deck(p, splith)
         local mainhgt = floor(wa.height * mwfact)
         local slavehgt = wa.height - mainhgt
 
+        -- TODO: Allow for multiple master windows.
+        -- These will be tiled next to each other in the first row.
+        -- This should completely optional; users could set single_master = true.
         g.height = mainhgt
         g.width = wa.width
         g.x = wa.x

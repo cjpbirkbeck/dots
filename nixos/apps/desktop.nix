@@ -13,7 +13,7 @@ in
 
   environment.shellAliases = {
     ncdu = "ncdu --color dark";
-    calcurse = "calcurse --confdir $HOME/.config/calcurse --datadir $HOME/.local/share/calcurse";
+    # calcurse = "calcurse --confdir $HOME/.config/calcurse --datadir $HOME/.local/share/calcurse";
   };
 
   programs.gnome-disks.enable = true;
@@ -270,6 +270,8 @@ in
           set -g window-status-format ' #I  #{=/16/…:window_name}#F'
           set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{=/16/…:pane_title}'
           set -g status-style 'fg=#87ceeb,bold,bg=#4d4d4d'
+          set -g window-status-activity-style 'fg=#ee2b2a,bold,bg=#4d4d4d'
+          set -g window-status-bell-style 'fg=#ee2b2a,bold,bg=#4d4d4d'
           set -g status-position top
 
           # Pane border style
@@ -326,11 +328,12 @@ in
       mpd = {
         enable = true;
         musicDirectory = /home/cjpbirkbeck/Audio;
+        network.listenAddress = "127.0.0.1";
+        network.port = 6600;
         extraConfig = ''
           auto_update "yes"
 
           restore_paused "yes"
-          max_output_buffer_size "16384"
 
           audio_output {
                 type  "pulse"

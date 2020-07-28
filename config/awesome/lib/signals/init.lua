@@ -42,18 +42,6 @@ client.connect_signal("mouse::enter", function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
-client.connect_signal("focus",
-function(c)
-    c.opacity = 1
-    c.border_color = beautiful.border_focus
-end)
-
-client.connect_signal("unfocus",
-function(c)
-    -- c.opacity = 0.8
-    c.border_color = beautiful.border_normal
-end)
-
 -- No borders with the max layout or if there is only a single tile client.
 screen.connect_signal("arrange",
     function (s)

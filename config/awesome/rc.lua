@@ -54,6 +54,7 @@ do
 end
 
 -- Global Variables
+-- These don't seem to travel to other files, might have to delete theme.
 
 -- Directories
 home_d   = os.getenv("HOME")
@@ -65,11 +66,6 @@ theme_d  = config_d .. "theme/"
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(theme_d .. "/theme.lua")
 beautiful.gap_single_client = false
-
--- Programs
-terminal = "st"
-launcher = "export XDG_CURRENT_DESKTOP=kde && rofi -show-icons -show combi window drun run -combi-modi \"window,drun,run\""
-browser = "firefox"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {

@@ -17,25 +17,25 @@ local time = require("lib.widgets.clock-calendar")
 function setup_bar_for_screen(s)
     local bar = awful.wibar({ position = "top", screen = s })
 
-    local screen_layout = setup_layoutbox(s)
-    local screen_tags = setup_taglist(s)
-    local screen_tasks = setup_clientlist(s)
+    s.systray = wibox.widget.systray()
+    s.systray.visible = false
 
     bar:setup {
         layout = wibox.layout.align.horizontal,
         {
             layout = wibox.layout.fixed.horizontal,
-            screen_layout,
-            screen_tags
+            setup_layoutbox(s),
+            setup_taglist(s)
         },
-        screen_tasks,
+        setup_clientlist(s),
         {
             layout  = wibox.layout.fixed.horizontal,
+            s.systray,
             removable,
             networking,
             volume,
-            mpd,
-            weather,
+            -- mpd,
+            -- weather,
             time
         }
     }

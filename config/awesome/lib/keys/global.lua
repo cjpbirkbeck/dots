@@ -16,44 +16,69 @@ local control = "Control"
 local mwf_increment = 0.05
 local mwf_default = 0.5
 
+-- Directories
+home_d   = os.getenv("HOME")
+config_d = gears.filesystem.get_dir("config")
+exec_d   = config_d .. "bin/"
+lib_d    = config_d .. "lib/"
+theme_d  = config_d .. "theme/"
+
+-- Programs
+local _LAUNCHER = "rofi -show-icons -show drun"
+local _WIN_SWITCH = "rofi -show window"
+local _FINDER = "st -c st-dialog -t Finder -g 160x45 -e " .. exec_d .. "find-file.sh"
+local _BROWSER = "firefox"
+local _EMAIL = "thunderbird"
+local _FILE_MAN = "st -e vifm"
+local _SYS_MON = "st -e gotop"
+
 -- Functions
 local function create_prompt(question, action)
     awful.spawn.with_shell(exec_d .. "rofi-prompt.sh " .. question .. " " .. action)
 end
 
 local global_keys = gears.table.join(
-    -- Spawn new programs or switch to existing programs, using rofi as a launcher
-    awful.key({ super }, "f", function() awful.spawn.with_shell(launcher) end,
-              { description = "Find program to run", group = "Launch"}),
-
     -- Spawn specific programs
     awful.key({ super }, "Return", function () awful.spawn(terminal) end,
               {description = "Spawn a terminal", group = "Launch"}),
 
-    awful.key({ super, shift }, "Return", function () awful.spawn(exec_d .. "rofi-tmux.sh") end,
-              {description = "Create new tmux client", group = "Launch"}),
-
-    awful.key({ super, control }, "Return", function () awful.spawn(exec_d .. "rofi-tmuxp.sh") end,
-              {description = "Create new tmuxp session", group = "Launch"}),
-
-    awful.key({ super }, "\\", function() awful.spawn.with_shell("st -c st-float") end,
+    awful.key({ super, shift }, "Return", function() awful.spawn.with_shell("st -c st-float") end,
               { description = "Create a floating terminal", group = "Launch"}),
 
+    awful.key({ super }, "space", function () awful.spawn(exec_d .. "rofi-tmux.sh") end,
+              {description = "Create new tmux client", group = "Launch"}),
+
+    awful.key({ super, shift }, "space", function () awful.spawn(exec_d .. "rofi-tmuxp.sh") end,
+              {description = "Create new tmuxp session", group = "Launch"}),
+
     awful.key({ super }, "p", function() awful.spawn.with_shell("rofi-pass --last-used") end,
-              { description = "Open passwords", group = "Launch"}),
+              { description = "Open password vault", group = "Launch"}),
 
-    awful.key({}, "XF86HomePage", function() awful.spawn.raise_or_spawn("firefox") end,
-              { description = "Open passwords", group = "Launch"}),
+    awful.key({}, "XF86HomePage", function() awful.spawn.raise_or_spawn(_BROWSER) end,
+              { description = "Open or raise default browser", group = "Launch"}),
 
-    awful.key({}, "XF86Mail", function() awful.spawn.raise_or_spawn("thunderbird") end,
-              { description = "Open passwords", group = "Launch"}),
+    awful.key({ super }, "w", function() awful.spawn.raise_or_spawn(_BROWSER) end,
+              { description = "Open or raise default browser", group = "Launch"}),
+
+    awful.key({}, "XF86Mail", function() awful.spawn.raise_or_spawn(_EMAIL) end,
+              { description = "Open or raise default email client", group = "Launch"}),
+
+    awful.key({ super }, "e", function() awful.spawn.raise_or_spawn(_EMAIL) end,
+              { description = "Open or raise default email client", group = "Launch"}),
+
+    awful.key({ super }, "d", function() awful.spawn.raise_or_spawn(_FILE_MAN) end,
+              { description = "Open or raise default file manager", group = "Launch"}),
+
+    awful.key({ super }, "y", function() awful.spawn.with_shell(_SYS_MON) end,
+        {description = "Toggle System Monitor", group = "System"}),
+
+    -- Spawn generic programs
+    awful.key({ super }, "a", function() awful.spawn.with_shell(_LAUNCHER) end,
+              { description = "Find program to run", group = "Launch"}),
 
     -- Search for files
-    awful.key({ super }, "s", function() awful.spawn.with_shell(terminal .. " -c st-dialog " .. " -t Directories" .. " -g 160x45 " .. " -e " .. exec_d .. "find-file.sh") end,
+    awful.key({ super }, "f", function() awful.spawn.with_shell(_FINDER) end,
               { description = "Search for files to open", group = "Launch"}),
-
-    awful.key({ super }, "d", function() awful.spawn(terminal .. " -c st-dialog " .. "-g 160x45 " .. " -t Finder " .. " -e " .. exec_d .. "find-dirs.sh") end,
-       { description = "Find directories to open", group = "Launch"}),
 
     -- Screen controls
     awful.key({ super, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
@@ -65,11 +90,11 @@ local global_keys = gears.table.join(
     awful.key({ super, "Control" }, "h", function () client.focus:move_to_screen() end,
               {description = "Move focused to previous screen", group = "Screen"}),
 
-    awful.key({ super, "Control" }, "l", function () client.focus:move_to_screen() end,
+    -- Function doesn't wrap around.
+    awful.key({ super, "Control" }, "l", function () client.focus:move_to_screen(-1) end,
               {description = "Move focused to next screen", group = "Screen"}),
 
-    -- Tag controls
-
+    -- General tag controls
     awful.key({ super }, "0",
         function()
             local s = awful.screen.focused()
@@ -88,13 +113,11 @@ local global_keys = gears.table.join(
             end
         end),
 
-    awful.key({ super, control }, "0",
-        function()
-            awful.tag.viewnone()
-        end),
+    awful.key({ super, control }, "0", function() awful.tag.viewnone() end,
+        { description = "Toggle all tags off", group = "Tag" }),
 
     awful.key({ super,           }, "grave", awful.tag.history.restore,
-              {description = "Restore previous tag(s)", group = "tag"}),
+              {description = "Restore previous tag(s)", group = "Tag"}),
 
     -- Layout controls
     awful.key({ super }, "x",
@@ -102,7 +125,8 @@ local global_keys = gears.table.join(
             local t = awful.screen.focused().selected_tag
 
             t.layout = awful.layout.suit.max
-        end),
+        end,
+        { description = "Switch to max layout", group = "Layouts"}),
 
     awful.key({ super }, "v",
         function ()
@@ -115,14 +139,16 @@ local global_keys = gears.table.join(
             else
                 t.layout = deck
             end
-        end),
+        end,
+        { description = "Switch to vertical deck layout", group = "Layouts"}),
 
     awful.key({ super, shift }, "v",
         function ()
             local t = awful.screen.focused().selected_tag
 
             t.layout = awful.layout.suit.tile
-        end),
+        end,
+        { description = "Switch to vertical tile layout", group = "Layouts"}),
 
     awful.key({ super }, "z",
         function ()
@@ -135,20 +161,16 @@ local global_keys = gears.table.join(
             else
                 t.layout = deck.horizontal
             end
-        end),
+        end,
+        { description = "Switch to horizontal deck layout", group = "Layouts"}),
 
     awful.key({ super, shift }, "z",
         function()
             local t = client.focus and client.focus.first_tag or nil
 
             t.layout = awful.layout.suit.tile.bottom
-        end),
-
-    -- awful.key({ super }, "space", function () awful.layout.inc( 1) end,
-    --           {description = "Select next", group = "Layout"}),
-
-    -- awful.key({ super, "Shift" }, "space", function () awful.layout.inc(-1) end,
-    --           {description = "Select previous", group = "Layout"}),
+        end,
+        { description = "Switch to horizontal tile layout", group = "Layouts"}),
 
     -- General window controls
     awful.key({ super, shift }, "n",
@@ -183,7 +205,10 @@ local global_keys = gears.table.join(
               {description = "Jump to urgent client", group = "Client"}),
 
     awful.key({ super, shift     }, "u", function() awful.client.urgent.jumpto() end,
-              {description = "Jump to urgent client", group = "Client"}),
+              {description = "Jump to urgent client (active tag only)", group = "Client"}),
+
+    awful.key({ super,           }, "s", function() awful.spawn.with_shell(_WIN_SWITCH) end,
+              {description = "Switch window", group = "Client"}),
 
     -- Modify master width factor
     awful.key( { super }, "i", function() awful.tag.incmwfact(mwf_increment) end,
@@ -249,16 +274,9 @@ local global_keys = gears.table.join(
               { description = "Screenshot menu", group = "Screenshots"}),
 
     -- Miscellaneous
-
     awful.key({ super }, "c", function() awful.spawn.with_shell(exec_d .. "rofi-unicode.sh") end),
 
     awful.key({ super, shift }, "c", function() awful.spawn.with_shell(exec_d .. "rofi-unicode.sh clipboard") end),
-
-    -- awful.key({ super, "Control" }, "c",  function () year_calendar:toggle() end,
-    --            { description = "Show yearly calendar", group = "Miscellaneous"}),
-
-    -- awful.key({ super, control   }, "s",      hotkeys_popup.show_help,
-    --           {description="Show shortcuts", group="awesome"}),
 
     -- System functions
     awful.key({ super }, "Escape", function() awful.spawn.with_shell(exec_d .. "rofi-system.sh") end,
@@ -276,31 +294,13 @@ local global_keys = gears.table.join(
     awful.key({ super, shift }, "r", function() create_prompt("\"Restart your system?\"", "systemctl reboot") end,
         { description = "Restart AwesomeWM", group = "System"}),
 
-    awful.key({ super, "Control" }, "r",
-        function()
-            awful.spawn.with_line_callback("awesome -k",
-            {
-                exit = function(e, code)
-                    if code == 0 then
-                        awesome.restart()
-                    else
-                        naughty.notify({title = "Error", text = "Configuration contains an error."})
-                    end
-                end,
-            })
-        end,
+    awful.key({ super, "Control" }, "r", function() awesome.restart() end,
         { description = "Restarts AwesomeWM", group = "System"}),
 
-    awful.key({ super }, "y",
-        function()
-            awful.spawn.with_shell("st -e gotop")
-        end,
-        {description = "Toggle System Monitor", group = "System"}),
+    awful.key({ super }, "=", function() awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible end,
+        { description = "Toggle System Tray visiblity", group = "System"}),
 
-    awful.key({ super, shift }, "d",
-        function()
-            awful.spawn.with_shell(exec_d .. "rofi-removable.sh")
-        end,
+    awful.key({ super, shift }, "d", function() awful.spawn.with_shell(exec_d .. "rofi-removable.sh") end,
         { description = "Unmount mounted drives", group = "System"})
 )
 
