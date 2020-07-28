@@ -91,6 +91,70 @@ local function swap_prev_tiled(c)
     end
 end
 
+local function focus_next_floating(c)
+    if c.floating then
+        local s = c.screen
+        local other = not c.floating
+        local cls = s.clients
+        if #cls > 1 then
+            local n = awful.client.next(1)
+            for i = 1,#cls,1 do
+                if n.floating then break end
+                n = awful.client.next(1, n)
+            end
+            awful.client.focus.byidx(0, n)
+        end
+    end
+end
+
+local function swap_next_floating(c)
+    if c.floating then
+        local s = c.screen
+        local other = not c.floating
+        local cls = s.clients
+        if #cls > 1 then
+            local n = awful.client.next(1)
+            for i = 1,#cls,1 do
+                if n.floating then break end
+                n = awful.client.next(1, n)
+            end
+            c:swap(n)
+        end
+    end
+end
+
+local function focus_prev_floating(c)
+    if c.floating then
+        local s = c.screen
+        local other = not c.floating
+        local cls = s.clients
+        if #cls > 1 then
+            local n = awful.client.next(-1)
+            for i = 1,#cls,1 do
+                if n.floating then break end
+                n = awful.client.next(-1, n)
+            end
+            awful.client.focus.byidx(0, n)
+        end
+    end
+end
+
+local function swap_prev_floating(c)
+    if c.floating then
+        local s = c.screen
+        local other = not c.floating
+        local cls = s.clients
+        if #cls > 1 then
+            local n = awful.client.next(-1)
+            for i = 1,#cls,1 do
+                if n.floating then break end
+                n = awful.client.next(-1, n)
+            end
+            c:swap(n)
+        end
+    end
+end
+
 local function move_floating_left(c)
     c.x = c.x - reposition_inc
     awful.placement.no_offscreen(c)
@@ -108,7 +172,6 @@ end
 
 local function move_floating_right(c)
     c.x = c.x + reposition_inc
-
     awful.placement.no_offscreen(c)
 end
 
@@ -290,7 +353,6 @@ end
 
 local clientkeys = gears.table.join(
     -- Tilled/stacked window controls
-    -- Works only for tiled or stacked clients
     -- Covers both the vi direction keys of hjkl and standard left, up, down and right.
     awful.key({ super }, "h", function(c) if not c.floating then focus_tiled_master(c) end end,
         { description = "Focus tiled master", group = "Client" }),
@@ -376,100 +438,19 @@ local clientkeys = gears.table.join(
               {description = "Close", group = "Client"}),
 
     -- Floating window controls
-    awful.key({ super }, "Prior",
-        function(c)
-            if c.floating then
-                local s = c.screen
-                local other = not c.floating
-                local cls = s.clients
-                if #cls > 1 then
-                    local n = awful.client.next(1)
-                    for i = 1,#cls,1 do
-                        if n.floating then break end
-                        n = awful.client.next(1, n)
-                    end
-                    awful.client.focus.byidx(0, n)
-                end
-            end
-        end),
+    awful.key({ super }, "Prior", function(c) focus_prev_floating(c) end),
 
-    awful.key({ super, shift }, "Prior",
-        function(c)
-            if c.floating then
-                local s = c.screen
-                local other = not c.floating
-                local cls = s.clients
-                if #cls > 1 then
-                    local n = awful.client.next(1)
-                    for i = 1,#cls,1 do
-                        if n.floating then break end
-                        n = awful.client.next(1, n)
-                    end
-                    c:swap(n)
-                end
-            end
-        end),
+    awful.key({ super, shift }, "Prior", function(c) swap_prev_tiled(c) end),
 
-    awful.key({ super }, "Next",
-        function(c)
-            if c.floating then
-                local s = c.screen
-                local other = not c.floating
-                local cls = s.clients
-                if #cls > 1 then
-                    local n = awful.client.next(-1)
-                    for i = 1,#cls,1 do
-                        if n.floating then break end
-                        n = awful.client.next(-1, n)
-                    end
-                    awful.client.focus.byidx(0, n)
-                end
-            end
-        end),
+    awful.key({ super }, "Next", function(c) focus_next_floating(c) end),
 
-    awful.key({ super, shift }, "Next",
-        function(c)
-            if c.floating then
-                local s = c.screen
-                local other = not c.floating
-                local cls = s.clients
-                if #cls > 1 then
-                    local n = awful.client.next(-1)
-                    for i = 1,#cls,1 do
-                        if n.floating then break end
-                        n = awful.client.next(-1, n)
-                    end
-                    c:swap(n)
-                end
-            end
-        end),
+    awful.key({ super, shift }, "Next", function(c) swap_next_floating(c) end),
 
-    awful.key({ super }, "e",  awful.placement.centered,
-               { description = "Center floating window", group = "Floating"} ),
-
-    awful.key({ super }, "b",  function(c) if c.floating then c.below = not c.below end end,
-               { description = "Center floating window", group = "Floating"} ),
-
-    awful.key({ super }, "w",
-        function(c)
-            if c.floating then
-                position_menu:show({ coords = { x = c.x, y = c.y } })
-            end
-        end,
-        { description = "Opening position menu", group = "Floating"}),
-
-    awful.key({ super, shift }, "w",
-        function(c)
-            if c.floating then
-                size_menu:show({ coords = { x = c.x, y = c.y } })
-            end
-        end,
-        {description = "Opening size menu", group = "Floating"}),
-
-    awful.key({ super,           }, "t", function(c) if c.floating == true then c.ontop = not c.ontop end end,
+    awful.key({ super }, "t", function(c) if c.floating then c.ontop = not c.ontop end end,
       {description = "Toggle keep on top", group = "Client"}),
 
-    awful.key({ super, shift }, "t", function(c) c.sticky = not c.sticky end),
+    awful.key({ super, shift }, "t", function(c) if c.floating then c.sticky = not c.sticky end end,
+      { description = "Toggle sticky mode", group = "Client" }),
 
     awful.key({ super,           }, "m",
         function (c)
@@ -477,9 +458,6 @@ local clientkeys = gears.table.join(
             c:raise()
         end ,
         {description = "(un)maximize", group = "client"})
-
-    -- awful.key({super, shift }, "t", function(c) if c.floating == true then awful.titlebar.toggle(c) end end,
-    -- { description = "Show/Hide Titlebars", group = "Client"} )
 
 )
 
