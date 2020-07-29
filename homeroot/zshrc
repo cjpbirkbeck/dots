@@ -55,9 +55,22 @@ if test -z "${TTY_BNAME%%[0-9]*}" || test "${TTY_BNAME%%[0-9]*}" = "ttyp"; then
 
     # Write some info to terminal title.
     # This is seen when the shell prompts for input.
-    function precmd {
-        print -Pn "\e]0;%~ %(1j,[%j],)\a"
-    }
+    # If using screen or tmux, then only use the directory name.
+    # Otherwise, be a bit more verbose, show that it's zsh with is pts number,
+    # along with if any jobs are in the background.
+    case "$TERM" in
+        screen* | tmux* )
+            function precmd {
+                print -Pn "\e]0;%~ %(1j,[%j],)\a"
+            }
+            ;;
+        *)
+            function precmd {
+                print -Pn "\e]0;zsh [${TTY_BNAME##*[a-z]}]:%~ %(1j,[%j],)\a"
+            }
+            ;;
+    esac
+
     # Write command and args to terminal title.
     # This is seen while the shell waits for a command to complete.
     function preexec {
