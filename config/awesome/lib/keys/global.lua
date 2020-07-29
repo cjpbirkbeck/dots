@@ -24,6 +24,7 @@ lib_d    = config_d .. "lib/"
 theme_d  = config_d .. "theme/"
 
 -- Programs
+local _TERM_EMU = "st"
 local _LAUNCHER = "rofi -show-icons -show drun"
 local _WIN_SWITCH = "rofi -show window"
 local _FINDER = "st -c st-dialog -t Finder -g 160x45 -e " .. exec_d .. "find-file.sh"
@@ -39,7 +40,7 @@ end
 
 local global_keys = gears.table.join(
     -- Spawn specific programs
-    awful.key({ super }, "Return", function () awful.spawn(terminal) end,
+    awful.key({ super }, "Return", function () awful.spawn(_TERM_EMU) end,
               {description = "Spawn a terminal", group = "Launch"}),
 
     awful.key({ super, shift }, "Return", function() awful.spawn.with_shell("st -c st-float") end,
