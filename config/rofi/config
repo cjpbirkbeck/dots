@@ -1,0 +1,24 @@
+
+
+
+
+
+
+
+
+
+
+
+rofi.location: 0
+rofi.xoffset: 0
+rofi.yoffset: 0
+
+
+rofi.theme: ~/.config/rofi/themes/flat-ocean
+
+! Opacity
+rofi.opacity: 80
+
+! Enable modes
+rofi.modi: window,run,combi,drun
+
