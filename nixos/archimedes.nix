@@ -46,12 +46,9 @@
   ];
 
   # boot.loader = {
-    # timeout = 10;
-
-    # grub.useOSProber = true;
-
-    # grub.memtest86.enable = true;
-
+  #   timeout = 10;
+  #   grub.useOSProber = true;
+  #   grub.memtest86.enable = true;
   # };
 
   boot.loader.systemd-boot.enable = true;

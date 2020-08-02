@@ -1,0 +1,21 @@
+" Case-insentive searches
+set ignorecase
+set iclower
+
+" Regex
+set extended
+set iclower
+
+" Indentation
+set autoindent
+set shiftwidth=4
+set tabstop=4
+
+" UI
+set noerrorbells
+set noflash
+set verbose
+
+" Show line numbers, cursor positions
+set number
+set rule
