@@ -18,36 +18,39 @@ let
   # Programs that should be on any machine with X server on it.
   general = with pkgs; [
     # Command line tools
+    asciidoctor       # Convertor for asciidoc files
+    atool             # Print archive file infomation
     bashdb            # Bash debugger.
     bats              # Automated tests with bash scripts.
-    checkbashisms     # Check for bash-specific syntax in POSIX scripts.
-    atool             # Print archive file infomation
-    asciidoctor       # Convertor for asciidoc files
     catdoc            # Converts Mircosoft Office to text
     catdocx           # Converts Mircosoft Office (post-2007) to text
     catimg            # A much better image to text converter
+    checkbashisms     # Check for bash-specific syntax in POSIX scripts.
     dante             # SOCKS server; need for aerc
-    detox             # Automatically make cli-friendly file names
     ddgr              # Search DuckDuckGo from the command line
+    detox             # Automatically make cli-friendly file names
     dict              # Command line dictionary
     exiftool          # Image file information
-    ffmpeg            # Video encoder
     ffmpegthumbnailer # Create video thumbnails
+    ffmpeg            # Video encoder
     gcal              # Prints out almost any calendar and some holidays.
     graphicsmagick    # Command line graphic process
-    # highlight         # Highlights syntax in a file
+    isync             # POP/IMAP client
     jrnl              # Command line journal system.
     khard             # Address books
     libcaca           # Image to text converter
+    mailcap           # Open non-plain-text emails
     maim              # Simple screenshot utility
     mediainfo         # Multimedia file information
     mpc_cli           # Barebones command line interface for mpd
+    msmtp             # SMTP client
     neofetch          # An "About" screen for the terminal
     nix-index         # Locate for nix
+    notmuch           # Email indexer
     odt2txt           # Converts odt (LibreOffice) to text
-    pass              # Password manager
     pamixer           # Pulse Audio mixer
     pandoc            # Universal document converter
+    pass              # Password manager
     pdd               # Date/time calculator
     playerctl         # Command-line MPRIS controller
     poppler_utils     # Converts pdf to text
@@ -57,45 +60,50 @@ let
     taskwarrior       # Tasks and TODOs
     translate-shell   # Search for translations (e.g. Google, Yandex) from the command line.
     trash-cli         # CLI program for working with Trash bin.
-    unstable.ueberzug # Real images in the terminal!
     units             # Convert between units
+    unstable.ueberzug # Real images in the terminal!
     unzip             # List and extact zip file
     weather           # Weather command line
-    youtube-dl        # Video downloader
     xcape             # Binding a modifier key when press by itself.
     xclip             # Command line ultity for manuplating the system clipboard.
     xlsx2csv          # Converts Excel (post-2007) files to csv files
+    youtube-dl        # Video downloader
     zip               # Compress zip files
 
     # TUI programs
-    # calcurse          # Calendar
+    calc              # Calculator
     cava              # Visualiser for the terminal
+    gotop             # Terminal base system monitor
     htop              # System resources monitor
     ncdu              # Filesystem size browser
+    neomutt           # Ncurses email client
     newsboat          # RSS/Atom feed reader
-    gotop             # Terminal base system monitor
+    rlwrap            # Wrap readline library around certian prompts
     sc-im             # Terminal spreadsheet program
     tig               # Git frontend
     unstable.aerc     # Terminal email client
+    unstable.calcurse # Calendar
     unstable.tuir     # Read reddit in a terminal
     vifm              # Terminal file manager
     vimpc             # TUI frontend for mpd
     vit               # Frontend for taskwarrior
     w3m               # Terminal web browser
+    weechat           # IRC client
 
     # GUI applications
     alacritty            # Terminal emuator
     arc-theme            # Theme for GUI programs
     firefox              # GUI web browser
+    flameshot            # Screenshot tool
     kp                   # Kolourpaint, a simple MS Paint clone
+    mpv-with-scripts     # Customized mpv file
     networkmanagerapplet # Applet for connecting to wifi
     notify-desktop       # Desktop notify
-    mpv-with-scripts     # Customized mpv file
-    rofi                 # Program launcher/Window switcher/dmenu replacement
     rofi-pass            # Frontend for quickly entering passwords with rofi.
+    rofi                 # Program launcher/Window switcher/dmenu replacement
     screenkey            # Show keypress on the screen.
-    sxiv                 # Lightweight image viewer
     st_patched           # Terminal emulator
+    sxiv                 # Lightweight image viewer
     thunderbird          # GUI email client
     torbrowser           # Browser using the tor network
     zathura              # Lightweight PDF/EPUB/Dejv reader
