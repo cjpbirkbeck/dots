@@ -1,21 +1,14 @@
-" Case-insentive searches
-set ignorecase
-set iclower
-
-" Regex
-set extended
-set iclower
-
-" Indentation
-set autoindent
-set shiftwidth=4
-set tabstop=4
+" Setting for nvi, the ex/vi clone found on the *BSD and Void Linux.
 
 " UI
-set noerrorbells
-set noflash
-set verbose
+set showmode     " Display the mode and write status
+set number       " Show line number
+set rule         " Show cursor's position
+set noerrorbells " Disable error bells
+set noflash      " Do not flash the screen
+set verbose      " Show error messages
 
-" Show line numbers, cursor positions
-set number
-set rule
+" Searching
+set extended     " Use extended regex syntax
+set ignorecase   " Ignore case ...
+set iclower      " ... unless there is an uppercase word.
