@@ -41,6 +41,7 @@
     ./apps/scripts/rofi-as-dmenu.nix
     ./apps/dev-env/lisp.nix
     ./apps/dev-env/golang.nix
+    ./apps/syncthing.nix
     # ./apps/dev-env/rust.nix
   ];
 
