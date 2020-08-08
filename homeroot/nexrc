@@ -1,0 +1,14 @@
+" Setting for nvi, the ex/vi clone found on the *BSD and Void Linux.
+
+" UI
+set showmode     " Display the mode and write status
+set number       " Show line number
+set rule         " Show cursor's position
+set noerrorbells " Disable error bells
+set noflash      " Do not flash the screen
+set verbose      " Show error messages
+
+" Searching
+set extended     " Use extended regex syntax
+set ignorecase   " Ignore case ...
+set iclower      " ... unless there is an uppercase word.

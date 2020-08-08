@@ -65,8 +65,9 @@ if test -z "${TTY_BNAME%%[0-9]*}" || test "${TTY_BNAME%%[0-9]*}" = "ttyp"; then
             }
             ;;
         *)
+            __PTS_NO=${TTY_BNAME##*[a-z]}
             function precmd {
-                print -Pn "\e]0;zsh [${TTY_BNAME##*[a-z]}]:%~ %(1j,[%j],)\a"
+                print -Pn "\e]0;zsh [$__PTS_NO]: %~ %(1j,[%j],)\a"
             }
             ;;
     esac
@@ -123,6 +124,9 @@ zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path $HOME/.cache/zsh/
 
 ### Source Plugins ###
+
+# Get common functions
+source $HOME/.local/share/shell/functions.sh
 
 if test -e "${USR_PATH}"/zsh-autosuggestions/; then
     source "${USR_PATH}"/zsh-autosuggestions/zsh-autosuggestions.zsh
