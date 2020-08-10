@@ -105,7 +105,7 @@ let
     st_patched           # Terminal emulator
     sxiv                 # Lightweight image viewer
     thunderbird          # GUI email client
-    torbrowser           # Browser using the tor network
+    # torbrowser           # Browser using the tor network
     zathura              # Lightweight PDF/EPUB/Dejv reader
 
     neovim_with_plugins    # Customized neovim.
