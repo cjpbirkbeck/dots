@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Creates symbolic links according a text file (dubbed as a 'manifest') en mass.
+
+# Detect what operating system and distribution we are using.
+# For *BSDs like FreeBSD or OpenBSD, these are the same.
+OS="$(uname | tr "[:upper:]" "[:lower:]")"
+
+if test "${OS##[A-Z]*[a-z]}" = "bsd" ; then
+    DISTRO="$OS"
+elif test "${OS}" = "linux"; then
+    DISTRO="$(grep -E "^NAME=" /etc/*-release | cut -d '=' -f 2 | \
+        tr -d '"' | tr "[:upper:]" "[:lower:]")"
+fi
+
+# This file should be in the root of directory containing the files,
+# with the manifests being stored in a directory within that main directory.
+DOTS_DIR="$( cd "$(dirname "$0")" > /dev/null 2>&1 || exit 1 ; pwd -P )"
+HOME_MANIFEST="$DOTS_DIR"/manifests/"$DISTRO"/home
+
+while read -r line; do
+    # Ignore any lines that start with a pound symbol,
+    # or are just whitespace.
+    printf "%s" "$line" | grep "^#" && continue
+    test -z "$(printf "%s" "$line" | tr -d "[:space:]")" && continue
+
+    # Expand $HOME and $DOTS_DIR with the shell variables.
+    escaped="$(printf "%s" "$line" | sed -e 's@$HOME@'"$HOME"'@g' -e 's@$DOTS_DIR@'"$DOTS_DIR"'@g')"
+
+    # Lines should divided into two parts,
+    # first part should be a source, second should be a target (cf. ln(1))
+    # They should contain only letters, numbers, the characters $, " and .
+    SYMLINK="${escaped##[A-Za-z0-9./]* }"
+    SOURCE="${escaped%% [A-Za-z0-9./]*}"
+
+    test -e "$SYMLINK" || printf "%s does not exit. Skipping" "$SYMLINK" >> /dev/stderr || continue
+
+    # Check if there is already a symbolic link there; if so, remove it.
+    # Check if there is a regular file there; if so, move it to a unique name.
+    test -L "$SYMLINK" && rm "$SYMLINK"
+    test -e "$SYMLINK" && mv "$SYMLINK" "$SYMLINK.old.$(date '%s')"
+
+    ln -s "$SOURCE" "$SYMLINK"
+done < "$HOME_MANIFEST"
