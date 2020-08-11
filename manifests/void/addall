@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# Installs packages for Void Linux
+
+xbps-install zsh zsh-autosuggestions zsh-completions zsh-autosuggestions
+xbps-install awesome
+xbps-install gnupg pass flameshot xcape
+xbps-install tmux python3-tmuxp
+xbps-install vifm
+xbps-install gotop
+xbps-install rofi
+xbps-install bat
+xbps-install neovim neovim-qt neovim-remote python3-neovim
+xbps-install GraphicsMagick
+xbps-install mpd mpc vimpc
+xbps-install mpv mpv-mpris
+xbps-install ffmpeg
+xbps-install w3m
+xbps-install neomutt isync msmtp notmuch
+xbps-install newsboat
+xbps-install curl youtube-dl
+xbps-install transmission transmission-qt
+xbps-install khard
+xbps-install calcurse
+xbps-install taskwarrior
+xbps-install timewarrior
+xbps-install ledger
+xbps-install zathura
+xbps-install libreoffice
+xbps-install kolourpaint gimp inkscape
+xbps-install audacity
+xbps-install firefox torbrowser-launcher
+xbps-install thunderbird
+xbps-install qtox nheko

@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Add all programs to a new FreeBSD install.
+
+pkg install zsh zsh-autosuggestions zsh-completions zsh-autosuggestions
+pkg install fzf detox
+pkg install font-awesome
+pkg install awesome
+pkg install gnupg pass flameshot xcape
+pkg install tmux py37-tmuxp
+pkg install vifm
+pkg install gotop
+pkg install rofi rofi-pass
+pkg install bat
+pkg install neovim neovim-qt neovim-remote python3-neovim
+pkg install GraphicsMagick
+pkg install muspicpd muspicpc vimpc
+pkg install mpv mpv-mpris
+pkg install ffmpeg
+pkg install w3m
+pkg install neomutt isync msmtp notmuch
+pkg install newsboat
+pkg install curl youtube_dl
+pkg install transmission transmission-qt
+pkg install py37-khard
+pkg install calcurse
+pkg install taskwarrior
+pkg install timewarrior
+pkg install ledger
+pkg install zathura
+pkg install libreoffice
+pkg install kolourpaint gimp inkscape
+pkg install audacity
+pkg install firefox
+pkg install thunderbird
+pkg install qTox nheko

@@ -1,0 +1,3 @@
+# Manifest for NixOS
+
+$DOTS_DIR/config/awesome $HOME/.config/awesome
