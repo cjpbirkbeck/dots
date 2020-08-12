@@ -18,6 +18,10 @@ fi
 DOTS_DIR="$( cd "$(dirname "$0")" > /dev/null 2>&1 || exit 1 ; pwd -P )"
 HOME_MANIFEST="$DOTS_DIR"/manifests/"$DISTRO"/home
 
+# Setup $HOME directory to my liking.
+mkdir -p "$HOME/.cache/shell" "$HOME/.config" "$HOME/.local/bin" "$HOME/.local/share"
+mkdir -p "$HOME/ref" "$HOME/docs" "$HOME/imgs" "$HOME/audio" "$HOME/video" "$HOME/boxes" "$HOME/shared" "$HOME/desktop" "$HOME/templates" "$HOME/games" "$HOME/dls"
+
 while read -r line; do
     # Ignore any lines that start with a pound symbol,
     # or are just whitespace.
@@ -29,7 +33,7 @@ while read -r line; do
 
     # Lines should divided into two parts,
     # first part should be a source, second should be a target (cf. ln(1))
-    # They should contain only letters, numbers, the characters $, " and .
+    # They should contain only letters, numbers and the characters '.' and '/'.
     SYMLINK="${escaped##[A-Za-z0-9./]* }"
     SOURCE="${escaped%% [A-Za-z0-9./]*}"
 
@@ -38,8 +42,8 @@ while read -r line; do
     # Check if there is a broken symbolic link there; if so, remove it.
     # Check if there is a regular file there; if so, move it to a unique name.
     if test -L "$SYMLINK" ; then
-        test ! -e "$SYMLINK" && rm "$SYMLINK"
         test "$SYMLINK" -ef "$SOURCE" || rm "$SYMLINK"
+        test ! -e "$SYMLINK" && rm "$SYMLINK"
     else
         test -e "$SYMLINK" && mv "$SYMLINK" "$SYMLINK.old.$(date '%s')"
     fi
