@@ -133,8 +133,10 @@ if test -e "${USR_PATH}"/zsh-autosuggestions/; then
     ZSH_AUTOSUGGEST_USE_ASYNC=true         # Get suggestions asynchronously
 fi
 
-test -e "${USR_PATH}"/zsh-navigation-tools && \
-    source "${USR_PATH}"/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+if test -e "${USR_PATH}"/examples/fzf/shell; then
+    source "${USR_PATH}"/examples/fzf/shell/completion.zsh
+    source "${USR_PATH}"/examples/fzf/shell/key-bindings.zsh
+fi
 
 test -e "${USR_PATH}"/bash-completion && autoload -U +X bashcompinit && bashcompinit
 
