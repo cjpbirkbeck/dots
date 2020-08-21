@@ -9,9 +9,33 @@
 # $HOME Directory variables
 # Excudes XDG Base directories, which are set seperately.
 
+# This block also should be listed as XDG Base directories; see ~/.config/user-dirs.dirs
+export DOC_DIR="$HOME/docs"
+export IMG_DIR="$HOME/imgs"
+export AUD_DIR="$HOME/audio"
+export VID_DIR="$HOME/video"
+export DESKTOP_DIR="$HOME/dt"
+export DOWNLOAD_DIR="$HOME/dls"
+export PUBLIC_DIR="$HOME/pub"
+export TEMPLATES="$HOME/templates"
+
 export REF_DIR="$HOME/ref"
 export VM_DIR="$HOME/vms"
 export GAMES_DIR="$HOME/games"
+export CODE_DIR="$HOME/code"
+export SECRETS_DIR="$HOME/.secrets"
+export TESTING_DIR="$HOME/.testing"
+export ARCH_DIR="$HOME/.archive"
+
+export NOTES_DIR="$DOC_DIR/notes"
+export JOURNAL_DIR="$DOC_DIR/journals"
+export OFFICE_DIR="$DOC_DIR/office"
+
+export PHOTO_DIR="$IMG_DIR/photos"
+export SCREENSHOTS_DIR="$IMG_DIR/screenshots"
+export WALLPAPERS_DIR="$IMG_DIR/wallpapers"
+export VEC_IMG_DIR="$IMG_DIR/vector"
+export RAS_IMG_DIR="$IMG_DIR/rasters"
 
 # Default terminal applications
 # Set "default" applications, used by various programs and config files.

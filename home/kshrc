@@ -1,0 +1,8 @@
+#!/bin/ksh
+
+HISTFILE="$HOME/.cache/shell/ksh_history"
+if test -e "$HISTFILE"; then
+    mkdir -p "$HOME/.cache/shell" && touch "$HISTFILE"
+fi
+
+PS1="\u@\h:\w\# "

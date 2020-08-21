@@ -1,0 +1,15 @@
+#!/bin/tcsh
+
+################################################################################
+#                                                                              #
+# TCSHRC: minimal (T)CSHRC file                                                #
+#                                                                              #
+################################################################################
+
+set histfile "$HOME/.cache/shell/tcsh_history"
+if (filetest -f "$histfile" ) then
+    mkdir -p "$HOME/.cache/shell"
+    touch "$histfile"
+endif
+
+set prompt = "%n@%m:%c5%# "
