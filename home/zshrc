@@ -7,11 +7,7 @@
 ### General ###
 
 stty -ixon # Disable C-s and C-q in terminals.
-KERNEL="$(uname)"
 TTY_BNAME="$(basename $(tty))"
-
-test $KERNEL = "Linux" && USR_PATH="/usr/share/zsh/plugins"
-test "${KERNEL##[A-Z]*[a-z]}" = "BSD" -o "${KERNEL}" = "Dragonfly" && USR_PATH="/usr/local/share"
 
 ### Keybindings ###
 
@@ -43,7 +39,7 @@ test -n "${key[ShiftTab]}" && bindkey -- "${key[ShiftTab]}"  reverse-menu-comple
 
 ### Prompt and Terminal Title ###
 
-setopt PROMPT_SUBST       # Allow parameter expansion and command substitution.
+setopt PROMPT_SUBST # Allow parameter expansion and command substitution.
 
 # On Linux distros, FreeBSD, NetBSD and DragonFlyBSD (and presumably, any of their derrivatives),
 # pseudoterminal are have the path of /dev/pts/[0-9]+.
@@ -92,9 +88,13 @@ setopt PUSHD_IGNORE_DUPS  # Ignore multiple copies on the stack.
 
 HISTSIZE=2147483647
 SAVEHIST=HISTSIZE
-HISTFILE=$HOME/.local/share/zsh/history
+HISTFILE=$HOME/.cache/shell/zsh_history
 
-setopt HIST_IGNORE_SPACE  # Ignores commands with a space.
+if test ! -f $HISTFILE; then
+    mkdir -p $HOME/.cache/shell && touch $HISTFILE
+fi
+
+setopt HIST_IGNORE_SPACE  # Ignores commands that start with a space.
 setopt HIST_REDUCE_BLANKS # Removes blanks from history when not needed.
 setopt SHARE_HISTORY      # History shared between sessions.
 
@@ -123,25 +123,11 @@ zstyle ':completion:*:default' list-colors 'fi=97:di=94' # Colour regular files 
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path $HOME/.cache/zsh/
 
+unset TTY_BNAME
+
 ### Source Plugins ###
 
-# Get common functions
-source $HOME/.local/share/shell/functions.sh
+test -f $HOME/.config/zsh/aliases.zsh && source $HOME/.config/zsh/aliases.zsh
 
-if test -e "${USR_PATH}"/zsh-autosuggestions/; then
-    source "${USR_PATH}"/zsh-autosuggestions/zsh-autosuggestions.zsh
-    ZSH_AUTOSUGGEST_USE_ASYNC=true         # Get suggestions asynchronously
-fi
-
-if test -e "${USR_PATH}"/examples/fzf/shell; then
-    source "${USR_PATH}"/examples/fzf/shell/completion.zsh
-    source "${USR_PATH}"/examples/fzf/shell/key-bindings.zsh
-fi
-
-test -e "${USR_PATH}"/bash-completion && autoload -U +X bashcompinit && bashcompinit
-
-unset KERNEL TTY_BNAME
-
-# This needs to be loaded last.
-test -e "${USR_PATH}"/zsh-syntax-highlighting && \
-    source "${USR_PATH}"/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh && unset USR_PATH
+# This line needs to be last, as it loads the zsh-syntax-highlighting plugins, which need to be last.
+test -f $HOME/.config/zsh/plugins.zsh && source $HOME/.config/zsh/plugins.zsh
