@@ -6,7 +6,7 @@
 
 # Prompt
 PROMPT_DIRTRIM=5 # Paths with 5 or more components are elided.
-PS1="\u@\h:\w\$ "
+PS1="[\u@\h:\w]\$ "
 
 # History file
 HISTFILE=$HOME/.cache/shell/bash_history

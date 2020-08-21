@@ -6,10 +6,25 @@
 #                                                                              #
 ################################################################################
 
-set histfile "$HOME/.cache/shell/tcsh_history"
-if (filetest -f "$histfile" ) then
+# History file
+set histfile = "$HOME/.cache/shell/csh_history"
+if ( -f $HOME/.cache/shell/csh_history ) then
     mkdir -p "$HOME/.cache/shell"
     touch "$histfile"
 endif
 
-set prompt = "%n@%m:%c5%# "
+set filec
+set history = 1000
+set savehist = (1000 merge)
+set autolist = ambiguous
+set autoexpand
+set autorehash
+
+if ( $?tcsh ) then
+    bindkey "^W" backward-delete-word
+    bindkey -k up history-search-backward
+    bindkey -k down history-search-forward
+endif
+
+# Prompt
+set prompt = "%B%N@%m:%c5 %#%b "
