@@ -1,0 +1,39 @@
+#!/bin/sh
+
+################################################################################
+#                                                                              #
+# ENV File: Set universal environment variables                                #
+#                                                                              #
+################################################################################
+
+# $HOME Directory variables
+# Excudes XDG Base directories, which are set seperately.
+
+export REF_DIR="$HOME/ref"
+export VM_DIR="$HOME/vms"
+export GAMES_DIR="$HOME/games"
+
+# Default terminal applications
+# Set "default" applications, used by various programs and config files.
+# These should mostly open their terminal version; for open GUI applications, use xdg-open
+
+export EDITOR="nvim"
+export VISUAL="nvim"
+export PAGER="less"
+export BROWSER="firefox"
+
+export TEMU="st"
+export TMPLEx="tmux"
+export FILE_MAN="vifm"
+export PDF_VIEWER="pdftotext"
+export IMG_VIEWER="img2txt"
+export AUD_PLAYER="mpv"
+export VID_PLAYER="mpv"
+export TBROWSER="w3m"
+export EMAIL_CLIENT="neomutt"
+export RSS_READER="newsboat"
+export IRC_CLIENT="weechat"
+export CONTACTS="khard"
+export CALENDAR="calcurse"
+export TASKS="vit"
+export SYS_MON="gotop"

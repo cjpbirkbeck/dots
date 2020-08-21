@@ -1,0 +1,15 @@
+################################################################################
+#                                                                              #
+# BASHRC: Minimal bashrc file                                                  #
+#                                                                              #
+################################################################################
+
+# Prompt
+PROMPT_DIRTRIM=5 # Paths with 5 or more components are elided.
+PS1="\u@\h:\w\$ "
+
+# History file
+HISTFILE=$HOME/.cache/shell/bash_history
+if test ! -f "$HISTFILE"; then
+    mkdir -p "$HOME/.cache/shell" && touch "$HISTFILE"
+fi
