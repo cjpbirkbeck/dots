@@ -9,4 +9,25 @@ __mkdir_cd() {
     fi
 }
 
+# Wrapper function for coloured manpages.
+__man_coloured() {
+    # Termcap escape sequence meanings:
+    # mb: start blinking text
+    # md: start bolding text
+    # me: end bolding, blinking and underlining
+    # so: start standout (reverse video)
+    # se: stop standout
+    # us: start underlining text
+    # ue: stop underlining
+    LESS_TERMCAP_mb=$'\e[1;32m' \
+    LESS_TERMCAP_md=$'\e[1;32m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[1;4;31m' \
+    command man "$@"
+}
+
 alias md="__mkdir_cd"
+alias man="__man_coloured"
