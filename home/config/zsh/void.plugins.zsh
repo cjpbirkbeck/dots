@@ -21,14 +21,14 @@ alias xpbsu="sudo xbps-install -Su"
 test -e  $HOME/.local/share/shell/functions.sh && \
     source $HOME/.local/share/shell/functions.sh
 
-if test -e /usr/share/zsh-autosuggestions/; then
-    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if test -e /usr/share/zsh/plugins/zsh-autosuggestions/; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
     ZSH_AUTOSUGGEST_USE_ASYNC=true         # Get suggestions asynchronously
 fi
 
-if test -e /usr/share/examples/fzf/shell; then
-    source /usr/share/examples/fzf/shell/completion.zsh
-    source /usr/share/examples/fzf/shell/key-bindings.zsh
+if test -e /usr/share/doc/fzf; then
+    source /usr/share/doc/fzf/completion.zsh
+    source /usr/share/doc/fzf/key-bindings.zsh
 
     export FZF_ALT_C_OPTS="--ansi --preview='ls -gAGh --color --group-directories-first {}'"
     # TODO: Finish revising peekat so it can serve as a file previewer here.
@@ -38,5 +38,5 @@ fi
 test -e /usr/share/bash-completion && autoload -U +X bashcompinit && bashcompinit
 
 # This needs to be loaded last.
-test -e /usr/share/zsh-syntax-highlighting && \
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+test -e /usr/share/zsh/plugins/zsh-syntax-highlighting && \
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

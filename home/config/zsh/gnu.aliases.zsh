@@ -47,5 +47,5 @@ alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 
 # Program aliases
-alias more= "less"
+alias more="less"
 alias dff="df -hH -x tmpfs -x devtmpfs"
