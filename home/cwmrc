@@ -1,0 +1,118 @@
+# CWMRC: Configuration for Calm Window Manager
+# See cwm(1) and cwmrc(5) for more information
+
+# Set default programs
+command term st
+command lock xlock
+
+# Set commands for applications menu
+# Should be only the most commonly used programs.
+command "Web" "firefox"
+command "Email" "thunderbird"
+command "PDFs" "zathura"
+command "Find program" "rofi -show drun"
+# TODO: Write new fetchfile, open with xdg-open
+# command "Find file" "fetchfile"
+command "End session" quit
+# TODO: Create command that can reboot the system portably.
+# command "Reboot" "false"
+# TODO: Create command that can shutdown the system portably.
+# command "Shutdown" "false"
+
+# Theming
+borderwidth 1
+color activeborder green
+fontname "sans-serif:pixelsize=14:bold"
+
+# Group rules
+
+# Keybindings
+# In general, these replace the defaults with keybindings with the super key (Mod4 = 4)
+
+bind-key 4-Return terminal
+unbind-key CM-Return
+
+bind-key 4-BackSpace window-close
+unbind-key CM-x
+
+bind-key 4-semicolon menu-cmd
+bind-key 4S-semicolon "rofi -show drun"
+bind-key 4C-semicolon menu-exec
+bind-key 4-period menu-ssh
+unbind-key M-question
+unbind-key M-period
+
+bind-key 4-Tab  window-cycle
+bind-key 4S-Tab window-rcycle
+
+bind-key 4-1 group-toggle-1
+unbind-key CM-1
+bind-key 4-2 group-toggle-2
+unbind-key CM-2
+bind-key 4-3 group-toggle-3
+unbind-key CM-3
+bind-key 4-4 group-toggle-4
+unbind-key CM-4
+bind-key 4-5 group-toggle-5
+unbind-key CM-5
+bind-key 4-6 group-toggle-6
+unbind-key CM-6
+bind-key 4-7 group-toggle-7
+unbind-key CM-7
+bind-key 4-8 group-toggle-8
+unbind-key CM-8
+bind-key 4-9 group-toggle-9
+unbind-key CM-9
+bind-key 4-0 group-toggle-all
+unbind-key CM-0
+bind-key 4-a group-toggle-all
+unbind-key CM-a
+
+bind-key 4M-h window-move-left-big
+unbind-key M-h
+bind-key 4M-j window-move-down-big
+unbind-key M-j
+bind-key 4M-k window-move-up-big
+unbind-key M-k
+bind-key 4M-l window-move-right-big
+unbind-key M-l
+bind-key 4SM-h window-move-left
+unbind-key SM-h
+bind-key 4SM-j window-move-down
+unbind-key SM-j
+bind-key 4SM-k window-move-up
+unbind-key SM-k
+bind-key 4SM-l window-move-right
+unbind-key SM-l
+
+bind-key 4C-h window-resize-left-big
+unbind-key MC-h
+bind-key 4C-j window-resize-down-big
+unbind-key MC-j
+bind-key 4C-k window-resize-up-big
+unbind-key MC-k
+bind-key 4C-l window-resize-right-big
+unbind-key MC-l
+bind-key 4SC-h window-resize-left
+unbind-key MSC-h
+bind-key 4SC-j window-resize-down
+unbind-key MSC-j
+bind-key 4SC-k window-resize-up
+unbind-key MSC-k
+bind-key 4SC-l window-resize-right
+unbind-key MSC-l
+
+# bind-key 4M-Return window-hide
+# bind-key 4M-Down
+# bind-key 4M-Up
+# bind-key 4M-slash
+# bind-key 4C-slash
+# bind-key 4CM-g
+# bind-key 4M-Right
+# bind-key 4M-Left
+# bind-key 4CMS-f
+# bind-key 4CM-m
+# bind-key 4CM-equal
+# bind-key 4CM-w
+# bind-key 4CMS-r restart
+# bind-key 4CMS-q quit
