@@ -1,4 +1,5 @@
 -- Returns a titlebar for any window requesting one.
+-- Mostly used for dialog boxes, which look odd without them.
 
 local gears = require("gears")
 local awful = require("awful")
@@ -32,8 +33,6 @@ local get_titlebars = function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },

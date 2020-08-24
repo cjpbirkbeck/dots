@@ -26,7 +26,7 @@ end)
 -- When toggling floating mode, force clients to have a titlebar.
 client.connect_signal("property::floating",
     function(c)
-        if c.floating and c.class ~= 'Conky' then
+        if c.floating and c.type == 'dialog' then
             awful.titlebar.show(c)
         else
             awful.titlebar.hide(c)
@@ -38,11 +38,13 @@ client.connect_signal("property::floating",
 client.connect_signal("request::titlebars", function(c) titlebars(c) end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
-end)
+client.connect_signal("mouse::enter",
+    function(c)
+        c:emit_signal("request::activate", "mouse_enter", {raise = false})
+    end)
 
 -- No borders with the max layout or if there is only a single tile client.
+-- Floating clients should have a border unless it is a dialog box.
 screen.connect_signal("arrange",
     function (s)
         local selected = s.selected_tags
@@ -52,7 +54,11 @@ screen.connect_signal("arrange",
 
             for _, c in pairs(s.clients) do
                 if #s.tiled_clients == 1 or l == awful.layout.suit.max then
-                    c.border_width = 0
+                    if c.floating and c.type ~= 'dialog' then
+                        c.border_width = beautiful.border_width
+                    else
+                        c.border_width = 0
+                    end
                 else
                     c.border_width = beautiful.border_width
                 end
@@ -60,6 +66,7 @@ screen.connect_signal("arrange",
         end
     end)
 
+-- Add icons for st terminals.
 client.connect_signal("manage", function(c)
     if c.class == "st-256color" or c.class == "st-dialog" or c.class == "st-float" then
         local new_icon = gears.surface(menubar.utils.lookup_icon(theme_d .. "st.svg"))
