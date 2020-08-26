@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
 # Make a directory and change into it.
 __mkdir_cd() {

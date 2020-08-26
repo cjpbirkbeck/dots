@@ -16,7 +16,20 @@ TTY_BNAME="$(basename $(tty))"
 # while having C-S-d to delete whitespace-delimited words (cf WORDS in vi).
 # Not sure if that is possible.
 bindkey -e
-autoload -U select-word-style && select-word-style shell
+
+# Set alt-backspace to delete words up to slash.
+# Use alt-control-h to delete the entire word.
+function slash-backwards-kill-word {
+    local WORDCHARS="${WORDCHARS:s@/@}"
+    zle backward-kill-word
+}
+zle -N slash-backwards-kill-word
+bindkey '\e^?' slash-backwards-kill-word
+
+# Edit line in editor
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^[e' edit-command-line
 
 # Set keybindings for specialized keys on a standard keyboard.
 typeset -g -A key
@@ -73,10 +86,15 @@ if test -z "${TTY_BNAME%%[0-9]*}" || test "${TTY_BNAME%%[0-9]*}" = "ttyp"; then
     function preexec {
         printf "\033]0;%s\a" "$1"
     }
+
 else
     PROMPT="%B%F{red}[%t]%f%F{yellow}["${TTY_BNAME##*[a-z]}"]%f%F{green}[%n@%M]%f%F{blue}[%(5~|-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
     RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
 fi
+
+# Change prompt when using zsh's vi command mode
+# For some reason, I cannot customize the prompt, it's always [NORM].
+zle -N zle-keymap-select
 
 ### Directory navigation ###
 
@@ -121,11 +139,22 @@ zstyle ':completion:*:default' list-colors 'fi=97:di=94' # Colour regular files 
 
 # Cache completions; useful for package managers
 zstyle ':completion:*' use-cache yes
+test -d $HOME/.cache/zsh || mkdir -p $HOME/.cache/zsh/
 zstyle ':completion:*' cache-path $HOME/.cache/zsh/
+
+# Modify menu keybindings:
+# Use alt-{hjkl} to navigate menus
+# Use alt-i to pick an item but stay on the menu
+zmodload zsh/complist
+bindkey -M menuselect '^[h' vi-backward-char
+bindkey -M menuselect '^[k' vi-up-line-or-history
+bindkey -M menuselect '^[l' vi-forward-char
+bindkey -M menuselect '^[j' vi-down-line-or-history
+bindkey -M menuselect '^[i' accept-and-menu-complete
 
 unset TTY_BNAME
 
-### Source Plugins ###
+### Source Aliases and Plugins ###
 
 test -f $HOME/.config/zsh/aliases.zsh && source $HOME/.config/zsh/aliases.zsh
 
