@@ -103,8 +103,6 @@ set laststatus=2                " Keeps the status bar on screen.
 " Setup lightline
 let g:lightline = {
     \ 'colorscheme': 'one',
-    \ 'separator': { 'left': '', 'right': '' },
-    \ 'subseparator': { 'left': '', 'right': '' },
     \ 'active': {
     \   'left': [ [ 'mode', ],
     \             [ 'bufnum', 'modified', 'absolutepath' ] ],
@@ -119,11 +117,6 @@ let g:lightline = {
     \   'cursorpos': '%l:%c/%L'
     \ }
     \ }
-
-if has('win32')
-    let g:lightline.separator = { 'left': '', 'right': '' }
-    let g:lightline.subseparator = { 'left': '|', 'right': '|' }
-endif
 
 " }}}
 
