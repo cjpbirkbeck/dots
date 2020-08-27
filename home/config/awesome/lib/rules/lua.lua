@@ -72,7 +72,7 @@ local rules = {
       }, properties = { floating = true, placement = awful.placement.centered }},
 
     -- Assign applications to tags
-    { rule_any = { class = { "Firefox", "Brave", "Tor Browser" } },
+    { rule_any = { class = { "qutebrowser", "Firefox", "Brave", "Tor Browser" } },
       properties = { tag = "Web" } },
 
     { rule_any = { class = { "Daily", "Thunderbird" } },

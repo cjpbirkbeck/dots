@@ -79,7 +79,9 @@ settings:
     global: 10pt sans-serif
   fonts.statusbar:
     global: 12pt default_family
-  fonts.tabs:
+  fonts.tabs.selected:
+    global: 12pt default_family
+  fonts.tabs.unselected:
     global: 12pt default_family
   hints.dictionary:
     global: /usr/share/dict/words
