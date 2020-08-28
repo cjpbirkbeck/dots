@@ -77,6 +77,7 @@ set wildmenu                   " Use the advanced 'wildcard' menu for completion
 set wildmode=longest,list,full " Complete to longest string, list all matches, complete to next fullest match.
 set mouse=a                    " Allow mouse usage in all modes.
 set wrap                       " Turns on word wrap.
+set colorcolumn=80,100         " Colour the 80th and 100th columns.
 
 " }}}
 
@@ -103,8 +104,6 @@ set laststatus=2                " Keeps the status bar on screen.
 " Setup lightline
 let g:lightline = {
     \ 'colorscheme': 'one',
-    \ 'separator': { 'left': '', 'right': '' },
-    \ 'subseparator': { 'left': '', 'right': '' },
     \ 'active': {
     \   'left': [ [ 'mode', ],
     \             [ 'bufnum', 'modified', 'absolutepath' ] ],
@@ -119,11 +118,6 @@ let g:lightline = {
     \   'cursorpos': '%l:%c/%L'
     \ }
     \ }
-
-if has('win32')
-    let g:lightline.separator = { 'left': '', 'right': '' }
-    let g:lightline.subseparator = { 'left': '|', 'right': '|' }
-endif
 
 " }}}
 

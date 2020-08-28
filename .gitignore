@@ -4,8 +4,8 @@ tags
 config/awesome/theme/*
 config/awesome/theme/!theme.lua
 config/awesome/theme/!st.svg
-config/vifm/vifminfo
-homeroot/weechat/certs/*
-homeroot/weechat/logs/*
-homeroot/weechat/ecdsa.pem
+home/config/vifm/vifminfo
+home/weechat/certs/*
+home/weechat/logs/*
+home/weechat/ecdsa.pem
 test/

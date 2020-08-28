@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
-# Generates a previews of a file, based on its file extension and mimetype.
-# Otherwise, it prints out what finds.
+#!/usr/bin/env zsh
+# Generates a textual previews of a file, based on its file extension and mimetype.
+# Otherwise, it prints out some file information.
 
 # Based off Ranger's scope.sh and a suggested revision for lf.
 # Latest Ranger scope.sh: https://github.com/ranger/ranger/blob/master/ranger/data/scope.sh
@@ -9,10 +9,10 @@
 set -C -f
 IFS=$'\n'
 WINDOW_WIDTH="${COLUMNS}"
+# Hack for working with fzf, as $FZF_PREVIEW_COLUMNS does work.
+test -n PEEKAT_WITH_FZF && WINDOW_WIDTH=$(( COLUMNS / 2 - 4))
 PAGE_LIMIT=10
 ROW_LIMIT=90
-FULLSCREEN=false
-VIEW_SOURCE=true
 
 # Process the file path and find its file extension.
 examine_file_path() {
@@ -32,9 +32,9 @@ printbreak() {
 
 process_pdf () {
     echo "${WINDOW_WIDTH}"
-    pdftotext -l "${PAGE_LIMIT}" -nopgbrk -q -- "${FILE_PATH}" - | fold --spaces --width="${WINDOW_WIDTH}"
+    pdftotext -l "${PAGE_LIMIT}" -nopgbrk -q -- "${FILE_PATH}" - | fold -s -w "${WINDOW_WIDTH}"
     printbreak
-    exiftool "${FILE_PATH}" | fold --spaces --width="${WINDOW_WIDTH}"
+    exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
     exit 0
 }
 
@@ -42,9 +42,9 @@ process_epub () {
     # NOTE: pandoc is quite slow, slower than should allowed for a script
     # like this. It should be replace with something like epub2txt2, if I
     # can get it to work.
-    pandoc -i "${FILE_PATH}" --to=plain --spaces --width="${WINDOW_WIDTH}"
+    pandoc -i "${FILE_PATH}" --to=plain -s -w "${WINDOW_WIDTH}"
     printbreak
-    exiftool "${FILE_PATH}" | fold --spaces --width="${WINDOW_WIDTH}"
+    exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
     exit 0
 }
 
@@ -59,7 +59,7 @@ process_torrent() {
 }
 
 process_opendocs() {
-    odt2txt "${FILE_PATH}" --width="${WINDOW_WIDTH}"
+    odt2txt "${FILE_PATH}" -w "${WINDOW_WIDTH}"
     exit 0
 }
 
@@ -73,17 +73,10 @@ process_ms_wordx() {
     exit 0
 }
 
-process_json() {
-    jq --color-output . "${FILE_PATH}"
-    exit 0
-}
-
 process_html() {
-    if test "${VIEW_SOURCE}"; then
-        process_struct_text
-        exit 0
-    fi
     w3m -dump "${FILE_PATH}"
+    printbreak
+    process_struct_text
     exit 0
 }
 
@@ -93,33 +86,15 @@ process_struct_text() {
 }
 
 process_image() {
-    if "$FULLSCREEN" = true; then
-        catimg -w "$WINDOW_WIDTH" "${FILE_PATH}"
-        exit 0
-    fi
-
-    if test "$TRUE_IMAGE" = true && test "$COLORTERM" = "truecolor"; then
-        source "$(ueberzug library)"
-
-        {
-            ImageLayer::add [idenifier]="peekat-preview" \
-                [x]="${UEBERZUG_X}" \
-                [y]="${UEBERZUG_Y}" \
-                [path]="${FILE_PATH}"
-        } | ImageLayer
-    exit 0
-    else
-        img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
-        printbreak
-        exiftool "${FILE_PATH}"
-    fi
-    exit 0
+    img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
+    printbreak
+    exiftool "${FILE_PATH}"
 }
 
 process_multimedia() {
-    mediainfo "${FILE_PATH}" | fold --width="${WINDOW_WIDTH}" --spaces
+    mediainfo "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
     printbreak
-    exiftool "${FILE_PATH}" | fold --width="${WINDOW_WIDTH}" --spaces
+    exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
     exit 0
 }
 
@@ -160,9 +135,6 @@ handle_extension() {
         htm|html|xhtml)
             process_html
             ;;
-        json)
-            process_json
-            ;;
         doc)
             process_ms_word
             ;;
@@ -185,14 +157,26 @@ handle_mime() {
         text/* | */*xml)
             process_struct_text
             ;;
+        application/msword)
+            process_ms_word
+            ;;
         application/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
             process_ms_excelx
+            ;;
+        application/pdf)
+            process_pdf
+            ;;
+        application/epub)
+            process_epub
             ;;
         image/*)
             process_image
             ;;
         video/*|audio/*|application/octet-stream)
             process_multimedia
+            ;;
+        application/gzip|application/x-tar|application/zip)
+            process_compressed
             ;;
         inode/directory)
             process_directory
@@ -209,63 +193,9 @@ handle_fallback() {
     echo "Previewer cannot generate a preview based on its extension or mimetype."
     echo "File Path: ${FILE_PATH}"
     echo "File Extension: ${FILE_EXT}"
-    echo "Mime Type: ${mimetype}"
+    echo "Mime Type: ${MIMETYPE}"
     exit 1
 }
-
-while test $# -gt 0; do
-    if test $# -eq 1; then
-        examine_file_path "${1}"
-        break
-    fi
-
-    case "$1" in
-        "-F"|"--fzf")
-            # Hack for working with fzf, as $FZF_PREVIEW_COLUMNS does work.
-            WINDOW_WIDTH=$(( COLUMNS / 2 - 4))
-            shift
-            ;;
-        "-f"|"--fullscreen")
-            FULLSCREEN=true
-            shift
-            ;;
-        "-p"|"--pages")
-            PAGE_LIMIT="${2}"
-            shift 2
-            ;;
-        "-r"|"--rows")
-            ROW_LIMIT="${2}"
-            shift 2
-            ;;
-        "-w"|"--width")
-            WINDOW_WIDTH="$2"
-            shift 2
-            ;;
-        "-s"|"--source")
-            VIEW_SOURCE=true
-            shift
-            ;;
-        "-t"|"--true-image")
-            TRUE_IMAGE=true
-            shift
-            ;;
-        "-x"|"--x")
-            UEBERZUG_X="${1}"
-            shift 2
-            ;;
-        "-y"|"--y")
-            UEBERZUG_Y="${1}"
-            shift 2
-            ;;
-        "--")
-            examine_file_path "${1}"
-            shift
-            ;;
-        *)
-            exit 1
-            ;;
-    esac
-done
 
 handle_extension
 MIMETYPE="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"

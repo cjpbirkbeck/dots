@@ -17,11 +17,11 @@ local mwf_increment = 0.05
 local mwf_default = 0.5
 
 -- Directories
-home_d   = os.getenv("HOME")
-config_d = gears.filesystem.get_dir("config")
-exec_d   = config_d .. "bin/"
-lib_d    = config_d .. "lib/"
-theme_d  = config_d .. "theme/"
+local home_d   = os.getenv("HOME")
+local config_d = gears.filesystem.get_dir("config")
+local exec_d   = config_d .. "bin/"
+local lib_d    = config_d .. "lib/"
+local theme_d  = config_d .. "theme/"
 
 -- Programs
 local _TERM_EMU = "st"
@@ -77,6 +77,9 @@ local global_keys = gears.table.join(
     awful.key({ super }, "a", function() awful.spawn.with_shell(_LAUNCHER) end,
               { description = "Find program to run", group = "Launch"}),
 
+    awful.key({ super }, ";", function() awful.screen.focused().promptbox:run() end,
+              { description = "Find program to run", group = "Launch"}),
+
     -- Search for files
     awful.key({ super }, "f", function() awful.spawn.with_shell(_FINDER) end,
               { description = "Search for files to open", group = "Launch"}),
@@ -98,27 +101,32 @@ local global_keys = gears.table.join(
     -- General tag controls
     awful.key({ super }, "0",
         function()
-            local s = awful.screen.focused()
-            local tags = s.tags
-
-            awful.tag.viewmore(tags)
-        end),
+            for _,t in pairs(awful.screen.focused().tags) do
+                if #t:clients() == 0 then
+                    t.selected = false
+                else
+                    t.selected = true
+                end
+            end
+        end,
+        { description = "Select all tags with clients on them", group = "Tag"}),
 
     awful.key({ super, shift }, "0",
         function()
-            local s = awful.screen.focused()
-            local tags = s.tags
-
-            for i,t in pairs(tags) do
+            for _,t in pairs(awful.screen.focused().tags) do
                 awful.tag.viewtoggle(t)
             end
-        end),
-
-    awful.key({ super, control }, "0", function() awful.tag.viewnone() end,
-        { description = "Toggle all tags off", group = "Tag" }),
+        end,
+        { description = "Reverse toggle on all tags", group = "Tag"}),
 
     awful.key({ super,           }, "grave", awful.tag.history.restore,
               {description = "Restore previous tag(s)", group = "Tag"}),
+
+    awful.key({ super, shift }, "grave", function() awful.tag.viewmore(awful.screen.focused().tags) end,
+        { description = "Toggle all tags on", group = "Tag"}),
+
+    awful.key({ super, control }, "grave", function() awful.tag.viewnone() end,
+        { description = "Toggle all tags off", group = "Tag" }),
 
     -- Layout controls
     awful.key({ super }, "x",

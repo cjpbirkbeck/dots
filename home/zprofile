@@ -4,6 +4,4 @@
 #                                                                              #
 ################################################################################
 
-# Default editor
-EDITOR=nvim
-VISUAL=$EDITOR
+source .env_vars
