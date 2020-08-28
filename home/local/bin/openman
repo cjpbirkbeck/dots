@@ -9,6 +9,12 @@ export LESS_TERMCAP_so=$'\e[01;33m' \
 export LESS_TERMCAP_ue=$'\e[0m' \
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-man -k . | \
-    fzf --preview-window=up --preview="echo {} | sed -E 's/[(,].*//g' | xargs -r man" | \
-    sed -E 's/[(,].*//g' | xargs -r man
+sel="$(man -k . | \
+    fzf-tmux --preview-window=up --preview="echo {} | sed -E 's/[(,].*//g' | xargs -r man" | \
+    sed -E 's/[(,].*//g')"
+
+if test -z "$TMUX"; then
+    man "$sel"
+else
+    tmux new-window -n "man ${sel}" man "$sel"
+fi
