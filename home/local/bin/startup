@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+# Script for opening up selected TUI programs within a terminal,
+# essentially a TUI version of dmenu(1) or rofi(1), but for TUI programs only.
+# It also changes behavior depending on if it is in Terminal multiplexer like
+# tmux(1) or GNU screen(1) - it will open them in a new window.
+
+# Temporary list of programs listed here: not sure how this should handled long term.
+tui_editor="nvim"
+tui_file_man="vifm"
+tui_spreadsheets="sc-im"
+tui_audio="vimpc"
+tui_browser="w3m"
+tui_email="neomutt"
+tui_news_reader="newsboat"
+tui_irc="weechat"
+tui_calendar="calcurse"
+tui_tasks="vit"
+tui_sys_mon="gotop"
+tui_calc="calc"
+
+selection="$(printf "%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n" \
+    $tui_editor $tui_file_man $tui_spreadsheets $tui_audio $tui_browser $tui_email $tui_news_reader \
+    $tui_irc $tui_calendar $tui_tasks $tui_sys_mon $tui_calc | fzf )"
+
+test -z "$selection" && exit 0
+
+if test -z "$TMUX"; then
+    "$selection"
+else
+    tmux new-window "$selection"
+fi
