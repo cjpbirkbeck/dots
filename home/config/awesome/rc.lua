@@ -24,10 +24,6 @@ require("awful.hotkeys_popup.keys")
 
 -- Load custom libraries
 local deck = require("lib.layouts.deck")
-local keys = require("lib.keys.global")
-local mouse = require("lib.keys.mouse")
-local rules = require("lib.rules.lua")
-local titlebars = require("lib.bars.title")
 
 -- Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -84,13 +80,13 @@ require("lib.screens")
 
 -- Mouse bindings
 -- Active only clicking on the root window (areas without any clients)
-root.buttons(mouse)
+root.buttons(require("lib.keys.mouse"))
 
 -- Global keybindings
-root.keys(keys)
+root.keys(require("lib.keys.global"))
 
 -- Rules
-awful.rules.rules = rules
+awful.rules.rules = require("lib.rules.lua")
 
 -- Signals
 require("lib.signals")

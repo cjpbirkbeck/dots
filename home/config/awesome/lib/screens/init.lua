@@ -85,7 +85,6 @@ rand_wp:start()
 
 awful.screen.connect_for_each_screen(
     function(s)
-        -- set_wallpaper(s)
         set_tags(s, tag_symbols)
         awful.tag.viewtoggle(s.tags[1])
         setup_status_bar(s)

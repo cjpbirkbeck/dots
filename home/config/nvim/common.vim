@@ -77,6 +77,7 @@ set wildmenu                   " Use the advanced 'wildcard' menu for completion
 set wildmode=longest,list,full " Complete to longest string, list all matches, complete to next fullest match.
 set mouse=a                    " Allow mouse usage in all modes.
 set wrap                       " Turns on word wrap.
+set colorcolumn=80,100         " Colour the 80th and 100th columns.
 
 " }}}
 

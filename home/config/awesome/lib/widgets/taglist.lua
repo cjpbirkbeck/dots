@@ -6,11 +6,6 @@ local tag_symbols = require("lib.vars.tags")
 
 local taglist_buttons = gears.table.join(
     awful.button({ }, 1, awful.tag.viewtoggle),
-    awful.button({ super }, 1, function(t)
-        if client.focus then
-            client.focus:move_to_tag(t)
-        end
-    end),
     awful.button({ }, 3, function(t) t:view_only() end),
     awful.button({ super }, 3, function(t)
         if client.focus then
