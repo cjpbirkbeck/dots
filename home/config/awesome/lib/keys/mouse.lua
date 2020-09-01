@@ -6,6 +6,13 @@ local beautiful = require("beautiful")
 beautiful.init(theme_d .. "/theme.lua")
 beautiful.gap_single_client = false
 
+-- Directories
+home_d   = os.getenv("HOME")
+config_d = gears.filesystem.get_dir("config")
+exec_d   = config_d .. "bin/"
+lib_d    = config_d .. "lib/"
+theme_d  = config_d .. "theme/"
+
 -- Menu
 local mouse_menu = awful.menu({
     items = {
@@ -13,9 +20,11 @@ local mouse_menu = awful.menu({
         { "Tmux", function() awful.spawn.with_shell("st -e tmux") end },
         { "Browser", function() awful.spawn("firefox") end },
         { "Email", function() awful.spawn("thunderbird") end },
-        { "Other Applications", function() awful.spawn.with_shell("rofi -show drun") end },
+        { "Other Applications", function() awful.spawn.with_shell("rofi -show-icon -show drun") end },
         { "Restart", awesome.restart },
         { "Quit", function() awesome.quit() end },
+        { "Reboot", function() awful.spawn.with_shell(exec_d .. "portable_reboot.sh") end },
+        { "Shutdown", function() awful.spawn.with_shell(exec_d .. "portable_poweroff.sh") end },
     }
 })
 

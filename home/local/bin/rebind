@@ -9,4 +9,4 @@
 
 pkill xcape; setxkbmap -option  # Reset everything
 setxkbmap -option compose:menu -option ctrl:nocaps -option shift:both_capslock
-xcape -e 'Control_L=Escape;Super_R=Print;Super_L=#135'
+xcape -e 'Control_L=Escape;Super_R=Print;Super_L=Multi_key'

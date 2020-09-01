@@ -12,9 +12,6 @@ TTY_BNAME="$(basename $(tty))"
 ### Keybindings ###
 
 # Use Emacs-like keybindings.
-# TODO: It would nice to use C-d to delete $SHELLCHAR-delimited words (cf words in vi),
-# while having C-S-d to delete whitespace-delimited words (cf WORDS in vi).
-# Not sure if that is possible.
 bindkey -e
 
 # Set alt-backspace to delete words up to slash.
