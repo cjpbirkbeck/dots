@@ -38,6 +38,14 @@ local function create_prompt(question, action)
     awful.spawn.with_shell(exec_d .. "rofi-prompt.sh " .. question .. " " .. action)
 end
 
+local function reboot_prompt()
+    awful.spawn.with_shell(exec_d .. "portable_reboot.sh")
+end
+
+local function shutdown_prompt()
+    awful.spawn.with_shell(exec_d .. "portable_poweroff.sh")
+end
+
 local global_keys = gears.table.join(
     -- Spawn specific programs
     awful.key({ super }, "Return", function () awful.spawn(_TERM_EMU) end,
@@ -294,13 +302,13 @@ local global_keys = gears.table.join(
     awful.key({ super }, "q", function() create_prompt("\"Quit AwesomeWM?\"", "awesome-client \"awesome.quit()\"") end,
         { description = "Quit Awesome", group = "System"}),
 
-    awful.key({ super, shift }, "q", function() create_prompt("\"Shutdown your system?\"", "systemctl poweroff") end,
+    awful.key({ super, shift }, "q", shutdown_prompt,
         { description = "Shutdown Computer", group = "System"}),
 
     awful.key({ super }, "r", function() create_prompt("\"Restart AwesomeWM?\"", "awesome-client \"awesome.restart()\"") end,
         { description = "Restart AwesomeWM", group = "System"}),
 
-    awful.key({ super, shift }, "r", function() create_prompt("\"Restart your system?\"", "systemctl reboot") end,
+    awful.key({ super, shift }, "r", reboot_prompt,
         { description = "Restart AwesomeWM", group = "System"}),
 
     awful.key({ super, "Control" }, "r", function() awesome.restart() end,
