@@ -20,7 +20,7 @@ local mouse_menu = awful.menu({
         { "Tmux", function() awful.spawn.with_shell("st -e tmux") end },
         { "Browser", function() awful.spawn("firefox") end },
         { "Email", function() awful.spawn("thunderbird") end },
-        { "Other Applications", function() awful.spawn.with_shell("rofi -show-icon -show drun") end },
+        { "Other Applications", function() awful.spawn.with_shell("rofi -show-icons -show drun") end },
         { "Restart", awesome.restart },
         { "Quit", function() awesome.quit() end },
         { "Reboot", function() awful.spawn.with_shell(exec_d .. "portable_reboot.sh") end },
