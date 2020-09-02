@@ -88,7 +88,7 @@ if test -z "${TTY_BNAME%%[0-9]*}" || test "${TTY_BNAME%%[0-9]*}" = "ttyp"; then
     }
 
 else
-    PROMPT="%B%F{red}[%t]%f%F{yellow}["${TTY_BNAME##*[a-z]}"]%f%F{green}[%n@%M]%f%F{blue}[%(5~|-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
+    PROMPT="%B%F{red}[%t]%f%F{yellow}["${TTY_BNAME##*[a-z]}"]%f%F{green}[%n@%M]%f%F{blue}[%(5~|%-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
     RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
 fi
 

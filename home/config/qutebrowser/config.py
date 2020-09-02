@@ -29,6 +29,15 @@ config.bind(',m', 'hint links spawn mpv {hint-url}')
 # Play videos in mpv instead of the browser.
 config.bind(',M', 'spawn mpv {url}')
 
+# # Command
+# config.bind('<Alt-J>', 'completion-item-focus --history prev', mode='command')
+# config.bind('<Alt-K>', 'completion-item-focus --history next', mode='command')
+
+# # Add emacs-like keybindings (used in command line) to insert mode.
+# config.bind('<Ctrl-w>', 'rl-unix-word-rubout', mode='insert')
+# config.bind('<Alt-Backspace>', 'rl-backward-kill-word', mode='insert')
+# config.bind('<Ctrl-u>', 'fake-key <Shift-Home> ;; fake-key <Delete>', mode='insert')
+
 # Set search engines to use.
 # Use ';' to distingish between DDG hashbang searches and my own custom searches.
 c.url.searchengines = {
