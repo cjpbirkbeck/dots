@@ -8,8 +8,8 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 
-local position_menu = require("lib.menus.position")
-local size_menu = require("lib.menus.sizes")
+position_menu = require("lib.menus.position")
+size_menu = require("lib.menus.sizes")
 
 -- Modifier keys
 super   = "Mod4"
@@ -217,9 +217,71 @@ local function focus_next_floating(c)
     end
 end
 
+local function grow_floating(c)
+    local max_width = c.screen.geometry.width
+    local max_height = c.screen.geometry.height
+    local new_width = c.width + resize_inc
+    local new_height = c.height + resize_inc
+
+    if c.floating and new_width >= min_width and new_width <= max_width and
+        new_height >= min_height and new_height <= max_height
+        then
+        c.width = new_width
+        c.height = new_height
+    end
+end
+
+local function shrink_floating(c)
+    local max_width = c.screen.geometry.width
+    local max_height = c.screen.geometry.height
+    local new_width = c.width - resize_inc
+    local new_height = c.height - resize_inc
+
+    if c.floating and new_width >= min_width and new_width <= max_width and
+        new_height >= min_height and new_height <= max_height
+        then
+        c.width = new_width
+        c.height = new_height
+    end
+end
+
+-- Floating client controls
+awful.keygrabber {
+    stop_key = { "q", "Return", "Escape" },
+    stop_event = "press",
+    keybindings = {
+        { {}, "h", function() move_floating_left(client.focus) end },
+        { {}, "j", function() move_floating_down(client.focus) end },
+        { {}, "k", function() move_floating_up(client.focus) end },
+        { {}, "l", function() move_floating_right(client.focus) end },
+        { { control }, "h", function() shrink_floating_left(client.focus) end },
+        { { control }, "j", function() grow_floating_down(client.focus) end },
+        { { control }, "k", function() shrink_floating_up(client.focus) end },
+        { { control }, "l", function() grow_floating_right(client.focus) end },
+        { {}, "n", function() grow_floating(client.focus) end },
+        { {}, "p", function() shrink_floating(client.focus) end },
+        { {}, "s", function() position_menu:show() end },
+        { {}, "z", function() size_menu:show() end },
+    },
+    start_callback = function(_,_,_,_)
+        naughty.notify{ text="Start floating controls" }
+    end,
+    stop_callback = function(_,_,_,_)
+        naughty.notify{ text="End floating controls" }
+    end,
+    root_keybindings = {
+        { { super, control }, "l",
+        function(self)
+            if client.focus and not client.focus.floating then
+                root.fake_input('key_press', 'q')
+                root.fake_input('key_release', 'q')
+            end
+        end }
+    }
+}
+
 local clientkeys = gears.table.join(
-    -- Tilled/stacked window controls
-    -- Covers both the vi direction keys of hjkl and standard left, up, down and right.
+    -- Tilled/stacked window controls with the vi direction keys of hjkl
     awful.key({ super }, "h", function(c) if not c.floating then focus_tiled_master(c) end end,
         { description = "Focus tiled master", group = "Client" }),
 
@@ -244,28 +306,30 @@ local clientkeys = gears.table.join(
     awful.key({ super, shift }, "l", awful.client.floating.toggle,
         { description = "Toggle floating", group = "Client" }),
 
-    awful.key({ super }, "Left", function(c) if not c.floating then focus_tiled_master(c) end end,
+    -- Directional keys left, up, down and right moves floating clients
+    -- with shift, resizes floating clients.
+    awful.key({ super }, "Left", function(c) if c.floating then move_floating_left(c) end end,
         { description = "Focus first master", group = "Client" }),
 
-    awful.key({ super, shift }, "Left", function(c) if not c.floating then focus_tiled_master(c) end end,
+    awful.key({ super, shift }, "Left", function(c) if c.floating then shrink_floating_left(c) end end,
         { description = "Swap with master", group = "Client"}),
 
-    awful.key({ super }, "Down", function(c) if not c.floating then focus_next_tiled(c) end end,
+    awful.key({ super }, "Down", function(c) if c.floating then move_floating_down(c) end end,
         { description = "Focus next by index", group = "Client"}),
 
-    awful.key({ super, shift }, "Down", function(c) if not c.floating then swap_next_tiled(c) end end,
+    awful.key({ super, shift }, "Down", function(c) if c.floating then grow_floating_down(c) end end,
         { description = "Focus next by index", group = "Client"}),
 
-    awful.key({ super }, "Up", function(c) if not c.floating then focus_prev_tiled(c) end end,
+    awful.key({ super }, "Up", function(c) if c.floating then move_floating_up(c) end end,
         { description = "Focus previous by index", group = "Client"}),
 
-    awful.key({ super, shift }, "Up", function(c) if not c.floating then swap_prev_tiled(c) end end,
+    awful.key({ super, shift }, "Up", function(c) if c.floating then shrink_floating_up(c) end end,
         { description = "Focus previous by index", group = "Client"}),
 
-    awful.key({ super }, "Right", function(c) if not c.floating then focus_next_floating(c) end end,
+    awful.key({ super }, "Right", function(c) if c.floating then move_floating_right(c) end end,
         { description = "Focus last slave", group = "Client" }),
 
-    awful.key({ super, shift }, "Right", awful.client.floating.toggle,
+    awful.key({ super, shift }, "Right", function(c) if c.floating then grow_floating_right(c) end end,
         { description = "Focus first slave", group = "Client" }),
 
     -- Absolute keys; these operate on the whole current client list,
@@ -276,16 +340,16 @@ local clientkeys = gears.table.join(
     awful.key({ super, shift }, "m", function(c) c:swap(awful.client.getmaster()) end,
         { description = "Swap with master", group = "Client"}),
 
-    awful.key({ super }, "[", function (c) awful.client.focus.byidx( 1) end,
+    awful.key({ super }, "[", function (c) awful.client.focus.byidx(-1) end,
         { description = "Focus next by index", group = "Client"}),
 
-    awful.key({ super, "Shift"   }, "[", function (c) awful.client.swap.byidx(1) end,
+    awful.key({ super, "Shift"   }, "[", function (c) awful.client.swap.byidx(-1) end,
         { description = "Swap with next client by index", group = "Client"}),
 
-    awful.key({ super }, "]", function (c) awful.client.focus.byidx(-1) end,
+    awful.key({ super }, "]", function (c) awful.client.focus.byidx(1) end,
         { description = "Focus previous by index", group = "Client"}),
 
-    awful.key({ super, "Shift"   }, "]", function (c) awful.client.swap.byidx( -1) end,
+    awful.key({ super, "Shift"   }, "]", function (c) awful.client.swap.byidx(1) end,
         { description = "Swap with previous client by index", group = "Client"}),
 
     -- General window commands
@@ -304,13 +368,13 @@ local clientkeys = gears.table.join(
               {description = "Close", group = "Client"}),
 
     -- Floating window controls
-    awful.key({ super }, "Prior", function(c) focus_prev_floating(c) end),
+    -- awful.key({ super }, "Prior", function(c) focus_prev_floating(c) end),
 
-    awful.key({ super, shift }, "Prior", function(c) swap_prev_tiled(c) end),
+    -- awful.key({ super, shift }, "Prior", function(c) swap_prev_tiled(c) end),
 
-    awful.key({ super }, "Next", function(c) focus_next_floating(c) end),
+    -- awful.key({ super }, "Next", function(c) focus_next_floating(c) end),
 
-    awful.key({ super, shift }, "Next", function(c) swap_next_floating(c) end),
+    -- awful.key({ super, shift }, "Next", function(c) swap_next_floating(c) end),
 
     awful.key({ super }, "t", function(c) if c.floating then c.ontop = not c.ontop end end,
       {description = "Toggle keep on top", group = "Client"}),
@@ -318,7 +382,7 @@ local clientkeys = gears.table.join(
     awful.key({ super, shift }, "t", function(c) if c.floating then c.sticky = not c.sticky end end,
       { description = "Toggle sticky mode", group = "Client" }),
 
-    awful.key({ super,           }, "m",
+    awful.key({ super, control }, "m",
         function (c)
             c.maximized = not c.maximized
             c:raise()

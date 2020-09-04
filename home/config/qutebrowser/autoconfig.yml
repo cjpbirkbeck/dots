@@ -89,6 +89,8 @@ settings:
     global: true
   hints.mode:
     global: letter
+  scrolling.smooth:
+    global: true
   session.lazy_restore:
     global: true
   spellcheck.languages:
