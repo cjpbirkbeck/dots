@@ -27,6 +27,7 @@ in
         XCOMPOSECACHE = "$HOME/.config/X11/XCompose";
         GTK_IM_MODULE = "xim";
         QT_IM_MODULE = "xim";
+        QT_QPA_PLATFORMTHEME = "qt5ct";
         TMUXP_CONFIGDIR = "$HOME/.config/tmuxp";
         UNICODE_CHARS = "$HOME/.local/share/unicode-chars";
         # GNUPGHOME = "$HOME/.secrets/gnupg";

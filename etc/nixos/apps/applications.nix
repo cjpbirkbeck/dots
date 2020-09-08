@@ -103,6 +103,7 @@ let
     rofi                 # Program launcher/Window switcher/dmenu replacement
     screenkey            # Show keypress on the screen.
     st_patched           # Terminal emulator
+    qutebrowser          # Another GUI browser
     sxiv                 # Lightweight image viewer
     thunderbird          # GUI email client
     # torbrowser           # Browser using the tor network
@@ -110,6 +111,7 @@ let
 
     neovim_with_plugins    # Customized neovim.
     neovim-qt_with_plugins # GUI frontend using Qt.
+    gnvim_with_plugins
     neovim-remote          # Control remote instances of neovim.
 
     miscfiles              # Misc files have a dictionary list that is useful for vim autocompletions.
