@@ -15,6 +15,9 @@ local beautiful = require("beautiful")
 -- Error handling
 require("lib.error-handling")
 
+-- Autofocus library
+require("awful.autofocus")
+
 -- Global Variables
 -- Store in a single table, to better track them.
 rc = {}
@@ -24,6 +27,22 @@ rc.home_d   = os.getenv("HOME")
 rc.config_d = gears.filesystem.get_dir("config")
 rc.exec_d   = rc.config_d .. "bin/"
 rc.theme_d  = rc.config_d .. "theme/"
+
+-- Modkey defintions
+rc.super   = "Mod4"
+rc.alt     = "Mod1"
+rc.shift   = "Shift"
+rc.control = "Control"
+
+-- Program defaults
+rc.launcher     = "rofi -show-icons -show drun"
+rc.win_switcher = "rofi -show window"
+
+rc.term_emu     = "st"
+rc.browser      = "qutebrowser"
+rc.email        = "thunderbird"
+rc.file_man     = "pcmanfm-qt"
+rc.passwords    = "rofi-pass --last-used"
 
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(rc.theme_d .. "/theme.lua")
@@ -42,6 +61,7 @@ require("main.screens")
 -- Mouse bindings active only on the root window (area without any clients)
 root.buttons(require("main.keys.mouse"))
 root.keys(require("main.keys.global"))
+require("main.keys.floatmode")
 
 -- Window placement rules
 require("main.rules")
