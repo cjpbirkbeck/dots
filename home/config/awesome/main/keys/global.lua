@@ -5,7 +5,7 @@ local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
-local deck = require("lib.layouts.deck")
+local deck = require("lib.deck")
 
 -- Modifier keys
 local super   = "Mod4"
@@ -102,10 +102,6 @@ local global_keys = gears.table.join(
     awful.key({ super, "Control" }, "h", function () client.focus:move_to_screen() end,
               {description = "Move focused to previous screen", group = "Screen"}),
 
-    -- Function doesn't wrap around.
-    awful.key({ super, "Control" }, "l", function () client.focus:move_to_screen(-1) end,
-              {description = "Move focused to next screen", group = "Screen"}),
-
     -- General tag controls
     awful.key({ super }, "0",
         function()
@@ -120,6 +116,18 @@ local global_keys = gears.table.join(
         { description = "Select all tags with clients on them", group = "Tag"}),
 
     awful.key({ super, shift }, "0",
+        function()
+            local prev = client.focus
+            awful.tag.viewnone()
+            if prev then
+                for _,t in pairs(prev:tags()) do
+                    t.selected = true
+                end
+            end
+        end,
+        { description = "Select current client tags only", group = "Tag"}),
+
+    awful.key({ super, control }, "0",
         function()
             for _,t in pairs(awful.screen.focused().tags) do
                 awful.tag.viewtoggle(t)
@@ -284,13 +292,16 @@ local global_keys = gears.table.join(
              {description = "Play next song", group = "Music control"}),
 
     -- Screenshots
-    awful.key({ "Shift" }, "Print", function() awful.spawn.with_shell(exec_d .. "rofi-screenshot.sh select") end,
+    awful.key({}, "Print", function() awful.spawn("flameshot gui") end,
               { description = "Take a screenshot of selected region", group = "Screenshots"}),
 
-    awful.key({ "Control" }, "Print", function() awful.spawn.with_shell(exec_d .. "rofi-screenshot.sh") end,
+    awful.key({ "Shift" }, "Print", function() awful.spawn.with_shell("flameshot screen --path $HOME/Pictures/screnshots") end,
+              { description = "Take a screenshot of selected region", group = "Screenshots"}),
+
+    awful.key({ "Control" }, "Print", function() awful.spawn("flameshot full --path $HOME/Pictures/screenshots") end,
               { description = "Screenshot menu", group = "Screenshots"}),
 
-    -- Miscellaneous
+    -- Insert Unicode character
     awful.key({ super }, "c", function() awful.spawn.with_shell(exec_d .. "rofi-unicode.sh") end),
 
     awful.key({ super, shift }, "c", function() awful.spawn.with_shell(exec_d .. "rofi-unicode.sh clipboard") end),
@@ -314,7 +325,28 @@ local global_keys = gears.table.join(
     awful.key({ super, "Control" }, "r", function() awesome.restart() end,
         { description = "Restarts AwesomeWM", group = "System"}),
 
-    awful.key({ super }, "=", function() awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible end,
+    awful.key({ super }, "=",
+        function()
+            local status = awful.screen.focused().systray.visible
+            awful.screen.focused().systray.visible = not status
+            if status then
+                naughty.notify { text = "System tray visible" }
+            else
+                naughty.notify { text = "System tray invisible" }
+            end
+        end,
+        { description = "Toggle System Tray visiblity", group = "System"}),
+
+    awful.key({ super, shift }, "=",
+        function()
+            local status = awful.screen.focused().systray.visible
+            awful.screen.focused().systray.visible = not status
+            if status then
+                naughty.notify { text = "System tray visible" }
+            else
+                naughty.notify { text = "System tray invisible" }
+            end
+        end,
         { description = "Toggle System Tray visiblity", group = "System"}),
 
     awful.key({ super, shift }, "d", function() awful.spawn.with_shell(exec_d .. "rofi-removable.sh") end,

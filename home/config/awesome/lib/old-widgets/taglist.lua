@@ -22,8 +22,8 @@ local function screen_tags(s)
                 id = "background_role",
                 widget = wibox.container.background,
                 {
-                    left = 2,
-                    right = 2,
+                    left = 1,
+                    right = 1,
                     widget = wibox.container.margin,
                     {
                         layout = wibox.layout.fixed.horizontal,
