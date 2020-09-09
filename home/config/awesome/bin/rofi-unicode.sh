@@ -1,8 +1,8 @@
-#! /usr/bin/env dash
+#! /usr/bin/env zsh
 
 UNICODE_LIST="${UNICODE_CHARS:-"$HOME/.local/share/unicode-chars"}"
 
-char="$(column "$UNICODE_LIST" | rofi -dmenu -i -p "Choose a character" | cut --fields=1)"
+char="$(column "$UNICODE_LIST" | rofi -dmenu -i -p "Choose a character" | cut -f 1)"
 
 test -z "$char" && exit
 

@@ -4,6 +4,12 @@
 #                                                                              #
 ################################################################################
 
+# Export relevant variables
+# export CLICOLOR=true
+
+# export MANWIDTH="tty"
+# export MANCOLOR=true
+
 # Moving between directories
 alias p="popd"
 alias d="dirs -pv"
@@ -19,7 +25,7 @@ alias sl="ln -s"
 
 # ls Aliases
 # ls should have readable sizes, be coloured and list directories first.
-alias ls="ls -h --color=always"
+alias ls="ls -h"
 
 alias l="ls -l"    # List directories with a long format.
 alias ll="ls -lA"  # List all directories with a long format

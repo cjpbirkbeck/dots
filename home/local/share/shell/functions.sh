@@ -30,4 +30,5 @@ __man_coloured() {
 }
 
 alias md="__mkdir_cd"
-alias man="__man_coloured"
+# export MANCOLOR=true
+# alias man="__man_coloured"
