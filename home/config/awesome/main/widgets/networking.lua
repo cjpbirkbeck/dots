@@ -1,7 +1,7 @@
 local gears = require("gears")
 local awful = require("awful")
 
-local tooltip_script = "if command -v nmcli 2&>1 /dev/null; then nmcli general; else netstat -i; fi"
+local tooltip_script = "ip addr show"
 
 -- Networking widget
 local networking = awful.widget.watch(exec_d .. "status-bar-networking.sh", 300)

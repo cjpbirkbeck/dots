@@ -3,7 +3,7 @@ local awful = require("awful")
 
 -- Audio widget
 -- Tells the current volume and if anything is playing
-local volume = awful.widget.watch(exec_d .. "status-bar-volume.sh", 1)
+local volume = awful.widget.watch(rc.exec_d .. "status-bar-volume.sh", 1)
 
 volume.font = "fontawesome bold 10"
 volume:connect_signal("button::press",

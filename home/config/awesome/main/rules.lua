@@ -6,9 +6,9 @@ local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
-local clientkeys = require("lib.keys.client")
+local clientkeys = require("main.keys.client")
 
-clientbuttons = gears.table.join(
+local clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
     end),
@@ -22,7 +22,7 @@ clientbuttons = gears.table.join(
     end)
 )
 
-local rules = {
+awful.rules.rules = {
     -- Rules for all clients
     { rule = { },
       properties = { border_width = beautiful.border_width,
@@ -55,7 +55,8 @@ local rules = {
           "xtightvncviewer",
           "alacritty-float",
           "st-float",
-          "st-dialog"
+          "st-dialog",
+          "flameshot"
         },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -69,7 +70,7 @@ local rules = {
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         },
         type = { "dialog" }
-      }, properties = { floating = true, placement = awful.placement.centered }},
+      }, properties = { floating = true, placement = awful.placement.centered } },
 
     -- Assign applications to tags
     { rule_any = { class = { "qutebrowser", "Firefox", "Brave", "Tor Browser" } },
@@ -93,16 +94,6 @@ local rules = {
     { rule_any = { class = { "VirtualBox Manager", "VirtualBox Machine" } },
       properties = { tag = "Virtual" } },
 
-    -- Conky should be present in all windows
-    { rule = { class = "Conky" },
-      properties = { sticky = true,
-                     skip_taskbar = true }},
-
     { rule = { class = "Brave" },
       properties = { maximized = false } },
-
-    { rule = { class = "st-256color" },
-      properties = { icon = "utilities-terminal"} },
 }
-
-return rules

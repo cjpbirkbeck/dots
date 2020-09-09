@@ -8,85 +8,63 @@ pcall(require, "luarocks.loader")
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
-require("awful.autofocus")
-require("awful.keygrabber")
--- Widget and layout library
-local wibox = require("wibox")
+
 -- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
-local naughty = require("naughty")
-local menubar = require("menubar")
-local hotkeys_popup = require("awful.hotkeys_popup")
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
-
--- Load custom libraries
-local deck = require("lib.layouts.deck")
 
 -- Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
-if awesome.startup_errors then
-    naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
-end
+require("lib.error-handling")
 
--- Handle runtime errors after startup
-do
-    local in_error = false
-    awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = tostring(err) })
-        in_error = false
-    end)
-end
+-- Autofocus library
+require("awful.autofocus")
 
 -- Global Variables
--- These don't seem to travel to other files, might have to delete theme.
+-- Store in a single table, to better track them.
+rc = {}
 
 -- Directories
-home_d   = os.getenv("HOME")
-config_d = gears.filesystem.get_dir("config")
-exec_d   = config_d .. "bin/"
-lib_d    = config_d .. "lib/"
-theme_d  = config_d .. "theme/"
+rc.home_d   = os.getenv("HOME")
+rc.config_d = gears.filesystem.get_dir("config")
+rc.exec_d   = rc.config_d .. "bin/"
+rc.theme_d  = rc.config_d .. "theme/"
+
+-- Modkey defintions
+rc.super   = "Mod4"
+rc.alt     = "Mod1"
+rc.shift   = "Shift"
+rc.control = "Control"
+
+-- Program defaults
+rc.launcher     = "rofi -show-icons -show drun"
+rc.win_switcher = "rofi -show window"
+
+rc.term_emu     = "st"
+rc.browser      = "qutebrowser"
+rc.email        = "thunderbird"
+rc.file_man     = "pcmanfm-qt"
+rc.passwords    = "rofi-pass --last-used"
 
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(theme_d .. "/theme.lua")
+beautiful.init(rc.theme_d .. "/theme.lua")
 beautiful.gap_single_client = false
 
--- Table of layouts to cover with awful.layout.inc, order matters.
-awful.layout.layouts = {
-    awful.layout.suit.max,
-    deck,
-    awful.layout.suit.tile,
-    deck.horizontal,
-    awful.layout.suit.tile.bottom
-}
+-- Set layouts
+require("main.layouts")
 
 -- Loads programs automatically at startup.
-awful.spawn.with_shell(exec_d .. "autoexec.sh")
+awful.spawn.with_shell(rc.exec_d .. "autoexec.sh")
 
--- Set screens, includin the status bar
-require("lib.screens")
+-- Set screens, including the status bar.
+require("main.screens")
 
--- Mouse bindings
--- Active only clicking on the root window (areas without any clients)
-root.buttons(require("lib.keys.mouse"))
+-- Set keybindings and mouse bindings
+-- Mouse bindings active only on the root window (area without any clients)
+root.buttons(require("main.keys.mouse"))
+root.keys(require("main.keys.global"))
+require("main.keys.floatmode")
 
--- Global keybindings
-root.keys(require("lib.keys.global"))
-
--- Rules
-awful.rules.rules = require("lib.rules.lua")
+-- Window placement rules
+require("main.rules")
 
 -- Signals
-require("lib.signals")
+require("main.signals")

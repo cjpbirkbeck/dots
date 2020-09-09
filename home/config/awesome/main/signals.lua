@@ -7,7 +7,7 @@ local awful = require("awful")
 local menubar = require("menubar")
 local beautiful = require("beautiful")
 
-local titlebars = require("lib.bars.title")
+local titlebars = require("main.titlebar")
 
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
@@ -69,7 +69,7 @@ screen.connect_signal("arrange",
 -- Add icons for st terminals.
 client.connect_signal("manage", function(c)
     if c.class == "st-256color" or c.class == "st-dialog" or c.class == "st-float" then
-        local new_icon = gears.surface(menubar.utils.lookup_icon(theme_d .. "st.svg"))
+        local new_icon = gears.surface(menubar.utils.lookup_icon(rc.theme_d .. "st.svg"))
         c.icon = new_icon._native
     end
 end)
