@@ -1,24 +1,28 @@
--- Main AwesomeWM configuration file
+--[[
+    Main AwesomeWM configuration file
+--]]
 
--- Libraries
+-- Libraries --
+
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
--- Standard awesome library
+-- Standard awesome libraries
 local gears = require("gears")
 local awful = require("awful")
 
 -- Theme handling library
 local beautiful = require("beautiful")
 
--- Error handling
+-- Handle any errors
 require("lib.error-handling")
 
 -- Autofocus library
 require("awful.autofocus")
 
--- Global Variables
+-- Global Variables --
+
 -- Store in a single table, to better track them.
 rc = {}
 

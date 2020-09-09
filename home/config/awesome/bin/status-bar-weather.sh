@@ -1,9 +1,10 @@
-#!/usr/bin/env dash
+#!/bin/sh
 
 error=' Error'
-current="$(weather --metric "${1}" || echo "$error && exit 1")"
 
-# test "$current" = "$error" && printf "%s" "$error" && exit 1
+[ "$(uname)" = "FreeBSD" ] && weatherpath="--setpath=/usr/local/share/weather"
+
+current="$(weather "$weatherpath" --metric "${1}" || echo "$error && exit 1")"
 
 temperature=$(echo "$current" | awk ' /Temperature:/ { print $2 " °" $3 } ')
 

@@ -45,3 +45,4 @@ alias egrep="egrep --color=always"
 # Program aliases
 alias more="less"
 alias dff="df -H -t nodevfs"
+alias weather="weather --setpath=/usr/local/share/weather"

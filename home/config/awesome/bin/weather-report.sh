@@ -4,7 +4,11 @@
 # Created by Christopher Birkbeck
 
 glyph=""
-current="$(weather --metric "${1}")"
+if [ "$(uname)" = "FreeBSD" ]; then
+    current="$(weather --setpath=/usr/local/share/weather --metric "${1}")"
+else
+    current="$(weather --metric "${1}")"
+fi
 notify-send "Weather Updated" "${current}" > /dev/null
 
 temperature=$(echo "$current" | awk ' /Temperature:/ { print $2 " °" $3 } ')
