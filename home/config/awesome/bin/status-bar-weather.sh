@@ -1,10 +1,12 @@
 #!/bin/sh
+# Show a small glyth using weathericons and the temperature, with data from weather(1)
 
 error=' Error'
 
+# weather doesn't have the correct path for its data files on FreeBSD.
 [ "$(uname)" = "FreeBSD" ] && weatherpath="--setpath=/usr/local/share/weather"
 
-current="$(weather "$weatherpath" --metric "${1}" || echo "$error && exit 1")"
+current="$(weather ${weatherpath} --metric "${1}" || echo "$error && exit 1")"
 
 temperature=$(echo "$current" | awk ' /Temperature:/ { print $2 " °" $3 } ')
 
