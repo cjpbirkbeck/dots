@@ -264,15 +264,15 @@ in
           # Enable the mouse
           set -g mouse on
 
-          # Set the default status bar style.
-          set -g status-left '#[reverse] #{=/16/…:session_name} #[noreverse]'
+          # Setup the status bar.
+          set -g status-left '#[fg=#4D4D4D,bg=#98C379] ❰#{=/16/…:session_name}❱ #[default] '
           set -g status-left-length 20
-          set -g window-status-current-format '#[reverse] #I  #{=/16/…:window_name}#F #[noreverse]'
-          set -g window-status-format ' #I  #{=/16/…:window_name}#F'
-          set -g status-right ' #{?client_prefix,#[reverse] Prefix #[noreverse] ,}#P/#{window_panes} #{=/16/…:pane_title}'
+          set -g window-status-current-format '#[reverse] {#I} #{=/16/…:window_name}#F #[noreverse]'
+          set -g window-status-format '[#I] #{=/16/…:window_name}#F'
+          set -g status-right ' #{?client_prefix, #[reverse](Prefix)#[noreverse],} #P/#{window_panes} #{=/16/…:pane_title}'
           set -g status-style 'fg=#87ceeb,bold,bg=#4d4d4d'
-          set -g window-status-activity-style 'fg=#ee2b2a,bold,bg=#4d4d4d'
-          set -g window-status-bell-style 'fg=#ee2b2a,bold,bg=#4d4d4d'
+          set -g window-status-activity-style 'fg=#ee2b2a,bg=#4d4d4d,bold,reverse'
+          set -g window-status-bell-style 'fg=#ee2b2a,bg=#4d4d4d,bold,reverse'
           set -g status-position top
 
           # Pane border style

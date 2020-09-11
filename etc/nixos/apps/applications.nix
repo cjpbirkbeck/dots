@@ -5,7 +5,7 @@ let
 
   kp = pkgs.kdeApplications.kolourpaint;
 
-  # Core packages that should be accessible 
+  # Core packages that should be accessible on all machines.
   core = with pkgs; [
     fd      # find replacement
     ripgrep # grep replacement
@@ -19,9 +19,11 @@ let
   general = with pkgs; [
     # Command line tools
     asciidoctor       # Convertor for asciidoc files
+    asciinema         # Recoard terminal sessions
     atool             # Print archive file infomation
     bashdb            # Bash debugger.
     bats              # Automated tests with bash scripts.
+    boxes             # Create text boxes
     catdoc            # Converts Mircosoft Office to text
     catdocx           # Converts Mircosoft Office (post-2007) to text
     catimg            # A much better image to text converter
@@ -31,8 +33,8 @@ let
     detox             # Automatically make cli-friendly file names
     dict              # Command line dictionary
     exiftool          # Image file information
-    ffmpegthumbnailer # Create video thumbnails
     ffmpeg            # Video encoder
+    ffmpegthumbnailer # Create video thumbnails
     gcal              # Prints out almost any calendar and some holidays.
     graphicsmagick    # Command line graphic process
     isync             # POP/IMAP client
@@ -42,6 +44,7 @@ let
     mailcap           # Open non-plain-text emails
     maim              # Simple screenshot utility
     mediainfo         # Multimedia file information
+    miscfiles         # Misc files have a dictionary list that is useful for vim autocompletions.
     mpc_cli           # Barebones command line interface for mpd
     msmtp             # SMTP client
     neofetch          # An "About" screen for the terminal
@@ -52,6 +55,7 @@ let
     pandoc            # Universal document converter
     pass              # Password manager
     pdd               # Date/time calculator
+    pfetch            # Minimalist text fetch program
     playerctl         # Command-line MPRIS controller
     poppler_utils     # Converts pdf to text
     qrencode          # Prints out QR codes, when given a string of letters.
@@ -61,62 +65,69 @@ let
     translate-shell   # Search for translations (e.g. Google, Yandex) from the command line.
     trash-cli         # CLI program for working with Trash bin.
     units             # Convert between units
+    universal-ctags   # Tags files that will hold keyword information.
     unstable.ueberzug # Real images in the terminal!
     unzip             # List and extact zip file
     weather           # Weather command line
     xcape             # Binding a modifier key when press by itself.
     xclip             # Command line ultity for manuplating the system clipboard.
+    xdotool           # Automation tool for X11
     xlsx2csv          # Converts Excel (post-2007) files to csv files
     youtube-dl        # Video downloader
     zip               # Compress zip files
 
     # TUI programs
-    calc              # Calculator
-    cava              # Visualiser for the terminal
-    gotop             # Terminal base system monitor
-    htop              # System resources monitor
-    ncdu              # Filesystem size browser
-    neomutt           # Ncurses email client
-    newsboat          # RSS/Atom feed reader
-    rlwrap            # Wrap readline library around certian prompts
-    sc-im             # Terminal spreadsheet program
-    tig               # Git frontend
-    unstable.aerc     # Terminal email client
-    unstable.calcurse # Calendar
-    unstable.tuir     # Read reddit in a terminal
-    vifm              # Terminal file manager
-    vimpc             # TUI frontend for mpd
-    vit               # Frontend for taskwarrior
-    w3m               # Terminal web browser
-    weechat           # IRC client
+    cava                   # Visualiser for the terminal
+    gotop                  # Terminal base system monitor
+    htop                   # System resources monitor
+    ledger                 # Financial management with plain text
+    lf                     # TUI file manager
+    ncdu                   # Filesystem size browser
+    neomutt                # Ncurses email client
+    neovim-qt_with_plugins # GUI frontend using Qt.
+    neovim-remote          # Control remote instances of neovim.
+    neovim_with_plugins    # Customized neovim.
+    newsboat               # RSS/Atom feed reader
+    rlwrap                 # Wrap readline library around certian prompts
+    sc-im                  # Terminal spreadsheet program
+    tig                    # Git frontend
+    unstable.aerc          # Terminal email client
+    unstable.calcurse      # Calendar
+    unstable.tuir          # Read reddit in a terminal
+    vifm                   # Terminal file manager
+    vimpc                  # TUI frontend for mpd
+    vit                    # Frontend for taskwarrior
+    w3m                    # Terminal web browser
+    weechat                # IRC client
 
     # GUI applications
     alacritty            # Terminal emuator
     arc-theme            # Theme for GUI programs
     firefox              # GUI web browser
     flameshot            # Screenshot tool
+    gromit-mpx           # On-screen annotator
+    gnome3.cheese        # Webcamera program
     kp                   # Kolourpaint, a simple MS Paint clone
     mpv-with-scripts     # Customized mpv file
+    nheko                # Matrix client
     networkmanagerapplet # Applet for connecting to wifi
     notify-desktop       # Desktop notify
     rofi-pass            # Frontend for quickly entering passwords with rofi.
     rofi                 # Program launcher/Window switcher/dmenu replacement
+    pcmanfm-qt           # GUI file manager
+    qtox                 # Tox client
+    qt5ct                # Configure Qt5 outside of KDE Plasma
+    qalculate-gtk        # Graphical calculator
     screenkey            # Show keypress on the screen.
     st_patched           # Terminal emulator
     qutebrowser          # Another GUI browser
     sxiv                 # Lightweight image viewer
     thunderbird          # GUI email client
-    # torbrowser           # Browser using the tor network
+    torbrowser           # Browser using the tor network
     zathura              # Lightweight PDF/EPUB/Dejv reader
 
-    neovim_with_plugins    # Customized neovim.
-    neovim-qt_with_plugins # GUI frontend using Qt.
-    gnvim_with_plugins
-    neovim-remote          # Control remote instances of neovim.
 
-    miscfiles              # Misc files have a dictionary list that is useful for vim autocompletions.
-    universal-ctags        # Tags files that will hold keyword information.
-
+    # Icons for theming GTK and Qt applications with the breeze theme.
     breeze-gtk
     breeze-icons
     breeze-qt5
@@ -125,17 +136,18 @@ let
 
   # Packages that only need to be on my desktop
   full = with pkgs; [
-    gimp      # Complex raster editor
-    inkscape  # Vector editor
+    gimp        # Complex raster editor
+    inkscape    # Vector editor
+    libreoffice # Office suite
 
-    asunder   # CD Ripper
-    handbrake # DVD Ripper
-    brasero   # CD Burner
-    audacity  # Waveform editor
+    asunder     # CD Ripper
+    handbrake   # DVD Ripper
+    brasero     # CD Burner
+    audacity    # Waveform editor
 
-    brave     # Web browser
+    brave       # Web browser
 
-    zoom-us
+    zoom-us     # Propiratary videoconferencing client
   ];
 in
 {
@@ -151,7 +163,8 @@ in
     dash                 # POSIX Shell
     file                 # Determine the type of a file.
     tree                 # Show contents of directories in a tree format.
-    gitAndTools.gitFull  # Defacto standard version control
+    gitAndTools.gitFull  # Defacto standard version control.
+    git-crypt            # Encypt files in git repositories.
     lsof                 # Lists open files
     shellcheck           # Linter for shell scripts.
     udiskie              # Frontend of udisks.
