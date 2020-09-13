@@ -8,6 +8,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local clientkeys = require("main.keys.client")
 
+-- Mouse keybindings
 local clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
@@ -22,6 +23,7 @@ local clientbuttons = gears.table.join(
     end)
 )
 
+-- Set rules for clients
 awful.rules.rules = {
     -- Rules for all clients
     { rule = { },
@@ -53,6 +55,9 @@ awful.rules.rules = {
           "Wpa_gui",
           "veromix",
           "xtightvncviewer",
+          "Yubico Authenticator",
+          "Gnome-disks",
+          "asunder",
           "alacritty-float",
           "st-float",
           "st-dialog",
@@ -73,22 +78,27 @@ awful.rules.rules = {
       }, properties = { floating = true, placement = awful.placement.centered } },
 
     -- Assign applications to tags
-    { rule_any = { class = { "qutebrowser", "Firefox", "Brave", "Tor Browser" } },
+
+    { rule_any = { class = { "pcmanfm-qt", "pcmanfm", "dolphin", "Gnome-disks", "ark", "Qalculate-gtk" } },
+      properties = { tag = "Home" } },
+
+    { rule_any = { class = { "qutebrowser", "Firefox", "Brave", "Tor Browser", "Vimb", } },
       properties = { tag = "Web" } },
 
-    { rule_any = { class = { "Daily", "Thunderbird" } },
+    { rule_any = { class = { "Daily", "Thunderbird", "nheko", "qTox", "zoom" } },
       properties = { tag = "Email" } },
 
-    { rule = { class = "Zathura" },
+    { rule_any = { class = { "Zathura", "okular", "libreoffice", "libreoffice-writer", "libreoffice-calc",
+                         "libreoffice-impress", "libreoffice-draw", "libreoffice-base" } },
       properties = { tag = "Documents" } },
 
-    { rule_any = { class = { "kolourpaint", "Sxiv", "GIMP", "Inkscape" } },
+    { rule_any = { class = { "kolourpaint", "Sxiv", "GIMP", "Inkscape", "gwenview" } },
       properties = { tag = "Images" } },
 
-    { rule_any = { class = { "mpv" } },
+    { rule_any = { class = { "mpv", "Audacity", "Asunder", "Gbh", ".brasero-wrapped_", "brasero", "Cheese" } },
       properties = { tag = "Video" } },
 
-    { rule_any = { class = { "Gnome-mines", "Steam", "Rftg" } },
+    { rule_any = { class = { "Gnome-mines", "Steam", "Rftg", "ksudoku" } },
       properties = { tag = "Games" } },
 
     { rule_any = { class = { "VirtualBox Manager", "VirtualBox Machine" } },

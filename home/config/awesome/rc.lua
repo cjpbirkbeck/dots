@@ -15,7 +15,7 @@ local awful = require("awful")
 -- Theme handling library
 local beautiful = require("beautiful")
 
--- Handle any errors
+-- Error handling library
 require("lib.error-handling")
 
 -- Autofocus library
@@ -32,7 +32,7 @@ rc.config_d = gears.filesystem.get_dir("config")
 rc.exec_d   = rc.config_d .. "bin/"
 rc.theme_d  = rc.config_d .. "theme/"
 
--- Modkey defintions
+-- Modkey definitions
 rc.super   = "Mod4"
 rc.alt     = "Mod1"
 rc.shift   = "Shift"
@@ -48,7 +48,9 @@ rc.email        = "thunderbird"
 rc.file_man     = "pcmanfm-qt"
 rc.passwords    = "rofi-pass --last-used"
 
--- Themes define colours, icons, font and wallpapers.
+-- Setup the windows manager --
+
+-- Configure the appearance
 beautiful.init(rc.theme_d .. "/theme.lua")
 beautiful.gap_single_client = false
 
