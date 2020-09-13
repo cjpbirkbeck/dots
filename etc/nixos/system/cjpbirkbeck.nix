@@ -10,7 +10,6 @@
     OS:      NixOS ${system.nixos.release} (${system.nixos.codeName})
     Version: ${system.nixos.version}
     Kernel:  ${boot.kernelPackages.kernel.version}
-    Shell:   ''$SHELL --version
   '';
 
   # Define my basic user details.

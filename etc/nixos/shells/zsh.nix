@@ -50,17 +50,54 @@
       ];
 
       promptInit = ''
-        if [ $TERM = "linux" ]; then
-          # Within the linux console, display show the time in red.
-          PROMPT="%B%F{red}[%t]%f%F{green}[%n@%M]%f%F{blue}[%(5~|-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
-          RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
+        TTY_BNAME="$(basename $(tty))"
+
+        if test "$TERM" != "linux"; then
+            PROMPT="%B%F{#FFFF00}["''${TTY_BNAME##*[a-z]}"]%f%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%(5~|%-1~/…/%3~|%4~)]%f%F{#FFFFFF}%(0#,#,$)%f%b "
+            RPROMPT="%(?,,%B%F{#FFFFFF}%K{red}[%?]%k%f%b)%(1j,%B%F{#FFFFFF}%K{blue}[%j]%k%f%b,)"
+
+            # Write some info to terminal title.
+            # This is seen when the shell prompts for input.
+            # If using screen or tmux, then only use the directory name.
+            # Otherwise, be a bit more verbose, show that it's zsh with is pts number,
+            # along with if any jobs are in the background.
+            case "$TERM" in
+                screen* | tmux* )
+                    function precmd {
+                        print -Pn "\e]0;%~ %(1j,[%j],)\a"
+                    }
+                    ;;
+                *)
+                    __PTS_NO=''${TTY_BNAME##*[a-z]}
+                    function precmd {
+                        print -Pn "\e]0;zsh [$__PTS_NO]: %~ %(1j,[%j],)\a"
+                    }
+                    ;;
+            esac
+
+            # Write command and args to terminal title.
+            # This is seen while the shell waits for a command to complete.
+            function preexec {
+                printf "\033]0;%s\a" "$1"
+            }
+
         else
-          # Outside of the linux console, the tty is usually /dev/pts/X, so $pts_id should be a number only.
-          pts_id="$(basename $(tty))"
-          # Print out the pts as simple method of distingishing two terminal sessions.
-          PROMPT="%B%F{#FFFF00}[$pts_id]%f%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%(5~|%-1~/…/%3~|%4~)]%f%F{#FFFFFF}%(0#,#,$)%f%b "
-          RPROMPT="%(?,,%B%F{#FFFFFF}%K{red}[%?]%k%f%b)%(1j,%B%F{#FFFFFF}%K{blue}[%j]%k%f%b,)"
+            PROMPT="%B%F{red}[%t]%f%F{yellow}["''${TTY_BNAME##*[a-z]}"]%f%F{green}[%n@%M]%f%F{blue}[%(5~|%-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
+            RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
         fi
+
+      # Change prompt when using zsh's vi command mode
+      zle-keymap-select () {
+          if [[ $KEYMAP == vicmd ]]; then
+              RPROMPT="%B%F{white}%K{green}[CMD]%k%f%b''${RPROMPT}"
+          else
+              RPROMPT="''${RPROMPT/\[CMD\]/}"
+          fi
+          zle reset-prompt
+      }
+
+      zle -N zle-keymap-select
+
       '';
 
       shellInit = ''
@@ -71,8 +108,20 @@
         stty -ixon    # Disable C-s and C-q in terminals
 
         bindkey -e    # Use Emacs-like keybindings
-        autoload -U select-word-style
-        select-word-style bash
+
+        # Set alt-backspace to delete words up to slash.
+        # Use alt-control-h to delete the entire word.
+        function slash-backwards-kill-word {
+            local WORDCHARS="''${WORDCHARS:s@/@}"
+            zle backward-kill-word
+        }
+        zle -N slash-backwards-kill-word
+        bindkey '\e^?' slash-backwards-kill-word
+
+        # Edit line in editor
+        autoload -Uz edit-command-line
+        zle -N edit-command-line
+        bindkey '^[e' edit-command-line
 
         # The follow was from the Arch Wiki.
         # create a zkbd compatible hash;
@@ -147,6 +196,17 @@
         # partial completion suggestions
         zstyle ':completion:*' list-suffixes
         zstyle ':completion:*' expand prefix suffix
+
+        # Modify menu keybindings:
+        # Use alt-{hjkl} to navigate menus
+        # Use alt-i to pick an item but stay on the menu
+        zmodload zsh/complist
+        bindkey -M menuselect '^[h' vi-backward-char
+        bindkey -M menuselect '^[k' vi-up-line-or-history
+        bindkey -M menuselect '^[l' vi-forward-char
+        bindkey -M menuselect '^[j' vi-down-line-or-history
+        bindkey -M menuselect '^[i' accept-and-menu-complete
+
       '';
     };
   };
