@@ -1,6 +1,9 @@
 # Text file to make sure that git crypt is work
 test-git-cypt filter=git-crypt diff=git-cypt
 
+# Qutebrowser quickmarks files
+home/config/qutebrowser/quickmarks filter=git-crypt diff=git-crypt
+
 # Email config files
 home/config/mutt/muttrc filter=git-crypt diff=git-crypt
 home/config/mutt/accounts/* filter=git-crypt diff=git-crypt
