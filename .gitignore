@@ -5,6 +5,7 @@ config/awesome/theme/*
 config/awesome/theme/!theme.lua
 config/awesome/theme/!st.svg
 home/config/vifm/vifminfo
+home/config/qutebrowser/autoconfig.yml
 home/weechat/certs/*
 home/weechat/logs/*
 home/weechat/ecdsa.pem
