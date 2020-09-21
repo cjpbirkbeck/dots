@@ -13,11 +13,14 @@ settings:
       wq: quit --save
   bindings.commands:
     global:
+      insert:
+        <Ctrl+u>: fake-key <Shift-End> ;; fake-key <Delete>
       normal:
-        ',m': hint links spawn --detach mpv --force-window yes --input-ipc-server=/tmp/mpv-socket
-          {hint-url}
+        ',M': spawn mpv {url}
+        ',m': hint links spawn mpv {hint-url}
         <Ctrl+Shift+y>: hint links spawn --detach mpv --force-window yes --input-ipc-server=/tmp/mpvsocket
           {hint-url}
+        d: null
   bindings.key_mappings:
     global:
       <Ctrl+6>: <Ctrl+^>
@@ -30,6 +33,8 @@ settings:
       <Shift+Return>: <Return>
   colors.completion.category.bg:
     global: '#151718'
+  colors.contextmenu.menu.bg:
+    global: null
   colors.webpage.bg:
     global: null
   confirm_quit:
@@ -79,9 +84,7 @@ settings:
     global: 10pt sans-serif
   fonts.statusbar:
     global: 12pt default_family
-  fonts.tabs.selected:
-    global: 12pt default_family
-  fonts.tabs.unselected:
+  fonts.tabs:
     global: 12pt default_family
   hints.dictionary:
     global: /usr/share/dict/words
