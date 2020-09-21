@@ -17,7 +17,7 @@ Plug 'mbbill/undotree'                     " Visual Vim's undos with a tree.
 Plug 'kassio/neoterm'                      " Neovim terminal enhancements.
 
 " Custom operators
-Plug 'tpope/vim-surround'                  " Manipulate elements that surrounds text, like brackets or quotation marks.
+Plug 'tpope/vim-surround'                  " Manipulate elements that surrounds text.
 Plug 'vim-scripts/ReplaceWithRegister'     " Replace text objects with register contents directly.
 Plug 'tpope/vim-commentary'                " Toggles commenting.
 Plug 'machakann/vim-swap'                  " Swap elements of list structures.
@@ -33,7 +33,7 @@ Plug 'michaeljsmith/vim-indent-object'     " Manipulate lines of same indentatio
 Plug 'vim-scripts/argtextobj.vim'          " Text object for function arguments.
 
 " Other text manipulation
-Plug 'thinca/vim-visualstar'               " Allows */# keys to use arbitrarily defined text (with visual mode).
+Plug 'thinca/vim-visualstar'               " Allows */# keys to used in visual mode.
 Plug 'junegunn/vim-easy-align'             " Align text elements some characters.
 Plug 'tpope/vim-speeddating'               " Increment dates and times.
 Plug 'tpope/vim-endwise'                   " Adds ending elements for various structures.
@@ -43,13 +43,13 @@ Plug 'junegunn/fzf.vim'                    " Collection of commands using fzf.
 
 " Git integration
 Plug 'airblade/vim-gitgutter'              " Shows Git changes in gutter.
-Plug 'tpope/vim-fugitive'                  " Git frontend for Vim
+Plug 'tpope/vim-fugitive'                  " Git frontend for Vim.
 
 " IDE-like plugins
 Plug 'SirVer/ultisnips'                    " Snippet manager.
 Plug 'honza/vim-snippets'                  " Collection of prebuilt snippets.
 Plug 'roxma/nvim-yarp'                     " Remote Plugin framework.
-Plug 'autozimu/LanguageClient-neovim'      " Language server implementation
+Plug 'autozimu/LanguageClient-neovim'      " Language server implementation.
 Plug 'janko/vim-test'                      " Automatic testing.
 Plug 'dense-analysis/ale'                  " Multi-language linter.
 

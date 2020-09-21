@@ -164,18 +164,6 @@ in
         userEmail = "cjpbirkbeck@gmail.com";
       };
 
-      # gpg = {
-      #   enable = true;
-      # };
-
-      # mpv = {
-      #   enable = true;
-      #   config = {
-      #     input-ipc-server = "/tmp/mpv";
-      #     slang = "en";
-      #   };
-      # };
-
       jq = {
         enable = true;
       };
@@ -359,9 +347,6 @@ in
 
       picom = {
         enable = false;
-        # extraOptions = ''
-        #   "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
-        # '';
       };
     };
 
@@ -448,6 +433,55 @@ in
         luaModules = with pkgs.luaPackages; [
           vicious
         ];
+      };
+    };
+
+    xresources = {
+      properties = {
+        "XTerm.termName" = "xterm-256color";
+        "XTerm.vt100.locale" = true;
+        "XTerm.vt100.metaSendEscape" = true;
+        "XTerm.vt100.saveLines" = 4096;
+        "XTerm.vt100.faceName" = "sans mono:size=10:antialias=true";
+
+        "XTerm.*.foreground" = "#c2c8d7";
+        "XTerm.*.background" = "#1c262b";
+        "XTerm.*.cursorColor" = "#b3b8c3";
+
+        # Black
+        "XTerm.*color0" = "#000000";
+        "XTerm.*color8" = "#777777";
+
+        # Red
+        "XTerm.*color1" = "#ee2b2a";
+        "XTerm.*color9" = "#dc5c60";
+
+        # Green
+        "XTerm.*color2" = "#40a33f";
+        "XTerm.*color10" = "#70be71";
+
+        # Yellow
+        "XTerm.*color3" = "#ffea2e";
+        "XTerm.*color11" = "#fff163";
+
+        # Blue
+        "XTerm.*color4" = "#1e80f0";
+        "XTerm.*color12" = "#54a4f3";
+
+        # Magenta
+        "XTerm.*color5" = "#8800a0";
+        "XTerm.*color13" = "#aa4dbc";
+
+        # Cyan
+        "XTerm.*color6" = "#16afca";
+        "XTerm.*color14" = "#42c7da";
+
+        # White
+        "XTerm.*color7" = "#a4a4a4";
+        "XTerm.*color15" = "#ffffff";
+
+        # Bold, Italic, Underline
+        "XTerm.*.colorBD" = "#ffffff";
       };
     };
   };

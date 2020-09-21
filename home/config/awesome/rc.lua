@@ -60,7 +60,7 @@ require("main.layouts")
 -- Loads programs automatically at startup.
 awful.spawn.with_shell(rc.exec_d .. "autoexec.sh")
 
--- Set screens, including the status bar.
+-- Setup screens, including the status bar.
 require("main.screens")
 
 -- Set keybindings and mouse bindings

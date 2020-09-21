@@ -126,7 +126,6 @@ let
     torbrowser           # Browser using the tor network
     zathura              # Lightweight PDF/EPUB/Dejv reader
 
-
     # Icons for theming GTK and Qt applications with the breeze theme.
     breeze-gtk
     breeze-icons
@@ -144,8 +143,6 @@ let
     handbrake   # DVD Ripper
     brasero     # CD Burner
     audacity    # Waveform editor
-
-    brave       # Web browser
 
     zoom-us     # Propiratary videoconferencing client
   ];

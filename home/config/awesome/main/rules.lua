@@ -57,6 +57,7 @@ awful.rules.rules = {
           "xtightvncviewer",
           "Yubico Authenticator",
           "Gnome-disks",
+          "Cheese",
           "asunder",
           "alacritty-float",
           "st-float",
@@ -95,8 +96,8 @@ awful.rules.rules = {
     { rule_any = { class = { "kolourpaint", "Sxiv", "GIMP", "Inkscape", "gwenview" } },
       properties = { tag = "Images" } },
 
-    { rule_any = { class = { "mpv", "Audacity", "Asunder", "Gbh", ".brasero-wrapped_", "brasero", "Cheese" } },
-      properties = { tag = "Video" } },
+    { rule_any = { class = { "Audacity", "Asunder", "Gbh", ".brasero-wrapped_", "brasero", "Cheese" } },
+      properties = { tag = "Multimedia" } },
 
     { rule_any = { class = { "Gnome-mines", "Steam", "Rftg", "ksudoku" } },
       properties = { tag = "Games" } },
@@ -106,4 +107,10 @@ awful.rules.rules = {
 
     { rule = { class = "Brave" },
       properties = { maximized = false } },
+
+    { rule = { class = "mpv" },
+      properties = { tag = "Multimedia",
+                     floating = true,
+                     placement = awful.placement.centered,
+                     ontop = true } }
 }

@@ -3,6 +3,10 @@ windows:
     - window_name: Main
       panes:
           - null
+    - window_name: Email
+      panes:
+          - neomutt
+          - mbsync -a
     - window_name: Music
       panes:
           - vimpc
