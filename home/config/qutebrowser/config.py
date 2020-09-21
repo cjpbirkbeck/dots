@@ -9,7 +9,7 @@ config.load_autoconfig()
 # Aliases for commands. The keys of the given dictionary are the
 # aliases, while the values are the commands they map to.
 # Type: Dict
-c.aliases = {'q': 'quit', 'w': 'session-save', 'wq': 'quit --save'}
+c.aliases = {'Q': 'quit', 'q': 'quit', 'w': 'session-save', 'wq': 'quit --save'}
 
 # Enable JavaScript.
 # Type: Bool
@@ -22,6 +22,10 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 # Enable JavaScript.
 # Type: Bool
 config.set('content.javascript.enabled', True, 'qute://*/*')
+
+# Unbind delete tab from 'd', bind it to 'D'
+config.unbind('d')
+config.bind('D', 'tab-close')
 
 # Play videos in mpv instead of the browser.
 config.bind(',m', 'hint links spawn mpv {hint-url}')
