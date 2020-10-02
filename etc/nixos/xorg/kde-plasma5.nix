@@ -3,12 +3,6 @@
 { pkgs, config, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    ark
-    gwenview
-    okular
-  ];
-
   services.xserver = {
     enable = true;
 

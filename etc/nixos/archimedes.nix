@@ -15,7 +15,6 @@
     ./hardware/io.nix
 
     # System-wide settings
-    # ./system/boot.nix
     ./system/fonts.nix
     ./system/locale.nix
     ./system/upgrades.nix
@@ -45,16 +44,15 @@
     # ./apps/dev-env/rust.nix
   ];
 
-  # boot.loader = {
-  #   timeout = 10;
-  #   grub.useOSProber = true;
-  #   grub.memtest86.enable = true;
-  # };
+  boot.loader = {
+    timeout = 10;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.consoleMode = "auto";
-  boot.loader.timeout = 10;
-  boot.loader.systemd-boot.configurationLimit = 50;
+    systemd-boot = {
+      enable = true;
+      consoleMode = "auto";
+      configurationLimit = 50;
+    };
+  };
 
   time.hardwareClockInLocalTime = true;
 
