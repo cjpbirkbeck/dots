@@ -12,7 +12,13 @@
       greeters = {
         gtk.clock-format = "%A, %B %d %Y [%U] %I:%M:%S %p %Z";
       };
-    };
 
+      extraConfig = ''
+        [Seat:*]
+        greeter-setup-script=${pkgs.numlockx}/bin/numlockx on
+      '';
+    };
   };
+
+  environment.systemPackages = [ pkgs.numlockx ];
 }

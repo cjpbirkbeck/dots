@@ -11,11 +11,6 @@ in
     <home-manager/nixos>
   ];
 
-  environment.shellAliases = {
-    ncdu = "ncdu --color dark";
-    # calcurse = "calcurse --confdir $HOME/.config/calcurse --datadir $HOME/.local/share/calcurse";
-  };
-
   programs.gnome-disks.enable = true;
 
   home-manager.users.cjpbirkbeck = { pkgs, ... }: {
@@ -30,7 +25,6 @@ in
         QT_QPA_PLATFORMTHEME = "qt5ct";
         TMUXP_CONFIGDIR = "$HOME/.config/tmuxp";
         UNICODE_CHARS = "$HOME/.local/share/unicode-chars";
-        # GNUPGHOME = "$HOME/.secrets/gnupg";
       };
 
       file = {
@@ -106,7 +100,6 @@ in
         ];
         extraConfig = {
           gtk-button-images = 0;
-          # gtk-cursor-theme-name = "breeze_cursors";
           gtk-cursor-theme-size = 0;
           gtk-enable-event-sounds = 1;
           gtk-enable-input-feedback-sounds = 1;

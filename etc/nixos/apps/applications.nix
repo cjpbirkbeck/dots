@@ -135,6 +135,10 @@ let
 
   # Packages that only need to be on my desktop
   full = with pkgs; [
+    ark         # GUI archive manager
+    gwenview    # KDE image viewer
+    okular      # KDE document viewer
+
     gimp        # Complex raster editor
     inkscape    # Vector editor
     libreoffice # Office suite

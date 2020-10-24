@@ -5,6 +5,8 @@
 { config, pkgs, ... }:
 
 let
+  unstable = import <unstable> {};
+
   neovim-pkgs = with pkgs; [
     neovim_with_plugins    # Customized neovim.
     neovim-qt_with_plugins # GUI frontend using Qt.
@@ -14,45 +16,13 @@ let
     universal-ctags        # Tags files that will hold keyword information.
   ];
 
-  unstable = import <unstable> {};
-
-  customPlugins.tmux-vim = pkgs.vimUtils.buildVimPlugin {
-    name = "tmux.vim";
-    src = pkgs.fetchFromGitHub {
-      owner = "tmux-plugins";
-      repo = "vim-tmux";
-      rev = "4e77341a2f8b9b7e41e81e9debbcecaea5987c85";
-      sha256 = "16fgc0lx1jr8zbayanf5w677ssiw5xb8vwfaca295c8xlk760c3m";
-    };
-  };
-
-  customPlugins.vim-swap = pkgs.vimUtils.buildVimPlugin {
-    name = "vim-swap";
-    src = pkgs.fetchFromGitHub {
-      owner = "machakann";
-      repo = "vim-swap";
-      rev = "e52ff679c88f4aa7a7afe77fb42af78c93ed33c8";
-      sha256 = "0rqvxqqk961syawmyc2qdfb4w9ilb1r3mxxij2ja1jbhl1f3w4vq";
-    };
-  };
-
-  customPlugins.endwise-vim = pkgs.vimUtils.buildVimPlugin {
-    name = "endwise-vim";
-    src = pkgs.fetchFromGitHub {
-      owner = "tpope";
-      repo = "vim-endwise";
-      rev = "f67d022169bd04d3c000f47b1c03bfcbc4209470";
-      sha256 = "0lq2sphh2mfciva184b4b3if202hr4yls4d2gzbjx7ibch45zb9i";
-    };
-  };
-
-  customPlugins.vim-charazterize = pkgs.vimUtils.buildVimPlugin {
-    name = "charazterize-vim";
+  customPlugins.vim-characterize = pkgs.vimUtils.buildVimPlugin {
+    name = "vim-characterize";
     src = pkgs.fetchFromGitHub {
       owner = "tpope";
       repo = "vim-characterize";
-      rev = "c6d26e5017ab8637bac30db7448ddabfaa238cce";
-      sha256 = "119k93k55r3r8lsz5chjwyww8pjxqajv4r8ccb82zxfpg4fffkcv";
+      rev = "af156501e8a8855832f15c2cc3d6cefb2d7f7f52";
+      sha256 = "1fmrh94miansi5sz1cwyia7z57azwi4cfxx59h81wrmlsf513l5w";
     };
   };
 
@@ -118,7 +88,7 @@ in {
             # Interface enhancements
             lightline-vim       # Lightweight but pretty statusline.
             vim-lastplace       # Open files with cursor at last cursor position.
-            vim-charazterize    # Display Unicode character metadata.
+            vim-characterize    # Display Unicode character metadata.
             vim-signature       # Displays marks in the gutter.
             undotree            # Visual Vim's undos with a tree.
             neoterm             # Neovim terminal enhancements.
@@ -145,7 +115,7 @@ in {
             vim-visualstar      # Allows */# keys to use arbitrarily defined text (with visual mode).
             vim-easy-align      # Align text elements some characters.
             vim-speeddating     # Increment dates and times.
-            endwise-vim         # Adds ending elements for various structures.
+            vim-endwise         # Adds ending elements for various structures.
 
             # Fuzzy finding
             fzfWrapper          # Fuzzy finding with fzf.
@@ -168,7 +138,7 @@ in {
 
             # Filetype specific plugins
             vim-nix                # Adds nix syntax colouring and file detection to vim.
-            customPlugins.tmux-vim # Adds support for modifying tmux config files.
+            vim-tmux               # Adds support for modifying tmux config files.
             # vim-pandoc             # Integrate pandoc with neovim
             # vim-pandoc-syntax      # Add syntax highlighting for pandoc's markdown files.
             vim-go                 # Plugin for extra support with Go

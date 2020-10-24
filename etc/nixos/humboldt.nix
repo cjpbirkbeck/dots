@@ -35,7 +35,7 @@
     ./xorg/awesome.nix
 
     # Application specific settings
-    ./apps/desktop.nix
+    ./apps/desktop_env.nix
     ./apps/applications.nix
     ./apps/overrides/scripts.nix
     ./apps/scripts/rofi-as-dmenu.nix
