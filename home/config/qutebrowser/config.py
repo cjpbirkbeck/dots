@@ -9,7 +9,11 @@ config.load_autoconfig()
 # Aliases for commands. The keys of the given dictionary are the
 # aliases, while the values are the commands they map to.
 # Type: Dict
-c.aliases = {'Q': 'quit', 'q': 'quit', 'w': 'session-save', 'wq': 'quit --save'}
+c.aliases = {'Q': 'quit', 'q': 'quit', 'w': 'session-save', 'wq': 'quit --save',
+        'about': "open -t qute://version/"}
+
+# Set Dark Mode
+# config.set("colors.webpage.perfers_color_scheme_dark", True)
 
 # Enable JavaScript.
 # Type: Bool
@@ -28,14 +32,14 @@ config.unbind('d')
 config.bind('D', 'tab-close')
 
 # Play videos in mpv instead of the browser.
-config.bind(',m', 'hint links spawn mpv {hint-url}')
+config.bind(',M', 'hint links spawn mpv {hint-url}')
 
 # Play videos in mpv instead of the browser.
-config.bind(',M', 'spawn mpv {url}')
+config.bind(',m', 'spawn mpv {url}')
 
-# # Command
-# config.bind('<Alt-J>', 'completion-item-focus --history prev', mode='command')
-# config.bind('<Alt-K>', 'completion-item-focus --history next', mode='command')
+# Use alt-j,k keys to cycle through command history
+config.bind('<Alt-J>', 'completion-item-focus --history next', mode='command')
+config.bind('<Alt-K>', 'completion-item-focus --history prev', mode='command')
 
 # # Add emacs-like keybindings (used in command line) to insert mode.
 # config.bind('<Ctrl-w>', 'rl-unix-word-rubout', mode='insert')
@@ -48,6 +52,7 @@ c.url.searchengines = {
     # Default
     "DEFAULT": "https://duckduckgo.com/?q={}",
     # General search engines
+    ";d":     "https://duckduckgo.com/?q={}",
     ";g":     "https://www.google.com/search?q={}",
     ";b":     "https://www.bing.com/search?q={}",
     ";yc":    "https://ca.search.yahoo.com/search?p={}",
@@ -58,7 +63,7 @@ c.url.searchengines = {
     # Multimedia
     ";yt":    "https://www.youtube.com/results?search_query={}",
     # Social media
-    ";twr":   "https://twitter.com/search?q={}",
+    ";tw":    "https://twitter.com/search?q={}",
     ";ntr":   "https://nitter.net/search?f=tweets&q={}",
     ";rdt":   "https://www.reddit.com/search?q={}",
     ";lbt":   "https://www.librarything.com/search.php?search={}",
@@ -80,13 +85,16 @@ c.url.searchengines = {
     ";ahm":   "https://jlk.fjfi.cvut.cz/arch/manpages/search?q={}",
     ";obm":   "https://man.openbsd.org/{}",
     ";vdm":   "https://man.voidlinux.org/{}",
-    # Repositories
+    # Git repositories
     ";gh":    "https://github.com/search?q={}",
     ";gl":    "https://gitlab.com/search?q={}",
-    ";arw":   "https://wiki.archlinux.org/index.php?title=Special:Search&search={}",
     # Misc
+    ";arw":   "https://wiki.archlinux.org/index.php?title=Special:Search&search={}",
     ";bgg":   "https://boardgamegeek.com/geeksearch.php?action=search&objecttype=boardgame&q={}",
     ";w":     "https://en.wikipedia.org/w/index.php?search={}",
+    ";wfr":   "https://fr.wikipedia.org/w/index.php?search={}",
+    ";wde":   "https://de.wikipedia.org/w/index.php?search={}",
+    ";wes":   "https://es.wikipedia.org/w/index.php?search={}",
 }
 
 # Copied from the base16-seti-page

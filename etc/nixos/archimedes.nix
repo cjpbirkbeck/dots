@@ -34,7 +34,7 @@
     ./xorg/awesome.nix
 
     # Application specific settings
-    ./apps/desktop.nix
+    ./apps/desktop_env.nix
     ./apps/applications.nix
     ./apps/gaming.nix
     ./apps/overrides/scripts.nix

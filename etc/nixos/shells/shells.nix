@@ -57,6 +57,7 @@
       grep  = "grep --color=auto";
       fgrep = "fgrep --color=auto";
       egrep = "egrep --color=auto";
+      ncdu = "ncdu --color dark";
 
       # Program aliases
       more  = "less";
@@ -73,8 +74,6 @@
   programs = {
     gnupg.agent = {
       enable = true;
-      # enableBrowserSocket = true;
-      # enableExtraSocket = true;
     };
 
     ssh = {

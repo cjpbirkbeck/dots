@@ -11,10 +11,6 @@ in
     <home-manager/nixos>
   ];
 
-  environment.shellAliases = {
-    ncdu = "ncdu --color dark";
-  };
-
   programs.gnome-disks.enable = true;
 
   home-manager.users.cjpbirkbeck = { pkgs, ... }: {
