@@ -42,6 +42,7 @@
     ./apps/dev-env/lisp.nix
     ./apps/dev-env/golang.nix
     ./apps/syncthing.nix
+    ./apps/vivaldi.nix
     # ./apps/dev-env/rust.nix
   ];
 
