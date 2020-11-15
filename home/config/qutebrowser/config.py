@@ -50,9 +50,9 @@ config.bind('<Alt-K>', 'completion-item-focus --history prev', mode='command')
 # Use ';' to distingish between DDG hashbang searches and my own custom searches.
 c.url.searchengines = {
     # Default
-    "DEFAULT": "https://duckduckgo.com/?q={}",
+    "DEFAULT": "https://duckduckgo.com/?q={}&ia=web",
     # General search engines
-    ";d":     "https://duckduckgo.com/?q={}",
+    ";d":     "https://duckduckgo.com/?q={}&ia=web",
     ";g":     "https://www.google.com/search?q={}",
     ";b":     "https://www.bing.com/search?q={}",
     ";yc":    "https://ca.search.yahoo.com/search?p={}",

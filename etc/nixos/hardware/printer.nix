@@ -19,7 +19,7 @@
     printing = {
       enable = true;
 
-      drivers = [ pkgs.hplip ];
+      drivers = [ pkgs.hplipWithPlugin ];
     };
   };
 }

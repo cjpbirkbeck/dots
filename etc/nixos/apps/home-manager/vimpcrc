@@ -44,7 +44,7 @@ set window lists
 " Colours
 hi error red bold_white
 hi status black bold_blue
-hi tab green black
+hi tab black bold_blue
 hi progress default bold_green
 hi id default yellow
 hi song default white

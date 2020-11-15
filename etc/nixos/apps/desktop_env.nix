@@ -17,7 +17,7 @@ in
     home = {
       stateVersion = "19.09";
       sessionVariables = {
-        BROWSER = "firefox";
+        BROWSER = "qutebrowser";
         XCOMPOSEFILE = "$HOME/.config/X11/XCompose";
         XCOMPOSECACHE = "$HOME/.config/X11/XCompose";
         GTK_IM_MODULE = "xim";
