@@ -131,6 +131,11 @@ let
     breeze-icons
     breeze-qt5
     gnome-breeze
+
+    # Keep these here for now
+    gimp        # Complex raster editor
+    inkscape    # Vector editor
+    libreoffice # Office suite
   ];
 
   # Packages that only need to be on my desktop
@@ -148,7 +153,7 @@ let
     brasero     # CD Burner
     audacity    # Waveform editor
 
-    zoom-us     # Propiratary videoconferencing client
+    zoom-us     # Proprietary videoconferencing client
   ];
 in
 {
@@ -172,7 +177,7 @@ in
     rsync                # Simple archival program
     rclone               # rsync for cloud storage
     borgbackup           # Deduplication backup tool
-    inxi                 # Comand line system information
+    inxi                 # Command line system information
         # Battery information
   ] ++ (if config.networking.hostName == "humboldt" then [ acpi ] else []);
 

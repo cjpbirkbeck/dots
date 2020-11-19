@@ -11,8 +11,6 @@ in
     <home-manager/nixos>
   ];
 
-  programs.gnome-disks.enable = true;
-
   home-manager.users.cjpbirkbeck = { pkgs, ... }: {
     home = {
       stateVersion = "19.09";
@@ -339,7 +337,7 @@ in
       };
 
       picom = {
-        enable = false;
+        enable = true;
       };
     };
 

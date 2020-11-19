@@ -10,7 +10,7 @@ let
 
     export NIXOS_LABEL_VERSION="Automatic_upgrade-on-$(date '+%s')"
 
-    ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch --upgrade || exit 1
+    ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch || exit 1
     ${config.nix.package.out}/bin/nix-collect-garbage --delete-older-than 14d
     ${config.nix.package.out}/bin/nix optimise-store
     # mandb --create
@@ -31,9 +31,5 @@ in {
         startAt = (if name == "archimedes" then "22:00" else "23:00");
       };
     };
-  };
-
-  environment = {
-    # systemPackages = [ nixos-upgrade nixos-full-upgrade nixos-upgrade ];
   };
 }

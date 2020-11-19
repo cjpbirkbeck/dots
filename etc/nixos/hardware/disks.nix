@@ -17,4 +17,7 @@
 
   # Add disk monitoring tools
   environment.systemPackages = with pkgs; [ smartmontools ];
+
+  # I don't like working with dd
+  programs.gnome-disks.enable = true;
 }

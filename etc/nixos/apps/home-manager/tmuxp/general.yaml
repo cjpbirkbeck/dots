@@ -1,8 +1,5 @@
 session_name: General
 windows:
-    - layout: main-horizontal
-      options:
-          main-pane-height: 30
     - window_name: Main
       panes:
           - neofetch

@@ -3,8 +3,6 @@
 { pkgs, config, ... }:
 
 {
-  hardware.u2f.enable = true;
-
   services = {
     udev.packages = with pkgs; [ yubikey-personalization ];
 

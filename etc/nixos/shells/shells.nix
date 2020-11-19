@@ -57,7 +57,7 @@
       grep  = "grep --color=auto";
       fgrep = "fgrep --color=auto";
       egrep = "egrep --color=auto";
-      ncdu = "ncdu --color dark";
+      ncdu  = "ncdu --color dark";
 
       # Program aliases
       more  = "less";

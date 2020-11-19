@@ -19,7 +19,6 @@
     ./system/fonts.nix
     ./system/locale.nix
     ./system/upgrades.nix
-    ./system/backup.nix
     ./system/cjpbirkbeck.nix
 
     # Shell configuration
@@ -31,7 +30,6 @@
 
     # Xorg Server configuration
     ./xorg/lightdm.nix
-    # ./xorg/kde-plasma5.nix
     ./xorg/awesome.nix
 
     # Application specific settings
@@ -42,11 +40,15 @@
     ./apps/dev-env/lisp.nix
     ./apps/dev-env/golang.nix
     ./apps/syncthing.nix
-    ./apps/vivaldi.nix
     # ./apps/dev-env/rust.nix
   ];
 
   services = {
+    avahi = {
+      enable = true;
+      nssmdns = true;
+    };
+
     tlp = {
       enable = true;
     };
