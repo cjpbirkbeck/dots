@@ -136,6 +136,9 @@ let
     gimp        # Complex raster editor
     inkscape    # Vector editor
     libreoffice # Office suite
+
+    # Test obsidian
+    obsidian    # Personal knowledge base/"second brain"
   ];
 
   # Packages that only need to be on my desktop

@@ -29,11 +29,12 @@ awful.keygrabber {
         { {}, "z", function() size_menu:show() end },
     },
     start_callback = function(_,_,_,_)
-        naughty.notify{ text="Starting floating controls" }
+        naughty.notify{ text="Entering floating window mode" }
     end,
     stop_callback = function(_,_,_,_)
-        naughty.notify{ text="Ending floating controls" }
+        naughty.notify{ text="Quitting floating window mode" }
     end,
+    -- Make sure that the mode only occurs with floating clients
     root_keybindings = {
         { { super, control }, "l",
         function(self)

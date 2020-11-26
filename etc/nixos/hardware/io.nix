@@ -19,7 +19,7 @@ in
       mapExpression = {
         Control_L = "Escape";
         Super_L = "#135"; # Menu key
-      } // (if name == "humboldt" then { Super_L = "#135"; } else {});
+      } // (if name == "humboldt" then { Super_R = "Print"; } else {});
     };
   };
 

@@ -299,21 +299,9 @@ local global_keys = gears.table.join(
             local status = awful.screen.focused().systray.visible
             awful.screen.focused().systray.visible = not status
             if status then
-                naughty.notify { text = "System tray visible" }
-            else
                 naughty.notify { text = "System tray invisible" }
-            end
-        end,
-        { description = "Toggle System Tray visiblity", group = "System"}),
-
-    awful.key({ super, shift }, "=",
-        function()
-            local status = awful.screen.focused().systray.visible
-            awful.screen.focused().systray.visible = not status
-            if status then
-                naughty.notify { text = "System tray visible" }
             else
-                naughty.notify { text = "System tray invisible" }
+                naughty.notify { text = "System tray visible" }
             end
         end,
         { description = "Toggle System Tray visiblity", group = "System"}),

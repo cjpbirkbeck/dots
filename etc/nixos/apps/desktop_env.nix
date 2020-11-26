@@ -13,7 +13,7 @@ in
 
   home-manager.users.cjpbirkbeck = { pkgs, ... }: {
     home = {
-      stateVersion = "19.09";
+      stateVersion = "19.09"; # DO NOT CHANGE!
       sessionVariables = {
         BROWSER = "qutebrowser";
         XCOMPOSEFILE = "$HOME/.config/X11/XCompose";
@@ -39,6 +39,11 @@ in
         vimpc = {
           source = ./home-manager/vimpcrc;
           target = ".vimpcrc";
+        };
+
+        XCompose = {
+          source = ./home-manager/XCompose;
+          target = ".XCompose";
         };
 
         peekat = {
@@ -429,6 +434,7 @@ in
 
     xresources = {
       properties = {
+        # Set properties for xterm, for when the occations when I need it.
         "XTerm.termName" = "xterm-256color";
         "XTerm.vt100.locale" = true;
         "XTerm.vt100.metaSendEscape" = true;
