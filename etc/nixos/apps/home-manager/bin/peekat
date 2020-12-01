@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # Generates a textual previews of a file, based on its file extension and mimetype.
 # Otherwise, it prints out some file information.
 
@@ -20,12 +20,13 @@ examine_file_path() {
 
     FILE_PATH="$path"
     FILE_EXT="${FILE_PATH##*.}"
-    FILE_EXT_LOWER=$(echo "${FILE_EXT}" | tr '[:upper:]' '[:lower:]')
+    FILE_EXT_LOWER="$(echo '${FILE_EXT}' | tr '[:upper:]' '[:lower:]')"
 }
 
 # Print out dashes to fill the screen.
 printbreak() {
     for ((i=0; i<WINDOW_WIDTH; i++)); do printf '—'; done
+    printf '\n'
 }
 
 # Various processing functions for converting various file formats into useful text-based representations.
@@ -200,7 +201,7 @@ handle_fallback() {
     exit 1
 }
 
-handle_extension
+examine_file_path "${1}"
 MIMETYPE="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
 handle_mime "${MIMETYPE}"
 handle_fallback "${MIMETYPE}"
