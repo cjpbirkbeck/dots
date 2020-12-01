@@ -1,0 +1,7 @@
+# Config file for lf
+
+# UI Elements
+set drawbox
+set number
+set relativenumber
+set icons

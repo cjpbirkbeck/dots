@@ -9,7 +9,7 @@
 set -C -f
 IFS=$'\n'
 WINDOW_WIDTH="${COLUMNS}"
-# Hack for working with fzf, as $FZF_PREVIEW_COLUMNS does work.
+# Hack for working with fzf, as $FZF_PREVIEW_COLUMNS doesn't seem to work.
 test -n PEEKAT_WITH_FZF && WINDOW_WIDTH=$(( COLUMNS / 2 - 4))
 PAGE_LIMIT=10
 ROW_LIMIT=90
@@ -23,7 +23,7 @@ examine_file_path() {
     FILE_EXT_LOWER=$(echo "${FILE_EXT}" | tr '[:upper:]' '[:lower:]')
 }
 
-# Print out the dash to fill the screen.
+# Print out dashes to fill the screen.
 printbreak() {
     for ((i=0; i<WINDOW_WIDTH; i++)); do printf '—'; done
 }
@@ -159,6 +159,9 @@ handle_mime() {
             ;;
         application/msword)
             process_ms_word
+            ;;
+        application/vnd.openxmlformats-officedocument.wordprocessingml.document)
+            process_ms_wordx
             ;;
         application/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
             process_ms_excelx
