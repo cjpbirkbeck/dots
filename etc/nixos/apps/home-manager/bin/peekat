@@ -32,7 +32,6 @@ printbreak() {
 # Various processing functions for converting various file formats into useful text-based representations.
 
 process_pdf () {
-    echo "${WINDOW_WIDTH}"
     pdftotext -l "${PAGE_LIMIT}" -nopgbrk -q -- "${FILE_PATH}" - | fold -s -w "${WINDOW_WIDTH}"
     printbreak
     exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
@@ -90,6 +89,7 @@ process_image() {
     img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
     printbreak
     exiftool "${FILE_PATH}"
+    exit 0
 }
 
 process_multimedia() {
@@ -101,10 +101,12 @@ process_multimedia() {
 
 process_ms_excel() {
     xls2csv -- "${FILE_PATH}"
+    exit 0
 }
 
 process_ms_excelx() {
     xlsx2csv -- "${FILE_PATH}"
+    exit 0
 }
 
 process_directory() {

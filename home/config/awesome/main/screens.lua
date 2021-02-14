@@ -11,8 +11,8 @@ local beautiful = require("beautiful")
 local tag_symbols = require("lib.vars.tags")
 local setup_status_bar = require("main.statusbar")
 
-local landscapes_d = rc.home_d .. "/Images/wallpapers/landscapes/"
-local cityscapes_d = rc.home_d .. "/Images/wallpapers/cityscapes/"
+local landscapes_d = rc.home_d .. "/images/wallpapers/landscapes/"
+local cityscapes_d = rc.home_d .. "/images/wallpapers/cityscapes/"
 
 math.randomseed(os.time())
 local is_first_landscape = math.random() >= 0.5

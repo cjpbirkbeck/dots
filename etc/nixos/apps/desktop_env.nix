@@ -98,8 +98,11 @@ in
       '';
       gtk3 = {
         bookmarks = [
-          "file:///home/cjpbirkbeck/Audio"
-          "file:///home/cjpbirkbeck/Images"
+          "file:///home/cjpbirkbeck/images/downloaded/"
+          "file:///home/cjpbirkbeck/images/raster/"
+          "file:///home/cjpbirkbeck/images/screenshots/"
+          "file:///home/cjpbirkbeck/images/photos/"
+          "file:///home/cjpbirkbeck/ref/"
         ];
         extraConfig = {
           gtk-button-images = 0;
@@ -133,8 +136,11 @@ in
       bat = {
         enable = true;
         config = {
-          theme = "zenburn";
+          theme = "desert";
           style = "full";
+        };
+        themes = {
+          desert = builtins.readFile ./home-manager/bat/themes/Desert.tmTheme;
         };
       };
 
@@ -155,7 +161,7 @@ in
       git = {
         enable = true;
         package = pkgs.gitAndTools.gitFull;
-        # ignores = [ ".envrc" "shell.nix" ".tmuxp.yaml" ];
+        ignores = [ ".envrc" "shell.nix" ".tmuxp.yaml" ];
         userName = "Christopher Birkbeck";
         userEmail = "cjpbirkbeck@gmail.com";
       };
@@ -312,7 +318,7 @@ in
 
       mpd = {
         enable = true;
-        musicDirectory = /home/cjpbirkbeck/Audio;
+        musicDirectory = /home/cjpbirkbeck/audio;
         network.listenAddress = "127.0.0.1";
         network.port = 6600;
         extraConfig = ''
@@ -413,10 +419,35 @@ in
         };
       };
 
+      mimeApps = {
+        enable = true;
+        associations = {
+          added = {
+            "x-scheme-handler/mailto" = "userapp-Thunderbird-6DZAV0.desktop";
+            "message/rfc822" = "userapp-Thunderbird-6DZAV0.desktop";
+          };
+        };
+        defaultApplications = {
+          "application/epub+zip" = [ "zathura.desktop" "org.pwmt.zathura.desktop" ];
+          "application/pdf" = [ "zathura.desktop" "org.pwmt.zathura.desktop" ];
+          "image/bmp" = [ "sxiv.desktop" "kolourpaint.desktop" ];
+          "image/png" = [ "sxiv.desktop" "kolourpaint.desktop" ];
+          "image/jpeg" = [ "sxiv.desktop" "kolourpaint.desktop" ];
+          "x-scheme-handler/mailto" = [ "userapp-Thunderbird-6DZAV0.desktop" ];
+          "message/rfc822" = [ "userapp-Thunderbird-6DZAV0.desktop" ];
+        };
+      };
+
       userDirs = {
         enable = true;
-        music = "\$HOME/Audio";
-        pictures = "\$Home/Images";
+        desktop = "\$HOME/dt";
+        download = "\$HOME/dls";
+        templates = "\$HOME/tp";
+        music = "\$HOME/audio";
+        pictures = "\$HOME/images";
+        publicShare = "\$HOME/pub";
+        videos = "\$HOME/videos";
+        documents = "\$HOME/docs";
       };
     };
 

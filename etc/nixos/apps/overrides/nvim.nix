@@ -105,7 +105,6 @@ in {
             vim-textobj-brace            # Generic braces text objects
             vim-textobj-comment          # Comment block text objects
             vim-textobj-variable-segment # Snake/CamelCase text objects
-            # vim-textobj-punctuation      #
             vim-textobj-matchit          # Text object for matchit elements
             textobj-gitgutter            # Git Gutter text objects
             vim-indent-object            # Manipulate lines of same indentation as a single object.

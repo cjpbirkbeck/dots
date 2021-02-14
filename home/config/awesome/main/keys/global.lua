@@ -211,9 +211,6 @@ local global_keys = gears.table.join(
     awful.key( { super, shift }, "i", function() awful.tag.incmwfact(-mwf_increment) end,
         { description = "Decrease master width factor" , group = "Tag" }),
 
-    awful.key( { super, control }, "i", function() client.focus.first_tag.master_width_factor = mwf_default end,
-        {description = "Reset default master width factor" , group = "Tag"}),
-
     -- Modify master count
     awful.key( { super, }, "o",
         function()

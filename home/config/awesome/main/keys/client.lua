@@ -215,7 +215,16 @@ local clientkeys = gears.table.join(
             c.maximized = not c.maximized
             c:raise()
         end ,
-        {description = "(un)maximize", group = "client"})
+        {description = "(un)maximize", group = "client"}),
+
+    awful.key( { super, control }, "i",
+        function(c)
+            local t = c:tags()
+            for k, v in pairs(t) do
+                v.master_width_factor = 0.5
+            end
+        end,
+        {description = "Reset default master width factor" , group = "Tag"})
 
 )
 

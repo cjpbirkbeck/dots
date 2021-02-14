@@ -53,5 +53,5 @@ browser qutebrowser
 macro   p set browser "podboat"; open-in-browser ; set browser firefox
 
 # Podboat settings
-download-path ~/Audio/Podcasts/
+download-path ~/audio/Podcasts/
 player "mpv --no-video"

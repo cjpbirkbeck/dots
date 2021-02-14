@@ -62,6 +62,7 @@
       # Program aliases
       more  = "less";
       dff   = "df -hH -x tmpfs -x devtmpfs";
+      fr    = "free --human";
 
       # Aliases for nix programs.
       nrb   = "nixos-rebuild";

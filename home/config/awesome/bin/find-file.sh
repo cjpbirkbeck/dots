@@ -3,7 +3,7 @@
 
 FILE_EXTS="\.(ogg|mp[3-4]|wma|webm|txt|md|markdown|org|epub|pdf|ps|djvu|png|jpe?g|gif|bmp|avi|mkv)$"
 
-selected="$(fd --type file "$FILE_EXTS" $HOME/{Audio,Documents,Images,Videos,Downloads} | \
+selected="$(fd --type file "$FILE_EXTS" $HOME/{audio,docs,ref,images,videos,Downloads} | \
     fzf --prompt="Files> " --reverse --preview="$HOME/.local/bin/peekat {} " --preview-window=right:wrap)"
 
 test -n "$selected" && "$HOME/.config/awesome/bin/open-file.sh" "$selected"

@@ -43,6 +43,23 @@
     # ./apps/dev-env/rust.nix
   ];
 
+  security = {
+    doas = {
+      enable = true;
+
+      extraRules = [
+        {
+          groups = [ "doas" ];
+          persist = true;
+        }
+        {
+          groups = [ "wheel" ];
+          persist = true;
+        }
+      ];
+    };
+  };
+
   services = {
     avahi = {
       enable = true;
@@ -58,6 +75,8 @@
 
       locker = "${pkgs.xsecurelock}/bin/xsecurelock";
     };
+
+    tor.enable = true;
   };
 
   networking = {

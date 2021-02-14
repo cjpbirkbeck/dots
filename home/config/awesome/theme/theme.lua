@@ -10,7 +10,7 @@ local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
 -- Colours
--- From the Oceanic Material theme, using in my terminal
+-- From the Oceanic Material theme, used in my terminal
 local om = {
     foreground    = "#C2C8D7",
     background    = "#1C262B",
@@ -99,7 +99,7 @@ theme.gaps_single_client = false
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
---theme.taglist_bg_focus = "#ff0000"
+theme.tasklist_bg_focus = desert.blue
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(6)

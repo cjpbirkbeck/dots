@@ -68,8 +68,8 @@ c.url.searchengines = {
     ";rdt":   "https://www.reddit.com/search?q={}",
     ";lbt":   "https://www.librarything.com/search.php?search={}",
     # Stores
-    ";amz":   "https://www.amazon.com/s?ie=UTF8&field-keywords={}",
-    ";amc":   "https://www.amazon.ca/gp/search?ie=UTF8&keywords={}",
+    ";a":   "https://www.amazon.com/s?ie=UTF8&field-keywords={}",
+    ";ac":   "https://www.amazon.ca/gp/search?ie=UTF8&keywords={}",
     ";ebc":   "https://www.ebay.ca/sch/{}",
     ";kb":    "https://www.kobo.com/ca/en/search?query={}",
     ";stm":   "https://store.steampowered.com/search/?term={}",
