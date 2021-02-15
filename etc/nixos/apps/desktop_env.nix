@@ -283,12 +283,15 @@ in
         enable = true;
         dotDir = ".config/zsh";
         history = {
+          extended = true;
+          size = 2147483647;
+          save = 2147483647;
           path = ".local/share/zsh/history";
         };
         initExtra = builtins.readFile ./home-manager/zsh/functions.sh;
         shellAliases = {
-          "_" = "sudo";
-          "__" = "sudo -i";
+          "_" = "doas";
+          "__" = "doas -s";
 
           "nrb" = "sudo nixos-rebuild";
         };
@@ -458,6 +461,7 @@ in
         enable = true;
 
         luaModules = with pkgs.luaPackages; [
+
           vicious
         ];
       };

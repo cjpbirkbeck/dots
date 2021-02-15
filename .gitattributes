@@ -12,6 +12,8 @@ home/config/msmtp/config filter=git-crypt diff=git-crypt
 home/mbsyncrc filter=git-crypt diff=git-crypt
 home/notmuch-config filter=git-crypt diff=git-crypt
 
+home/config/aerc/accounts.conf filter=git-crypt diff=git-crypt
+
 # Home manager email accounts
 etc/nixos/apps/email.nix filter=git-crypt diff=git-crypt
 
