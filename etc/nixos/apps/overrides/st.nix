@@ -24,6 +24,4 @@
       '';
     } );
   };
-
-  # environment.systemPackages = with pkgs; [ st_patched ];
 }

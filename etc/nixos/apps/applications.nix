@@ -102,7 +102,7 @@
     w3m                       # Terminal web browser
     weechat                   # IRC client
 
-                              # GUI applications
+    # GUI applications
     alacritty                 # Terminal emuator
     anki                      # Flashcard application
     arc-theme                 # Theme for GUI programs
