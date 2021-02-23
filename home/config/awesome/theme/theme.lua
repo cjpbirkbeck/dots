@@ -75,8 +75,8 @@ theme.tasklist_font_focus     = "DejaVu Sans bold 10"
 theme.tasklist_font_urgent    = "DejaVu Sans bold 10"
 theme.tasklist_font_minimized = "DejaVu Sans italic 10"
 
-theme.tooltip_bg = theme.bg_normal
-theme.tooltip_fg = theme.fg_normal
+theme.tooltip_bg           = theme.bg_normal
+theme.tooltip_fg           = theme.fg_normal
 theme.tooltip_border_color = theme.bg_focus
 theme.tooltip_border_width = dpi(1)
 

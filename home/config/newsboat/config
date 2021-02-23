@@ -15,7 +15,7 @@ notify-program notify-desktop
 
 # Colour scheme
 #       Element           foreg      backg       style
-color listfocus           color231   color208    bold
+color listfocus           color231   color10     bold
 color listnormal_unread   red        color231    bold
 color listfocus_unread    color231   red         bold
 color info                blue       black       bold
