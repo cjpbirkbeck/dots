@@ -211,9 +211,6 @@ in
         terminal = "tmux-256color";
         tmuxp.enable = true;
         plugins = with pkgs.tmuxPlugins; [
-          # {
-          #   plugin = yank;
-          # }
           {
             plugin = logging;
             extraConfig = ''
@@ -374,9 +371,9 @@ in
           source = ./home-manager/rofi-pass/config;
         };
 
-        "vifm" = {
-          source = ./home-manager/vifm;
-        };
+        # "vifm" = {
+        #   source = ./home-manager/vifm;
+        # };
 
         "neofetch/config.conf" = {
           source = ./home-manager/neofetch/config.conf;

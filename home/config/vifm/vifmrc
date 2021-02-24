@@ -13,7 +13,7 @@ set vimhelp        " Use vim's help system
 
 " Interface
 
-" Use the desert colorscheme
+" Use my custom desert colorscheme
 colorscheme cjpb-desert
 
 " Use absolute numbers for current line and relative numbers for other lines.
@@ -51,7 +51,7 @@ set classify+=' ::*.avi,,*.ts,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mk
 " office files
 set classify+=' ::*.doc,,*.docx,,*.odt::, ::*.xls,,*.xls[mx],,*.ods::, ::*.pptx,,*.ppt,,*.odp::'
 
-" Search
+" Search options
 set ignorecase
 set smartcase
 set incsearch
