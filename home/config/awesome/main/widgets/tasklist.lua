@@ -14,9 +14,7 @@ local task_buttons = gears.table.join(
             )
         end
     end),
-    awful.button({ }, 3, function () awful.menu.client_list({ theme = { width = 250 } }, _, function (c) return not c.skip_taskbar end) end),
-    awful.button({ }, 4, function () awful.client.focus.byidx(1) end),
-    awful.button({ }, 5, function () awful.client.focus.byidx(-1) end))
+    awful.button({ }, 3, function () awful.menu.client_list({ theme = { width = 250 } }, _, function (c) return not c.skip_taskbar end) end))
 
 local function screen_tasks(s)
     local tasklist = awful.widget.tasklist {
@@ -57,13 +55,13 @@ local function screen_tasks(s)
                 },
                 id     = 'background_role',
                 widget = wibox.container.background,
-            },
-            create_callback = function(self, c, i, cls)
-                awful.tooltip {
-                    objects = { self },
-                    timer_function = function() return c.name end
-                }
-            end
+                create_callback = function(self, c, _, _)
+                    awful.tooltip {
+                        objects = { self },
+                        timer_function = function() return c.name end
+                    }
+                end,
+            }
         }
 
     return tasklist

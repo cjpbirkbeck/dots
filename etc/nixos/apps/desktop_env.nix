@@ -211,9 +211,9 @@ in
         terminal = "tmux-256color";
         tmuxp.enable = true;
         plugins = with pkgs.tmuxPlugins; [
-          {
-            plugin = yank;
-          }
+          # {
+          #   plugin = yank;
+          # }
           {
             plugin = logging;
             extraConfig = ''
@@ -235,6 +235,9 @@ in
           # Show title in terminal emulator title
           set-option -g set-titles on
           set-option -g set-titles-string "#S:#W:#T [#I/#{session_windows}:#P/#{window_panes}] - Tmux"
+
+          # Use the system clipboard
+          set -g set-clipboard on
 
           # Use emacs-style keybindings for the status-line
           set -g status-keys emacs
@@ -307,6 +310,7 @@ in
         options = {
           font = "monospace normal 12";
           incremental-search = true;
+          window-title-basename = true;
           window-title-page = true;
           selection-clipboard = "clipboard";
           page-padding = 3;

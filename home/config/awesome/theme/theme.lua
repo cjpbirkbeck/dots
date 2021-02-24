@@ -69,7 +69,7 @@ theme.fg_urgent     = om.light_white
 theme.fg_minimize   = om.light_white
 
 theme.taglist_font_focus = "DejaVu Sans bold 10"
-theme.taglist_fg_focus = "#000000"
+theme.taglist_fg_focus   = "#000000"
 
 theme.tasklist_font_focus     = "DejaVu Sans bold 10"
 theme.tasklist_font_urgent    = "DejaVu Sans bold 10"
