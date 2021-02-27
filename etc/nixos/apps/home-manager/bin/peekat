@@ -12,7 +12,7 @@ WINDOW_WIDTH="${COLUMNS}"
 # Hack for working with fzf, as $FZF_PREVIEW_COLUMNS doesn't seem to work.
 test -n PEEKAT_WITH_FZF && WINDOW_WIDTH=$(( COLUMNS / 2 - 4))
 PAGE_LIMIT=10
-ROW_LIMIT=90
+# ROW_LIMIT=90
 
 # Process the file path and find its file extension.
 examine_file_path() {
@@ -86,9 +86,13 @@ process_struct_text() {
 }
 
 process_image() {
-    img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
+    if [ "$VIFM_PREVIEW" = "SET" ]; then
+        img2txt "${FILE_PATH}"
+    else
+        img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
+    fi
     printbreak
-    exiftool "${FILE_PATH}"
+    mediainfo "${FILE_PATH}"
     exit 0
 }
 
@@ -119,6 +123,9 @@ handle_extension() {
         a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\
         rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
             process_compressed
+            ;;
+        png|jpg|jpeg)
+            process_image
             ;;
         nix|md|markdown|txt)
             process_struct_text
@@ -194,8 +201,6 @@ handle_mime() {
 }
 
 handle_fallback() {
-    local mimetype="${1}"
-
     echo "Previewer cannot generate a preview based on its extension or mimetype."
     echo "File Path: ${FILE_PATH}"
     echo "File Extension: ${FILE_EXT}"

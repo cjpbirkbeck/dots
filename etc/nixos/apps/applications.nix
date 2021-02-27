@@ -15,7 +15,6 @@
   # Programs that should be on any machine with X server on it.
   general = with pkgs; [
     # Command line tools
-    asciidoctor               # Convertor for asciidoc files
     asciinema                 # Recoard terminal sessions
     atool                     # Print archive file infomation
     bashdb                    # Bash debugger.
@@ -28,7 +27,7 @@
     dante                     # SOCKS server; need for aerc
     ddgr                      # Search DuckDuckGo from the command line
     detox                     # Automatically make cli-friendly file names
-    dict                      # Command line dictionary
+    dico                      # Command line dictionary
     exiftool                  # Image file information
     ffmpeg                    # Video encoder
     ffmpegthumbnailer         # Create video thumbnails
@@ -41,8 +40,8 @@
     jrnl                      # Command line journal system.
     khard                     # Address books
     libcaca                   # Image to text converter
+    libqalculate              # Advanced calculator for the command line
     mailcap                   # Open non-plain-text emails
-    maim                      # Simple screenshot utility
     mediainfo                 # Multimedia file information
     miscfiles                 # Misc files have a dictionary list that is useful for vim autocompletions.
     mpc_cli                   # Barebones command line interface for mpd
@@ -129,20 +128,18 @@
     torbrowser                # Browser using the tor network
     zathura                   # Lightweight PDF/EPUB/Dejv reader
 
-                              # Icons for theming GTK and Qt applications with the breeze theme.
+    # Icons for theming GTK and Qt applications with the breeze theme.
     breeze-gtk
     breeze-icons
     breeze-qt5
     gnome-breeze
 
-                              # Keep these here for now
+    # Keep these here for now
     gimp                      # Complex raster editor
     inkscape                  # Vector editor
     libreoffice               # Office suite
 
-                              # Test obsidian
-    obsidian                  # Personal knowledge base/"second brain"
-
+    # UGH
     zoom-us
   ];
 

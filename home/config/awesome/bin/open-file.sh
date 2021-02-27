@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # Opens files in a new window, given first the file extension and then the mimetype.
 
 # Arguments

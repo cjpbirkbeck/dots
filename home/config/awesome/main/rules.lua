@@ -62,7 +62,8 @@ awful.rules.rules = {
           "alacritty-float",
           "st-float",
           "st-dialog",
-          "flameshot"
+          "flameshot",
+          "Qalculate-gtk"
         },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -104,9 +105,6 @@ awful.rules.rules = {
 
     { rule_any = { class = { "VirtualBox Manager", "VirtualBox Machine" } },
       properties = { tag = "Virtual" } },
-
-    { rule = { class = "Brave" },
-      properties = { maximized = false } },
 
     { rule = { class = "mpv" },
       properties = { tag = "Multimedia",

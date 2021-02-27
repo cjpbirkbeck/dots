@@ -66,9 +66,13 @@ nnoremap w :view<CR>
 vnoremap w :view<CR>gv
 
 " File previews
+
+" fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm,*.gif
+"     \ img2txt "%c" 2>/dev/null
+
 " Using my own script that uses a combination of file extensions and mime
 " types
-set previewprg='~/.local/bin/peekat %c '
+set previewprg='export VIFM_PREVIEW=SET; ~/.local/bin/peekat %c '
 
 " Filetypes
 " For now, I am going to use my opener script for all files

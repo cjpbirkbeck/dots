@@ -37,12 +37,13 @@ end
 
 local function toggle_float_tiled(c)
     local s = c.screen
-    local other = not c.floating
     local cls = s.clients
-    if #cls > 1 then
+    local tcls = s.tiled_clients
+
+    if #cls > 1 and #cls > #tcls then
         local n = awful.client.next(1)
         for i = 1,#cls,1 do
-            if n.floating == other then break end
+            if n.floating == not c.floating then break end
             n = awful.client.next(1, n)
         end
         awful.client.focus.byidx(0, n)

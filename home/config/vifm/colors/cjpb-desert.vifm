@@ -1,6 +1,7 @@
 " Desert
 " by Michael jubalh Vetter
 " https://github.com/jubalh/vifm-colors
+" Modifed by Christopher J. P. Birkbeck
 
 highlight clear
 
@@ -13,7 +14,7 @@ highlight Device cterm=bold ctermfg=31 ctermbg=default
 highlight Fifo cterm=bold ctermfg=31 ctermbg=default
 highlight Executable cterm=bold ctermfg=green ctermbg=default
 highlight Selected cterm=bold ctermfg=magenta ctermbg=default
-highlight CurrLine cterm=bold ctermfg=131 ctermbg=228
+highlight CurrLine cterm=bold ctermfg=Grey0 ctermbg=228
 highlight TopLine cterm=none ctermfg=black ctermbg=15
 highlight TopLineSel cterm=bold ctermfg=Red1 ctermbg=default
 highlight StatusLine cterm=bold ctermfg=Red1 ctermbg=15

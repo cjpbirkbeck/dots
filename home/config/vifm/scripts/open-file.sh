@@ -60,22 +60,27 @@ function open_text() {
 
 function open_document_viewer() {
     zathura --fork "${FILE_PATH}"
+    exit 0
 }
 
 function open_office_document() {
     setsid libreoffice "${FILE_PATH}" &
+    exit 0
 }
 
 function open_image() {
     setsid --fork sxiv -a "${FILE_PATH}"
+    exit 0
 }
 
 function open_multimedia() {
     setsid --fork mpv --player-operation-mode=pseudo-gui "${FILE_PATH}"
+    exit 0
 }
 
 function open_unknown() {
     setsid --fork xdg-open "${FILE_PATH}"
+    exit 0
 }
 
 handle_extension "${FILE_EXT_LOWER}"
