@@ -83,9 +83,11 @@ set colorcolumn=80,100         " Colour the 80th and 100th columns.
 
 " Appearance {{{
 
-syntax enable                   " Enable syntax colouring.
-set termguicolors               " Use the true (24-bit) colours instead of the terminal options.
-colorscheme savanna             " Use my customized theme, located at colors/cjpb-desert.vim.
+if has('nvim')
+    syntax enable                   " Enable syntax colouring.
+    set termguicolors               " Use the true (24-bit) colours instead of the terminal options.
+    colorscheme savanna             " Use my customized theme, located at colors/cjpb-desert.vim.
+endif
 
 " Changes cursor shape depending on the current mode.
 " Normal mode     = box

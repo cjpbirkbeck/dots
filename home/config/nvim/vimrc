@@ -14,7 +14,12 @@ set showcmd                             " Show the incremental results of comman
 set ttyfast                             " Assume that I am using a fast terminal
 set smarttab                            " Tab smartly
 set encoding=utf-8                      " Encode everything in UTF-8
-set display="lastline,msgsep"            " Show results of last line
+set display="lastline,msgsep"           " Show results of last line
+
+set backupdir=~/.cache/vim//,.          " Set backup directory to cache directory.
+set directory=~/.cache/vim//,.          " Put swap files in a seperate directory.
+
+colorscheme slate                       " Use this colorscheme instead
 
 " Set the statusline to the following:
 set statusline=%1*[%n]
@@ -27,5 +32,5 @@ set statusline+=\ {%B}
 set statusline+=\ %l:%c/%L
 set statusline+=\ %P
 
-" Source the common file
+" Source the common configuration file.
 source $HOME/.vim/common.vim
