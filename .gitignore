@@ -10,3 +10,5 @@ home/weechat/certs/*
 home/weechat/logs/*
 home/weechat/ecdsa.pem
 test/
+*~
+plug.vim
