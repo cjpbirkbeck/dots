@@ -10,9 +10,10 @@ set -C -f
 IFS=$'\n'
 WINDOW_WIDTH="${COLUMNS}"
 # Hack for working with fzf, as $FZF_PREVIEW_COLUMNS doesn't seem to work.
-test -n PEEKAT_WITH_FZF && WINDOW_WIDTH=$(( COLUMNS / 2 - 4))
+test -n "$PEEKAT_WITH_FZF" && WINDOW_WIDTH=$(( COLUMNS / 2 - 4 ))
+# Hack for working with vifm, passing preview window size as the second argument.
+test -n "$PEEKAT_WITH_VIFM" && WINDOW_WIDTH="${2}"
 PAGE_LIMIT=10
-# ROW_LIMIT=90
 
 # Process the file path and find its file extension.
 examine_file_path() {
@@ -58,8 +59,8 @@ process_torrent() {
     exit 0
 }
 
-process_opendocs() {
-    odt2txt "${FILE_PATH}" -w "${WINDOW_WIDTH}"
+process_odt() {
+    odt2txt --width="${WINDOW_WIDTH}" "${FILE_PATH}"
     exit 0
 }
 
@@ -86,11 +87,7 @@ process_struct_text() {
 }
 
 process_image() {
-    if [ "$VIFM_PREVIEW" = "SET" ]; then
-        img2txt "${FILE_PATH}"
-    else
-        img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
-    fi
+    img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
     printbreak
     mediainfo "${FILE_PATH}"
     exit 0
@@ -139,9 +136,9 @@ handle_extension() {
         torrent)
             process_torrent
             ;;
-        odt|ods|odp|sxw)
-            process_opendocs
-            ;;
+        # odt|ods|odp|sxw)
+        #     process_odt
+        #     ;;
         htm|html|xhtml)
             process_html
             ;;
@@ -169,6 +166,10 @@ handle_mime() {
             ;;
         application/msword)
             process_ms_word
+            ;;
+        application/vnd.oasis.opendocument.text|application/vnd.oasis.opendocument.spreadsheet|\
+        application/vnd.oasis.opendocument.presentation)
+            process_odt
             ;;
         application/vnd.openxmlformats-officedocument.wordprocessingml.document)
             process_ms_wordx

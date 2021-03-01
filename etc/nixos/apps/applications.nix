@@ -95,7 +95,7 @@
     unstable.aerc             # Terminal email client
     unstable.calcurse         # Calendar
     unstable.tuir             # Read reddit in a terminal
-    vifm                      # Terminal file manager
+    vifm-full                 # Terminal file manager
     vimpc                     # TUI frontend for mpd
     vit                       # Frontend for taskwarrior
     w3m                       # Terminal web browser

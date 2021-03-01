@@ -85,7 +85,7 @@ set colorcolumn=80,100         " Colour the 80th and 100th columns.
 
 syntax enable                   " Enable syntax colouring.
 set termguicolors               " Use the true (24-bit) colours instead of the terminal options.
-colorscheme cjpb-desert         " Use my customized theme, located at colors/cjpb-desert.vim.
+colorscheme savanna             " Use my customized theme, located at colors/cjpb-desert.vim.
 
 " Changes cursor shape depending on the current mode.
 " Normal mode     = box
@@ -323,8 +323,19 @@ set complete+=kspell
 " so use the same syntax file for those files
 augroup vifm
     autocmd!
+    autocmd BufRead *.vifm set filetype=vim
     autocmd BufRead */vifmrc set filetype=vim
+    autocmd BufRead $HOME/.config/vifm/vifm-help.txt set filetype=help
     autocmd BufRead */vimpcrc set filetype=vim
+augroup END
+
+" }}}
+
+" rasi files {{{
+
+augroup rasi
+    autocmd!
+    autocmd BufRead *.rasi set filetype=css
 augroup END
 
 " }}}

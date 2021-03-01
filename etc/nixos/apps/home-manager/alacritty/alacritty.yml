@@ -13,6 +13,7 @@
   #TERM: xterm-256color
 
 window:
+
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels.
@@ -39,6 +40,9 @@ window:
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: true
+
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
 
   # Window decorations
   #
@@ -127,12 +131,12 @@ font:
     #style: Italic
 
   # Point size
-  size: 8.0
+  size: 11.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
-    x: 0
+    x: -1
     y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
@@ -266,7 +270,7 @@ colors:
 #   - Linear
 #
 # Specifying a `duration` of `0` will disable the visual bell.
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
   color: '0xffffff'
@@ -334,9 +338,6 @@ selection:
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: false
-
-# Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
 
 cursor:
   # Cursor style

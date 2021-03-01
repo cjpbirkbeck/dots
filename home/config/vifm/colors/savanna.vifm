@@ -20,5 +20,5 @@ highlight TopLineSel cterm=bold ctermfg=Red1 ctermbg=default
 highlight StatusLine cterm=bold ctermfg=Red1 ctermbg=15
 highlight WildMenu cterm=underline,reverse ctermfg=15 ctermbg=black
 highlight CmdLine cterm=none ctermfg=217 ctermbg=black
-highlight ErrorMsg cterm=none ctermfg=7 ctermbg=Red1
+highlight ErrorMsg cterm=none ctermfg=15 ctermbg=Red1
 highlight Border cterm=none ctermfg=black ctermbg=15

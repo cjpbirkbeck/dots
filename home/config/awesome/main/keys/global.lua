@@ -81,6 +81,8 @@ local global_keys = gears.table.join(
                     t.selected = true
                 end
             end
+
+            awful.client.focus.byidx(0)
         end,
         { description = "Select all tags with clients on them", group = "Tag"}),
 

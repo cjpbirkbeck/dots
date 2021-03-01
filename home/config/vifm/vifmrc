@@ -9,12 +9,13 @@ set trash          " Use trash can for deletion
 set followlinks    " Follow symlinks
 set norunexec      " Do not run executables
 set sortnumbers    " Sort numbers natuarally
-set vimhelp        " Use vim's help system
+set cpoptions=fs   " Set C-i/Tab to go forward in history
+" set vimhelp        " Use vim's help system
 
 " Interface
 
-" Use my custom desert colorscheme
-colorscheme cjpb-desert
+" Use my custom savanna colorscheme
+colorscheme savanna
 
 " Use absolute numbers for current line and relative numbers for other lines.
 set number
@@ -65,14 +66,14 @@ screen
 nnoremap w :view<CR>
 vnoremap w :view<CR>gv
 
-" File previews
+" Use catimg(1) to show a more detailed preview of an image.
+nnoremap <A-l> :!catimg-pause.sh %c<CR>
 
-" fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm,*.gif
-"     \ img2txt "%c" 2>/dev/null
+" File previews
 
 " Using my own script that uses a combination of file extensions and mime
 " types
-set previewprg='export VIFM_PREVIEW=SET; ~/.local/bin/peekat %c '
+set previewprg='export PEEKAT_WITH_VIFM=SET; ~/.local/bin/peekat %c %pw'
 
 " Filetypes
 " For now, I am going to use my opener script for all files

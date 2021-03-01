@@ -1,1 +1,1 @@
-setfiletype css
+:set filetype=css

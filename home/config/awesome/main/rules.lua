@@ -59,7 +59,7 @@ awful.rules.rules = {
           "Gnome-disks",
           "Cheese",
           "asunder",
-          "alacritty-float",
+          "Alacritty",
           "st-float",
           "st-dialog",
           "flameshot",
@@ -78,6 +78,9 @@ awful.rules.rules = {
         },
         type = { "dialog" }
       }, properties = { floating = true, placement = awful.placement.centered } },
+
+      { rule_any = { class = { "Tilda", ".guake-wrapped" } },
+        properties = { floating = true } },
 
     -- Assign applications to tags
 

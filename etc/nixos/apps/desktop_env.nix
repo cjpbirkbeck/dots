@@ -154,8 +154,16 @@ in
         enable = true;
         enableBashIntegration = true;
         enableZshIntegration = true;
-        changeDirWidgetOptions = [ "--preview='ls -gAGh --color --group-directories-first {}'" "--ansi" "--no-multi" ];
-        fileWidgetOptions = [ "--preview='$HOME/.local/bin/peekat {} $FZF_PREVIEW_COLUMNS'" ];
+        changeDirWidgetOptions = [
+          "--preview='ls -gAGh --color --group-directories-first {}'"
+          "--ansi"
+          "--no-multi"
+          "--history=$HOME/.cache/fzf/change-directory-history"
+        ];
+        fileWidgetOptions = [
+          "--preview='$HOME/.local/bin/peekat {}'"
+          "--history=$HOME/.cache/fzf/file-widget-history"
+        ];
       };
 
       git = {
