@@ -1,6 +1,7 @@
 # Text file to make sure that git crypt is work
 test-git-cypt filter=git-crypt diff=git-cypt
 
+# Giant list of website I want to block locally.
 etc/nixos/system/blockedhosts.nix filter=git-crypt diff=git-crypt
 
 # Qutebrowser quickmarks files
