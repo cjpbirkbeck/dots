@@ -42,11 +42,12 @@ rc.control = "Control"
 rc.launcher     = "rofi -show-icons -show drun"
 rc.win_switcher = "rofi -show window"
 
-rc.term_emu     = "st"
-rc.browser      = "qutebrowser"
-rc.email        = "thunderbird"
-rc.file_man     = "pcmanfm-qt"
-rc.passwords    = "rofi-pass --last-used"
+rc.term_emu      = "st"
+rc.float_term_ed = "alacritty"
+rc.browser       = "qutebrowser"
+rc.email         = "thunderbird"
+rc.file_man      = "pcmanfm-qt"
+rc.passwords     = "rofi-pass --last-used"
 
 -- Setup the windows manager --
 

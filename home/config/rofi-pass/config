@@ -17,7 +17,6 @@ _pwgen () {
 # that can read from pipes. Known viewers to work are feh and display
 _image_viewer () {
     sxiv -
-#    display
 }
 
 # xdotool needs the keyboard layout to be set using setxkbmap
@@ -47,7 +46,7 @@ xdotool_delay=12
 
 ## Programs to be used
 # Editor
-EDITOR='gvim -f'
+EDITOR='nvim-qt'
 
 # Browser
 BROWSER='xdg-open'
@@ -76,9 +75,8 @@ clip_clear=45
 edit_new_pass="true"
 
 # default_user is also used for password files that have no user field.
-#default_user="${ROFI_PASS_DEFAULT_USER-$(whoami)}"
-#default_user2=mary_ann
-#password_length=12
+default_user="${ROFI_PASS_DEFAULT_USER-$(whoami)}"
+password_length=32
 
 # Custom Keybindings
 autotype="Alt+1"

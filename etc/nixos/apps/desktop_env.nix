@@ -4,6 +4,9 @@
 
 let
   unstable = import <unstable> {};
+
+  homeConfigFiles = /home/cjpbirkbeck/code/dots/home;
+  xdgConfigFiles = /home/cjpbirkbeck/code/dots/home/config;
 in
 {
   # Import home-manager
@@ -16,8 +19,6 @@ in
       stateVersion = "19.09"; # DO NOT CHANGE!
       sessionVariables = {
         BROWSER = "qutebrowser";
-        XCOMPOSEFILE = "$HOME/.config/X11/XCompose";
-        XCOMPOSECACHE = "$HOME/.config/X11/XCompose";
         GTK_IM_MODULE = "xim";
         QT_IM_MODULE = "xim";
         QT_QPA_PLATFORMTHEME = "qt5ct";
@@ -27,51 +28,45 @@ in
 
       file = {
         tmuxp-default = {
-          source = ./home-manager/tmuxp.yaml;
-          target = "Templates/.tmuxp.yaml";
+          source = homeConfigFiles + /templates/tmuxp.yaml;
+          target = "./Templates/tmuxp.yaml";
         };
 
         weatherrc = {
-          source = ./home-manager/weatherrc;
+          source = homeConfigFiles + /weatherrc;
           target = ".weatherc";
         };
 
         vimpc = {
-          source = ./home-manager/vimpcrc;
+          source = homeConfigFiles + /vimpcrc;
           target = ".vimpcrc";
         };
 
         XCompose = {
-          source = ./home-manager/XCompose;
+          source = homeConfigFiles + /XCompose;
           target = ".XCompose";
         };
 
         peekat = {
-          source = ./home-manager/bin/peekat;
+          source = homeConfigFiles + /local/bin/peekat;
           target = ".local/bin/peekat";
           executable = true;
         };
 
         unicode-chars = {
-          source = ./home-manager/unicode-chars;
+          source = homeConfigFiles + /local/share/unicode-chars;
           target = ".local/share/unicode-chars";
         };
 
         openup = {
-          source = ./home-manager/bin/openup;
+          source = homeConfigFiles + /local/bin/openup;
           target = ".local/bin/openup";
           executable = true;
         };
 
         localbackup = {
-          source = ./home-manager/bin/localbackup;
+          source = homeConfigFiles + /local/bin/localbackup;
           target = ".local/bin/localbackup";
-          executable = true;
-        };
-
-        takepicof = {
-          source = ./home-manager/bin/takepicof;
-          target = ".local/bin/takepicof";
           executable = true;
         };
       };
@@ -140,7 +135,7 @@ in
           style = "full";
         };
         themes = {
-          desert = builtins.readFile ./home-manager/bat/themes/Desert.tmTheme;
+          desert = builtins.readFile /home/cjpbirkbeck/code/dots/home/config/bat/themes/Desert.tmTheme;
         };
       };
 
@@ -296,7 +291,7 @@ in
           save = 2147483647;
           path = ".local/share/zsh/history";
         };
-        initExtra = builtins.readFile ./home-manager/zsh/functions.sh;
+        initExtra = builtins.readFile /home/cjpbirkbeck/code/dots/home/local/share/zsh/functions.sh;
         shellAliases = {
           "_" = "doas";
           "__" = "doas -s";
@@ -367,67 +362,49 @@ in
     # Use nix to manage the plugins globally, while configuring them per-user.
     xdg = {
       configFile = {
-        "alacritty/alacritty.yml" = {
-          source = ./home-manager/alacritty/alacritty.yml;
+        alacritty = {
+          source = xdgConfigFiles + "/alacritty/alacritty.yml";
         };
 
         "khard/config,conf" = {
-          source = ./home-manager/khard/khard.conf;
+          source = xdgConfigFiles + /khard/khard.conf;
         };
 
         "rofi-pass/config" = {
-          source = ./home-manager/rofi-pass/config;
+          source = xdgConfigFiles + /rofi-pass/config;
         };
 
-        # "vifm" = {
-        #   source = ./home-manager/vifm;
-        # };
-
         "neofetch/config.conf" = {
-          source = ./home-manager/neofetch/config.conf;
+          source = xdgConfigFiles + /neofetch/config.conf;
         };
 
         "sxiv/exec/key-handler" = {
-          source = ./home-manager/sxiv/exec/key-handler;
+          source = xdgConfigFiles + /sxiv/exec/key-handler;
           executable = true;
         };
 
         "sxiv/exec/image-info" = {
-          source = ./home-manager/sxiv/exec/image-info;
+          source = xdgConfigFiles + /sxiv/exec/image-info;
           executable = true;
         };
 
         "sxiv/exec/rename.sh" = {
-          source = ./home-manager/sxiv/exec/rename.sh;
+          source = xdgConfigFiles + /sxiv/exec/rename.sh;
           executable = true;
         };
 
-        "rofi/themes/Material-Ocean.rasi" = {
-          source = ./home-manager/rofi/Material-Ocean.rasi;
-        };
-
-        "rofi/themes/flat-orange.rasi" = {
-          source = ./home-manager/rofi/flat-orange.rasi;
-        };
-
         "rofi/themes/flat-ocean.rasi" = {
-          source = ./home-manager/rofi/flat-ocean.rasi;
+          source = xdgConfigFiles + /rofi/themes/flat-ocean.rasi;
         };
 
         "tmuxp/general.yaml" = {
-          source = ./home-manager/tmuxp/general.yaml;
-        };
-
-        # These files *should* point to the root directory,
-        # assuming that xdg.configFile symlinks to ~/.config
-        "X11/XCompose" = {
-          source = ./home-manager/XCompose;
+          source = xdgConfigFiles + /tmuxp/general.yaml;
         };
 
         # Right now, vimpc does not seem be able to read the XDG
         # config file. Not sure why; keeping both versions until that is fixed.
         "./vimpc/.vimpcrc" = {
-          source = ./home-manager/vimpcrc;
+          source = homeConfigFiles + /vimpcrc;
         };
       };
 
@@ -454,7 +431,7 @@ in
         enable = true;
         desktop = "\$HOME/dt";
         download = "\$HOME/dls";
-        templates = "\$HOME/tp";
+        templates = "\$HOME/tpls";
         music = "\$HOME/audio";
         pictures = "\$HOME/images";
         publicShare = "\$HOME/pub";

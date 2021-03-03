@@ -16,8 +16,8 @@ local mwf_increment = 0.05
 local mwf_default = 0.5
 
 -- Programs
-local finder = "st -c st-dialog -t Finder -g 140x45 -e " .. rc.exec_d .. "find-file.sh"
-local _SYS_MON = "st -e gotop"
+local finder = rc.float_term_ed .. " -t Finder -d 140 45 -e " .. rc.exec_d .. "find-file.sh"
+local _SYS_MON = rc.float_term_ed .. " -e gotop"
 
 -- Functions
 local function create_prompt(question, action)
@@ -327,6 +327,7 @@ for i = 1, 9 do
                         if tag and #current > 1 or tag ~= first then
                             awful.tag.viewtoggle(tag)
                         end
+                        awful.client.focus.byidx(0)
                   end,
                   {description = "Toggle tag #"..i, group = "Tag"}),
 

@@ -1,6 +1,0 @@
-[default]
-cache=True
-cache_data=True
-cache_search=True
-cachedir=~/.cache/weather
-cacheage=900

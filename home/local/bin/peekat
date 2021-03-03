@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # Generates a textual previews of a file, based on its file extension and mimetype.
 # Otherwise, it prints out some file information.
 
@@ -10,9 +10,10 @@ set -C -f
 IFS=$'\n'
 WINDOW_WIDTH="${COLUMNS}"
 # Hack for working with fzf, as $FZF_PREVIEW_COLUMNS doesn't seem to work.
-test -n PEEKAT_WITH_FZF && WINDOW_WIDTH=$(( COLUMNS / 2 - 4))
+test -n "$PEEKAT_WITH_FZF" && WINDOW_WIDTH=$(( COLUMNS / 2 - 4 ))
+# Hack for working with vifm, passing preview window size as the second argument.
+test -n "$PEEKAT_WITH_VIFM" && WINDOW_WIDTH="${2}"
 PAGE_LIMIT=10
-ROW_LIMIT=90
 
 # Process the file path and find its file extension.
 examine_file_path() {
@@ -20,18 +21,18 @@ examine_file_path() {
 
     FILE_PATH="$path"
     FILE_EXT="${FILE_PATH##*.}"
-    FILE_EXT_LOWER=$(echo "${FILE_EXT}" | tr '[:upper:]' '[:lower:]')
+    FILE_EXT_LOWER="$(echo '${FILE_EXT}' | tr '[:upper:]' '[:lower:]')"
 }
 
 # Print out dashes to fill the screen.
 printbreak() {
     for ((i=0; i<WINDOW_WIDTH; i++)); do printf '—'; done
+    printf '\n'
 }
 
 # Various processing functions for converting various file formats into useful text-based representations.
 
 process_pdf () {
-    echo "${WINDOW_WIDTH}"
     pdftotext -l "${PAGE_LIMIT}" -nopgbrk -q -- "${FILE_PATH}" - | fold -s -w "${WINDOW_WIDTH}"
     printbreak
     exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
@@ -58,8 +59,8 @@ process_torrent() {
     exit 0
 }
 
-process_opendocs() {
-    odt2txt "${FILE_PATH}" -w "${WINDOW_WIDTH}"
+process_odt() {
+    odt2txt --width="${WINDOW_WIDTH}" "${FILE_PATH}"
     exit 0
 }
 
@@ -88,7 +89,8 @@ process_struct_text() {
 process_image() {
     img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
     printbreak
-    exiftool "${FILE_PATH}"
+    mediainfo "${FILE_PATH}"
+    exit 0
 }
 
 process_multimedia() {
@@ -100,10 +102,12 @@ process_multimedia() {
 
 process_ms_excel() {
     xls2csv -- "${FILE_PATH}"
+    exit 0
 }
 
 process_ms_excelx() {
     xlsx2csv -- "${FILE_PATH}"
+    exit 0
 }
 
 process_directory() {
@@ -117,6 +121,9 @@ handle_extension() {
         rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
             process_compressed
             ;;
+        png|jpg|jpeg)
+            process_image
+            ;;
         nix|md|markdown|txt)
             process_struct_text
             ;;
@@ -129,9 +136,9 @@ handle_extension() {
         torrent)
             process_torrent
             ;;
-        odt|ods|odp|sxw)
-            process_opendocs
-            ;;
+        # odt|ods|odp|sxw)
+        #     process_odt
+        #     ;;
         htm|html|xhtml)
             process_html
             ;;
@@ -159,6 +166,10 @@ handle_mime() {
             ;;
         application/msword)
             process_ms_word
+            ;;
+        application/vnd.oasis.opendocument.text|application/vnd.oasis.opendocument.spreadsheet|\
+        application/vnd.oasis.opendocument.presentation)
+            process_odt
             ;;
         application/vnd.openxmlformats-officedocument.wordprocessingml.document)
             process_ms_wordx
@@ -191,8 +202,6 @@ handle_mime() {
 }
 
 handle_fallback() {
-    local mimetype="${1}"
-
     echo "Previewer cannot generate a preview based on its extension or mimetype."
     echo "File Path: ${FILE_PATH}"
     echo "File Extension: ${FILE_EXT}"
@@ -200,7 +209,7 @@ handle_fallback() {
     exit 1
 }
 
-handle_extension
+examine_file_path "${1}"
 MIMETYPE="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
 handle_mime "${MIMETYPE}"
 handle_fallback "${MIMETYPE}"

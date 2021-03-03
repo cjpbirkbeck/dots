@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# Search through directories and open one in a new terminal.
-
-selected="$(fasd -Rdl | fzf --no-sort --no-multi --ansi --preview="ls -gAGh --color --group-directories-first {}" --preview-window=up)"
-
-setsid --fork termite --directory="$selected"
