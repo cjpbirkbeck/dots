@@ -2,10 +2,11 @@ session_name: General
 windows:
     - window_name: Main
       panes:
-          - null
-    - window_name: Calc
+          - neofetch
+    - window_name: Email
       panes:
-          - calc
+          - neomutt
+          - mbsync -a
     - window_name: Music
       panes:
           - vimpc

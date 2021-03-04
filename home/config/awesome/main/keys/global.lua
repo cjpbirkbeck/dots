@@ -16,8 +16,8 @@ local mwf_increment = 0.05
 local mwf_default = 0.5
 
 -- Programs
-local finder = rc.float_term_ed .. " -t Finder -d 140 45 -e " .. rc.exec_d .. "find-file.sh"
-local _SYS_MON = rc.float_term_ed .. " -e gotop"
+local finder = rc.float_term_em .. " -t Finder -d 140 45 -e " .. rc.exec_d .. "find-file.sh"
+local _SYS_MON = rc.float_term_em .. " -e gotop"
 
 -- Functions
 local function create_prompt(question, action)
@@ -29,7 +29,7 @@ local global_keys = gears.table.join(
     awful.key({ super }, "Return", function () awful.spawn(rc.term_emu) end,
               {description = "spawn a terminal", group = "launch"}),
 
-    awful.key({ super, shift }, "Return", function() awful.spawn.with_shell(rc.term_emu .. " -c st-float") end,
+    awful.key({ super, shift }, "Return", function() awful.spawn.with_shell(rc.float_term_em) end,
               { description = "Create a floating terminal", group = "Launch"}),
 
     awful.key({ super }, "space", function () awful.spawn(rc.exec_d .. "rofi-tmux.sh") end,

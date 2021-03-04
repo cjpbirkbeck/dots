@@ -43,7 +43,7 @@ rc.launcher     = "rofi -show-icons -show drun"
 rc.win_switcher = "rofi -show window"
 
 rc.term_emu      = "st"
-rc.float_term_ed = "alacritty"
+rc.float_term_em = "alacritty"
 rc.browser       = "qutebrowser"
 rc.email         = "thunderbird"
 rc.file_man      = "pcmanfm-qt"

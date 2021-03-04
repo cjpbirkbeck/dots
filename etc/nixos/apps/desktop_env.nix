@@ -5,6 +5,8 @@
 let
   unstable = import <unstable> {};
 
+  # These are absolute paths, which isn't ideal.
+  # Some be replaced with path relative to ether this file or the main file.
   homeConfigFiles = /home/cjpbirkbeck/code/dots/home;
   xdgConfigFiles = /home/cjpbirkbeck/code/dots/home/config;
 in
@@ -19,9 +21,8 @@ in
       stateVersion = "19.09"; # DO NOT CHANGE!
       sessionVariables = {
         BROWSER = "qutebrowser";
-        GTK_IM_MODULE = "xim";
-        QT_IM_MODULE = "xim";
         QT_QPA_PLATFORMTHEME = "qt5ct";
+        XCOMPOSECACHE = "$HOME/.cache/Xcompose/";
         TMUXP_CONFIGDIR = "$HOME/.config/tmuxp";
         UNICODE_CHARS = "$HOME/.local/share/unicode-chars";
       };
@@ -34,7 +35,7 @@ in
 
         weatherrc = {
           source = homeConfigFiles + /weatherrc;
-          target = ".weatherc";
+          target = ".weatherrc";
         };
 
         vimpc = {
@@ -173,6 +174,13 @@ in
         enable = true;
       };
 
+      readline = {
+        enable = true;
+        extraConfig = ''
+          
+        '';
+      };
+
       rofi = {
         enable = true;
         theme = "~/.config/rofi/themes/flat-ocean";
@@ -297,6 +305,8 @@ in
           "__" = "doas -s";
 
           "nrb" = "sudo nixos-rebuild";
+
+          "units" = "units --history $HOME/.cache/readline/units_history";
         };
       };
 
@@ -362,7 +372,7 @@ in
     # Use nix to manage the plugins globally, while configuring them per-user.
     xdg = {
       configFile = {
-        alacritty = {
+        "alacritty/alacritty.yml" = {
           source = xdgConfigFiles + "/alacritty/alacritty.yml";
         };
 
