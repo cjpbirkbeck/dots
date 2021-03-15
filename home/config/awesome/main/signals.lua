@@ -68,11 +68,12 @@ screen.connect_signal("arrange",
 
 -- Add icons for st terminals.
 client.connect_signal("manage", function(c)
-    if c.class == "st-256color" or c.class == "st-dialog" or c.class == "st-float" then
+    if c.class == "st-256color" then
         local new_icon = gears.surface(menubar.utils.lookup_icon(rc.theme_d .. "st.svg"))
         c.icon = new_icon._native
     end
 end)
 
+-- Signals for change border colouring when changing focus.
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
