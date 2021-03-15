@@ -4,14 +4,13 @@
 
 {
   # Set your time zone.
-  time.timeZone = "America/Montreal";
+  time.timeZone = "America/Toronto";
 
   i18n.defaultLocale = "en_CA.UTF-8";
 
   # Select internationalisation properties.
   console = {
     font = "Lat2-Terminus16";
-    # keyMap = "us";
     useXkbConfig = (if config.services.xserver.enable then true else false);
     # Use the Oceanic Material colours
     colors = [

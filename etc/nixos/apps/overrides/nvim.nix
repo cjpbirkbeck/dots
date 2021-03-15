@@ -173,5 +173,6 @@ in {
   environment.shellAliases = {
     v = "nvim";
     view  = "nvim -R";
+    vimdiff = "nvim -d";
   };
 }

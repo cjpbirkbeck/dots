@@ -16,12 +16,12 @@
 local floor  = math.floor
 local screen = screen
 
--- TODO: Add icon support (use lain's cascadetilew.png as an interm icon.
+-- TODO: Add icon support (use lain's cascadetilew.png as an interm icon).
 
 -- @beautiful beautiful.layout_deck
 local deck = {
     name     = "deck",
-    icon = "/home/cjpbirkbeck/.config/awesome/theme/default/layouts/cascadetilew.png",
+    icon = "/home/cjpbirkbeck/.config/awesome/theme/layouts/cascadetilew.png",
     horizontal     = {
         name          = "horideck",
     },

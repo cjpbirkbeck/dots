@@ -9,6 +9,15 @@ let
   # Some be replaced with path relative to ether this file or the main file.
   homeConfigFiles = /home/cjpbirkbeck/code/dots/home;
   xdgConfigFiles = /home/cjpbirkbeck/code/dots/home/config;
+
+  largest32Int = 2147483647;
+
+  commonAliases = {
+    "_" = "doas";
+    "__" = "doas -s";
+
+    "nrb" = "sudo nixos-rebuild";
+  };
 in
 {
   # Import home-manager
@@ -140,16 +149,17 @@ in
         };
       };
 
+      dircolors = {
+        enable = true;
+      };
+
       direnv = {
         enable = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true;
+        enableNixDirenvIntegration = true;
       };
 
       fzf = {
         enable = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true;
         changeDirWidgetOptions = [
           "--preview='ls -gAGh --color --group-directories-first {}'"
           "--ansi"
@@ -162,12 +172,24 @@ in
         ];
       };
 
+      gh = {
+        enable = true;
+      };
+
       git = {
         enable = true;
         package = pkgs.gitAndTools.gitFull;
         ignores = [ ".envrc" "shell.nix" ".tmuxp.yaml" ];
         userName = "Christopher Birkbeck";
         userEmail = "cjpbirkbeck@gmail.com";
+        extraConfig = {
+          pull = {
+            rebase = false;
+          };
+        };
+        delta = {
+          enable = true;
+        };
       };
 
       jq = {
@@ -203,8 +225,6 @@ in
 
       pazi = {
         enable = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true;
       };
 
       taskwarrior = {
@@ -295,24 +315,19 @@ in
         dotDir = ".config/zsh";
         history = {
           extended = true;
-          size = 2147483647;
-          save = 2147483647;
+          size = largest32Int;
+          save = largest32Int;
           path = ".local/share/zsh/history";
         };
         initExtra = builtins.readFile /home/cjpbirkbeck/code/dots/home/local/share/zsh/functions.sh;
-        shellAliases = {
-          "_" = "doas";
-          "__" = "doas -s";
-
-          "nrb" = "sudo nixos-rebuild";
-
-          "units" = "units --history $HOME/.cache/readline/units_history";
-        };
+        shellAliases = commonAliases;
       };
 
       bash = {
         enable = true;
-        historyFile = ".local/share/bash/history";
+        historyFile = "\$HOME/.local/share/bash/history";
+        historyFileSize = largest32Int;
+        shellAliases = commonAliases;
       };
 
       zathura = {
@@ -410,12 +425,6 @@ in
         "tmuxp/general.yaml" = {
           source = xdgConfigFiles + /tmuxp/general.yaml;
         };
-
-        # Right now, vimpc does not seem be able to read the XDG
-        # config file. Not sure why; keeping both versions until that is fixed.
-        "./vimpc/.vimpcrc" = {
-          source = homeConfigFiles + /vimpcrc;
-        };
       };
 
       mimeApps = {
@@ -457,7 +466,6 @@ in
         enable = true;
 
         luaModules = with pkgs.luaPackages; [
-
           vicious
         ];
       };

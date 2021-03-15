@@ -5,3 +5,5 @@ set drawbox
 set number
 set relativenumber
 set icons
+
+set previewer ~/.config/lf/preview

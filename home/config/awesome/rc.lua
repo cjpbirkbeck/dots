@@ -23,7 +23,7 @@ require("awful.autofocus")
 
 -- Global Variables --
 
--- Store in a single table, to better track them.
+-- Store in a single table, to better keep track them.
 rc = {}
 
 -- Directories

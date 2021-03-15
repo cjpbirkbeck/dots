@@ -178,6 +178,34 @@ nnoremap <leader>b :buffers<CR>:b<space>
 
 " }}}
 
+" {{{ FZF Menus
+
+if has('nvim')
+    nnoremap <silent> <A-b>f     :Files<CR>
+    nnoremap <silent> <A-b><A-f> :Files<CR>
+
+    nnoremap <silent> <A-b>b     :Buffers<CR>
+    nnoremap <silent> <A-b><A-b> :Buffers<CR>
+
+    nnoremap <silent> <A-b>l     :Lines<CR>
+    nnoremap <silent> <A-b><A-l> :Lines<CR>
+
+    nnoremap <silent> <A-b>r     :Rg
+    nnoremap <silent> <A-b><A-r> :Rg
+
+    nnoremap <silent> <A-b>s     :Snippets<CR>
+    nnoremap <silent> <A-b><A-s> :Snippets<CR>
+
+    nnoremap <silent> <A-b>;     :History:<CR>
+    nnoremap <silent> <A-b><A-;> :History:<CR>
+
+    nnoremap <silent> <A-b>/     :History/<CR>
+    nnoremap <silent> <A-b><A-/> :History/<CR>
+
+endif
+
+" }}}
+
 " }}}
 
 " Editing {{{
@@ -220,12 +248,6 @@ nnoremap <silent> <leader>l :nohlsearch<CR>
 set smartindent  " Turns on smart-indenting.
 set expandtab    " Replaces default tab with number of spaces.
 set shiftwidth=4 " Set the number of spaces for each indent.
-
-" Insert brackets and quotation marks with their matching pair.
-" inoremap ( ()<ESC>i
-" inoremap [ []<ESC>i
-" inoremap { {}<ESC>i
-" inoremap " ""<ESC>i
 
 " Either insert pairs for punctation that can, but normally isn't used for
 " pairs, or insert a opening bracket with the matching pair.
@@ -333,7 +355,7 @@ augroup END
 
 " }}}
 
-" rasi files {{{
+" Rasi files {{{
 
 augroup rasi
     autocmd!

@@ -54,6 +54,7 @@
       # Colourize commands.
       less  = "less -R";
       tree  = "tree -C --dirsfirst";
+      diff  = "diff --color=auto";
       grep  = "grep --color=auto";
       fgrep = "fgrep --color=auto";
       egrep = "egrep --color=auto";

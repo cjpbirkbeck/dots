@@ -60,8 +60,6 @@ awful.rules.rules = {
           "Cheese",
           "asunder",
           "Alacritty",
-          "st-float",
-          "st-dialog",
           "flameshot",
           "Qalculate-gtk"
         },
@@ -70,11 +68,16 @@ awful.rules.rules = {
         -- and the name shown there might not match defined rules here.
         name = {
           "Event Tester",  -- xev.
+          "About Firefox",
+          "About LibreWolf",
         },
         role = {
           "AlarmWindow",  -- Thunderbird's calendar.
           "ConfigManager",  -- Thunderbird's about:config.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+          "About",
+          "page-info",
+          "Organizer",
         },
         type = { "dialog" }
       }, properties = { floating = true, placement = awful.placement.centered } },
@@ -87,12 +90,13 @@ awful.rules.rules = {
     { rule_any = { class = { "pcmanfm-qt", "pcmanfm", "dolphin", "Gnome-disks", "ark", "Qalculate-gtk" } },
       properties = { tag = "Home" } },
 
-    { rule_any = { class = { "qutebrowser", "Firefox", "Brave", "Tor Browser", "Vimb", } },
+    { rule_any = { class = { "qutebrowser", "Firefox", "Brave", "Tor Browser", "Vimb", "LibreWolf" } },
       properties = { tag = "Web" } },
 
     { rule_any = { class = { "Daily", "Thunderbird", "nheko", "qTox", "zoom" } },
       properties = { tag = "Email" } },
 
+      -- LibreOffice doesn't seem to quite work with the rules here.
     { rule_any = { class = { "Zathura", "okular", "libreoffice", "libreoffice-writer", "libreoffice-calc",
                          "libreoffice-impress", "libreoffice-draw", "libreoffice-base" } },
       properties = { tag = "Documents" } },
@@ -103,7 +107,7 @@ awful.rules.rules = {
     { rule_any = { class = { "Audacity", "Asunder", "Gbh", ".brasero-wrapped_", "brasero", "Cheese" } },
       properties = { tag = "Multimedia" } },
 
-    { rule_any = { class = { "Gnome-mines", "Steam", "Rftg", "ksudoku" } },
+    { rule_any = { class = { "Quadrapassel", "Gnome-mines", "Steam", "Rftg", "ksudoku" } },
       properties = { tag = "Games" } },
 
     { rule_any = { class = { "VirtualBox Manager", "VirtualBox Machine" } },

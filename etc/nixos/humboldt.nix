@@ -38,28 +38,11 @@
     ./apps/applications.nix
     ./apps/overrides/scripts.nix
     ./apps/scripts/rofi-as-dmenu.nix
-    ./apps/dev-env/lisp.nix
+    # ./apps/dev-env/lisp.nix
     ./apps/dev-env/golang.nix
-    ./apps/syncthing.nix
+    # ./apps/syncthing.nix
     # ./apps/dev-env/rust.nix
   ];
-
-  security = {
-    doas = {
-      enable = true;
-
-      extraRules = [
-        {
-          groups = [ "doas" ];
-          persist = true;
-        }
-        {
-          groups = [ "wheel" ];
-          persist = true;
-        }
-      ];
-    };
-  };
 
   services = {
     avahi = {
