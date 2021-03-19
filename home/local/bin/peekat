@@ -180,7 +180,7 @@ handle_mime() {
         application/pdf)
             process_pdf
             ;;
-        application/epub)
+        application/epub+zip)
             process_epub
             ;;
         image/*)

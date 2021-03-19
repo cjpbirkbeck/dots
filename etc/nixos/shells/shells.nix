@@ -1,4 +1,4 @@
-# System-wide configuration for all (POSIX-compatible) shells.
+# System-wide configuration for all (POSIX-compatible) shells and shell-like programs.
 
 { config, pkgs, ... }:
 
@@ -11,10 +11,6 @@
     shells = with pkgs; [ bashInteractive zsh ];
 
     variables = {
-      LESSHISTFILE = "$HOME/.local/share/less/history";
-      LESSKEY = "$HOME/.config/less/lesskey";
-
-      BAT_STYLE = "full";
     };
 
     shellAliases = {
@@ -66,10 +62,7 @@
       fr    = "free --human";
 
       # Aliases for nix programs.
-      nrb   = "nixos-rebuild";
       nev   = "nix-env";
-      ncg   = "nix-collect-garbage";
-      nsh   = "nix-shell";
     };
   };
 

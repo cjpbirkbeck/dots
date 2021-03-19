@@ -86,6 +86,7 @@
     ncdu                      # Filesystem size browser
     neomutt                   # Ncurses email client
     neovim-qt_with_plugins    # GUI frontend using Qt.
+    gnvim_with_plugins        # Another GUI frontend using Qt, but with Rust.
     neovim-remote             # Control remote instances of neovim.
     neovim_with_plugins       # Customized neovim.
     newsboat                  # RSS/Atom feed reader
@@ -194,7 +195,5 @@ in
   environment.variables = {
     LESSHISTFILE = "$HOME/.local/share/less/history";
     LESSKEY = "$HOME/.config/less/lesskey";
-
-    BAT_STYLE = "full";
   };
 }

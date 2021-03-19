@@ -1,4 +1,5 @@
 # System-wide configuation for tmux.
+# Should only apply to headless configurations.
 
 { config, pkgs, ... } :
 
@@ -18,7 +19,7 @@
         set -g status-keys emacs
 
         # Split windows with more intuitive keybindings
-        bind | split-window -h
+        bind \ split-window -h
         bind - split-window -v
 
         bind C-- delete-buffer
@@ -29,7 +30,7 @@
         # Set the default status bar style.
         set -g status-right ' #{?client_prefix,#[reverse]<Prefix>#[noreverse] ,}"#{=21:pane_title}" %H:%M %d-%b-%y'
         set -g status-style 'fg=#87ceeb,bold,bg=#4e4e4e'
-        set -g status-position top
+        set -g status-position bottom
 
         # Pane border style
         set -g pane-active-border-style 'fg=#ffffff,bg=#00FF7F'

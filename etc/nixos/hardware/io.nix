@@ -1,5 +1,5 @@
-# Configure the keyboard and mouse for my user, remaping different keys for different
-# machines
+# Configure the keyboard and mouse for my user,
+# remaping different keys for different machines.
 
 { config, pkgs, ... }:
 

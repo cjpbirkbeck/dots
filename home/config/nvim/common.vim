@@ -217,7 +217,7 @@ endif
 nnoremap Q @@
 
 " Remap gQ to repeat the last macro.
-nnoremap gQ @@
+" nnoremap gQ @@
 
 " }}}
 
@@ -259,7 +259,7 @@ inoremap <A-'> ''<ESC>i
 inoremap <A-"> ""<ESC>i
 inoremap <A-`> ``<ESC>i
 
-" Insert blank lines above or below the current line.
+" Insert a blank line above or below the current line.
 nnoremap <leader>o m`A<CR><ESC>``
 nnoremap <leader>O m`ko<ESC>``
 
@@ -349,8 +349,8 @@ augroup vifm
     autocmd!
     autocmd BufRead *.vifm set filetype=vim
     autocmd BufRead */vifmrc set filetype=vim
-    autocmd BufRead $HOME/.config/vifm/vifm-help.txt set filetype=help
     autocmd BufRead */vimpcrc set filetype=vim
+    autocmd BufRead vifm-help.txt set filetype=help
 augroup END
 
 " }}}

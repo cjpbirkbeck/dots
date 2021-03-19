@@ -15,7 +15,8 @@
   '' + (if services.xserver.enable then
   ''
     Xserver:   Enabled
-  '' else
+  ''
+    else
   ''
     Xserver:   Disabled
   '');
@@ -28,13 +29,13 @@
         {
           groups = [ "wheel" ];
           persist = true;
-          keepEnv = true;
         }
-        # {
-        #   groups = [ "wheel" ];
-        #   cmd = "${config.system.build.nixos-rebuild}/bin/nixos-rebuild";
-        #   setEnv = [ "NIX_CONFIG" ];
-        # }
+        {
+          users = [ "cjpbirkbeck" ];
+          cmd = "${config.system.build.nixos-rebuild}/bin/nixos-rebuild";
+          persist = true;
+          setEnv = [ "NIX_CONFIG" ];
+        }
       ];
     };
   };
@@ -42,7 +43,12 @@
   # Define my basic user details.
   users = {
     groups = {
-      doas = { };
+      doas = {
+        members = [ "cjpbirkbeck" ];
+      };
+      vboxusers = {
+        members = [ "cjpbirkbeck" ];
+      };
     };
     users.cjpbirkbeck = {
       description = "Christopher Birkbeck";

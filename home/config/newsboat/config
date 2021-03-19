@@ -46,8 +46,7 @@ bind-key G end
 bind-key s sort
 bind-key S rev-sort
 
-# Set browser
-browser qutebrowser
+bind-key w save
 
 # Open podboat
 macro   p set browser "podboat"; open-in-browser ; set browser firefox

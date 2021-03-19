@@ -39,9 +39,7 @@
     ./apps/gaming.nix
     ./apps/overrides/scripts.nix
     ./apps/scripts/rofi-as-dmenu.nix
-    # ./apps/dev-env/lisp.nix
     ./apps/dev-env/golang.nix
-    # ./apps/dev-env/rust.nix
   ];
 
   boot.loader = {

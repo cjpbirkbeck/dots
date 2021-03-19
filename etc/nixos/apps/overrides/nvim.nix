@@ -128,18 +128,12 @@ in {
             ultisnips           # Snippet manager.
             vim-snippets        # Collection of prebuilt snippets.
             LanguageClient-neovim # Language server for neovim
-            # ncm2                # Autocompletion
-            # ncm2-bufword        # Suggestion words for currently opened buffers
-            # ncm2-path           # Generates suggestions from paths
-            # ncm2-ultisnips      # Generates suggestions from snippets
             vim-test            # Automatic testing.
             ale                 # Multi-language linter.
 
             # Filetype specific plugins
             vim-nix                # Adds nix syntax colouring and file detection to vim.
             vim-tmux               # Adds support for modifying tmux config files.
-            # vim-pandoc             # Integrate pandoc with neovim
-            # vim-pandoc-syntax      # Add syntax highlighting for pandoc's markdown files.
             vim-go                 # Plugin for extra support with Go
             vim-orgmode            # Add support for org file.
             zig-vim                # Add support for the Zig language
@@ -165,14 +159,15 @@ in {
     };
   };
 
-  environment.variables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-  };
-
-  environment.shellAliases = {
-    v = "nvim";
-    view  = "nvim -R";
-    vimdiff = "nvim -d";
+  environment = {
+    shellAliases = {
+      v = "nvim";
+      view  = "nvim -R";
+      vimdiff = "nvim -d";
+    };
+    variables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
   };
 }

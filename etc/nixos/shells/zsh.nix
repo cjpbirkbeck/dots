@@ -98,6 +98,14 @@
 
       zle -N zle-keymap-select
 
+      # Remove any changes to the prompt when set up a new line.
+      # Without it, the [CMD] prompt doesn't disappear you execute within vi command mode.
+      # Does not quite work, you have enter another line to work.
+      zle-line-init () {
+        RPROMPT="''${RPROMPT/\[CMD\]/}"
+      }
+
+      zle -N zle-line-init
       '';
 
       shellInit = ''
@@ -118,7 +126,7 @@
         zle -N slash-backwards-kill-word
         bindkey '\e^?' slash-backwards-kill-word
 
-        # Edit line in editor
+        # Set alt-e to edit current line within a text editor.
         autoload -Uz edit-command-line
         zle -N edit-command-line
         bindkey '^[e' edit-command-line
@@ -128,6 +136,7 @@
         # to add other keys to this hash, see: man 5 terminfo
         typeset -g -A key
 
+        # Search history for lines that match the current line.
         autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
         zle -N up-line-or-beginning-search
         zle -N down-line-or-beginning-search
@@ -145,7 +154,7 @@
         key[PageDown]="''${terminfo[knp]}"
         key[ShiftTab]="''${terminfo[kcbt]}"
 
-        # setup key accordingly
+        # Setup keys accordingly
         [[ -n "''${key[Home]}"      ]] && bindkey -- "''${key[Home]}"      beginning-of-line
         [[ -n "''${key[End]}"       ]] && bindkey -- "''${key[End]}"       end-of-line
         [[ -n "''${key[Insert]}"    ]] && bindkey -- "''${key[Insert]}"    overwrite-mode
@@ -173,6 +182,7 @@
           add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
         fi
 
+        # Get help for various subcommands.
         autoload -Uz run-help
         unalias run-help
         alias help=run-help

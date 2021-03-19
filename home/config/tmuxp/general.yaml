@@ -1,21 +1,24 @@
-session_name: General
+session_name: general
 windows:
     - window_name: Main
       panes:
           - neofetch
     - window_name: Email
       panes:
-          - neomutt
-          - mbsync -a
+          - mbsync -aV ; neomutt -v
+    - window_name: Calendar
+      panes:
+          - calcurse --version
+          - task --version ; vit --version
     - window_name: Music
       panes:
-          - vimpc
+          - vimpc --version
     - window_name: Reddit
       panes:
-          - tuir
+          - tuir --version
     - window_name: RSS Feeds
       panes:
-          - newsboat
+          - newsboat --version
     - window_name: IRC
       panes:
-          - weechat
+          - weechat --version

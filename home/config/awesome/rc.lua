@@ -66,7 +66,7 @@ require("main.screens")
 
 -- Set keybindings and mouse bindings
 -- Mouse bindings active only on the root window (area without any clients)
-root.buttons(require("main.keys.mouse"))
+-- root.buttons(require("main.keys.mouse"))
 root.keys(require("main.keys.global"))
 require("main.keys.floatmode")
 

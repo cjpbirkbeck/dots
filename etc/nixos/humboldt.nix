@@ -18,7 +18,7 @@
     ./system/boot.nix
     ./system/fonts.nix
     ./system/locale.nix
-    ./system/upgrades.nix
+    ./system/auto-upgrade.nix
     ./system/cjpbirkbeck.nix
     ./system/blockedhosts.nix
 
@@ -36,12 +36,9 @@
     # Application specific settings
     ./apps/desktop_env.nix
     ./apps/applications.nix
+    ./apps/gaming.nix
     ./apps/overrides/scripts.nix
-    ./apps/scripts/rofi-as-dmenu.nix
-    # ./apps/dev-env/lisp.nix
-    ./apps/dev-env/golang.nix
-    # ./apps/syncthing.nix
-    # ./apps/dev-env/rust.nix
+    ./apps/devlopement/golang.nix
   ];
 
   services = {
