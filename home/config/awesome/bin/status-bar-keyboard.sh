@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env dash
 # Prints out the keyboard toggle states.
 
 awk_script=' /00:/ {

@@ -3,7 +3,7 @@
 # General
 confirm-exit yes
 feed-sort-order firsttag
-save-path ~/Documents/Text/
+save-path ~/docs/text/
 
 # Autoupdating settings
 auto-reload yes
@@ -48,9 +48,12 @@ bind-key S rev-sort
 
 bind-key w save
 
-# Open podboat
-macro   p set browser "podboat"; open-in-browser ; set browser firefox
+# Set browser
+browser ~/.config/newsboat/openbrowser.sh
+
+# Open link in firefox
+macro y set browser "firefox %u"; open-in-browser ; set browser "~/.config/newsboat/openbrowser.sh"
 
 # Podboat settings
-download-path ~/audio/Podcasts/
+download-path ~/audio/podcasts/
 player "mpv --no-video"

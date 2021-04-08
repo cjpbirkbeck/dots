@@ -28,7 +28,7 @@ include "%L"
 <Multi_key> <G> <Q> <X> : "Ξ"    U039E    # GREEK CAPITAL LETTER XI
 <Multi_key> <G> <Q> <P> : "Ψ"    U03A8    # GREEK CAPITAL LETTER PSI
 
-# greek small letters
+# Greek small letters
 <Multi_key> <g> <a> : "α"    U03B1    # GREEK SMALL LETTER ALPHA
 <Multi_key> <g> <b> : "β"    U03B2    # GREEK SMALL LETTER BETA
 <Multi_key> <g> <g> : "γ"    U03B3    # GREEK SMALL LETTER GAMMA
@@ -56,3 +56,6 @@ include "%L"
 <Multi_key> <g> <q> <p> : "ψ"    U03C8    # GREEK SMALL LETTER PSI
 <Multi_key> <g> <q> <s> : "ς"    U03C2    # GREEK SMALL LETTER FINAL SIGMA
 <Multi_key> <g> <q> <x> : "ξ"    U03BE    # GREEK SMALL LETTER XI
+
+# Pi is so common, it should have a key combination of it own.
+<Multi_key> <p> <i> : "π"    U03C0    # GREEK SMALL LETTER PI

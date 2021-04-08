@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env dash
 # Show a small glyph using weathericons and the temperature, with data from weather(1)
 
 # weather doesn't have the correct path for its data files on FreeBSD.
 [ "$(uname)" = "FreeBSD" ] && weatherpath="--setpath=/usr/local/share/weather"
 
 if ! current="$(weather ${weatherpath} --metric "${1}")"; then
-    echo " Error"
+    echo " ERR"
     exit 1
 fi
 

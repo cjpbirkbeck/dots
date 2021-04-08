@@ -16,6 +16,16 @@ let
     universal-ctags        # Tags files that will hold keyword information.
   ];
 
+  customPlugins.sonokai = pkgs.vimUtils.buildVimPlugin {
+    name = "sonokai";
+    src = pkgs.fetchFromGitHub {
+      owner = "sainnhe";
+      repo = "sonokai";
+      rev = "78f1b14ad18b043eb888a173f4c431dbf79462d8";
+      sha256 = "0spnpzr874ad9jpawcgydfm242wq55ychcky14f1qa09svsrdiv0";
+    };
+  };
+
   customPlugins.vim-characterize = pkgs.vimUtils.buildVimPlugin {
     name = "vim-characterize";
     src = pkgs.fetchFromGitHub {
@@ -140,6 +150,9 @@ in {
 
             # External plugins
             vim-ghost
+
+            # Test
+            sonokai
           ];
           # For optional plugins, loaded only when meeting certain conditions:
           # e.g. autocmd FileType foo :packadd fooCompletion

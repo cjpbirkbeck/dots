@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env dash
 # Query the weather and prints a synposis with an icon and the temperature.
 # Created on Monday December 17, 2018.
 # Created by Christopher Birkbeck

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/env/env dash
 
 sel="$(printf %s "Yes|No" | rofi -dmenu -sep "|" -p "Shutdown your system?")"
 

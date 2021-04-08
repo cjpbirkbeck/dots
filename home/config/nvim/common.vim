@@ -68,9 +68,9 @@ set title                      " Set title of terminal.
 set number                     " Prints the line numbers on the left margin.
 set relativenumber             " Prints the relative line numbers on the left margin.
 set showmatch                  " Prints the matching bracket.
-set showmode                   " Do not print non-normal mode status.
+set showmode                   " Show non-normal mode status.
 set lazyredraw                 " Does not redraws screen during operations.
-set confirm                    " Prints a confirmation command.
+set confirm                    " Always a confirmation failable commands.
 set scrolloff=3                " Cursor will always be 3 lines above or below the screen margins.
 set list                       " Show tabs and EOL.
 set wildmenu                   " Use the advanced 'wildcard' menu for completion.
@@ -86,7 +86,7 @@ set colorcolumn=80,100         " Colour the 80th and 100th columns.
 if has('nvim')
     syntax enable                   " Enable syntax colouring.
     set termguicolors               " Use the true (24-bit) colours instead of the terminal options.
-    colorscheme savanna             " Use my customized theme, located at colors/cjpb-desert.vim.
+    colorscheme savanna             " Use my customized theme, located at colors/savanna.vim.
 endif
 
 " Changes cursor shape depending on the current mode.
@@ -180,10 +180,13 @@ nnoremap <leader>b :buffers<CR>:b<space>
 
 " {{{ FZF Menus
 
+" Creat keybindings for various fzf.vim functions.
 if has('nvim')
+    " Search files within the directory.
     nnoremap <silent> <A-b>f     :Files<CR>
     nnoremap <silent> <A-b><A-f> :Files<CR>
 
+    " Search loaded buffers
     nnoremap <silent> <A-b>b     :Buffers<CR>
     nnoremap <silent> <A-b><A-b> :Buffers<CR>
 
@@ -201,7 +204,6 @@ if has('nvim')
 
     nnoremap <silent> <A-b>/     :History/<CR>
     nnoremap <silent> <A-b><A-/> :History/<CR>
-
 endif
 
 " }}}

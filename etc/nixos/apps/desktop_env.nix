@@ -29,7 +29,7 @@ in
     home = {
       stateVersion = "19.09"; # DO NOT CHANGE!
       sessionVariables = {
-        # BROWSER = "qutebrowser";
+        BROWSER = "qutebrowser";
         LESSHISTFILE = "$HOME/.local/share/less/history";
         LESSKEY = "$HOME/.config/less/lesskey";
         QT_QPA_PLATFORMTHEME = "qt5ct";
@@ -273,7 +273,7 @@ in
           set -g status-keys emacs
 
           # Split windows with more intuitive keybindings
-          bind \ split-window -h
+          bind \\ split-window -h
           bind - split-window -v
 
           bind C-- delete-buffer
