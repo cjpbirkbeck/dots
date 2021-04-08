@@ -41,7 +41,7 @@ alias la="ls -A"   # list hidden files
 
 # Colourize commands.
 alias less="less -R"
-alias tree="tree -C --dirsfirst"
+alias tree="tree -A -C --dirsfirst"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"

@@ -2,6 +2,7 @@ config/nvim/plug.vim
 .tmuxp.yaml
 tags
 home/config/vifm/vifminfo
+home/config/vifm/vifminfo.json
 home/config/qutebrowser/autoconfig.yml
 home/config/qutebrowser/qsettings/*
 home/weechat/certs/*
