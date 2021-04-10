@@ -142,6 +142,8 @@
 
     # UGH
     zoom-us
+
+    appimage-run
   ];
 
   # Packages that only need to be on my desktop
