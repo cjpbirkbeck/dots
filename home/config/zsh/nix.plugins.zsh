@@ -8,6 +8,10 @@ unsetopt LIST_BEEP
 # Alias less so it doesn't activate the bell.
 export LESS="$LESS -R -Q"
 
+# pass(1) settings
+export PASSWORD_STORE_DIR="$HOME/.secrets/pv"
+export PASSWORD_STORE_GENERATED_LENGTH="31"
+
 # Get common functions
 test -e  $HOME/.local/share/shell/functions.sh && \
     source $HOME/.local/share/shell/functions.sh

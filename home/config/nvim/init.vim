@@ -62,7 +62,7 @@ call plug#end()
 
 if has('win32')
     source $HOME\AppData\Local\nvim\common.vim
-    let g:python3_host_prog = '$HOME\AppData\Local\Programs\Python\Python37-32\python.EXE'
+    let g:python3_host_prog = 'C:\Python39\python.EXE'
 else
     source $HOME/.config/nvim/common.vim
 endif
