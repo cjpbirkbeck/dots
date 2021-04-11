@@ -163,7 +163,7 @@ in {
       };
     };
 
-    neovim-qt_with_plugins = neovim-qt.override {
+    neovim-qt_with_plugins = unstable.neovim-qt.override {
       neovim = neovim_with_plugins;
     };
 

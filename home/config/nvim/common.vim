@@ -58,6 +58,12 @@ let mapleader=" "
 " Set localleader to backslash.
 let maplocalleader="\\"
 
+" Settings for gnvim
+
+if exists("g:gnvim")
+    " TODO: For future use.
+endif
+
 " }}}
 
 " Interface {{{
@@ -363,6 +369,23 @@ augroup rasi
     autocmd!
     autocmd BufRead *.rasi set filetype=css
 augroup END
+
+" }}}
+
+" Neovim terrminal {{{
+" Would be better if it were a filetype instead.
+
+if has('nvim')
+    augroup nvim_term
+        autocmd!
+        " Disable numbering in all terminal buffers.
+        autocmd TermOpen term://* :setlocal norelativenumber
+        autocmd TermOpen term://* :setlocal nonumber
+
+        " Automatically enter insert mode.
+        autocmd TermOpen term://* startinsert
+    augroup END
+endif
 
 " }}}
 
