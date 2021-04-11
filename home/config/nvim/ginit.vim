@@ -5,7 +5,7 @@ if exists('g:fvim_loaded')
     FVimCustomTitleBar v:true
 
     " Use smooth animations
-    FVimCursorSmoothScroll v:true
+    FVimCursorSmoothMove v:true
     FVimCursorSmoothBlink v:true
 
     " Keybindings
