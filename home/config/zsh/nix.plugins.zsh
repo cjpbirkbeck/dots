@@ -5,13 +5,6 @@
 unsetopt BEEP
 unsetopt LIST_BEEP
 
-# Alias less so it doesn't activate the bell.
-export LESS="$LESS -R -Q"
-
-# pass(1) settings
-export PASSWORD_STORE_DIR="$HOME/.secrets/pv"
-export PASSWORD_STORE_GENERATED_LENGTH="31"
-
 # Get common functions
 test -e  $HOME/.local/share/shell/functions.sh && \
     source $HOME/.local/share/shell/functions.sh
@@ -29,7 +22,7 @@ if test -e $HOME/.nix-profile/share/fzf/; then
     export FZF_CTRL_T_OPTS="--preview='$HOME/.local/bin/peekat {}'"
 fi
 
-# Use native distro's bash-completions.
+# Use the native distro's bash-completions.
 test -e /usr/share/bash-completion && autoload -U +X bashcompinit && bashcompinit
 
 # This needs to be loaded last.

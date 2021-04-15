@@ -10,7 +10,7 @@ __mkdir_cd() {
 }
 
 # Wrapper function for coloured manpages.
-__man_coloured() {
+man() {
     # Termcap escape sequence meanings:
     # mb: start blinking text
     # md: start bolding text
@@ -23,12 +23,10 @@ __man_coloured() {
     LESS_TERMCAP_md=$'\e[1;32m' \
     LESS_TERMCAP_me=$'\e[0m' \
     LESS_TERMCAP_se=$'\e[0m' \
-    LESS_TERMCAP_so=$'\e[01;33m' \
+    LESS_TERMCAP_so=$'\e[01;44;33m' \
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[1;4;31m' \
     command man "$@"
 }
 
 alias md="__mkdir_cd"
-# export MANCOLOR=true
-# alias man="__man_coloured"
