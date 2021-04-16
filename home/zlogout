@@ -1,0 +1,7 @@
+# zlogout: shutdown file for zsh login shell.
+
+# Clear the console completely when exiting a logout shell.
+
+if test "$SHLVL" = 1 && test -x /usr/bin/clear_console; then
+    /usr/bin/clear_console -q
+fi

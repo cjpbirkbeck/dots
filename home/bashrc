@@ -4,12 +4,33 @@
 #                                                                              #
 ################################################################################
 
-# Prompt
-PROMPT_DIRTRIM=5 # Paths with 5 or more components are elided.
+# Setup prompt and terminal
+
+# Paths with 5 or more components are elided.
+PROMPT_DIRTRIM=5
+# Use an uncolored prompt.
 PS1="[\u@\h:\w]\$ "
 
-# History file
+# History settings
+
+# History file size. Negative sizes are unlimited
+HISTSIZE=-1
+HISTFILESIZE="$HISTSIZE"
+
+# History file location
 HISTFILE=$HOME/.cache/shell/bash_history
 if test ! -f "$HISTFILE"; then
     mkdir -p "$HOME/.cache/shell" && touch "$HISTFILE"
 fi
+
+# History settings
+# Ignore duplicate entries
+HISTCONTROL=ignoreboth
+
+# Append to the history file, don't overwrite it
+shopt -s histappend
+
+# Aliases
+
+# Import my zsh aliases, which should be useful in bash as well.
+test -f $HOME/.config/zsh/aliases.zsh && source $HOME/.config/zsh/aliases.zsh

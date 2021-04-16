@@ -28,7 +28,7 @@ alias d="dirs -pv"
 # ls should have readable sizes, be coloured and list directories first.
 alias ls="ls --human-readable --color=auto --group-directories-first"
 
-alias l= "ls -l"   # List directories with a long format.
+alias  l="ls -l"   # List directories with a long format.
 alias ll="ls -lA"  # List all directories with a long format
 alias lt="ls -lt"  # List files by time (newest first)
 alias lT="ls -ltr" # List files by time (oldest first)
