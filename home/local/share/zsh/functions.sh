@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 # Keep zcompdump in the cache.
+test ! -d $HOME/.cache/zsh && mkdir -p $HOME/.cache/zsh
 compinit -d ~/.cache/zsh/zcompdump-"$ZSH_VERSION"
 
 # Write to the terminal window.

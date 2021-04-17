@@ -13,9 +13,6 @@ let
   largest32Int = 2147483647;
 
   commonAliases = {
-    "_" = "doas";
-    "__" = "doas -s";
-
     "nrb" = "sudo nixos-rebuild";
   };
 in
@@ -105,11 +102,6 @@ in
       '';
       gtk3 = {
         bookmarks = [
-          "file:///home/cjpbirkbeck/images/downloaded/"
-          "file:///home/cjpbirkbeck/images/raster/"
-          "file:///home/cjpbirkbeck/images/screenshots/"
-          "file:///home/cjpbirkbeck/images/photos/"
-          "file:///home/cjpbirkbeck/ref/"
         ];
         extraConfig = {
           gtk-button-images = 0;
@@ -314,7 +306,6 @@ in
 
       zsh = {
         enable = true;
-        dotDir = ".config/zsh";
         history = {
           extended = true;
           size = largest32Int;
@@ -454,9 +445,9 @@ in
         download = "\$HOME/dls";
         templates = "\$HOME/tpls";
         music = "\$HOME/audio";
-        pictures = "\$HOME/images";
+        pictures = "\$HOME/imgs";
         publicShare = "\$HOME/pub";
-        videos = "\$HOME/videos";
+        videos = "\$HOME/vids";
         documents = "\$HOME/docs";
       };
     };

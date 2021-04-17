@@ -6,13 +6,12 @@
 local gears = require("gears")
 local awful = require("awful")
 local beautiful = require("beautiful")
--- local naughty = require("naughty")
 
 local tag_symbols = require("lib.vars.tags")
 local setup_status_bar = require("main.statusbar")
 
-local landscapes_d = rc.home_d .. "/images/wallpapers/landscapes/"
-local cityscapes_d = rc.home_d .. "/images/wallpapers/cityscapes/"
+local landscapes_d = rc.home_d .. "/imgs/wallpapers/landscapes/"
+local cityscapes_d = rc.home_d .. "/imgs/wallpapers/cityscapes/"
 
 math.randomseed(os.time())
 local is_first_landscape = math.random() >= 0.5
@@ -20,9 +19,9 @@ local rand_wp_timeout = 600
 
 local function get_random_file(dir)
     awful.spawn.easy_async_with_shell("shuf --head-count=1 --echo " .. dir .. "*",
-    function(stdout, stderr, reason, exit_code)
-        rand_file = stdout
-    end)
+        function(stdout, stderr, reason, exit_code)
+            rand_file = stdout
+        end)
 end
 
 local rand_wp = gears.timer { timer = rand_wp_timeout }
