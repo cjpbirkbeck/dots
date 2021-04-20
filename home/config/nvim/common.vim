@@ -167,7 +167,7 @@ let g:netrw_winsize = 25     " Specifies netrw default size.
 let g:netrw_dirhistmax = 0   " Please does not liter my directories with .netrwhist files; thank you.
 
 " Open netrw in a sidebar.
-nnoremap <leader>e :UndotreeHide<CR>:Lexplore<CR>
+nnoremap <silent> <leader>e :UndotreeHide<CR>:Lexplore<CR>
 
 " }}}
 
@@ -280,7 +280,7 @@ let g:undotree_WindowLayout = 2    " Show undo differences in large window at th
 let g:undotree_ShortIndicators = 1 " Times should written in shorthand.
 
 " Toggle Undo Tree
-nnoremap <leader>u :UndotreeToggle<CR><C-w><C-h>
+nnoremap <silent> <leader>u :UndotreeToggle<CR><C-w><C-h>
 
 " }}}
 

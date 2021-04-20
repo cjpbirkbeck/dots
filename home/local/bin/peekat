@@ -33,9 +33,17 @@ printbreak() {
 # Various processing functions for converting various file formats into useful text-based representations.
 
 process_pdf () {
-    pdftotext -l "${PAGE_LIMIT}" -nopgbrk -q -- "${FILE_PATH}" - | fold -s -w "${WINDOW_WIDTH}"
+    if command -v pdftotext > /dev/null ; then
+        pdftotext -l "${PAGE_LIMIT}" -nopgbrk -q -- "${FILE_PATH}" - | fold -s -w "${WINDOW_WIDTH}"
+    else
+        handle_missing_viewer "pdftotext"
+    fi
     printbreak
-    exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    if command -v exiftool ; then
+        exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    else
+        handle_missing_viewer exiftool
+    fi
     exit 0
 }
 
@@ -43,76 +51,145 @@ process_epub () {
     # NOTE: pandoc is quite slow, slower than should allowed for a script
     # like this. It should be replace with something like epub2txt2, if I
     # can get it to work.
-    pandoc -i "${FILE_PATH}" --to=plain -s -w "${WINDOW_WIDTH}"
+    if command -v pandoc > /dev/null ; then
+        pandoc -i "${FILE_PATH}" --to=plain -s -w "${WINDOW_WIDTH}"
+    else
+        handle_missing_viewer "pandoc"
+    fi
     printbreak
-    exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    if command -v exiftool ; then
+        exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    else
+        handle_missing_viewer exiftool
+    fi
     exit 0
 }
 
 process_compressed() {
-    atool --list -- "${FILE_PATH}"
+    if command -v atool > /dev/null ; then
+        atool --list -- "${FILE_PATH}"
+    else
+        handle_missing_viewer "atool"
+    fi
     exit 0
 }
 
 process_torrent() {
-    transmission-show -- "${FILE_PATH}"
+    if command -v transmission-show > /dev/null ; then
+        transmission-show -- "${FILE_PATH}"
+    else
+        handle_missing_viewer "transmission-show"
+    fi
     exit 0
 }
 
 process_odt() {
-    odt2txt --width="${WINDOW_WIDTH}" "${FILE_PATH}"
+    if command -v odt2txt > /dev/null ; then
+        odt2txt --width="${WINDOW_WIDTH}" "${FILE_PATH}"
+    else
+        handle_missing_viewer "odt2txt"
+    fi
     exit 0
 }
 
 process_ms_word() {
-    catdoc "${FILE_PATH}"
+    if command -v catdoc > /dev/null ; then
+        catdoc "${FILE_PATH}"
+    else
+        handle_missing_viewer "catdoc"
+    fi
     exit 0
 }
 
 process_ms_wordx() {
-    catdocx "${FILE_PATH}"
+    if command -v catdocx > /dev/null ; then
+        catdocx "${FILE_PATH}"
+    else
+        handle_missing_viewer "catdocx"
+    fi
     exit 0
 }
 
 process_html() {
-    w3m -dump "${FILE_PATH}"
+    if command -v w3m > /dev/null ; then
+        w3m -dump "${FILE_PATH}"
+    else
+        echo "Cannot generate file with w3m. Showing raw text instead."
+    fi
     printbreak
     process_struct_text
     exit 0
 }
 
 process_struct_text() {
-    bat --style="numbers,changes" --color=always --italic-text=always "${FILE_PATH}"
+    if command -v bat > /dev/null ; then
+        bat --style="numbers,changes" --color=always --italic-text=always "${FILE_PATH}"
+    else
+        cat -n "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    fi
     exit 0
 }
 
 process_image() {
-    img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
+    if command -v img2txt > /dev/null ; then
+        img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
+    else
+        echo "Cannot find img2txt to generate text-based preview."
+    fi
     printbreak
-    mediainfo "${FILE_PATH}"
+    if command -v mediainfo ; then
+        mediainfo "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    else
+        handle_missing_viewer "mediainfo"
+    fi
     exit 0
 }
 
 process_multimedia() {
-    mediainfo "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    if command -v mediainfo > /dev/null ; then
+        mediainfo "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    else
+        handle_missing_viewer "mediainfo"
+    fi
     printbreak
-    exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    if command -v exiftool ; then
+        exiftool "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    else
+        handle_missing_viewer exiftool
+    fi
     exit 0
 }
 
 process_ms_excel() {
-    xls2csv -- "${FILE_PATH}"
+    if command -v xls2csv > /dev/null ; then
+        xls2csv -- "${FILE_PATH}"
+    else
+        handle_missing_viewer "xls2csv"
+    fi
     exit 0
 }
 
 process_ms_excelx() {
-    xlsx2csv -- "${FILE_PATH}"
+    if command -v xlsx2csv > /dev/null ; then
+        xlsx2csv -- "${FILE_PATH}"
+    else
+        handle_missing_viewer "xlsx2csv"
+    fi
     exit 0
 }
 
 process_directory() {
     ls -l --group-directories-first --color=always --human-readable "${FILE_PATH}"
     exit 0
+}
+
+process_executable() {
+    if command -v readelf > /dev/null; then
+        readelf --file-header "${FILE_PATH}"
+        exit 0
+    else
+        handle_missing_viewer "readelf"
+    fi
 }
 
 handle_extension() {
@@ -195,6 +272,9 @@ handle_mime() {
         inode/directory)
             process_directory
             ;;
+        application/x-executable)
+            process_executable
+            ;;
         inode/x-empty)
             echo "Empty file" && exit 0
             ;;
@@ -207,6 +287,15 @@ handle_fallback() {
     echo "File Extension: ${FILE_EXT}"
     echo "Mime Type: ${MIMETYPE}"
     exit 1
+}
+
+handle_missing_viewer() {
+    echo "Previewer cannot find a viewer that can process this filetype."
+    echo "File Path: ${FILE_PATH}"
+    echo "File Extension: ${FILE_EXT}"
+    echo "Mime Type: ${MIMETYPE}"
+    echo "Expected previewer: ${1:-Unknown}"
+    exit 2
 }
 
 examine_file_path "${1}"

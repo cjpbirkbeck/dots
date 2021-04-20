@@ -73,7 +73,7 @@ nnoremap <A-l> :!catimg-pause.sh %c<CR>
 
 " Using my own script that uses a combination of file extensions and mime
 " types
-set previewprg='export PEEKAT_WITH_VIFM=SET; ~/.local/bin/peekat %c %pw'
+set previewprg='export PEEKAT_WITH_VIFM=true; ~/.local/bin/peekat %c %pw'
 
 " Filetypes
 " For now, I am going to use my opener script for all files
