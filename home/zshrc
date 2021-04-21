@@ -116,7 +116,7 @@ zle -N zle-keymap-select
 # Without it, the [CMD] prompt doesn't disappear you execute within vi command mode.
 # Does not quite work, you have enter another line to work.
 zle-line-init () {
-    RPROMPT="''${RPROMPT/\[CMD\]/}"
+    RPROMPT="${RPROMPT/\[CMD\]/}"
 }
 
 zle -N zle-line-init

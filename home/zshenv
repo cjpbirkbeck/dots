@@ -1,3 +1,20 @@
-PATH="$HOME/.local/bin:$PATH"
-EDITOR=nvim
-VISUAL=nvim
+# zshenv: Environoment variables for zsh
+# This file is read by ALL zsh shells, regardless if they are login shell, interactive shells, or some
+# combination of the two, so only setting of key environment variables should be set here.
+
+# Add bin directory to path.
+export PATH="$HOME/.local/bin:$PATH"
+
+# Set editor to neovim.
+export EDITOR=nvim
+export VISUAL=nvim
+
+# less(1) settings
+export LESS="-r"
+export LESSHISTFILE="$HOME/.cache/less/history"
+export LESSHISTSIZE="1000"
+export LESSKEY="$HOME/.config/less/lesskey"
+
+# Password store settings
+export PASSWORD_STORE_DIR="$HOME/.secrets/pv"
+export PASSWORD_STORE_GENERATED_LENGTH="31"
