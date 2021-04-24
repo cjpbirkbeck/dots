@@ -25,14 +25,14 @@ esac
 
 # Open the Nix store when given a command. Note that is works only for a command.
 function _nix_store_open {
-if [ -n "$1" ]; then
-  npath="$(nix path-info "$(command -v "$1")")"
+    if [ -n "$1" ]; then
+      npath="$(nix path-info "$(command -v "$1")")"
 
-  cd "$npath" || return
-else
-  echo "No valid argument. exiting."
-  return 1
-fi
+      cd "$npath" || return
+    else
+      echo "No valid argument. exiting."
+      return 1
+    fi
 }
 
 # Make a directory and change into it.
