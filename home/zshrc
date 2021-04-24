@@ -14,7 +14,7 @@ TTY_BNAME="$(basename $(tty))"
 # Use Emacs-like keybindings.
 bindkey -e
 
-# Set alt-backspace to delete words up to slash.
+# Set alt-backspace/alt-h to delete words up to slash.
 # Use alt-control-h to delete the entire word.
 function slash-backwards-kill-word {
     local WORDCHARS="${WORDCHARS:s@/@}"
@@ -28,6 +28,7 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^[e' edit-command-line
 
+# From the Arch wiki: https://wiki.archlinux.org/index.php/Zsh#Key_bindings
 # Set keybindings for specialized keys on a standard keyboard.
 typeset -g -A key
 
@@ -47,11 +48,21 @@ test -n "${key[PageUp]}"   && bindkey -- "${key[PageUp]}"    beginning-of-buffer
 test -n "${key[PageDown]}" && bindkey -- "${key[PageDown]}"  end-of-buffer-or-history
 test -n "${key[ShiftTab]}" && bindkey -- "${key[ShiftTab]}"  reverse-menu-complete
 
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+    autoload -Uz add-zle-hook-widget
+    function zle_application_mode_start { echoti smkx }
+    function zle_application_mode_stop { echoti rmkx }
+    add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+    add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
+
 ### Prompt and Terminal Title ###
 
 setopt PROMPT_SUBST # Allow parameter expansion and command substitution.
 
-# On Linux distros, FreeBSD, NetBSD and DragonFlyBSD (and presumably, any of their derrivatives),
+# On Linux distros, FreeBSD, NetBSD and DragonFlyBSD (and presumably, any of their derivatives),
 # pseudoterminal are have the path of /dev/pts/[0-9]+.
 # OpenBSD uses the older BSD system, where the pseudoterminals have the basename of tty[p-zP-Z].
 # From my testing, pseudoterminals have the basename of ttyp[0-9]+.
@@ -100,6 +111,15 @@ zle-keymap-select () {
 }
 
 zle -N zle-keymap-select
+
+# Remove any changes to the prompt when set up a new line.
+# Without it, the [CMD] prompt doesn't disappear you execute within vi command mode.
+# Does not quite work, you have enter another line to work.
+zle-line-init () {
+    RPROMPT="${RPROMPT/\[CMD\]/}"
+}
+
+zle -N zle-line-init
 
 ### Directory navigation ###
 
