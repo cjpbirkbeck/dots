@@ -1,7 +1,7 @@
 # bash_profile: bash init file for bash login shells.
 
 # If present, load zsh's environment variables.
-test -f "$HOME/.zshenv" && source "$HOME/.zshenv"
+# test -f "$HOME/.zshenv" && source "$HOME/.zshenv"
 
 # If there is a nix store, initalize it.
 if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then

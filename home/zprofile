@@ -1,5 +1,11 @@
 # zprofile: init file for zsh login shells
 
+# Set language
+export LANG="en_CA.UTF-8"
+
+# Add bin directory to path.
+export PATH="$HOME/.local/bin:$PATH"
+
 # If there is a nix store, initalize it.
 if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
     source "$HOME/.nix-profile/etc/profile.d/nix.sh"
@@ -7,6 +13,6 @@ fi
 
 # If tmux exists, and the shell is not currently within a tmux session,
 # then attach to the server or create a new session
-if command -v tmux > /dev/null && [ -z "$TMUX" ] && [ "$(tty)" = "/dev/tty1" ]; then
+if command -v tmux > /dev/null && [ -z "$TMUX" ] && [ "$(tty)" = "/dev/tty1" ] ; then
     tmux attach || tmux new-session -s winterm
 fi
