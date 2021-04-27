@@ -24,15 +24,27 @@ awful.keygrabber {
         { { control }, "l", function() fn.grow_right(client.focus) end },
         { {}, "n", function() fn.grow(client.focus) end },
         { {}, "p", function() fn.shrink(client.focus) end },
-        { {}, "s", function() position_menu:show() end },
         { {}, "e", function() awful.placement.centered() end },
-        { {}, "z", function() size_menu:show() end },
+        { {}, "s",
+            function()
+                local c = client.focus
+                position_menu:show({coords = { x = c.x, y = c.y }})
+            end },
+        { {}, "z",
+            function()
+                local c = client.focus
+                size_menu:show({coords = { x = c.x, y = c.y }})
+            end },
     },
     start_callback = function(_,_,_,_)
-        naughty.notify{ text="Entering floating window mode" }
+        if client.focus and client.focus.floating then
+            naughty.notify{ text="Entering floating window mode" }
+        end
     end,
     stop_callback = function(_,_,_,_)
-        naughty.notify{ text="Quitting floating window mode" }
+        if client.focus and client.focus.floating then
+            naughty.notify{ text="Quitting floating window mode" }
+        end
     end,
     -- Make sure that the mode only occurs with floating clients
     root_keybindings = {
