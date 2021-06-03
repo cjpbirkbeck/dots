@@ -3,7 +3,17 @@ extends sh
 # The default "if" snippet for sh uses the bashism [[ ... ]].
 # This snipet replaces that statement with a POSIX compliant snippet.
 snippet ifp
-    if ${1}; then
-        ${2:true}
-    fi
+if ${1}; then
+    ${2:true}
+fi
+endsnippet
+
+# The default "if" snippet for sh uses the bashism [[ ... ]].
+# This snippet also has the else condition inside it.
+snippet ifep
+if ${1}; then
+    ${2:true}
+else
+    ${3:true}
+fi
 endsnippet

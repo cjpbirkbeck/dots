@@ -1,2 +1,3 @@
 " Do not show colour here
-set colorcolumn=
+setlocal colorcolumn=
+setlocal spell

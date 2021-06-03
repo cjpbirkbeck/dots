@@ -1,3 +1,3 @@
 " Use literal tabs, as per gofmt guidelines.
-:setlocal noexpandtab
-:setlocal shiftwidth=0
+setlocal noexpandtab
+setlocal shiftwidth=0

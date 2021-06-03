@@ -214,18 +214,34 @@ endif
 
 " }}}
 
+" {{{ Firenvim
+
+let g:firenvim_config = {
+    \ 'globalsettings': {
+        \ 'alt': 'all',
+        \ '<C-w>': 'noop',
+        \ '<C-n>': 'noop',
+    \ },
+    \ 'localsettings': {
+        \ '.*': {
+            \ 'selector': 'textarea',
+        \ },
+    \ }
+\ }
+
+" }}}
+
 " }}}
 
 " Editing {{{
 
 " Basic {{{
 
-" Disable entering Ex mode, it's unneeded now.
-" Remap Q to repeat the last macro.
+" Repeat last macro with 'Q' in normal mode
 nnoremap Q @@
 
-" Remap gQ to repeat the last macro.
-" nnoremap gQ @@
+" Quit application with 'Q' at the command line
+cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
 
 " }}}
 
@@ -314,10 +330,10 @@ xmap gl <Plug>(EasyAlign)
 
 " Spell Check {{{
 
-setlocal spelllang=en
+set spelllang=en
 
 " Quickly toggle spell check.
-map <silent> <leader>s :setlocal spell!<cr>
+nnoremap <silent> <leader>s :setlocal spell!<cr>
 
 " }}}
 
@@ -337,7 +353,7 @@ set completefunc=ListSnippets
 
 " Autocompletion {{{
 
-" Autocompletion should never insert nor select a suggestion until the user choose an option.
+" Autocompletion should never insert nor select a suggestion until the user chooses an option.
 " Also should always show a menu, even if there is only one choice.
 set completeopt=menu,preview,noinsert,menuone,noselect
 " Enable omni-completion.
@@ -360,6 +376,36 @@ augroup vifm
     autocmd BufRead */vimpcrc set filetype=vim
     autocmd BufRead vifm-help.txt set filetype=help
 augroup END
+
+" }}}
+
+" org files {{{
+
+augroup vim-org
+    autocmd!
+    autocmd BufRead *.org :packadd vim-org
+    autocmd BufRead *.org :set filetype=org
+augroup END
+
+" }}}
+
+" zig files {{{
+
+augroup zig-vim
+    autocmd!
+    autocmd BufRead *.zig :packadd zig-vim
+    autocmd BufRead *.zig :set filetype=zig
+augroup END
+
+" }}}
+
+" nix files {{{
+
+augroup vim-nix
+    autocmd!
+    autocmd bufread *.nix :packadd vim-nix
+    autocmd bufread *.nix :set filetype=nix
+augroup end
 
 " }}}
 

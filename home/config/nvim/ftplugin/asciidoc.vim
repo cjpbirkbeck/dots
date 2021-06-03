@@ -1,1 +1,1 @@
-autocmd BufEnter <silent> :setlocal spell
+:setlocal spell

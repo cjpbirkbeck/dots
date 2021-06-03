@@ -25,10 +25,8 @@ Plug 'tpope/vim-repeat'                    " Repeat compatible custom operators.
 
 " Custom text objects
 Plug 'kana/vim-textobj-user'               " Easily create your own text objects
-Plug 'Julian/vim-textobj-brace'            " Generic braces text objects
 Plug 'Julian/vim-textobj-variable-segment' " Snake/CamelCase text objects
 Plug 'adriaanzon/vim-textobj-matchit'      " Matchit text objects
-Plug 'gilligan/textobj-gitgutter'          " Git Gutter text objects
 Plug 'michaeljsmith/vim-indent-object'     " Manipulate lines of same indentation as a single object.
 Plug 'vim-scripts/argtextobj.vim'          " Text object for function arguments.
 
@@ -58,6 +56,10 @@ Plug 'LnL7/vim-nix'                        " Adds nix syntax colouring and file 
 Plug 'jceb/vim-orgmode'                    " Add support for org file.
 Plug 'tmux-plugins/vim-tmux'               " Adds support for modifying tmux config files.
 Plug 'fatih/vim-go'                        " Extra support for working the Go language.
+
+" Misc
+" Allows nvim to run within browsers
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 
 if has('win32')
