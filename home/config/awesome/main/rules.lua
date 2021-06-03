@@ -100,7 +100,7 @@ awful.rules.rules = {
 
       -- LibreOffice doesn't seem to quite work with the rules here.
     { rule_any = { class = { "Zathura", "okular", "libreoffice", "libreoffice-writer", "libreoffice-calc",
-                         "libreoffice-impress", "libreoffice-draw", "libreoffice-base" } },
+                         "libreoffice-impress", "libreoffice-draw", "libreoffice-base", "Soffice", "Anki" } },
       properties = { tag = "Documents" } },
 
     { rule_any = { class = { "kolourpaint", "Sxiv", "GIMP", "Inkscape", "gwenview" } },

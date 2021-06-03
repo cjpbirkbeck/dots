@@ -253,6 +253,7 @@ in
           # Enable true color and dynamic cusors shapes.
           set-option -sa terminal-overrides ',alacritty:RGB,st-256color:RGB'
           set-option -sa terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+          set-option -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
 
           # Show title in terminal emulator title
           set-option -g set-titles on
@@ -374,6 +375,16 @@ in
 
       picom = {
         enable = true;
+        extraOptions = ''
+          opacity-rule = [
+            "70:class_g = 'st-test' && !_NET_WM_STATE@:32a",
+            "0:_NET_WM_STATE@[0]:32a *= '_NET_WM_STATE_HIDDEN'",
+            "0:_NET_WM_STATE@[1]:32a *= '_NET_WM_STATE_HIDDEN'",
+            "0:_NET_WM_STATE@[2]:32a *= '_NET_WM_STATE_HIDDEN'",
+            "0:_NET_WM_STATE@[3]:32a *= '_NET_WM_STATE_HIDDEN'",
+            "0:_NET_WM_STATE@[4]:32a *= '_NET_WM_STATE_HIDDEN'"
+          ];
+        '';
       };
     };
 

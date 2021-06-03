@@ -6,8 +6,8 @@
       src = fetchFromGitHub {
         owner = "cjpbirkbeck";
         repo = "st";
-        rev = "851f7df4da3dcb1ec91f419cf7ac252f6659ff3c";
-        sha256 = "0iqyd666q2vh41ra820l3cxq72py1wxmjr1ix7swzarn5ph8zmj5";
+        rev = "83c9975aa058654d64b26699bc4020f9f4e76e92";
+        sha256 = "0mslmnws42n1wmvb1z9wbgv6pgzrdi2dzr5kp290m77aqchhxj4s";
       };
 
       buildInputs = with pkgs.xorg; [ libX11 libXft libXcursor ];

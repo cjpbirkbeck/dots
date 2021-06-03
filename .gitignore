@@ -11,3 +11,4 @@ home/weechat/ecdsa.pem
 test/
 *~
 plug.vim
+home/config/nvim/spell/*
