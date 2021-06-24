@@ -199,8 +199,8 @@ if has('nvim')
     nnoremap <silent> <A-b>l     :Lines<CR>
     nnoremap <silent> <A-b><A-l> :Lines<CR>
 
-    nnoremap <silent> <A-b>r     :Rg
-    nnoremap <silent> <A-b><A-r> :Rg
+    nnoremap <silent> <A-b>r     :Rg<CR>
+    nnoremap <silent> <A-b><A-r> :Rg<CR>
 
     nnoremap <silent> <A-b>s     :Snippets<CR>
     nnoremap <silent> <A-b><A-s> :Snippets<CR>
@@ -217,15 +217,21 @@ endif
 " {{{ Firenvim
 
 let g:firenvim_config = {
-    \ 'globalsettings': {
+    \ 'globalSettings': {
         \ 'alt': 'all',
         \ '<C-w>': 'noop',
         \ '<C-n>': 'noop',
     \ },
-    \ 'localsettings': {
+    \ 'localSettings': {
         \ '.*': {
             \ 'selector': 'textarea',
+            \ 'takeover': 'never',
+            \ 'priority': 0,
         \ },
+        \ 'https://app.element.io/': {
+            \ 'takeover': 'never',
+            \ 'priority': 1,
+        \ }
     \ }
 \ }
 
