@@ -80,5 +80,8 @@
     };
   };
 
+  # Doesn't seem to activate on its own.
+  boot.kernelParams = [ "intel_pstate=active" ];
+
   system.stateVersion = "19.09";
 }

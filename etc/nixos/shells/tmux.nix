@@ -19,8 +19,8 @@
         set -g status-keys emacs
 
         # Split windows with more intuitive keybindings
-        bind \ split-window -h
-        bind - split-window -v
+        bind \\ split-window -h
+        bind -  split-window -v
 
         bind C-- delete-buffer
 

@@ -267,7 +267,7 @@ in
 
           # Split windows with more intuitive keybindings
           bind \\ split-window -h
-          bind - split-window -v
+          bind -  split-window -v
 
           bind C-- delete-buffer
 
@@ -375,16 +375,16 @@ in
 
       picom = {
         enable = true;
-        extraOptions = ''
-          opacity-rule = [
-            "70:class_g = 'st-test' && !_NET_WM_STATE@:32a",
-            "0:_NET_WM_STATE@[0]:32a *= '_NET_WM_STATE_HIDDEN'",
-            "0:_NET_WM_STATE@[1]:32a *= '_NET_WM_STATE_HIDDEN'",
-            "0:_NET_WM_STATE@[2]:32a *= '_NET_WM_STATE_HIDDEN'",
-            "0:_NET_WM_STATE@[3]:32a *= '_NET_WM_STATE_HIDDEN'",
-            "0:_NET_WM_STATE@[4]:32a *= '_NET_WM_STATE_HIDDEN'"
-          ];
-        '';
+        # extraOptions = ''
+        #   opacity-rule = [
+        #     "70:class_g = 'st-test' && !_NET_WM_STATE@:32a",
+        #     "0:_NET_WM_STATE@[0]:32a *= '_NET_WM_STATE_HIDDEN'",
+        #     "0:_NET_WM_STATE@[1]:32a *= '_NET_WM_STATE_HIDDEN'",
+        #     "0:_NET_WM_STATE@[2]:32a *= '_NET_WM_STATE_HIDDEN'",
+        #     "0:_NET_WM_STATE@[3]:32a *= '_NET_WM_STATE_HIDDEN'",
+        #     "0:_NET_WM_STATE@[4]:32a *= '_NET_WM_STATE_HIDDEN'"
+        #   ];
+        # '';
       };
     };
 

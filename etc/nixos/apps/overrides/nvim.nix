@@ -120,6 +120,8 @@ in {
             # Filetype specific plugins
             # Should go into opt, unless it doesn't work.
             vim-go                       # Plugin for extra support with Go
+            vim-markdown                 # Extra markdown support
+            semshi
 
             # Misc
             firenvim                     # Inserts neovim into browser text boxes.

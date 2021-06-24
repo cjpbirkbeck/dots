@@ -1,6 +1,6 @@
 { config, pkgs, ... }: let unstable = import <unstable> {};
 
-  kp = pkgs.kdeApplications.kolourpaint;
+  # kp = pkgs.kdeGear.kolourpaint;
 
   # Core packages that should be accessible on all machines.
   core = with pkgs; [
@@ -110,7 +110,7 @@
     flameshot                 # Screenshot tool
     gromit-mpx                # On-screen annotator
     gnome3.cheese             # Webcamera program
-    kp                        # Kolourpaint, a simple MS Paint clone
+    kolourpaint               # Kolourpaint, a simple MS Paint clone
     mpv-with-scripts          # Customized mpv file
     nheko                     # Matrix client
     networkmanagerapplet      # Applet for connecting to wifi
