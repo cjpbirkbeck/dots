@@ -16,7 +16,7 @@ local mwf_increment = 0.05
 local mwf_default = 0.5
 
 -- Programs
-local finder = rc.float_term_em .. " -t Finder -d 140 45 -e " .. rc.exec_d .. "find-file.sh"
+local finder = rc.float_term_em .. " -t Finder -o window.dimensions.columns=140 -o window.dimensions.lines=45 -e " .. rc.exec_d .. "find-file.sh"
 local _SYS_MON = rc.float_term_em .. " -e gotop"
 
 -- Functions

@@ -10,7 +10,7 @@ set -C -f
 IFS=$'\n'
 WINDOW_WIDTH="${COLUMNS}"
 # Hack for working with fzf, as $FZF_PREVIEW_COLUMNS doesn't seem to work.
-test -n "$PEEKAT_WITH_FZF" && WINDOW_WIDTH=$(( COLUMNS / 2 - 4 ))
+test -n "$PEEKAT_WITH_FZF" && WINDOW_WIDTH=$(( COLUMNS / 2 - 8 ))
 # Hack for working with vifm, passing preview window size as the second argument.
 test -n "$PEEKAT_WITH_VIFM" && WINDOW_WIDTH="${2}"
 PAGE_LIMIT=10
