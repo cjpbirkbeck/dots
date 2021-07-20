@@ -76,6 +76,7 @@
     xlsx2csv                  # Converts Excel (post-2007) files to csv files
     youtube-dl                # Video downloader
     zip                       # Compress zip files
+    tree-sitter
 
     # TUI programs
     cava                      # Visualiser for the terminal
