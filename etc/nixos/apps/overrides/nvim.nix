@@ -59,7 +59,7 @@ let
 
 in {
   nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
-    neovim_with_plugins = neovim.override {
+    neovim_with_plugins = unstable.neovim.override {
       viAlias = true;
       vimAlias = true;
 
@@ -71,8 +71,11 @@ in {
           " Add NixOS' of the GNU collection's dictionaries to nvim's dictionaries list.
           " Useful for autocompletions.
           set dictionary+=${pkgs.miscfiles}/share/web2,${pkgs.miscfiles}/share/web2a
+
+          " Set up colorizer.
+          lua require'colorizer'.setup()
         '';
-        packages.neovim = with pkgs.vimPlugins // customPlugins; { start = [
+        packages.neovim = with unstable.pkgs.vimPlugins // customPlugins; { start = [
             # Interface enhancements
             lightline-vim                # Lightweight but pretty statusline.
             vim-lastplace                # Open files with cursor at last cursor position.
@@ -80,6 +83,7 @@ in {
             vim-signature                # Displays marks in the gutter.
             undotree                     # Visualize vim's undos with a tree.
             neoterm                      # Neovim terminal enhancements.
+            nvim-colorizer-lua
 
             # Custom operators
             surround                     # Manipulate elements that surrounds text, like brackets or quotation marks.
@@ -121,10 +125,11 @@ in {
             # Should go into opt, unless it doesn't work.
             vim-go                       # Plugin for extra support with Go
             vim-markdown                 # Extra markdown support
-            semshi
 
             # Misc
             firenvim                     # Inserts neovim into browser text boxes.
+            nvim-treesitter              # Supports tree-sitter within nvim.
+            nvim-treesitter-textobjects
           ];
           # For optional plugins, loaded only when meeting certain conditions:
           # e.g. autocmd FileType foo :packadd fooCompletion
@@ -134,6 +139,8 @@ in {
             zig-vim                      # Add support for the Zig language
             vim-orgmode                  # Add support for org file.
             emmet-vim                    # Support for writing HTML/CSS
+            semshi
+
           ];
         };
       };

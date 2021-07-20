@@ -110,11 +110,12 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 set laststatus=2                " Keeps the status bar on screen.
 
 " Setup lightline
+" cursorpos: current line number:column line number/total lines.
 let g:lightline = {
-    \ 'colorscheme': 'one',
+    \ 'colorscheme': 'deus',
     \ 'active': {
     \   'left': [ [ 'mode', ],
-    \             [ 'bufnum', 'modified', 'absolutepath' ] ],
+    \             [ 'bufnum', 'modified', 'relativepath' ] ],
     \   'right': [ [ 'charvaluehex', 'percentwin', 'cursorpos' ],
     \              [ 'fileformat', 'fileencoding', 'filetype', 'spell' ] ]
     \ },
@@ -125,11 +126,14 @@ let g:lightline = {
     \ 'component': {
     \   'cursorpos': '%l:%c/%L'
     \ }
-    \ }
+\ }
 
 " }}}
 
 " Windows {{{
+
+" Use <leader>w as a alternate keybinding for <C-w> keycords
+nnoremap <leader>w <C-w>
 
 " Open new windows below and right of the current window.
 set splitbelow
@@ -164,7 +168,12 @@ let g:netrw_banner = 0       " Do not open with the banner.
 let g:netrw_liststyle = 3    " Uses a tree format by default.
 let g:netrw_browse_split = 4 " When pressing return on an item, it opens in the previous window.
 let g:netrw_winsize = 25     " Specifies netrw default size.
-let g:netrw_dirhistmax = 0   " Please does not liter my directories with .netrwhist files; thank you.
+let g:netrw_dirhistmax = 100 " Please does not liter my directories with .netrwhist files; thank you.
+let g:netrw_sizestyle = 'h'
+let g:netrw_special_syntax = 1
+let g:netrw_home = '~/.cache/nvim/'
+" Open files with DE's file-opener.
+let g:netrw_browser_viewer = 'xdg-open'
 
 " Open netrw in a sidebar.
 nnoremap <silent> <leader>e :UndotreeHide<CR>:Lexplore<CR>
@@ -227,10 +236,6 @@ let g:firenvim_config = {
             \ 'selector': 'textarea',
             \ 'takeover': 'never',
             \ 'priority': 0,
-        \ },
-        \ 'https://app.element.io/': {
-            \ 'takeover': 'never',
-            \ 'priority': 1,
         \ }
     \ }
 \ }
@@ -248,6 +253,9 @@ nnoremap Q @@
 
 " Quit application with 'Q' at the command line
 cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
+
+" Always show absolute paths with Ctrl-G
+nnoremap <C-g> 1<C-g>
 
 " }}}
 
@@ -280,14 +288,18 @@ set expandtab    " Replaces default tab with number of spaces.
 set shiftwidth=4 " Set the number of spaces for each indent.
 
 " Either insert pairs for punctation that can, but normally isn't used for
-" pairs, or insert a opening bracket with the matching pair.
-inoremap <A-(> ()<ESC>i
-inoremap <A-[> []<ESC>i
-inoremap <A-{> {}<ESC>i
-inoremap <A-<> <><ESC>i
-inoremap <A-'> ''<ESC>i
-inoremap <A-"> ""<ESC>i
-inoremap <A-`> ``<ESC>i
+" pairs, or insert a opening bracket with the matching pair. Also can insert
+" an empty brackets with right backets.
+inoremap <A-(> ()<Left>
+inoremap <A-)> ()
+inoremap <A-[> []<Left>
+inoremap <A-]> []
+inoremap <A-{> {}<Left>
+inoremap <A-}> {}
+inoremap <A-<> <><Left>
+inoremap <A-'> ''<Left>
+inoremap <A-"> ""<Left>
+inoremap <A-`> ``<Left>
 
 " Insert a blank line above or below the current line.
 nnoremap <leader>o m`A<CR><ESC>``
@@ -441,6 +453,29 @@ endif
 
 " }}}
 
+" }}}
+
+" {{{ Neovim 0.5 Treesitter and LSP config.
+
+if has('nvim')
+    lua <<EOF
+    require'nvim-treesitter.configs'.setup {
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = true,
+        },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+            },
+        },
+    }
+EOF
+endif
 " }}}
 
 " {{{ Direnv integration

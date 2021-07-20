@@ -4,7 +4,7 @@
 # depending on if vim or neovim is present.
 
 command -v vim 1> /dev/null && vim_path="$HOME/.vim/autoload/"
-command -v nvim 1> /dev/null && \ 
+command -v nvim 1> /dev/null && \
     nvim_path="${XDG_DATA_HOME:-$HOME/.local/share/}/nvim/site/autoload/"
 
 if command -v nixos-version 1> /dev/null ; then
