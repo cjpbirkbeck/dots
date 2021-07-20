@@ -44,7 +44,7 @@ rc.win_switcher = "rofi -show window"
 
 rc.term_emu      = "st"
 rc.float_term_em = "alacritty"
-rc.browser       = "qutebrowser"
+rc.browser       = os.getenv("BROWSER")
 rc.email         = "thunderbird"
 rc.file_man      = "pcmanfm-qt"
 rc.passwords     = "rofi-pass --last-used"

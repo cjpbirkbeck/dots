@@ -126,7 +126,7 @@
     qutebrowser               # Another GUI browser
     sxiv                      # Lightweight image viewer
     thunderbird               # GUI email client
-    torbrowser                # Browser using the tor network
+    # torbrowser                # Browser using the tor network
     zathura                   # Lightweight PDF/EPUB/Dejv reader
 
     # Icons for theming GTK and Qt applications with the breeze theme.
@@ -159,7 +159,7 @@
     asunder     # CD Ripper
     handbrake   # DVD Ripper
     brasero     # CD Burner
-    audacity    # Waveform editor
+    # audacity    # Waveform editor
 
     zoom-us     # Proprietary videoconferencing client
   ];

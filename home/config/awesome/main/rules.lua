@@ -109,7 +109,7 @@ awful.rules.rules = {
     { rule_any = { class = { "Audacity", "Asunder", "Gbh", ".brasero-wrapped_", "brasero", "Cheese" } },
       properties = { tag = "Multimedia" } },
 
-    { rule_any = { class = { "Quadrapassel", "Gnome-mines", "Steam", "Rftg", "ksudoku", "Gweled", "kmines", "Sol" } },
+    { rule_any = { class = { "Quadrapassel", "Gnome-mines", "Steam", "Rftg", "ksudoku", "Gweled", "kmines", "Sol", "kblocks" } },
       properties = { tag = "Games" } },
 
     { rule_any = { class = { "VirtualBox Manager", "VirtualBox Machine" } },

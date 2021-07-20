@@ -35,6 +35,7 @@
 
     # Application specific settings
     ./apps/desktop_env.nix
+    # ./apps/emacs.nix
     ./apps/applications.nix
     ./apps/gaming.nix
     ./apps/overrides/scripts.nix

@@ -5,7 +5,7 @@
 
 let
   gnomePackages = with pkgs.gnome3; [
-    gnome-mines   # Minesweeper
+    # gnome-mines   # Minesweeper
     quadrapassel  # Tetris
     gnome-chess   # Chess
     aisleriot
@@ -28,7 +28,7 @@ in
     gnuchess  # Chess engine
     gnugo     # Go engine
     freeciv
-    gweled
+    # gweled
     freesweep
     kblocks
     kmines

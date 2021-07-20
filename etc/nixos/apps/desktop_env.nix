@@ -26,13 +26,17 @@ in
     home = {
       stateVersion = "19.09"; # DO NOT CHANGE!
       sessionVariables = {
-        BROWSER = "qutebrowser";
+        BROWSER = "firefox";
         LESSHISTFILE = "$HOME/.local/share/less/history";
         LESSKEY = "$HOME/.config/less/lesskey";
         QT_QPA_PLATFORMTHEME = "qt5ct";
         TMUXP_CONFIGDIR = "$HOME/.config/tmuxp";
         UNICODE_CHARS = "$HOME/.local/share/unicode-chars";
         XCOMPOSECACHE = "$HOME/.cache/Xcompose/";
+
+        # Setup for pfetch
+        PF_INFO = "ascii os host kernel shell wm editor uptime";
+        PF_COL1 = "9"; # Sets info names to white.
       };
 
       file = {
@@ -149,7 +153,7 @@ in
 
       direnv = {
         enable = true;
-        enableNixDirenvIntegration = true;
+        nix-direnv.enable = true;
       };
 
       fzf = {
@@ -200,13 +204,17 @@ in
       rofi = {
         enable = true;
         theme = "~/.config/rofi/themes/flat-ocean";
-        extraConfig = ''
-          ! Opacity
-          rofi.opacity: 80
+        extraConfig = {
+          opacity = 80;
+          modi = "window,run,combi,drun";
+        };
+        # extraConfig = ''
+        #   ! Opacity
+        #   rofi.opacity: 80
 
-          ! Enable modes
-          rofi.modi: window,run,combi,drun
-        '';
+        #   ! Enable modes
+        #   rofi.modi: window,run,combi,drun
+        # '';
       };
 
       password-store = {

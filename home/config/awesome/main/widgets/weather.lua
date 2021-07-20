@@ -13,8 +13,8 @@ weather.font = "weathericons bold 10"
 weather:connect_signal("button::press",
 function(_, _, _, button)
     if button == 1 then
-        if not browser then browser = "qutebrowser " end
-        awful.spawn(browser .. weather_page)
+        -- if not rc.browser then browser = "firefox " end
+        awful.spawn("firefox " .. weather_page)
     elseif button == 3 then
         awful.spawn.with_shell(exec_d .. 'weather-report.sh ' .. location)
     end
