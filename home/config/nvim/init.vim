@@ -60,11 +60,13 @@ Plug 'fatih/vim-go'                        " Extra support for working the Go la
 " Misc
 " Allows nvim to run within browsers
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 if has('win32')
     source $HOME\AppData\Local\nvim\common.vim
     let g:python3_host_prog = 'C:\Python39\python.EXE'
+    lua require 'nvim-treesitter.install'.compilers = { "clang", "gcc" }
 else
     source $HOME/.config/nvim/common.vim
 endif
