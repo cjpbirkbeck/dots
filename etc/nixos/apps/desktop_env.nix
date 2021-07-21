@@ -208,13 +208,6 @@ in
           opacity = 80;
           modi = "window,run,combi,drun";
         };
-        # extraConfig = ''
-        #   ! Opacity
-        #   rofi.opacity: 80
-
-        #   ! Enable modes
-        #   rofi.modi: window,run,combi,drun
-        # '';
       };
 
       password-store = {
@@ -301,6 +294,12 @@ in
 
           # Pane border style
           set -g pane-active-border-style 'fg=#ffffff,bg=#00FF7F'
+
+          # Enable focus-events
+          set -g focus-events on
+
+          # Set history file for tmux
+          set -g history-file $HOME/.cache/tmux/history
         '';
       };
 

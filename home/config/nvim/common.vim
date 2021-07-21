@@ -453,9 +453,20 @@ endif
 
 " }}}
 
+" Highlight on yank {{{
+
+if has('nvim')
+    augroup high_on_yank
+        autocmd!
+        au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
+    augroup END
+endif
+
 " }}}
 
-" {{{ Neovim 0.5 Treesitter and LSP config.
+" }}}
+
+" Treesitter and LSP config {{{
 
 if has('nvim')
     lua <<EOF
