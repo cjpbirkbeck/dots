@@ -77,6 +77,7 @@
     youtube-dl                # Video downloader
     zip                       # Compress zip files
     tree-sitter
+    tree_sitter_with_packages
 
     # TUI programs
     cava                      # Visualiser for the terminal
@@ -89,7 +90,7 @@
     neovim-qt_with_plugins    # GUI frontend using Qt.
     gnvim_with_plugins        # Another GUI frontend using Qt, but with Rust.
     neovim-remote             # Control remote instances of neovim.
-    neovim_with_plugins       # Customized neovim.
+    # neovim_with_plugins       # Customized neovim.
     newsboat                  # RSS/Atom feed reader
     rlwrap                    # Wrap readline library around certian prompts
     sc-im                     # Terminal spreadsheet program

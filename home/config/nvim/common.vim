@@ -328,6 +328,13 @@ nnoremap <leader>d "_d
 nnoremap <leader>D "_D
 nnoremap <leader>dd "_dd
 
+" Settings for the registers.nvim plugin.
+if has('nvim')
+    let g:registers_tab_symbol         = '⇥'
+    let g:registers_window_border      = 'none'
+    let g:registers_register_key_sleep = 120
+endif
+
 " }}}
 
 " Miscellaneous {{{
@@ -458,7 +465,7 @@ endif
 if has('nvim')
     augroup high_on_yank
         autocmd!
-        au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
+        autocmd TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
     augroup END
 endif
 
@@ -478,10 +485,10 @@ if has('nvim')
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
+                init_selection = "gnn",
+                node_incremental = "grn",
+                scope_incremental = "grc",
+                node_decremental = "grm",
             },
         },
     }
