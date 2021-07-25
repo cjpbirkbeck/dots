@@ -30,11 +30,12 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "tpope";
       repo = "vim-characterize";
-      rev = "af156501e8a8855832f15c2cc3d6cefb2d7f7f52";
-      sha256 = "1fmrh94miansi5sz1cwyia7z57azwi4cfxx59h81wrmlsf513l5w";
+      rev = "885a00a3c21dd52ca8f2fd7d62850134934179d9";
+      sha256 = "14gr7w313gk2xs548s8gv5nf45dhma5y3hjl36zkvy9z8lw45dhj";
     };
   };
 
+  # Not much development here anymore
   customPlugins.vim-textobj-variable-segment = pkgs.vimUtils.buildVimPlugin {
     name = "vim-textobj-variable-segment";
     src = pkgs.fetchFromGitHub {
@@ -45,6 +46,7 @@ let
     };
   };
 
+  # Not much development here anymore
   customPlugins.vim-textobj-matchit = pkgs.vimUtils.buildVimPlugin {
     name = "vim-textobj-matchit";
     src = pkgs.fetchFromGitHub {
@@ -69,6 +71,9 @@ let
 
   neovim_configuration = {
     customRC = ''
+      " Let neovim know it is using NixOS plugin.
+      let g:is_nixos = 1
+
       " common.vim should hold all the settings to be used across all systems.
       source $HOME/.config/nvim/common.vim
 
@@ -123,9 +128,10 @@ let
         # IDE-like plugins
         ultisnips                    # Snippet manager.
         vim-snippets                 # Collection of prebuilt snippets.
-        LanguageClient-neovim        # Language server for neovim
+        # LanguageClient-neovim        # Language server for neovim
         vim-test                     # Automatic testing.
         ale                          # Multi-language linter.
+        nvim-lspconfig
 
         # Filetype specific plugins
         # Should go into opt, unless it doesn't work.

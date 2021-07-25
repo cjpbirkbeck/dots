@@ -15,6 +15,7 @@ Plug 'tpope/vim-characterize'              " Display Unicode character metadata.
 Plug 'kshenoy/vim-signature'               " Displays marks in the gutter.
 Plug 'mbbill/undotree'                     " Visual Vim's undos with a tree.
 Plug 'kassio/neoterm'                      " Neovim terminal enhancements.
+Plug 'tversteeg/registers.nvim'            " Show registers contents while inserting text.
 
 " Custom operators
 Plug 'tpope/vim-surround'                  " Manipulate elements that surrounds text.
@@ -60,7 +61,9 @@ Plug 'fatih/vim-go'                        " Extra support for working the Go la
 " Misc
 " Allows nvim to run within browsers
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Treesitter plugin for better syntax highlighting, etc.
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 call plug#end()
 
 if has('win32')
@@ -70,3 +73,5 @@ if has('win32')
 else
     source $HOME/.config/nvim/common.vim
 endif
+
+lua require'colorizer'.setup()

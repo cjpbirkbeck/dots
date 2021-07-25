@@ -4,6 +4,7 @@ setlocal shiftwidth=0
 
 " User Interface
 let g:go_doc_popup_window = 1
+let g:go_doc_balloon = 1
 
 " Enhanced syntax highlighting
 let g:go_highlight_fields = 1

@@ -150,7 +150,7 @@ noremap <C-l> <C-w>l
 " Files {{{
 
 " Map double leader (double space) to save but not quit.
-map <leader><leader> :w<CR>
+nnoremap <leader><leader> :w<CR>
 
 " Expand the path of the current file within command mode.
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -164,16 +164,15 @@ nnoremap <leader>f :find<space>
 set path=.,,**
 
 " Settings for netrw, vim's native file explorer.
-let g:netrw_banner = 0       " Do not open with the banner.
-let g:netrw_liststyle = 3    " Uses a tree format by default.
-let g:netrw_browse_split = 4 " When pressing return on an item, it opens in the previous window.
-let g:netrw_winsize = 25     " Specifies netrw default size.
-let g:netrw_dirhistmax = 100 " Please does not liter my directories with .netrwhist files; thank you.
-let g:netrw_sizestyle = 'h'
-let g:netrw_special_syntax = 1
-let g:netrw_home = '~/.cache/nvim/'
-" Open files with DE's file-opener.
-let g:netrw_browser_viewer = 'xdg-open'
+let g:netrw_banner = 0                  " Do not open with the banner.
+let g:netrw_liststyle = 3               " Uses a tree format by default.
+let g:netrw_browse_split = 4            " When pressing return on an item, it opens in the previous window.
+let g:netrw_winsize = 25                " Specifies netrw default size.
+let g:netrw_dirhistmax = 100            " Please does not liter my directories with .netrwhist files; thank you.
+let g:netrw_sizestyle = 'h'             " Human-readable file sizes
+let g:netrw_special_syntax = 1          " Syntax highlighting for various files
+let g:netrw_home = '~/.cache/nvim/'     " Save bookmarks and history in a special directory
+let g:netrw_browser_viewer = 'xdg-open' " Open files with DE's file-opener.
 
 " Open netrw in a sidebar.
 nnoremap <silent> <leader>e :UndotreeHide<CR>:Lexplore<CR>
@@ -183,10 +182,10 @@ nnoremap <silent> <leader>e :UndotreeHide<CR>:Lexplore<CR>
 " Buffers {{{
 
 " Navigational shortcuts for moving between buffers.
-nnoremap <silent>[b :bprevious<CR>
-nnoremap <silent>]b :bnext<CR>
-nnoremap <silent>[B :bfirst<CR>
-nnoremap <silent>]B :blast<CR>
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
 
 " Open list of buffers, then search currently open buffers
 nnoremap <leader>b :buffers<CR>:b<space>
@@ -287,6 +286,10 @@ set smartindent  " Turns on smart-indenting.
 set expandtab    " Replaces default tab with number of spaces.
 set shiftwidth=4 " Set the number of spaces for each indent.
 
+" Delete words with alt-backspace, useful of firenvim.
+inoremap <A-BS> <C-w>
+vnoremap <A-BS> <C-w>
+
 " Either insert pairs for punctation that can, but normally isn't used for
 " pairs, or insert a opening bracket with the matching pair. Also can insert
 " an empty brackets with right backets.
@@ -320,6 +323,9 @@ nnoremap <silent> <leader>u :UndotreeToggle<CR><C-w><C-h>
 
 " Registers {{{
 
+" Show all registers in normal mode
+nnoremap <silent> <leader>r :registers<CR>
+
 " Remap Y to y$
 nnoremap Y y$
 
@@ -332,8 +338,16 @@ nnoremap <leader>dd "_dd
 if has('nvim')
     let g:registers_tab_symbol         = '⇥'
     let g:registers_window_border      = 'none'
-    let g:registers_register_key_sleep = 120
 endif
+
+" }}}
+
+" Spell Checking {{{
+
+set spelllang=en
+
+" Quickly toggle spell check.
+nnoremap <silent> <leader>s :setlocal spell!<cr>
 
 " }}}
 
@@ -341,9 +355,6 @@ endif
 
 " Switch between relative and absolute line numbering.
 map <leader>n :set relativenumber!<CR>
-
-" Open fugitive
-nnoremap <leader>g :Gstatus<CR>
 
 " Map the alignment plugins
 nmap gl <Plug>(EasyAlign)
@@ -353,12 +364,12 @@ xmap gl <Plug>(EasyAlign)
 
 " }}}
 
-" Spell Check {{{
+" Development {{{
 
-set spelllang=en
+" Git Integration {{{
 
-" Quickly toggle spell check.
-nnoremap <silent> <leader>s :setlocal spell!<cr>
+" Open fugitive
+nnoremap <silent> <leader>g :Git<CR>
 
 " }}}
 
@@ -390,68 +401,27 @@ set complete+=kspell
 
 " Autocommands  {{{
 
-" Vim-like Programs {{{
+" Vifm help {{{
 
-" These programs use very similar (but not exact!) syntax as vim,
-" so use the same syntax file for those files
+" Set vifm's help to use the syntax of vim's help file.
 augroup vifm
     autocmd!
-    autocmd BufRead *.vifm set filetype=vim
-    autocmd BufRead */vifmrc set filetype=vim
-    autocmd BufRead */vimpcrc set filetype=vim
     autocmd BufRead vifm-help.txt set filetype=help
+    autocmd BufRead vifm-help.txt set readonly
+    autocmd BufRead vifm-help.txt set modifiable
 augroup END
 
 " }}}
 
-" org files {{{
-
-augroup vim-org
-    autocmd!
-    autocmd BufRead *.org :packadd vim-org
-    autocmd BufRead *.org :set filetype=org
-augroup END
-
-" }}}
-
-" zig files {{{
-
-augroup zig-vim
-    autocmd!
-    autocmd BufRead *.zig :packadd zig-vim
-    autocmd BufRead *.zig :set filetype=zig
-augroup END
-
-" }}}
-
-" nix files {{{
-
-augroup vim-nix
-    autocmd!
-    autocmd bufread *.nix :packadd vim-nix
-    autocmd bufread *.nix :set filetype=nix
-augroup end
-
-" }}}
-
-" Rasi files {{{
-
-augroup rasi
-    autocmd!
-    autocmd BufRead *.rasi set filetype=css
-augroup END
-
-" }}}
-
-" Neovim terrminal {{{
+" Neovim terminal {{{
 " Would be better if it were a filetype instead.
 
 if has('nvim')
     augroup nvim_term
         autocmd!
         " Disable numbering in all terminal buffers.
-        autocmd TermOpen term://* :setlocal norelativenumber
-        autocmd TermOpen term://* :setlocal nonumber
+        autocmd TermOpen term://* setlocal norelativenumber
+        autocmd TermOpen term://* setlocal nonumber
 
         " Automatically enter insert mode.
         autocmd TermOpen term://* startinsert
@@ -460,7 +430,7 @@ endif
 
 " }}}
 
-" Highlight on yank {{{
+" Yank Highlight {{{
 
 if has('nvim')
     augroup high_on_yank
@@ -473,7 +443,7 @@ endif
 
 " }}}
 
-" Treesitter and LSP config {{{
+" Treesitter {{{
 
 if has('nvim')
     lua <<EOF
@@ -482,21 +452,102 @@ if has('nvim')
             enable = true,
             additional_vim_regex_highlighting = true,
         },
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-                init_selection = "gnn",
-                node_incremental = "grn",
-                scope_incremental = "grc",
-                node_decremental = "grm",
+        -- Select text based on treesitter nodes.
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = "gzz",
+                node_incremental = "gzj",
+                node_decremental = "gzk",
+                scope_incremental = "gzc",
+            },
+        },
+        indent = {
+            enable = true,
+        },
+        textobjects = {
+            select = {
+                enable = true,
+                lookahead = true,
+                keymaps = {
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ad"] = "@conditional.outer",
+                    ["id"] = "@conditional.inner",
+                    ["al"] = "@loop.outer",
+                    ["il"] = "@loop.inner",
+                },
             },
         },
     }
 EOF
+
+" Use treesitter's folding functions.
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 endif
+
+
 " }}}
 
-" {{{ Direnv integration
+" Native LSP {{{
+
+if has('nvim')
+    lua << EOF
+    local nvim_lsp = require('lspconfig')
+
+    -- Use an on_attach function to only map the following keys
+    -- after the language server attaches to the current buffer
+    local on_attach = function(client, bufnr)
+        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+        local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+        --Enable completion triggered by <c-x><c-o>
+        buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+        -- Mappings.
+        local opts = { noremap=true, silent=true }
+
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+        buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+        buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+        -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+        -- buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+        -- buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+        -- buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+        -- buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+        -- buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+        -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        -- buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+        -- buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+        buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+        buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+        -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+        -- buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    end
+
+    -- Use a loop to conveniently call 'setup' on multiple servers and
+    -- map buffer local keybindings when the language server attaches
+    local servers = { "pyright", "rust_analyzer", "tsserver" }
+    for _, lsp in ipairs(servers) do
+      nvim_lsp[lsp].setup {
+        on_attach = on_attach,
+        flags = {
+          debounce_text_changes = 150,
+        }
+      }
+    end
+EOF
+endif
+
+" }}}
+
+" }}}
+
+" Per-directory configuration {{{
 
 " Allows direnv to load additional configuration (which could override
 " defaults), allowing for customized per-project configurations
