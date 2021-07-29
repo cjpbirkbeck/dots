@@ -93,7 +93,7 @@ let
         vim-signature                # Displays marks in the gutter.
         undotree                     # Visualize vim's undos with a tree.
         neoterm                      # Neovim terminal enhancements.
-        nvim-colorizer-lua           # Show various colour words (e.g. 'black' or #87fe8e) in that colour.
+        nvim-colorizer-lua           # Show various colour words (e.g. 'Black' or #87fe8e) in that colour.
         registers-nvim               # Dynamically show register contents
 
         # Custom operators
@@ -128,33 +128,34 @@ let
         # IDE-like plugins
         ultisnips                    # Snippet manager.
         vim-snippets                 # Collection of prebuilt snippets.
-        # LanguageClient-neovim        # Language server for neovim
+        nvim-treesitter              # Supports tree-sitter within nvim.
+        nvim-treesitter-textobjects  # Add text objects for tree-sitter objects
+        nvim-lspconfig               # Quick configuration of native LSP
         vim-test                     # Automatic testing.
         ale                          # Multi-language linter.
-        nvim-lspconfig
 
         # Filetype specific plugins
         # Should go into opt, unless it doesn't work.
         vim-go                       # Plugin for extra support with Go
         vim-markdown                 # Extra markdown support
-        neorg
+        neorg                        # New org-like notetake format
+        vim-nix                      # Adds nix syntax colouring and file detection to vim.
 
         # Misc
         firenvim                     # Inserts neovim into browser text boxes.
-        nvim-treesitter              # Supports tree-sitter within nvim.
-        nvim-treesitter-textobjects
+        glow-nvim
       ];
       # For optional plugins, loaded only when meeting certain conditions:
       # e.g. autocmd FileType foo :packadd fooCompletion
       opt = [
         emmet-vim                    # Support for writing HTML/CSS
-        vim-nix                      # Adds nix syntax colouring and file detection to vim.
         vim-orgmode                  # Add support for org file.
         vim-tmux                     # Adds support for modifying tmux config files.
         zig-vim                      # Add support for the Zig language
       ];
     };
   };
+
 in {
   nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
     neovim_with_plugins = unstable.neovim.override {

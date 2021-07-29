@@ -52,9 +52,41 @@
       promptInit = ''
         TTY_BNAME="$(basename $(tty))"
 
+        autoload -Uz vcs_info
+        zstyle ':vcs_info:*' enable git
+        zstyle ':vcs_info:git*' formats "%b(%7>>%i%<<)@%r%c%u"
+        zstyle ':vcs_info:git*' actionformats "(%a|%m)@%r%c%u"
+        zstyle ':vcs_info:git*' stagedstr "(+)"
+        zstyle ':vcs_info:git*' unstagedstr "(!)"
+        zstyle ':vcs_info:git*' get-revision true
+        zstyle ':vcs_info:git*' check-for-changes true
+        add-zsh-hook precmd vcs_info
+
+        function precmd {
+            psvar=()
+
+            vcs_info
+
+            # Set the terminal title
+            print -Pn "''${__TERM_TITLE}"
+
+            # Set up the vcs widget
+            [[ -n $vcs_info_msg_0_ ]] && print -v 'psvar[1]' -Pr -- "$vcs_info_msg_0_"
+
+            # Set up the nix-shell indicator "widget"
+            if [[ "$IN_NIX_SHELL" = "pure" || "$IN_NIX_SHELL" = "impure" && "$HAS_NISH_PROMPT" != "yes" ]]; then
+              RPROMPT="%B%F{white}%K{#5074bf}[NIXSH]%k%f%b''${RPROMPT}"
+              export HAS_NISH_PROMPT="yes"
+            fi
+            if [[ -z "$IN_NIX_SHELL" ]]; then
+              RPROMPT="''${RPROMPT/\%B\%F\{white\}\%K\{\#5074bf\}\[NIXSH\]\%k\%f\%b/}"
+              export HAS_NISH_PROMPT=""
+            fi
+        }
+
         if test "$TERM" != "linux"; then
             PROMPT="%B%F{#FFFF00}["''${TTY_BNAME##*[a-z]}"]%f%F{#00FF7F}[%n@%M]%f%F{#87CEEB}[%(5~|%-1~/…/%3~|%4~)]%f%F{#FFFFFF}%(0#,#,$)%f%b "
-            RPROMPT="%(?,,%B%F{#FFFFFF}%K{red}[%?]%k%f%b)%(1j,%B%F{#FFFFFF}%K{blue}[%j]%k%f%b,)"
+            RPROMPT="%(1v,%B%F{#FFFFFF}%K{magenta}[%1v]%k%f%b,)%(?,,%B%F{#FFFFFF}%K{red}[%?]%k%f%b)%(1j,%B%F{#FFFFFF}%K{blue}[%j]%k%f%b,)%(3L,%B%F{#FFFFFF}%K{cyan}[%L]%k%f%b,)"
 
             # Write some info to terminal title.
             # This is seen when the shell prompts for input.
@@ -63,15 +95,10 @@
             # along with if any jobs are in the background.
             case "$TERM" in
                 screen* | tmux* )
-                    function precmd {
-                        print -Pn "\e]0;%~ %(1j,[%j],)\a"
-                    }
+                    __TERM_TITLE="\e]0;%~ %(1j,[%j],)\a"
                     ;;
                 *)
-                    __PTS_NO=''${TTY_BNAME##*[a-z]}
-                    function precmd {
-                        print -Pn "\e]0;zsh [$__PTS_NO]: %~ %(1j,[%j],)\a"
-                    }
+                    __TERM_TITLE="\e]0;zsh [''${TTY_BNAME##*[a-z]}]: %~ %(1j,[%j],)\a"
                     ;;
             esac
 
@@ -83,7 +110,7 @@
 
         else
             PROMPT="%B%F{red}[%t]%f%F{yellow}["''${TTY_BNAME##*[a-z]}"]%f%F{green}[%n@%M]%f%F{blue}[%(5~|%-1~/…/%3~|%4~)]%f%F{white}%(0#,#,$)%f%b "
-            RPROMPT="%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)"
+            RPROMPT="%(1v,%B%F{#FFFFFF}%K{magenta}[%1v]%k%f%b,)%(?,,%B%F{white}%K{red}[%?]%k%f%b)%(1j,%B%F{white}%K{blue}[%j]%k%f%b,)%(3L,%B%F{#FFFFFF}%K{cyan}[%L]%k%f%b,)"
         fi
 
       # Change prompt when using zsh's vi command mode
@@ -91,7 +118,7 @@
           if [[ $KEYMAP == vicmd ]]; then
               RPROMPT="%B%F{white}%K{green}[CMD]%k%f%b''${RPROMPT}"
           else
-              RPROMPT="''${RPROMPT/\[CMD\]/}"
+              RPROMPT="''${RPROMPT/\%B\%F\{white\}\%K\{green\}\[CMD\]\%k\%f\%b/}"
           fi
           zle reset-prompt
       }
@@ -102,7 +129,7 @@
       # Without it, the [CMD] prompt doesn't disappear you execute within vi command mode.
       # Does not quite work, you have enter another line to work.
       zle-line-init () {
-        RPROMPT="''${RPROMPT/\[CMD\]/}"
+        RPROMPT="''${RPROMPT/\%B\%F\{white\}\%K\{green\}\[CMD\]\%k\%f\%b/}"
       }
 
       zle -N zle-line-init
@@ -131,7 +158,7 @@
         zle -N edit-command-line
         bindkey '^[e' edit-command-line
 
-        # The follow was from the Arch Wiki.
+        # The following was from the Arch Wiki.
         # create a zkbd compatible hash;
         # to add other keys to this hash, see: man 5 terminfo
         typeset -g -A key

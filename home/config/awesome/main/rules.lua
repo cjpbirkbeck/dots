@@ -71,6 +71,7 @@ awful.rules.rules = {
         name = {
           "Event Tester",  -- xev.
           "About Firefox",
+          "About Mozilla Firefox",
           "About LibreWolf",
         },
         role = {
@@ -80,6 +81,7 @@ awful.rules.rules = {
           "About",
           "page-info",
           "Organizer",
+          "Places",
         },
         type = { "dialog" }
       }, properties = { floating = true, placement = awful.placement.centered } },

@@ -1,5 +1,3 @@
-" packadd vim-markdown
-
 setlocal spell
 setlocal conceallevel=2
 
@@ -17,3 +15,9 @@ let g:vim_markdown_fenced_languages = [
     \'viml=vim',
     \'nix=nix',
     \ ]
+
+" Preview window
+highlight NormalFloat guifg=LightBlue guibg=grey30
+
+" Preview with glow(1)
+nnoremap <buffer> <silent> <localleader>p :Glow<CR>

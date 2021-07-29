@@ -12,3 +12,4 @@ test/
 *~
 plug.vim
 home/config/nvim/spell/*
+emacs.nix

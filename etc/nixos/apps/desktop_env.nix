@@ -177,7 +177,7 @@ in
       git = {
         enable = true;
         package = pkgs.gitAndTools.gitFull;
-        ignores = [ ".envrc" "shell.nix" ".tmuxp.yaml" ];
+        ignores = [ ".envrc" "shell.nix" ".tmuxp.yaml" "extra.vim" ];
         userName = "Christopher Birkbeck";
         userEmail = "cjpbirkbeck@gmail.com";
         extraConfig = {

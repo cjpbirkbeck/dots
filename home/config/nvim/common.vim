@@ -462,8 +462,9 @@ if has('nvim')
                 scope_incremental = "gzc",
             },
         },
+        -- Experimental
         indent = {
-            enable = true,
+            enable = false,
         },
         textobjects = {
             select = {
@@ -531,6 +532,7 @@ if has('nvim')
 
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches
+    -- vim-go handles gopls
     local servers = { "pyright", "rust_analyzer", "tsserver" }
     for _, lsp in ipairs(servers) do
       nvim_lsp[lsp].setup {

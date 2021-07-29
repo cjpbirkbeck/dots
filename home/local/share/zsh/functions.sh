@@ -5,23 +5,23 @@ test ! -d $HOME/.cache/zsh && mkdir -p $HOME/.cache/zsh
 compinit -d ~/.cache/zsh/zcompdump-"$ZSH_VERSION"
 
 # Write to the terminal window.
-case $TERM in
-    (*xterm* | rxvt | st* | alacritty )
-        tty_id="$(basename $(tty))"
+# case $TERM in
+#     (*xterm* | rxvt | st* | alacritty )
+#         tty_id="$(basename $(tty))"
 
-    # Write some info to terminal title.
-    # This is seen when the shell prompts for input.
-        function precmd {
-            print -Pn "\e]0;zsh [$tty_id] %(1j,%j job%(2j|s|); ,)%~\a"
-        }
-    # Write command and args to terminal title.
-    # This is seen while the shell waits for a command to complete.
-        function preexec {
-            printf "\033]0;%s\a" "$1"
-        }
+#     # Write some info to terminal title.
+#     # This is seen when the shell prompts for input.
+#         function precmd {
+#             print -Pn "\e]0;zsh [$tty_id] %(1j,%j job%(2j|s|); ,)%~\a"
+#         }
+#     # Write command and args to terminal title.
+#     # This is seen while the shell waits for a command to complete.
+#         function preexec {
+#             printf "\033]0;%s\a" "$1"
+#         }
 
-    ;;
-esac
+#     ;;
+# esac
 
 # Open the Nix store when given a command. Note that is works only for a command.
 function _nix_store_open {
@@ -68,5 +68,6 @@ man() {
     command man "$@"
 }
 
+alias fcd="_fuzzy_change_dir"
 alias ncd="_nix_store_open"
 alias md="_mkdir_cd"
