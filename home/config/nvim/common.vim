@@ -222,25 +222,6 @@ endif
 
 " }}}
 
-" {{{ Firenvim
-
-let g:firenvim_config = {
-    \ 'globalSettings': {
-        \ 'alt': 'all',
-        \ '<C-w>': 'noop',
-        \ '<C-n>': 'noop',
-    \ },
-    \ 'localSettings': {
-        \ '.*': {
-            \ 'selector': 'textarea',
-            \ 'takeover': 'never',
-            \ 'priority': 0,
-        \ }
-    \ }
-\ }
-
-" }}}
-
 " }}}
 
 " Editing {{{
@@ -546,6 +527,25 @@ EOF
 endif
 
 " }}}
+
+" }}}
+
+" {{{ Firenvim
+
+let g:firenvim_config = {
+    \ 'globalSettings': {
+        \ 'alt': 'all',
+        \ '<C-w>': 'noop',
+        \ '<C-n>': 'noop',
+    \ },
+    \ 'localSettings': {
+        \ '.*': {
+            \ 'selector': 'textarea',
+            \ 'takeover': 'never',
+            \ 'priority': 0,
+        \ }
+    \ }
+\ }
 
 " }}}
 

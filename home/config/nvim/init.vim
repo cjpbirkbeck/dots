@@ -48,7 +48,6 @@ Plug 'tpope/vim-fugitive'                  " Git frontend for Vim.
 Plug 'SirVer/ultisnips'                    " Snippet manager.
 Plug 'honza/vim-snippets'                  " Collection of prebuilt snippets.
 Plug 'roxma/nvim-yarp'                     " Remote Plugin framework.
-Plug 'autozimu/LanguageClient-neovim'      " Language server implementation.
 Plug 'janko/vim-test'                      " Automatic testing.
 Plug 'dense-analysis/ale'                  " Multi-language linter.
 
