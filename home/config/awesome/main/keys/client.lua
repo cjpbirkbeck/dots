@@ -216,7 +216,7 @@ local clientkeys = gears.table.join(
             c.maximized = not c.maximized
             c:raise()
         end ,
-        {description = "(un)maximize", group = "client"}),
+        {description = "Toggle maximize", group = "Client"}),
 
     awful.key( { super, control }, "i",
         function(c)

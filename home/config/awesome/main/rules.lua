@@ -64,6 +64,8 @@ awful.rules.rules = {
           "Qalculate-gtk",
           "Mediainfo-gui",
           "Gweled",
+          "stfloat",
+          "XTerm"
         },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
