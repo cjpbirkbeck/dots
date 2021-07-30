@@ -276,7 +276,7 @@ in
           bind C-i next-layout
 
           # Reload source code
-          bind r source $HOME/.tmux.conf
+          bind r source $HOME/.config/tmux/tmux.conf
 
           # Enable the mouse
           set -g mouse on
