@@ -13,3 +13,4 @@ test/
 plug.vim
 home/config/nvim/spell/*
 emacs.nix
+vim-plug.vim
