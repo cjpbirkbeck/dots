@@ -71,22 +71,17 @@ endfunction
 set modelines=0                              " Modelines set to 0.
 set nomodeline                               " Turns off modelines for security.
 if has('nvim')
-    set shada=!,'100,<50,s10,h,%,r/run/media " Sets the shada settings
-    set inccommand=nosplit                   " Show the incremental effects of typing in an command.
-    set clipboard+=unnamedplus               " Use the system clipboard by default.
-endif
-filetype indent plugin on                    " Detect file types.
-
-" Set leader to spacebar.
-let mapleader=" "
-
-" Set localleader to backslash.
-let maplocalleader="\\"
-
-" Settings for gnvim
-
-if exists("g:gnvim")
-    " TODO: For future use.
+    " Sha(red) da(ta) settings
+    " Save the marks of the last 100 files.
+    " Remember the last 50 lines of registers.
+    " Items with more than 10 KiB are ignored
+    " Do not highlight last searches
+    " Save and restore the buffer list
+    " Forget anything in the following directories:
+    " * /run/media
+    " * /temp
+    " * /tmp
+    set shada=!,'100,<50,s10,h,%,r/run/media,r/temp,r/tmp
 endif
 
 " }}}
@@ -94,6 +89,15 @@ endif
 " Interface {{{
 
 " General {{{
+
+" Detect file types.
+filetype indent plugin on
+
+" Set leader to spacebar.
+let mapleader=" "
+
+" Set localleader to backslash.
+let maplocalleader="\\"
 
 set title                      " Set title of terminal.
 set number                     " Prints the line numbers on the left margin.
@@ -118,9 +122,11 @@ map <silent> <leader>n :set relativenumber!<CR>
 " Appearance {{{
 
 if has('nvim')
-    syntax enable                   " Enable syntax colouring.
-    set termguicolors               " Use the true (24-bit) colours instead of the terminal options.
-    colorscheme savanna             " Use my customized theme, located at colors/savanna.vim.
+    syntax enable          " Enable syntax colouring.
+    set termguicolors      " Use the true (24-bit) colours instead of the terminal options.
+    colorscheme savanna    " Use my customized theme, located at colors/savanna.vim.
+
+    set inccommand=nosplit " Show the incremental effects of typing in an command.
 endif
 
 " Changes cursor shape depending on the current mode.
@@ -155,6 +161,19 @@ let g:lightline = {
     \   'cursorpos': '%l:%c/%L'
     \ }
 \ }
+
+" }}}
+
+" Command Line {{{
+
+" Quit application with 'Q' at the command line
+cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
+
+" Always show buffer absolute path with Ctrl-G
+nnoremap <C-g> 1<C-g>
+
+" Auto search help
+nnoremap <leader>h :help<Space>
 
 " }}}
 
@@ -263,20 +282,7 @@ endif
 
 " Editing {{{
 
-" Basic {{{
-
-" Repeat last macro with 'Q' in normal mode
-nnoremap Q @@
-
-" Quit application with 'Q' at the command line
-cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
-
-" Always show absolute paths with Ctrl-G
-nnoremap <C-g> 1<C-g>
-
-" }}}
-
-" Movement and Searching {{{
+" Cursor Movement and Searching {{{
 
 " Navigate by screen line with j and k, unless it has a count (arrows keys use default behavior).
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
@@ -344,9 +350,34 @@ iabbrev ;b []
 iabbrev ;{ {}
 iabbrev ;B {}
 
+" Insert undo breakpoint after certian punctuation.
+inoremap , ,<C-g>u
+inoremap . .<C-g>u
+inoremap ! !<C-g>u
+inoremap ? ?<C-g>u
+
 " Insert a blank line above or below the current line.
 nnoremap <leader>o m`A<CR><ESC>``
 nnoremap <leader>O m`ko<ESC>``
+
+" }}}
+
+" Modification {{{
+
+" Repeat last macro with 'Q' in normal mode
+nnoremap Q @@
+
+if has('nvim')
+    " Map the alignment plugin
+    nmap gl <Plug>(EasyAlign)
+    xmap gl <Plug>(EasyAlign)
+endif
+
+" Move lines in normal and visual mode
+nnoremap <silent> <leader>j :move .+1<CR>==
+nnoremap <silent> <leader>k :move .-2<CR>==
+vnoremap <silent> <C-j> :move '>+1<CR>gv=gv
+vnoremap <silent> <C-k> :move '<-2<CR>gv=gv
 
 " }}}
 
@@ -363,20 +394,26 @@ endif
 
 " }}}
 
-" Registers {{{
-
-" Remap Y to y$
-nnoremap Y y$
+" Deletion {{{
 
 " Delete to the null register.
 nnoremap <leader>d "_d
 nnoremap <leader>D "_D
 nnoremap <leader>dd "_dd
 
+" }}}
+
+" Registers {{{
+
+" Remap Y to y$
+nnoremap Y y$
+
 " Show all registers in normal mode
 nnoremap <silent> <leader>r :registers<CR>
 
 if has('nvim')
+    set clipboard+=unnamedplus " Use the system clipboard by default.
+
     " Settings for the registers.nvim plugin.
     let g:registers_tab_symbol         = '⇥'
     let g:registers_window_border      = 'none'
@@ -396,22 +433,6 @@ set spelllang=en
 
 " Quickly toggle spell check.
 nnoremap <silent> <leader>s :setlocal spell!<cr>
-
-" }}}
-
-" Miscellaneous {{{
-
-" Switch between relative and absolute line numbering.
-map <leader>n :set relativenumber!<CR>
-
-if has('nvim')
-    " Map the alignment plugins
-    nmap gl <Plug>(EasyAlign)
-    xmap gl <Plug>(EasyAlign)
-endif
-
-" Auto search help
-nnoremap <leader>h :help<Space>
 
 " }}}
 
@@ -606,7 +627,7 @@ endif
 
 " }}}
 
-" {{{ Firenvim
+" Firenvim {{{
 
 if has('nvim') && has('nvim-0.4')
     let g:firenvim_config = {

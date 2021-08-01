@@ -272,8 +272,11 @@ in
 
           bind C-- delete-buffer
 
-          # Cycle layouts with C-i, which should be the same as Tab
-          bind C-i next-layout
+          # Rebind switch client with C-i, which should be the same as Tab
+          bind C-i switch-client -lZ
+
+          # Cycle layouts
+          bind ` next-layout
 
           # Reload source code
           bind r source $HOME/.config/tmux/tmux.conf

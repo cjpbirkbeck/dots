@@ -24,3 +24,10 @@ else
     inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
     vnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
 endif
+
+" Settings for gnvim
+
+if exists("g:gnvim")
+    " TODO: For future use.
+endif
+
