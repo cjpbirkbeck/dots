@@ -25,9 +25,9 @@ colorscheme slate                       " Use this colorscheme instead
 set statusline=%1*[%n]
 set statusline+=\ %f
 set statusline+=\ %m
-set statusline+=\ %y%*
 set statusline+=%=
 set statusline+=%2*[%{&fileformat}\ %{&fileencoding?&fileencoding:&encoding}]
+set statusline+=\ %y%*
 set statusline+=\ {%B}
 set statusline+=\ %l:%c/%L
 set statusline+=\ %P

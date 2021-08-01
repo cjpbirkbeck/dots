@@ -14,3 +14,4 @@ plug.vim
 home/config/nvim/spell/*
 emacs.nix
 vim-plug.vim
+home/config/nvim/cache/

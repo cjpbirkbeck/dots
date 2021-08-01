@@ -111,7 +111,7 @@ set wrap                       " Turns on word wrap.
 set colorcolumn=80,100         " Colour the 80th and 100th columns.
 
 " Switch between relative and absolute line numbering.
-map <leader>n :set relativenumber!<CR>
+map <silent> <leader>n :set relativenumber!<CR>
 
 " }}}
 
@@ -199,7 +199,11 @@ let g:netrw_winsize = 25                " Specifies netrw default size.
 let g:netrw_dirhistmax = 100            " Please does not liter my directories with .netrwhist files; thank you.
 let g:netrw_sizestyle = 'h'             " Human-readable file sizes
 let g:netrw_special_syntax = 1          " Syntax highlighting for various files
-let g:netrw_home = '~/.cache/nvim/'     " Save bookmarks and history in a special directory
+if has('nvim')
+    let g:netrw_home = '~/.cache/nvim/' " Save bookmarks and history in a special directory
+else
+    let g:netrw_home = '~/.vim/cache'
+endif
 let g:netrw_browser_viewer = 'xdg-open' " Open files with DE's file-opener.
 let g:netrw_preview = 1
 
