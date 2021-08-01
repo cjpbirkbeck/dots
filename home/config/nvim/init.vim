@@ -15,7 +15,9 @@ Plug 'tpope/vim-characterize'              " Display Unicode character metadata.
 Plug 'kshenoy/vim-signature'               " Displays marks in the gutter.
 Plug 'mbbill/undotree'                     " Visual Vim's undos with a tree.
 Plug 'kassio/neoterm'                      " Neovim terminal enhancements.
-Plug 'tversteeg/registers.nvim'            " Show registers contents while inserting text.
+if has('nvim-0.5')
+    Plug 'tversteeg/registers.nvim'        " Show registers contents while inserting text.
+endif
 
 " Custom operators
 Plug 'tpope/vim-surround'                  " Manipulate elements that surrounds text.
@@ -49,20 +51,26 @@ Plug 'SirVer/ultisnips'                    " Snippet manager.
 Plug 'honza/vim-snippets'                  " Collection of prebuilt snippets.
 Plug 'roxma/nvim-yarp'                     " Remote Plugin framework.
 Plug 'janko/vim-test'                      " Automatic testing.
-Plug 'dense-analysis/ale'                  " Multi-language linter.
+if has('nvim-0.2')
+    Plug 'dense-analysis/ale'              " Multi-language linter.
+endif
 
 " Filetype specific plugins
 Plug 'LnL7/vim-nix'                        " Adds nix syntax colouring and file detection to vim.
 Plug 'jceb/vim-orgmode'                    " Add support for org file.
 Plug 'tmux-plugins/vim-tmux'               " Adds support for modifying tmux config files.
-Plug 'fatih/vim-go'                        " Extra support for working the Go language.
+if has('nvim-0.5')
+    Plug 'fatih/vim-go'                    " Extra support for working the Go language.
+endif
 
 " Misc
-" Allows nvim to run within browsers
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-" Treesitter plugin for better syntax highlighting, etc.
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+if has('nvim-0.5')
+    " Allows nvim to run within browsers
+    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+    " Treesitter plugin for better syntax highlighting, etc.
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+endif
 call plug#end()
 
 if has('win32')
@@ -73,4 +81,6 @@ else
     source $HOME/.config/nvim/common.vim
 endif
 
-lua require'colorizer'.setup()
+if has('nvim') && has('nvim-0.5')
+    lua require'colorizer'.setup()
+endif

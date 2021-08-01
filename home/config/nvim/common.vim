@@ -204,7 +204,11 @@ let g:netrw_browser_viewer = 'xdg-open' " Open files with DE's file-opener.
 let g:netrw_preview = 1
 
 " Open netrw in a sidebar.
-nnoremap <silent> <leader>e :UndotreeHide<CR>:call ToggleNetrw()<CR>
+if has('nvim')
+    nnoremap <silent> <leader>e :UndotreeHide<CR>:Lexplore<CR>
+else
+    nnoremap <silent> <leader>e :Lexplore<CR>
+endif
 
 " }}}
 
@@ -308,19 +312,25 @@ set shiftwidth=4 " Set the number of spaces for each indent.
 " List out all abbreviations
 nnoremap <silent> <leader>a :abbreviate<CR>
 
-" Either insert pairs for punctation that can, but normally isn't used for
-" pairs, or insert a opening bracket with the matching pair. Also can insert
-" bracket pairs on seperate lines, and start new typing with in th bracket.
-inoremap <A-(> ()<Left>
-inoremap <A-)> (<CR><CR>)<CR><Up><Up><C-o>i
-inoremap <A-[> []<Left>
-inoremap <A-]> [<CR><CR>]<CR><Up><Up><C-o>i
-inoremap <A-{> {}<Left>
-inoremap <A-}> {<CR><CR>}<CR><Up><Up><C-o>i
-inoremap <A-<> <><Left>
-inoremap <A-'> ''<Left>
-inoremap <A-"> ""<Left>
-inoremap <A-`> ``<Left>
+if has('nvim')
+    " Delete words with alt-backspace, useful of firenvim.
+    inoremap <A-BS> <C-w>
+    vnoremap <A-BS> <C-w>
+
+    " Either insert pairs for punctation that can, but normally isn't used for
+    " pairs, or insert a opening bracket with the matching pair. Also can insert
+    " bracket pairs on seperate lines, and start new typing with in th bracket.
+    inoremap <A-(> ()<Left>
+    inoremap <A-)> (<CR><CR>)<CR><Up><Up><C-o>i
+    inoremap <A-[> []<Left>
+    inoremap <A-]> [<CR><CR>]<CR><Up><Up><C-o>i
+    inoremap <A-{> {}<Left>
+    inoremap <A-}> {<CR><CR>}<CR><Up><Up><C-o>i
+    inoremap <A-<> <><Left>
+    inoremap <A-'> ''<Left>
+    inoremap <A-"> ""<Left>
+    inoremap <A-`> ``<Left>
+endif
 
 " Use abbreviations to insert completely empty pairs
 iabbrev ;9 ()
@@ -338,12 +348,14 @@ nnoremap <leader>O m`ko<ESC>``
 
 " Undos {{{
 
-set undofile                       " Keep persistent undos.
-let g:undotree_WindowLayout = 2    " Show undo differences in large window at the bottom.
-let g:undotree_ShortIndicators = 1 " Times should written in shorthand.
+if has('nvim')
+    set undofile                       " Keep persistent undos.
+    let g:undotree_WindowLayout = 2    " Show undo differences in large window at the bottom.
+    let g:undotree_ShortIndicators = 1 " Times should written in shorthand.
 
-" Toggle Undo Tree
-nnoremap <silent> <leader>u :call CloseNetrw()<CR>:UndotreeToggle<CR><C-w><C-h>
+    " Toggle Undo Tree
+    nnoremap <silent> <leader>u :call CloseNetrw()<CR>:UndotreeToggle<CR><C-w><C-h>
+endif
 
 " }}}
 
@@ -385,9 +397,14 @@ nnoremap <silent> <leader>s :setlocal spell!<cr>
 
 " Miscellaneous {{{
 
-" Map the alignment plugins
-nmap gl <Plug>(EasyAlign)
-xmap gl <Plug>(EasyAlign)
+" Switch between relative and absolute line numbering.
+map <leader>n :set relativenumber!<CR>
+
+if has('nvim')
+    " Map the alignment plugins
+    nmap gl <Plug>(EasyAlign)
+    xmap gl <Plug>(EasyAlign)
+endif
 
 " Auto search help
 nnoremap <leader>h :help<Space>
@@ -401,21 +418,25 @@ nnoremap <leader>h :help<Space>
 " Git Integration {{{
 
 " Open fugitive
-nnoremap <silent> <leader>g :Git<CR>
+if has('nvim')
+    nnoremap <silent> <leader>g :Git<CR>
+endif
 
 " }}}
 
 " Snippets {{{
 
-let g:UltiSnipsExpandTrigger="<a-j>"
-let g:UltiSnipsListSnippets="<a-S-j>"
+if has('nvim')
+    let g:UltiSnipsExpandTrigger="<a-j>"
+    let g:UltiSnipsListSnippets="<a-S-j>"
 
-let g:UltiSnipsJumpForwardTrigger="<a-j>"
-let g:UltiSnipsJumpBackwardTrigger="<a-k>"
+    let g:UltiSnipsJumpForwardTrigger="<a-j>"
+    let g:UltiSnipsJumpBackwardTrigger="<a-k>"
 
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
+    let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
 
-set completefunc=ListSnippets
+    set completefunc=ListSnippets
+endif
 
 " }}}
 
@@ -462,11 +483,22 @@ endif
 
 " }}}
 
+" Yank Highlight {{{
+
+if has('nvim') && has('nvim-0.5')
+    augroup high_on_yank
+        autocmd!
+        autocmd TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
+    augroup END
+endif
+
+" }}}
+
 " }}}
 
 " Treesitter {{{
 
-if has('nvim')
+if has('nvim') && has('nvim-0.5')
     lua <<EOF
     require'nvim-treesitter.configs'.setup {
         highlight = {
@@ -504,9 +536,9 @@ if has('nvim')
     }
 EOF
 
-" Use treesitter's folding functions.
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+    " Use treesitter's folding functions.
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
 
 endif
 
@@ -515,7 +547,7 @@ endif
 
 " Native LSP {{{
 
-if has('nvim')
+if has('nvim') && has('nvim-0.5')
     lua << EOF
     local nvim_lsp = require('lspconfig')
 
@@ -572,20 +604,22 @@ endif
 
 " {{{ Firenvim
 
-let g:firenvim_config = {
-    \ 'globalSettings': {
-        \ 'alt': 'all',
-        \ '<C-w>': 'noop',
-        \ '<C-n>': 'noop',
-    \ },
-    \ 'localSettings': {
-        \ '.*': {
-            \ 'selector': 'textarea',
-            \ 'takeover': 'never',
-            \ 'priority': 0,
+if has('nvim') && has('nvim-0.4')
+    let g:firenvim_config = {
+        \ 'globalSettings': {
+            \ 'alt': 'all',
+            \ '<C-w>': 'noop',
+            \ '<C-n>': 'noop',
+        \ },
+        \ 'localSettings': {
+            \ '.*': {
+                \ 'selector': 'textarea',
+                \ 'takeover': 'never',
+                \ 'priority': 0,
+            \ }
         \ }
     \ }
-\ }
+endif
 
 if exists('g:started_by_firenvim')
     " Delete words with alt-backspace, useful of firenvim.
