@@ -10,7 +10,6 @@ set followlinks    " Follow symlinks
 set norunexec      " Do not run executables
 set sortnumbers    " Sort numbers natuarally
 set cpoptions=fs   " Set C-i/Tab to go forward in history
-" set vimhelp        " Use vim's help system
 
 " Interface
 
@@ -40,7 +39,7 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 " file types
 set classify=' :dir:/, :exe:, :reg:, :link:'
 " various file names
-set classify+=' ::../::, ::*.sh::, ::*.[hc]pp::, ::*.[hc]::, ::/^copying|license$/::, ::.git/,,*.git/::, ::*.epub,,*.fb2,,*.djvu::, ::*.pdf::, ::*.htm,,*.html,,**.[sx]html,,*.xml::, ::*.py::'
+set classify+=' ::../::, ::*.sh,,*.bash,,*.zsh::, ::*.[hc]pp::, ::*.[hc]::, ::/^copying|license$/::, ::.git/,,*.git/::, ::*.epub,,*.fb2,,*.djvu::, ::*.pdf::, ::*.htm,,*.html,,**.[sx]html,,*.xml::, ::*.py::'
 " archives
 set classify+=' ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
 " images

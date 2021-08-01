@@ -56,6 +56,7 @@ function handle_mime() {
 
 function open_text() {
     $EDITOR "${FILE_PATH}"
+    exit 0
 }
 
 function open_document_viewer() {

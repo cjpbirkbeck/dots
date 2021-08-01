@@ -39,6 +39,31 @@ function! ListSnippets(findstart, base) abort
     endif
 endfunction
 
+let g:NetrwIsOpen=0
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i 
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
+endfunction
+
+function! CloseNetrw()
+    if g:NetrwIsOpen == 1
+        let g:NetrwIsOpen = 0
+        silent Lexplore
+    endif
+endfunction
+
 " }}}
 
 " Prelude {{{
@@ -85,6 +110,9 @@ set mouse=a                    " Allow mouse usage in all modes.
 set wrap                       " Turns on word wrap.
 set colorcolumn=80,100         " Colour the 80th and 100th columns.
 
+" Switch between relative and absolute line numbering.
+map <leader>n :set relativenumber!<CR>
+
 " }}}
 
 " Appearance {{{
@@ -114,10 +142,10 @@ set laststatus=2                " Keeps the status bar on screen.
 let g:lightline = {
     \ 'colorscheme': 'deus',
     \ 'active': {
-    \   'left': [ [ 'mode', ],
-    \             [ 'bufnum', 'modified', 'relativepath' ] ],
+    \   'left': [ [ 'bufnum', 'modified', 'readonly' ],
+    \             [ 'relativepath' ] ],
     \   'right': [ [ 'charvaluehex', 'percentwin', 'cursorpos' ],
-    \              [ 'fileformat', 'fileencoding', 'filetype', 'spell' ] ]
+    \              [ 'fileformat', 'filetype', 'spell' ] ]
     \ },
     \ 'inactive': {
     \   'left': [ [ 'bufnum' ], [ 'filename' ] ],
@@ -157,7 +185,7 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Vim already has some 'fuzzy' finding ablities on its own, so let's use them
 " here. This is for finding files in the current directory.
-nnoremap <leader>f :find<space>
+nnoremap <leader>f :find<Space>
 
 " Set path to search the current directory and any of its subdirectories
 " recursively.
@@ -173,9 +201,10 @@ let g:netrw_sizestyle = 'h'             " Human-readable file sizes
 let g:netrw_special_syntax = 1          " Syntax highlighting for various files
 let g:netrw_home = '~/.cache/nvim/'     " Save bookmarks and history in a special directory
 let g:netrw_browser_viewer = 'xdg-open' " Open files with DE's file-opener.
+let g:netrw_preview = 1
 
 " Open netrw in a sidebar.
-nnoremap <silent> <leader>e :UndotreeHide<CR>:Lexplore<CR>
+nnoremap <silent> <leader>e :UndotreeHide<CR>:call ToggleNetrw()<CR>
 
 " }}}
 
@@ -188,7 +217,7 @@ nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
 " Open list of buffers, then search currently open buffers
-nnoremap <leader>b :buffers<CR>:b<space>
+nnoremap <leader>b :buffers<CR>:b<Space>
 
 " }}}
 
@@ -239,7 +268,7 @@ nnoremap <C-g> 1<C-g>
 
 " }}}
 
-" Movement {{{
+" Movement and Searching {{{
 
 " Navigate by screen line with j and k, unless it has a count (arrows keys use default behavior).
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
@@ -258,6 +287,15 @@ set infercase  " Will match cases in auto-completions.
 " Clear search highlighting.
 nnoremap <silent> <leader>l :nohlsearch<CR>
 
+" Get to the command history easier
+nnoremap q; q:
+
+" No colorcolumns in Command Line windows
+augroup command_line_appearance
+    autocmd!
+    autocmd CmdwinEnter * setlocal colorcolumn=
+augroup END
+
 " }}}
 
 " Insertion {{{
@@ -267,23 +305,30 @@ set smartindent  " Turns on smart-indenting.
 set expandtab    " Replaces default tab with number of spaces.
 set shiftwidth=4 " Set the number of spaces for each indent.
 
-" Delete words with alt-backspace, useful of firenvim.
-inoremap <A-BS> <C-w>
-vnoremap <A-BS> <C-w>
+" List out all abbreviations
+nnoremap <silent> <leader>a :abbreviate<CR>
 
 " Either insert pairs for punctation that can, but normally isn't used for
 " pairs, or insert a opening bracket with the matching pair. Also can insert
-" an empty brackets with right backets.
+" bracket pairs on seperate lines, and start new typing with in th bracket.
 inoremap <A-(> ()<Left>
-inoremap <A-)> ()
+inoremap <A-)> (<CR><CR>)<CR><Up><Up><C-o>i
 inoremap <A-[> []<Left>
-inoremap <A-]> []
+inoremap <A-]> [<CR><CR>]<CR><Up><Up><C-o>i
 inoremap <A-{> {}<Left>
-inoremap <A-}> {}
+inoremap <A-}> {<CR><CR>}<CR><Up><Up><C-o>i
 inoremap <A-<> <><Left>
 inoremap <A-'> ''<Left>
 inoremap <A-"> ""<Left>
 inoremap <A-`> ``<Left>
+
+" Use abbreviations to insert completely empty pairs
+iabbrev ;9 ()
+iabbrev ;( ()
+iabbrev ;[ []
+iabbrev ;b []
+iabbrev ;{ {}
+iabbrev ;B {}
 
 " Insert a blank line above or below the current line.
 nnoremap <leader>o m`A<CR><ESC>``
@@ -298,14 +343,11 @@ let g:undotree_WindowLayout = 2    " Show undo differences in large window at th
 let g:undotree_ShortIndicators = 1 " Times should written in shorthand.
 
 " Toggle Undo Tree
-nnoremap <silent> <leader>u :UndotreeToggle<CR><C-w><C-h>
+nnoremap <silent> <leader>u :call CloseNetrw()<CR>:UndotreeToggle<CR><C-w><C-h>
 
 " }}}
 
 " Registers {{{
-
-" Show all registers in normal mode
-nnoremap <silent> <leader>r :registers<CR>
 
 " Remap Y to y$
 nnoremap Y y$
@@ -315,10 +357,19 @@ nnoremap <leader>d "_d
 nnoremap <leader>D "_D
 nnoremap <leader>dd "_dd
 
-" Settings for the registers.nvim plugin.
+" Show all registers in normal mode
+nnoremap <silent> <leader>r :registers<CR>
+
 if has('nvim')
+    " Settings for the registers.nvim plugin.
     let g:registers_tab_symbol         = '⇥'
     let g:registers_window_border      = 'none'
+
+    " When yanking, make yanked text flash
+    augroup high_on_yank
+        autocmd!
+        autocmd TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
+    augroup END
 endif
 
 " }}}
@@ -334,12 +385,12 @@ nnoremap <silent> <leader>s :setlocal spell!<cr>
 
 " Miscellaneous {{{
 
-" Switch between relative and absolute line numbering.
-map <leader>n :set relativenumber!<CR>
-
 " Map the alignment plugins
 nmap gl <Plug>(EasyAlign)
 xmap gl <Plug>(EasyAlign)
+
+" Auto search help
+nnoremap <leader>h :help<Space>
 
 " }}}
 
@@ -406,17 +457,6 @@ if has('nvim')
 
         " Automatically enter insert mode.
         autocmd TermOpen term://* startinsert
-    augroup END
-endif
-
-" }}}
-
-" Yank Highlight {{{
-
-if has('nvim')
-    augroup high_on_yank
-        autocmd!
-        autocmd TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
     augroup END
 endif
 
@@ -514,7 +554,7 @@ if has('nvim')
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches
     -- vim-go handles gopls
-    local servers = { "pyright", "rust_analyzer", "tsserver" }
+    local servers = { "pyright", "gopls", "rust_analyzer", "tsserver" }
     for _, lsp in ipairs(servers) do
       nvim_lsp[lsp].setup {
         on_attach = on_attach,
@@ -546,6 +586,12 @@ let g:firenvim_config = {
         \ }
     \ }
 \ }
+
+if exists('g:started_by_firenvim')
+    " Delete words with alt-backspace, useful of firenvim.
+    inoremap <C-BS> <C-w>
+    cnoremap <C-BS> <C-w>
+endif
 
 " }}}
 
