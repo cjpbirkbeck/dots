@@ -140,10 +140,11 @@ let
         vim-markdown                 # Extra markdown support
         neorg                        # New org-like notetake format
         vim-nix                      # Adds nix syntax colouring and file detection to vim.
+        vim-toml                     # Add syntax support for toml files
 
         # Misc
         firenvim                     # Inserts neovim into browser text boxes.
-        glow-nvim
+        glow-nvim                    # Previews for markdown with the terminal
       ];
       # For optional plugins, loaded only when meeting certain conditions:
       # e.g. autocmd FileType foo :packadd fooCompletion

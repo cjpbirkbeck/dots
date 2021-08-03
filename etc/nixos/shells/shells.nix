@@ -59,6 +59,7 @@
       # Program aliases
       more  = "less";
       dff   = "df -hH -x tmpfs -x devtmpfs";
+      du    = "du --human-readable";
       fr    = "free --human";
 
       # Aliases for nix programs.

@@ -35,8 +35,8 @@
 
     # Application specific settings
     ./apps/desktop_env.nix
-    # ./apps/emacs.nix
     ./apps/applications.nix
+    ./apps/bitlbee.nix
     ./apps/gaming.nix
     ./apps/overrides/scripts.nix
     ./apps/devlopement/golang.nix

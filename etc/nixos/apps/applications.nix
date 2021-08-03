@@ -32,6 +32,7 @@
     ffmpeg                    # Video encoder
     ffmpegthumbnailer         # Create video thumbnails
     gcal                      # Prints out almost any calendar and some holidays.
+    googler                   # Search Google from command line
     graphicsmagick            # Command line graphic process
     hunspell                  # Spell checker
     hunspellDicts.en_CA-large # Canadian English dictionary
@@ -80,17 +81,21 @@
     tree_sitter_with_packages
 
     # TUI programs
+    bombadillo                # Alternate protocol browser
+    bvi                       # vi-like hex editor
     cava                      # Visualiser for the terminal
+    glow                      # Terminal markdown reader
+    gnvim_with_plugins        # Another GUI frontend using Qt, but with Rust.
     gotop                     # Terminal base system monitor
     htop                      # System resources monitor
     ledger                    # Financial management with plain text
     lf                        # TUI file manager
+    lnav                      # vi-like log viewer
+    meli                      # TUI email client
     ncdu                      # Filesystem size browser
     neomutt                   # Ncurses email client
     neovim-qt_with_plugins    # GUI frontend using Qt.
-    gnvim_with_plugins        # Another GUI frontend using Qt, but with Rust.
     neovim-remote             # Control remote instances of neovim.
-    # neovim_with_plugins       # Customized neovim.
     newsboat                  # RSS/Atom feed reader
     rlwrap                    # Wrap readline library around certian prompts
     sc-im                     # Terminal spreadsheet program
@@ -100,9 +105,10 @@
     unstable.tuir             # Read reddit in a terminal
     vifm-full                 # Terminal file manager
     vimpc                     # TUI frontend for mpd
+    visidata                  # Tabular data viewer
     vit                       # Frontend for taskwarrior
     w3m                       # Terminal web browser
-    weechat                   # IRC client
+    unstable.weechat          # IRC client
 
     # GUI applications
     alacritty                 # Terminal emuator
@@ -113,6 +119,7 @@
     gromit-mpx                # On-screen annotator
     gnome3.cheese             # Webcamera program
     kolourpaint               # Kolourpaint, a simple MS Paint clone
+    imv                       # Lightweight image viewer
     mpv-with-scripts          # Customized mpv file
     nheko                     # Matrix client
     networkmanagerapplet      # Applet for connecting to wifi

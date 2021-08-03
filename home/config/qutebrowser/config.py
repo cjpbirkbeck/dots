@@ -1,4 +1,9 @@
 # Manual configuration for qutebrowser.
+# type: ignore (This shuts up pythons errors)
+
+import subprocess
+import os
+from qutebrowser.api import interceptor
 
 # Documentation:
 #   qute://help/configuring.html
@@ -11,7 +16,17 @@ config.load_autoconfig()
 # aliases, while the values are the commands they map to.
 # Type: Dict
 c.aliases = {'Q': 'quit', 'q': 'quit', 'w': 'session-save', 'wq': 'quit --save',
-        'about': "open -t qute://version/"}
+             'about': "open -t qute://version/"}
+
+# Use both adblocking methods
+c.content.blocking.enabled = True
+c.content.blocking.method = 'both'
+
+# UTF by default
+c.content.default_encoding = 'utf-8'
+
+# Add Canadian English as the first locality.
+c.content.headers.accept_language = 'en-CA,en-US,en;q=0.9'
 
 # Set Dark Mode
 # config.set("colors.webpage.darkmode.enabled", True)
@@ -22,8 +37,8 @@ config.set('content.javascript.enabled', True, 'file://*')
 config.set('content.javascript.enabled', True, 'chrome://*/*')
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
-# Use gnvim (nvim GUI frontend) as default editor.
-c.editor.command = [ "gnvim", "{file}", "--", "-c", "normal {line}G{column0}" ]
+# Use nvim-qt (nvim GUI frontend) as default editor.
+c.editor.command = [ "nvim-qt", "{file}", "--", "-c", "normal {line}G{column0}" ]
 
 # Keybindings
 
@@ -75,8 +90,9 @@ c.url.searchengines = {
     ";d":     "https://duckduckgo.com/?q={}&ia=web",
     ";g":     "https://www.google.com/search?q={}",
     ";b":     "https://www.bing.com/search?q={}",
-    ";yc":    "https://ca.search.yahoo.com/search?p={}",
-    ";qw":    "https://www.qwant.com/?q={}",
+    ";s":     "https://www.startpage.com/sp/{}",
+    ";yh":    "https://ca.search.yahoo.com/search?p={}",
+    ";q":     "https://www.qwant.com/?q={}",
     # Wikipedia sites
     ";w":     "https://en.wikipedia.org/w/index.php?search={}",
     ";wfr":   "https://fr.wikipedia.org/w/index.php?search={}",
@@ -86,14 +102,16 @@ c.url.searchengines = {
     ";gm":    "https://www.google.com/maps/search/{}",
     ";osm":   "https://www.openstreetmap.org/search?query={}",
     # Multimedia
-    ";yt":    "https://www.youtube.com/results?search_query={}",
+    ";y":    "https://www.youtube.com/results?search_query={}",
+    ";od":   "https://odysee.com/$/search?q={}",
     # Social media
-    ";tw":    "https://twitter.com/search?q={}",
+    ";t":    "https://twitter.com/search?q={}",
     ";rdt":   "https://www.reddit.com/search?q={}",
     ";lbt":   "https://www.librarything.com/search.php?search={}",
     # Stores
     ";a":     "https://www.amazon.com/s?ie=UTF8&field-keywords={}",
     ";ac":    "https://www.amazon.ca/gp/search?ie=UTF8&keywords={}",
+    ";eb":    "https://www.ebay.com/sch/{}",
     ";ebc":   "https://www.ebay.ca/sch/{}",
     ";kb":    "https://www.kobo.com/ca/en/search?query={}",
     ";stm":   "https://store.steampowered.com/search/?term={}",
@@ -118,27 +136,26 @@ c.url.searchengines = {
 }
 
 # Copied from the base16-seti-page
-# https://github.com/theova/base16-qutebrowser/blob/main/themes/default/base16-seti.config.py
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Base16 qutebrowser template by theova
-# Seti UI scheme by Unknown.
+# Helios scheme by Alex Meyer (https://github.com/reyemxela)
 
-base00 = "#151718"
-base01 = "#282a2b"
-base02 = "#3B758C"
-base03 = "#41535B"
-base04 = "#43a5d5"
-base05 = "#d6d6d6"
-base06 = "#eeeeee"
-base07 = "#ffffff"
-base08 = "#Cd3f45"
-base09 = "#db7b55"
-base0A = "#e6cd69"
-base0B = "#9fca56"
-base0C = "#55dbbe"
-base0D = "#55b5db"
-base0E = "#a074c4"
-base0F = "#8a553f"
+base00 = "#1d2021"
+base01 = "#383c3e"
+base02 = "#53585b"
+base03 = "#6f7579"
+base04 = "#cdcdcd"
+base05 = "#d5d5d5"
+base06 = "#dddddd"
+base07 = "#e5e5e5"
+base08 = "#d72638"
+base09 = "#eb8413"
+base0A = "#f19d1a"
+base0B = "#88b92d"
+base0C = "#1ba595"
+base0D = "#1e8bac"
+base0E = "#be4264"
+base0F = "#c85e0d"
 
 # set qutebrowser colors
 
@@ -147,7 +164,7 @@ base0F = "#8a553f"
 c.colors.completion.fg = base05
 
 # Background color of the completion widget for odd rows.
-c.colors.completion.odd.bg = base03
+c.colors.completion.odd.bg = base01
 
 # Background color of the completion widget for even rows.
 c.colors.completion.even.bg = base00
@@ -165,16 +182,19 @@ c.colors.completion.category.border.top = base00
 c.colors.completion.category.border.bottom = base00
 
 # Foreground color of the selected completion item.
-c.colors.completion.item.selected.fg = base01
+c.colors.completion.item.selected.fg = base05
 
 # Background color of the selected completion item.
-c.colors.completion.item.selected.bg = base0A
+c.colors.completion.item.selected.bg = base02
 
-# Top border color of the completion widget category headers.
-c.colors.completion.item.selected.border.top = base0A
+# Top border color of the selected completion item.
+c.colors.completion.item.selected.border.top = base02
 
 # Bottom border color of the selected completion item.
-c.colors.completion.item.selected.border.bottom = base0A
+c.colors.completion.item.selected.border.bottom = base02
+
+# Foreground color of the matched text in the selected completion item.
+c.colors.completion.item.selected.match.fg = base0B
 
 # Foreground color of the matched text in the completion.
 c.colors.completion.match.fg = base0B
@@ -184,6 +204,24 @@ c.colors.completion.scrollbar.fg = base05
 
 # Color of the scrollbar in the completion view.
 c.colors.completion.scrollbar.bg = base00
+
+# Background color of disabled items in the context menu.
+c.colors.contextmenu.disabled.bg = base01
+
+# Foreground color of disabled items in the context menu.
+c.colors.contextmenu.disabled.fg = base04
+
+# Background color of the context menu. If set to null, the Qt default is used.
+c.colors.contextmenu.menu.bg = base00
+
+# Foreground color of the context menu. If set to null, the Qt default is used.
+c.colors.contextmenu.menu.fg =  base05
+
+# Background color of the context menu’s selected item. If set to null, the Qt default is used.
+c.colors.contextmenu.selected.bg = base02
+
+#Foreground color of the context menu’s selected item. If set to null, the Qt default is used.
+c.colors.contextmenu.selected.fg = base05
 
 # Background color for the download bar.
 c.colors.downloads.bar.bg = base00
@@ -259,7 +297,10 @@ c.colors.prompts.border = base00
 c.colors.prompts.bg = base00
 
 # Background color for the selected item in filename prompts.
-c.colors.prompts.selected.bg = base0A
+c.colors.prompts.selected.bg = base02
+
+# Foreground color for the selected item in filename prompts.
+c.colors.prompts.selected.fg = base05
 
 # Foreground color of the statusbar.
 c.colors.statusbar.normal.fg = base0B
@@ -283,7 +324,7 @@ c.colors.statusbar.passthrough.bg = base0C
 c.colors.statusbar.private.fg = base00
 
 # Background color of the statusbar in private browsing mode.
-c.colors.statusbar.private.bg = base03
+c.colors.statusbar.private.bg = base01
 
 # Foreground color of the statusbar in command mode.
 c.colors.statusbar.command.fg = base05
@@ -348,7 +389,7 @@ c.colors.tabs.indicator.error = base08
 c.colors.tabs.odd.fg = base05
 
 # Background color of unselected odd tabs.
-c.colors.tabs.odd.bg = base03
+c.colors.tabs.odd.bg = base01
 
 # Foreground color of unselected even tabs.
 c.colors.tabs.even.fg = base05
@@ -356,17 +397,41 @@ c.colors.tabs.even.fg = base05
 # Background color of unselected even tabs.
 c.colors.tabs.even.bg = base00
 
+# Background color of pinned unselected even tabs.
+c.colors.tabs.pinned.even.bg = base0C
+
+# Foreground color of pinned unselected even tabs.
+c.colors.tabs.pinned.even.fg = base07
+
+# Background color of pinned unselected odd tabs.
+c.colors.tabs.pinned.odd.bg = base0B
+
+# Foreground color of pinned unselected odd tabs.
+c.colors.tabs.pinned.odd.fg = base07
+
+# Background color of pinned selected even tabs.
+c.colors.tabs.pinned.selected.even.bg = base02
+
+# Foreground color of pinned selected even tabs.
+c.colors.tabs.pinned.selected.even.fg = base05
+
+# Background color of pinned selected odd tabs.
+c.colors.tabs.pinned.selected.odd.bg = base02
+
+# Foreground color of pinned selected odd tabs.
+c.colors.tabs.pinned.selected.odd.fg = base05
+
 # Foreground color of selected odd tabs.
-c.colors.tabs.selected.odd.fg = base00
+c.colors.tabs.selected.odd.fg = base05
 
 # Background color of selected odd tabs.
-c.colors.tabs.selected.odd.bg = base05
+c.colors.tabs.selected.odd.bg = base02
 
 # Foreground color of selected even tabs.
-c.colors.tabs.selected.even.fg = base00
+c.colors.tabs.selected.even.fg = base05
 
 # Background color of selected even tabs.
-c.colors.tabs.selected.even.bg = base05
+c.colors.tabs.selected.even.bg = base02
 
 # Background color for webpages if unset (or empty to use the theme's
 # color).

@@ -611,7 +611,7 @@ if has('nvim') && has('nvim-0.5')
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches
     -- vim-go handles gopls
-    local servers = { "pyright", "gopls", "rust_analyzer", "tsserver" }
+    local servers = { "rust_analyzer", "tsserver" }
     for _, lsp in ipairs(servers) do
       nvim_lsp[lsp].setup {
         on_attach = on_attach,

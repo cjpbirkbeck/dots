@@ -168,6 +168,9 @@ in
           "--preview='$HOME/.local/bin/peekat {}'"
           "--history=$HOME/.cache/fzf/file-widget-history"
         ];
+        tmux = {
+          enableShellIntegration = true;
+        };
       };
 
       gh = {
