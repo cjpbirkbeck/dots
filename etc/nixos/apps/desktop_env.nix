@@ -27,6 +27,7 @@ in
       stateVersion = "19.09"; # DO NOT CHANGE!
       sessionVariables = {
         BROWSER = "firefox";
+        DOTREMINDERS = "$HOME/.local/share/remind/main.rem";
         LESSHISTFILE = "$HOME/.local/share/less/history";
         LESSKEY = "$HOME/.config/less/lesskey";
         QT_QPA_PLATFORMTHEME = "qt5ct";
@@ -74,6 +75,12 @@ in
         openup = {
           source = homeConfigFiles + /local/bin/openup;
           target = ".local/bin/openup";
+          executable = true;
+        };
+
+        move-and-link = {
+          source = homeConfigFiles + /local/bin/move-and-link;
+          target = ".local/bin/move-and-link";
           executable = true;
         };
 
@@ -133,9 +140,12 @@ in
 
     manual = {
       manpages.enable = true;
+
+      json.enable = true;
     };
 
     programs = {
+
       bat = {
         enable = true;
         config = {
@@ -145,6 +155,13 @@ in
         themes = {
           desert = builtins.readFile /home/cjpbirkbeck/code/dots/home/config/bat/themes/Desert.tmTheme;
         };
+      };
+
+      bash = {
+        enable = true;
+        historyFile = "\$HOME/.local/share/bash/history";
+        historyFileSize = largest32Int;
+        shellAliases = commonAliases;
       };
 
       dircolors = {
@@ -187,6 +204,9 @@ in
           pull = {
             rebase = false;
           };
+          merge = {
+            tool = "nvimdiff3";
+          };
         };
         delta = {
           enable = true;
@@ -197,18 +217,23 @@ in
         enable = true;
       };
 
+      man = {
+        generateCaches = true;
+      };
+
+      nix-index = {
+        enable = true;
+      };
+
       readline = {
         enable = true;
-        extraConfig = ''
-          
-        '';
       };
 
       rofi = {
         enable = true;
         theme = "~/.config/rofi/themes/flat-ocean";
         extraConfig = {
-          opacity = 80;
+          # opacity = 80;
           modi = "window,run,combi,drun";
         };
       };
@@ -227,6 +252,7 @@ in
 
       taskwarrior = {
         enable = true;
+        colorTheme = "dark-blue-256";
       };
 
       tmux = {
@@ -284,11 +310,17 @@ in
           # Reload source code
           bind r source $HOME/.config/tmux/tmux.conf
 
+          # Show the tmux man page.
+          bind C-F1 split-window -v man tmux
+
+          # Show copycat searches
+          bind M-F1 display-popup -h 16 -w 60 -E "less $HOME/.local/share/tmux/copycat-searches.txt"
+
           # Enable the mouse
           set -g mouse on
 
           # Setup the status bar.
-          set -g status-left '#[fg=#4D4D4D,bg=#98C379] ❰#{=/16/…:session_name}❱ #[default] '
+          set -g status-left '#[fg=#4D4D4D,bg=#98C379] #{=/16/…:session_name} #[default] '
           set -g status-left-length 20
           set -g window-status-current-format '#[reverse] {#I} #{=/16/…:window_name}#F #[noreverse]'
           set -g window-status-format '[#I] #{=/16/…:window_name}#F'
@@ -327,13 +359,6 @@ in
           path = ".local/share/zsh/history";
         };
         initExtra = builtins.readFile /home/cjpbirkbeck/code/dots/home/local/share/zsh/functions.sh;
-        shellAliases = commonAliases;
-      };
-
-      bash = {
-        enable = true;
-        historyFile = "\$HOME/.local/share/bash/history";
-        historyFileSize = largest32Int;
         shellAliases = commonAliases;
       };
 
@@ -388,6 +413,14 @@ in
 
       picom = {
         enable = true;
+      };
+
+      playerctld = {
+        enable = true;
+      };
+
+      udiskie = {
+        enable = false;
       };
     };
 
@@ -449,6 +482,7 @@ in
           "image/png" = [ "sxiv.desktop" "kolourpaint.desktop" ];
           "image/jpeg" = [ "sxiv.desktop" "kolourpaint.desktop" ];
           "x-scheme-handler/mailto" = [ "userapp-Thunderbird-6DZAV0.desktop" ];
+          "x-scheme-handler/ferdi" = [ "ferdi.desktop" ];
           "message/rfc822" = [ "userapp-Thunderbird-6DZAV0.desktop" ];
         };
       };

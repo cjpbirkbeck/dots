@@ -6,34 +6,28 @@
   core = with pkgs; [
     fd      # find replacement
     ripgrep # grep replacement
-    zip     # Create zip files
-    unzip   # Uncompress zip files
     curl    # Transfer files from a URL
-    wget    # Transfer files from a URL
   ];
 
   # Programs that should be on any machine with X server on it.
   general = with pkgs; [
     # Command line tools
-    asciinema                 # Recoard terminal sessions
-    atool                     # Print archive file infomation
-    bashdb                    # Bash debugger.
-    bats                      # Automated tests with bash scripts.
+    asciinema                 # Record terminal sessions
+    atool                     # Compressed file mangement
     boxes                     # Create text boxes
     catdoc                    # Converts Mircosoft Office to text
     catdocx                   # Converts Mircosoft Office (post-2007) to text
     catimg                    # A much better image to text converter
-    checkbashisms             # Check for bash-specific syntax in POSIX scripts.
     dante                     # SOCKS server; need for aerc
     ddgr                      # Search DuckDuckGo from the command line
     detox                     # Automatically make cli-friendly file names
-    dico                      # Command line dictionary
     exiftool                  # Image file information
     ffmpeg                    # Video encoder
     ffmpegthumbnailer         # Create video thumbnails
-    gcal                      # Prints out almost any calendar and some holidays.
+    gcal                      # Prints out almost any calendar and some holiday
     googler                   # Search Google from command line
     graphicsmagick            # Command line graphic process
+    gron                      # JSON command line processor
     hunspell                  # Spell checker
     hunspellDicts.en_CA-large # Canadian English dictionary
     hunspellDicts.fr-moderne  # French language dictionary
@@ -59,26 +53,21 @@
     playerctl                 # Command-line MPRIS controller
     poppler_utils             # Converts pdf to text
     qrencode                  # Prints out QR codes, when given a string of letters.
-    sent                      # Suckless's presentation software (default unpatched version)
     shellcheck                # Linter for shell scripts.
     taskopen                  # Open Taskwarrior annotations in various programs
     taskwarrior               # Tasks and TODOs
     translate-shell           # Search for translations (e.g. Google, Yandex) from the command line.
     trash-cli                 # CLI program for working with Trash bin.
+    tree-sitter
+    tree_sitter_with_packages
     units                     # Convert between units
     universal-ctags           # Tags files that will hold keyword information.
-    unstable.ueberzug         # Real images in the terminal!
-    unzip                     # List and extact zip file
-    unrar
     weather                   # Weather command line
     xcape                     # Binding a modifier key when press by itself.
     xclip                     # Command line ultity for manuplating the system clipboard.
     xdotool                   # Automation tool for X11
     xlsx2csv                  # Converts Excel (post-2007) files to csv files
     youtube-dl                # Video downloader
-    zip                       # Compress zip files
-    tree-sitter
-    tree_sitter_with_packages
 
     # TUI programs
     bombadillo                # Alternate protocol browser
@@ -89,7 +78,6 @@
     gotop                     # Terminal base system monitor
     htop                      # System resources monitor
     ledger                    # Financial management with plain text
-    lf                        # TUI file manager
     lnav                      # vi-like log viewer
     meli                      # TUI email client
     ncdu                      # Filesystem size browser
@@ -115,9 +103,8 @@
     anki                      # Flashcard application
     arc-theme                 # Theme for GUI programs
     firefox                   # GUI web browser
-    flameshot                 # Screenshot tool
+    # flameshot                 # Screenshot tool
     gromit-mpx                # On-screen annotator
-    gnome3.cheese             # Webcamera program
     kolourpaint               # Kolourpaint, a simple MS Paint clone
     imv                       # Lightweight image viewer
     mpv-with-scripts          # Customized mpv file
@@ -135,7 +122,7 @@
     qutebrowser               # Another GUI browser
     sxiv                      # Lightweight image viewer
     thunderbird               # GUI email client
-    # torbrowser                # Browser using the tor network
+    unstable.torbrowser       # Browser using the tor network
     zathura                   # Lightweight PDF/EPUB/Dejv reader
 
     # Icons for theming GTK and Qt applications with the breeze theme.
@@ -168,7 +155,6 @@
     asunder     # CD Ripper
     handbrake   # DVD Ripper
     brasero     # CD Burner
-    # audacity    # Waveform editor
 
     zoom-us     # Proprietary videoconferencing client
   ];
@@ -202,9 +188,4 @@ in
   users.users.cjpbirkbeck.packages = core ++
     (if config.services.xserver.enable then general else []) ++
     (if config.networking.hostName == "archimedes" then full else []);
-
-  environment.variables = {
-    LESSHISTFILE = "$HOME/.local/share/less/history";
-    LESSKEY = "$HOME/.config/less/lesskey";
-  };
 }

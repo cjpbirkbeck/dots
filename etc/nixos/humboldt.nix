@@ -20,7 +20,7 @@
     ./system/locale.nix
     ./system/auto-upgrade.nix
     ./system/cjpbirkbeck.nix
-    ./system/blockedhosts.nix
+    # ./system/blockedhosts.nix
 
     # Shell configuration
     ./shells/shells.nix

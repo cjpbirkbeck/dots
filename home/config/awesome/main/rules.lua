@@ -59,13 +59,13 @@ awful.rules.rules = {
           "Gnome-disks",
           "Cheese",
           "asunder",
-          "Alacritty",
           "flameshot",
           "Qalculate-gtk",
           "Mediainfo-gui",
           "Gweled",
           "stfloat",
-          "XTerm"
+          "XTerm",
+          "GNvim"
         },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -96,7 +96,7 @@ awful.rules.rules = {
     { rule_any = { class = { "pcmanfm-qt", "pcmanfm", "dolphin", "Gnome-disks", "ark", "Qalculate-gtk" } },
       properties = { tag = "Home" } },
 
-    { rule_any = { class = { "qutebrowser", "Firefox", "Brave", "Tor Browser", "Vimb", "LibreWolf" } },
+    { rule_any = { class = { "qutebrowser", "Firefox", "Brave", "Tor Browser", "Vieb", "Vimb", "LibreWolf" } },
       properties = { tag = "Web" } },
 
     { rule_any = { class = { "Daily", "Thunderbird", "nheko", "qTox", "zoom" } },
@@ -107,7 +107,7 @@ awful.rules.rules = {
                          "libreoffice-impress", "libreoffice-draw", "libreoffice-base", "Soffice", "Anki" } },
       properties = { tag = "Documents" } },
 
-    { rule_any = { class = { "kolourpaint", "Sxiv", "GIMP", "Inkscape", "gwenview" } },
+    { rule_any = { class = { "kolourpaint", "Sxiv", "GIMP", "Inkscape", "gwenview", "imv" } },
       properties = { tag = "Images" } },
 
     { rule_any = { class = { "Audacity", "Asunder", "Gbh", ".brasero-wrapped_", "brasero", "Cheese" } },
@@ -123,5 +123,5 @@ awful.rules.rules = {
       properties = { tag = "Multimedia",
                      floating = true,
                      placement = awful.placement.centered,
-                     ontop = true } }
+                     ontop = true } },
 }

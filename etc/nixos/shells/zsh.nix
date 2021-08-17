@@ -217,7 +217,7 @@
         zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
         zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
-        # partial completion suggestions
+        # Partial completion suggestions
         zstyle ':completion:*' list-suffixes
         zstyle ':completion:*' expand prefix suffix
 
@@ -230,6 +230,12 @@
         bindkey -M menuselect '^[l' vi-forward-char
         bindkey -M menuselect '^[j' vi-down-line-or-history
         bindkey -M menuselect '^[i' accept-and-menu-complete
+
+        # Add digraph insertion support.
+        # Insert with alt-k
+        autoload -Uz insert-composed-char
+        zle -N insert-composed-char
+        bindkey '^[k' insert-composed-char
       '';
     };
   };

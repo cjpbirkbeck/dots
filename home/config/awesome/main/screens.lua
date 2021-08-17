@@ -38,6 +38,7 @@ rand_wp:connect_signal("timeout",
             end
             rand_file = gears.string.split(rand_file, "\n")[1]
             gears.wallpaper.maximized(rand_file, s, true)
+            -- naughty.notify{ title = "Wallpaper", text = "changed to " .. rand_file }
             is_landscape = not is_landscape
         end
 

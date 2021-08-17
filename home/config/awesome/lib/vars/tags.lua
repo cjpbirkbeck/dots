@@ -6,7 +6,7 @@ local tag_symbols = {
     { "Documents", "" },
     { "Images", "" },
     { "Multimedia", "" },
-    { "Games", ""},
+    { "Games", "" },
     { "Virtual", "" },
     { "Miscellany", "" },
 }

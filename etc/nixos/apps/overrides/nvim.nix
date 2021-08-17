@@ -145,6 +145,7 @@ let
         # Misc
         firenvim                     # Inserts neovim into browser text boxes.
         glow-nvim                    # Previews for markdown with the terminal
+        himalaya-vim
       ];
       # For optional plugins, loaded only when meeting certain conditions:
       # e.g. autocmd FileType foo :packadd fooCompletion

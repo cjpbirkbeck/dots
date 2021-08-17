@@ -38,7 +38,7 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
 # Use nvim-qt (nvim GUI frontend) as default editor.
-c.editor.command = [ "nvim-qt", "{file}", "--", "-c", "normal {line}G{column0}" ]
+c.editor.command = [ "gnvim", "{file}", "--", "-c", "normal {line}G{column0}l" ]
 
 # Keybindings
 
@@ -52,11 +52,13 @@ config.bind(',M', 'hint links spawn mpv {hint-url}')
 # Play a video in mpv instead of the browser.
 config.bind(',m', 'spawn mpv {url}')
 
-# Use alt-j,k keys to cycle through command history
-config.bind('<Alt-j>', 'completion-item-focus next', mode='command')
-config.bind('<Alt-n>', 'completion-item-focus next', mode='command')
-config.bind('<Alt-k>', 'completion-item-focus prev', mode='command')
-config.bind('<Alt-p>', 'completion-item-focus prev', mode='command')
+# # Use alt-j,k keys to cycle through command history
+# config.bind('<Ctrl-n>', 'completion-item-focus next', mode='command')
+# config.bind('<Alt-n>', 'command-history-next', mode='command')
+# config.bind('<Alt-Shift-n>', 'completion-item-focus --history prev', mode='command')
+# config.bind('<Ctrl-p>', 'completion-item-focus prev', mode='command')
+# config.bind('<Alt-p>', 'command-history-prev', mode='command')
+# config.bind('<Alt-Shift-p>', 'completion-item-focus --history next', mode='command')
 
 # Add emacs-like keybindings (used in command line) to insert mode.
 
@@ -78,8 +80,8 @@ config.bind('<Ctrl-u>', 'fake-key <Shift-Home> ;; fake-key <Delete>', mode='inse
 config.bind('<Ctrl-k>', 'fake-key <Shift-End> ;; fake-key <Delete>', mode='insert')
 
 # Open in an editor
-config.bind('<Alt-e>', 'open-editor', mode='insert')
-config.bind('<Ctrl-x><Ctrl-e>', 'open-editor', mode='insert')
+config.bind('<Alt-e>', 'edit-text', mode='insert')
+config.bind('<Ctrl-x><Ctrl-e>', 'edit-text', mode='insert')
 
 # Set search engines to use.
 # Use ';' to distingish between DDG hashbang searches and my own custom searches.
