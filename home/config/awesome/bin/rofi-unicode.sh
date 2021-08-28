@@ -1,4 +1,4 @@
-#! /usr/bin/env zsh
+#!/usr/bin/env zsh
 # Show a rofi menu of various unicode character, and choose one of them.
 # By default, it will directly insert that symbol, but if there is an argument,
 # it will instead copy it to the clipboard

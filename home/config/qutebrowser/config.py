@@ -1,10 +1,6 @@
 # Manual configuration for qutebrowser.
 # type: ignore (This shuts up pythons errors)
 
-import subprocess
-import os
-from qutebrowser.api import interceptor
-
 # Documentation:
 #   qute://help/configuring.html
 #   qute://help/settings.html
@@ -44,21 +40,23 @@ c.editor.command = [ "gnvim", "{file}", "--", "-c", "normal {line}G{column0}l" ]
 
 # Unbind delete tab from 'd', bind it to 'D'
 config.unbind('d')
+config.unbind('<Ctrl-w>')
 config.bind('D', 'tab-close')
 
+# Yank a link to the clipboard
+config.bind('yl', 'hint links yank')
+
 # Play a link to a video in mpv instead of the browser.
-config.bind(',M', 'hint links spawn mpv {hint-url}')
+config.bind('<Ctrl-Space>m', 'hint links spawn mpv {hint-url}')
 
 # Play a video in mpv instead of the browser.
-config.bind(',m', 'spawn mpv {url}')
+config.bind('<Ctrl-Space>M', 'spawn mpv {url}')
 
-# # Use alt-j,k keys to cycle through command history
-# config.bind('<Ctrl-n>', 'completion-item-focus next', mode='command')
-# config.bind('<Alt-n>', 'command-history-next', mode='command')
-# config.bind('<Alt-Shift-n>', 'completion-item-focus --history prev', mode='command')
-# config.bind('<Ctrl-p>', 'completion-item-focus prev', mode='command')
-# config.bind('<Alt-p>', 'command-history-prev', mode='command')
-# config.bind('<Alt-Shift-p>', 'completion-item-focus --history next', mode='command')
+# Automatically download links as audio files.
+# Currently only works on YouTube
+# TODO: Find a way to make this more general.
+config.bind('<Ctrl-Space>d',
+        'hint links spawn youtube-dl --add-metadata -f 140 -o "~/audio/YouTube/%(title)s.%(ext)s" {hint-url}' )
 
 # Add emacs-like keybindings (used in command line) to insert mode.
 
@@ -92,15 +90,16 @@ c.url.searchengines = {
     ";d":     "https://duckduckgo.com/?q={}&ia=web",
     ";g":     "https://www.google.com/search?q={}",
     ";b":     "https://www.bing.com/search?q={}",
+    ";br":    "https://search.brave.com/search?q={}&source=web",
     ";s":     "https://www.startpage.com/sp/{}",
     ";yh":    "https://ca.search.yahoo.com/search?p={}",
     ";q":     "https://www.qwant.com/?q={}",
-    # Wikipedia sites
+    # Wikipedia
     ";w":     "https://en.wikipedia.org/w/index.php?search={}",
     ";wfr":   "https://fr.wikipedia.org/w/index.php?search={}",
     ";wde":   "https://de.wikipedia.org/w/index.php?search={}",
     ";wes":   "https://es.wikipedia.org/w/index.php?search={}",
-    # Search map sites
+    # Map sites
     ";gm":    "https://www.google.com/maps/search/{}",
     ";osm":   "https://www.openstreetmap.org/search?query={}",
     # Multimedia
@@ -119,8 +118,8 @@ c.url.searchengines = {
     ";stm":   "https://store.steampowered.com/search/?term={}",
     # Package repositories
     ";rpl":   "https://repology.org/metapackages/?search={}",
-    ";npk":   "https://search.nixos.org/packages?channel=20.09&from=0&size=50&sort=relevance&query={}",
-    ";nos":   "https://search.nixos.org/options?channel=20.09&from=0&size=50&sort=relevance&query={}",
+    ";npk":   "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&query={}",
+    ";nos":   "https://search.nixos.org/options?channel=21.05&from=0&size=50&sort=relevance&query={}",
     ";fbp":   "https://www.freebsd.org/cgi/ports.cgi?query={}&stype=all",
     ";obp":   "https://openports.se/search.php?so={}",
     # Man pages

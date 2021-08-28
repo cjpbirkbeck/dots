@@ -99,7 +99,7 @@ awful.rules.rules = {
     { rule_any = { class = { "qutebrowser", "Firefox", "Brave", "Tor Browser", "Vieb", "Vimb", "LibreWolf" } },
       properties = { tag = "Web" } },
 
-    { rule_any = { class = { "Daily", "Thunderbird", "nheko", "qTox", "zoom" } },
+    { rule_any = { class = { "Astroid", "Daily", "Thunderbird", "nheko", "qTox", "zoom" } },
       properties = { tag = "Email" } },
 
       -- LibreOffice doesn't seem to quite work with the rules here.

@@ -20,7 +20,6 @@
     ./system/locale.nix
     ./system/auto-upgrade.nix
     ./system/cjpbirkbeck.nix
-    # ./system/blockedhosts.nix
 
     # Shell configuration
     ./shells/shells.nix
@@ -57,8 +56,6 @@
 
       locker = "${pkgs.xsecurelock}/bin/xsecurelock";
     };
-
-    tor.enable = true;
   };
 
   networking = {

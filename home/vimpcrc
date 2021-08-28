@@ -1,5 +1,6 @@
 " VIMPC settings
 " Note that this program uses vi(m) conventions in many places.
+" It does not, however, allow for comments after a line.
 
 " Show numbers in the browser window.
 set browsenumbers
@@ -7,7 +8,7 @@ set browsenumbers
 " Show numbers in the playlist windows.
 set playlistnumbers
 
-" Show progress present.
+" Show current song progress.
 set showpercent
 
 " :q(uit) exits vimpc totally.
@@ -37,9 +38,9 @@ set incsearch
 " Only case sensitively when using an upper case character.
 set smartcase
 
-" Rearrange windows and set default as list.
-set windows lists,library,browse,playlist,directory,help
-set window lists
+" Rearrange windows and set default as playlist.
+set windows playlist,lists,library
+set window playlist
 
 " Colours
 hi error red bold_white
@@ -51,10 +52,15 @@ hi song default white
 hi match bold_white yellow
 hi song default bold_white
 hi current default green
-" hi current bold_green bold_white
 
 " Make going back and forth between tabs easier.
 map J gt
 map K gT
+
+" Move quiting a tab to the sequence gq.
+map gq q
+tmap info q q
+tmap help q q
+map q <Nop>
 
 map <F1> :help<Enter>

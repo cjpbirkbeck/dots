@@ -27,13 +27,15 @@ in
       stateVersion = "19.09"; # DO NOT CHANGE!
       sessionVariables = {
         BROWSER = "firefox";
-        DOTREMINDERS = "$HOME/.local/share/remind/main.rem";
+        # Default file for rem(1)
+        DOTREMINDERS = "$HOME/.config/remind/main.rem";
         LESSHISTFILE = "$HOME/.local/share/less/history";
         LESSKEY = "$HOME/.config/less/lesskey";
         QT_QPA_PLATFORMTHEME = "qt5ct";
         TMUXP_CONFIGDIR = "$HOME/.config/tmuxp";
         UNICODE_CHARS = "$HOME/.local/share/unicode-chars";
         XCOMPOSECACHE = "$HOME/.cache/Xcompose/";
+        YTFZF_THUMB_DISP_METHOD = "catimg";
 
         # Setup for pfetch
         PF_INFO = "ascii os host kernel shell wm editor uptime";
@@ -51,11 +53,6 @@ in
           target = ".weatherrc";
         };
 
-        vimpc = {
-          source = homeConfigFiles + /vimpcrc;
-          target = ".vimpcrc";
-        };
-
         XCompose = {
           source = homeConfigFiles + /XCompose;
           target = ".XCompose";
@@ -64,6 +61,30 @@ in
         peekat = {
           source = homeConfigFiles + /local/bin/peekat;
           target = ".local/bin/peekat";
+          executable = true;
+        };
+
+        new-sh-script = {
+          source = homeConfigFiles + /local/bin/new-sh-script;
+          target = ".local/bin/new-sh-script";
+          executable = true;
+        };
+
+        new-dash-script = {
+          source = homeConfigFiles + /local/bin/new-dash-script;
+          target = ".local/bin/new-dash-script";
+          executable = true;
+        };
+
+        new-bash-script = {
+          source = homeConfigFiles + /local/bin/new-bash-script;
+          target = ".local/bin/new-bash-script";
+          executable = true;
+        };
+
+        getanytime = {
+          source = homeConfigFiles + /local/bin/getanytime;
+          target = ".local/bin/getanytime";
           executable = true;
         };
 
@@ -81,6 +102,30 @@ in
         move-and-link = {
           source = homeConfigFiles + /local/bin/move-and-link;
           target = ".local/bin/move-and-link";
+          executable = true;
+        };
+
+        lookupaman = {
+          source = homeConfigFiles + /local/bin/lookupaman;
+          target = ".local/bin/lookupaman";
+          executable = true;
+        };
+
+        agenda = {
+          source = homeConfigFiles + /local/bin/agenda.bash;
+          target = ".local/bin/agenda";
+          executable = true;
+        };
+
+        rem-summary = {
+          source = homeConfigFiles + /local/bin/rem-summary.bash;
+          target = ".local/bin/rem-summary";
+          executable = true;
+        };
+
+        tw-summary = {
+          source = homeConfigFiles + /local/bin/tw-summary.bash;
+          target = ".local/bin/tw-summary";
           executable = true;
         };
 
@@ -231,19 +276,23 @@ in
 
       rofi = {
         enable = true;
-        theme = "~/.config/rofi/themes/flat-ocean";
+        theme = "my-dmenu";
         extraConfig = {
-          # opacity = 80;
           modi = "window,run,combi,drun";
         };
       };
 
       password-store = {
         enable = true;
+        package = with pkgs; pass.withExtensions (exts: [ exts.pass-audit exts.pass-update ]);
         settings = {
           PASSWORD_STORE_DIR = "$HOME/.secrets/pass";
           PASSWORD_STORE_GENERATED_LENGTH = "31";
         };
+      };
+
+      pidgin = {
+        enable = true;
       };
 
       pazi = {
@@ -278,6 +327,9 @@ in
           {
             plugin = open;
           }
+          {
+            plugin = urlview;
+          }
         ];
         extraConfig = ''
           # Enable true color and dynamic cusors shapes.
@@ -311,7 +363,13 @@ in
           bind r source $HOME/.config/tmux/tmux.conf
 
           # Show the tmux man page.
-          bind C-F1 split-window -v man tmux
+          bind F1 split-window -v "export FROM_TMUX=true; lookupaman"
+
+          # Show the tmux man page.
+          bind C-F1 split-window -v "export FROM_TMUX=true; lookupaman"
+
+          # Show the tmux man page.
+          bind S-F1 split-window -v man tmux
 
           # Show copycat searches
           bind M-F1 display-popup -h 16 -w 60 -E "less $HOME/.local/share/tmux/copycat-searches.txt"
@@ -380,6 +438,10 @@ in
         enable = (if config.networking.hostName == "humboldt" then true else false);
       };
 
+      flameshot = {
+        enable = true;
+      };
+
       mpd = {
         enable = true;
         musicDirectory = /home/cjpbirkbeck/audio;
@@ -420,7 +482,7 @@ in
       };
 
       udiskie = {
-        enable = false;
+        enable = true;
       };
     };
 
@@ -460,6 +522,14 @@ in
 
         "rofi/themes/flat-ocean.rasi" = {
           source = xdgConfigFiles + /rofi/themes/flat-ocean.rasi;
+        };
+
+        "rofi/themes/my-dmenu.rasi" = {
+          source = xdgConfigFiles + /rofi/themes/my-dmenu.rasi;
+        };
+
+        "vimpc/vimpcrc" = {
+          source = homeConfigFiles + /vimpcrc;
         };
 
         "tmuxp/general.yaml" = {
@@ -546,15 +616,15 @@ in
         "XTerm.*color12" = "#54a4f3";
 
         # Magenta
-        "XTerm.*color5" = "#8800a0";
-        "XTerm.*color13" = "#aa4dbc";
+        "XTerm.*color5" = "#c900ed";
+        "XTerm.*color13" = "#c585d1";
 
         # Cyan
         "XTerm.*color6" = "#16afca";
         "XTerm.*color14" = "#42c7da";
 
         # White
-        "XTerm.*color7" = "#a4a4a4";
+        "XTerm.*color7" = "#e3e3e3";
         "XTerm.*color15" = "#ffffff";
 
         # Bold, Italic, Underline

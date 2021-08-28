@@ -246,6 +246,9 @@ nnoremap <silent> ]B :blast<CR>
 " Open list of buffers, then search currently open buffers
 nnoremap <leader>b :buffers<CR>:b<Space>
 
+" Move between the alternate buffer
+nnoremap <leader>t <C-^>
+
 " }}}
 
 " {{{ FZF Menus

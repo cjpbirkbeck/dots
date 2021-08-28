@@ -12,6 +12,7 @@
   # Programs that should be on any machine with X server on it.
   general = with pkgs; [
     # Command line tools
+    afew                      # Notmuch tagger
     asciinema                 # Record terminal sessions
     atool                     # Compressed file mangement
     boxes                     # Create text boxes
@@ -43,7 +44,7 @@
     msmtp                     # SMTP client
     neofetch                  # An "About" screen for the terminal
     nix-index                 # Locate for nix
-    notmuch                   # Email indexer
+    unstable.notmuch          # Email indexer
     odt2txt                   # Converts odt (LibreOffice) to text
     pamixer                   # Pulse Audio mixer
     pandoc                    # Universal document converter
@@ -53,6 +54,7 @@
     playerctl                 # Command-line MPRIS controller
     poppler_utils             # Converts pdf to text
     qrencode                  # Prints out QR codes, when given a string of letters.
+    remind                    # Command-line calendar
     shellcheck                # Linter for shell scripts.
     taskopen                  # Open Taskwarrior annotations in various programs
     taskwarrior               # Tasks and TODOs
@@ -63,6 +65,7 @@
     units                     # Convert between units
     universal-ctags           # Tags files that will hold keyword information.
     weather                   # Weather command line
+    wyrd                      # TUI frontend for remind
     xcape                     # Binding a modifier key when press by itself.
     xclip                     # Command line ultity for manuplating the system clipboard.
     xdotool                   # Automation tool for X11
@@ -70,9 +73,12 @@
     youtube-dl                # Video downloader
 
     # TUI programs
+    abook                     # Terminal address book.
+    alot                      # TUI for notmuch email.
     bombadillo                # Alternate protocol browser
     bvi                       # vi-like hex editor
     cava                      # Visualiser for the terminal
+    clac                      # Fancy RPN calculator
     glow                      # Terminal markdown reader
     gnvim_with_plugins        # Another GUI frontend using Qt, but with Rust.
     gotop                     # Terminal base system monitor
@@ -92,18 +98,19 @@
     unstable.calcurse         # Calendar
     unstable.tuir             # Read reddit in a terminal
     vifm-full                 # Terminal file manager
-    vimpc                     # TUI frontend for mpd
+    latest_vimpc                     # TUI frontend for mpd
     visidata                  # Tabular data viewer
     vit                       # Frontend for taskwarrior
     w3m                       # Terminal web browser
     unstable.weechat          # IRC client
+    ytfzf                     # Console search for Youtube
 
     # GUI applications
-    alacritty                 # Terminal emuator
+    astroid                   # GUI client for notmuch
     anki                      # Flashcard application
     arc-theme                 # Theme for GUI programs
     firefox                   # GUI web browser
-    # flameshot                 # Screenshot tool
+    unstable.flameshot                 # Screenshot tool
     gromit-mpx                # On-screen annotator
     kolourpaint               # Kolourpaint, a simple MS Paint clone
     imv                       # Lightweight image viewer
@@ -165,6 +172,7 @@ in
     ./overrides/nvim.nix
     ./overrides/mpv.nix
     ./overrides/st.nix
+    ./overrides/vimpc.nix
   ];
 
   # Packages that should be accessible to all user, including root.
