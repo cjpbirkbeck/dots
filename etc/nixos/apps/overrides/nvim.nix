@@ -138,6 +138,7 @@ let
         # Should go into opt, unless it doesn't work.
         vim-go                       # Plugin for extra support with Go
         vim-markdown                 # Extra markdown support
+        vim-tmux                     # Adds support for modifying tmux config files.
         neorg                        # New org-like notetake format
         vim-nix                      # Adds nix syntax colouring and file detection to vim.
         vim-toml                     # Add syntax support for toml files
@@ -152,7 +153,6 @@ let
       opt = [
         emmet-vim                    # Support for writing HTML/CSS
         vim-orgmode                  # Add support for org file.
-        vim-tmux                     # Adds support for modifying tmux config files.
         zig-vim                      # Add support for the Zig language
       ];
     };

@@ -59,31 +59,31 @@ in
         };
 
         peekat = {
-          source = homeConfigFiles + /local/bin/peekat;
+          source = homeConfigFiles + /local/bin/peekat.bash;
           target = ".local/bin/peekat";
           executable = true;
         };
 
         new-sh-script = {
-          source = homeConfigFiles + /local/bin/new-sh-script;
+          source = homeConfigFiles + /local/bin/new-sh-script.sh;
           target = ".local/bin/new-sh-script";
           executable = true;
         };
 
         new-dash-script = {
-          source = homeConfigFiles + /local/bin/new-dash-script;
+          source = homeConfigFiles + /local/bin/new-dash-script.sh;
           target = ".local/bin/new-dash-script";
           executable = true;
         };
 
         new-bash-script = {
-          source = homeConfigFiles + /local/bin/new-bash-script;
+          source = homeConfigFiles + /local/bin/new-bash-script.sh;
           target = ".local/bin/new-bash-script";
           executable = true;
         };
 
         getanytime = {
-          source = homeConfigFiles + /local/bin/getanytime;
+          source = homeConfigFiles + /local/bin/getanytime.sh;
           target = ".local/bin/getanytime";
           executable = true;
         };
@@ -94,19 +94,19 @@ in
         };
 
         openup = {
-          source = homeConfigFiles + /local/bin/openup;
+          source = homeConfigFiles + /local/bin/openup.bash;
           target = ".local/bin/openup";
           executable = true;
         };
 
         move-and-link = {
-          source = homeConfigFiles + /local/bin/move-and-link;
+          source = homeConfigFiles + /local/bin/move-and-link.sh;
           target = ".local/bin/move-and-link";
           executable = true;
         };
 
         lookupaman = {
-          source = homeConfigFiles + /local/bin/lookupaman;
+          source = homeConfigFiles + /local/bin/lookupaman.sh;
           target = ".local/bin/lookupaman";
           executable = true;
         };
@@ -130,7 +130,7 @@ in
         };
 
         localbackup = {
-          source = homeConfigFiles + /local/bin/localbackup;
+          source = homeConfigFiles + /local/bin/localbackup.bash;
           target = ".local/bin/localbackup";
           executable = true;
         };
@@ -384,8 +384,8 @@ in
           set -g window-status-format '[#I] #{=/16/…:window_name}#F'
           set -g status-right ' #{?client_prefix, #[reverse](Prefix)#[noreverse],} #P/#{window_panes} #{=/16/…:pane_title}'
           set -g status-style 'fg=#87ceeb,bold,bg=#4d4d4d'
-          set -g window-status-activity-style 'fg=#ee2b2a,bg=#4d4d4d,bold,reverse'
-          set -g window-status-bell-style 'fg=#ee2b2a,bg=#4d4d4d,bold,reverse'
+          set -g window-status-activity-style 'fg=#ffffff,bg=#ee2b2a,bold'
+          set -g window-status-bell-style 'fg=#ffffff,bg=#ee2b2a,bold'
           set -g status-position top
 
           # Pane border style
