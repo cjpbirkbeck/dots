@@ -1,5 +1,10 @@
-" This file is for loading vim with my prefered settings, but without plugins.
-" For situtations where I've only have access to vanilla vim.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                             "
+" VIMRC                                                                       "
+" This file is for loading vim with my prefered settings, but without plugins."
+" For situtations where I've only have access to vanilla vim.                 "
+"                                                                             "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible                        " Do not emulate the original ex/vi
 syntax on                               " Enable syntax highlight

@@ -1,7 +1,5 @@
 { config, pkgs, ... }: let unstable = import <unstable> {};
 
-  # kp = pkgs.kdeGear.kolourpaint;
-
   # Core packages that should be accessible on all machines.
   core = with pkgs; [
     fd      # find replacement
@@ -108,6 +106,7 @@
     gomuks     # Matrix client
     toot       # Mastadon client
     turses     # Twitter client
+    (import ./pkgs/castero.nix)
 
     # GUI applications
     astroid                   # GUI client for notmuch

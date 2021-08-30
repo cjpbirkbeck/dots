@@ -2,7 +2,7 @@
 "                                                                             "
 " INIT.VIM                                                                    "
 " For most OS'es, this file will initalize the editor and manages plugins.    "
-" For NixOS, the plugins are managed by the OS.                               "
+" For NixOS, the plugins are managed by the OS and this file is not read.     "
 " For all others, I am using vim-plug for plugin management.                  "
 "                                                                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

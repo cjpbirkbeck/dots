@@ -532,8 +532,8 @@ in
           source = homeConfigFiles + /vimpcrc;
         };
 
-        "tmuxp/general.yaml" = {
-          source = xdgConfigFiles + /tmuxp/general.yaml;
+        "tmuxp/scratch.yaml" = {
+          source = xdgConfigFiles + /tmuxp/scratch.yaml;
         };
       };
 
