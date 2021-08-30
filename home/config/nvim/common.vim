@@ -221,7 +221,7 @@ let g:netrw_special_syntax = 1          " Syntax highlighting for various files
 if has('nvim')
     let g:netrw_home = '~/.cache/nvim/' " Save bookmarks and history in a special directory
 else
-    let g:netrw_home = '~/.vim/cache'
+    let g:netrw_home = '~/.vim/cache/'
 endif
 let g:netrw_browser_viewer = 'xdg-open' " Open files with DE's file-opener.
 let g:netrw_preview = 1
