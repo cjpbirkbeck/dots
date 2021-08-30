@@ -71,6 +71,7 @@
     xdotool                   # Automation tool for X11
     xlsx2csv                  # Converts Excel (post-2007) files to csv files
     youtube-dl                # Video downloader
+    lowdown
 
     # TUI programs
     abook                     # Terminal address book.
@@ -104,6 +105,9 @@
     w3m                       # Terminal web browser
     unstable.weechat          # IRC client
     ytfzf                     # Console search for Youtube
+    gomuks     # Matrix client
+    toot       # Mastadon client
+    turses     # Twitter client
 
     # GUI applications
     astroid                   # GUI client for notmuch

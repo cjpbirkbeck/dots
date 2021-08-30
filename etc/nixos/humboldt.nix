@@ -24,7 +24,7 @@
     # Shell configuration
     ./shells/shells.nix
     ./shells/bash.nix
-    ./shells/zsh.nix
+    ./shells/z-sh.nix
     ./shells/tmux.nix
     ./shells/ssh.nix
 
