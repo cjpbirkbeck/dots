@@ -20,12 +20,11 @@
     ./system/locale.nix
     ./system/auto-upgrade.nix
     ./system/cjpbirkbeck.nix
-    ./system/blockedhosts.nix
 
     # Shell configuration
     ./shells/shells.nix
     ./shells/bash.nix
-    ./shells/zsh.nix
+    ./shells/z-sh.nix
     ./shells/tmux.nix
     ./shells/ssh.nix
 
@@ -35,8 +34,8 @@
 
     # Application specific settings
     ./apps/desktop_env.nix
-    # ./apps/emacs.nix
     ./apps/applications.nix
+    ./apps/bitlbee.nix
     ./apps/gaming.nix
     ./apps/overrides/scripts.nix
     ./apps/devlopement/golang.nix
@@ -57,8 +56,6 @@
 
       locker = "${pkgs.xsecurelock}/bin/xsecurelock";
     };
-
-    tor.enable = true;
   };
 
   networking = {

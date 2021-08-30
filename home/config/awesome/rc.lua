@@ -9,11 +9,12 @@
 pcall(require, "luarocks.loader")
 
 -- Standard awesome libraries
-local gears = require("gears")
-local awful = require("awful")
+gears = require("gears")
+awful = require("awful")
 
 -- Theme handling library
-local beautiful = require("beautiful")
+beautiful = require("beautiful")
+naughty = require("naughty")
 
 -- Error handling library
 require("lib.error-handling")
@@ -43,7 +44,7 @@ rc.launcher     = "rofi -show-icons -show drun"
 rc.win_switcher = "rofi -show window"
 
 rc.term_emu      = "st"
-rc.float_term_em = "st -c stfloat "
+rc.float_term_em = "xterm"
 rc.browser       = os.getenv("BROWSER")
 rc.email         = "thunderbird"
 rc.file_man      = "pcmanfm-qt"

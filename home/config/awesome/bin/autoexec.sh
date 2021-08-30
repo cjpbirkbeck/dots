@@ -7,5 +7,6 @@ run() {
     fi
 }
 
-run udiskie
+# run udiskie
+# run flameshot
 run tmux new-session -d -x 100 -c "$HOME" -s "General" -n "Main" "pfetch; zsh"

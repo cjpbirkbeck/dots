@@ -8,7 +8,7 @@
 
 set -C -f
 IFS=$'\n'
-WINDOW_WIDTH="${COLUMNS}"
+WINDOW_WIDTH="${COLUMNS:=80}"
 # Hack for working with fzf, as $FZF_PREVIEW_COLUMNS doesn't seem to work.
 test -n "$PEEKAT_WITH_FZF" && WINDOW_WIDTH=$(( COLUMNS / 2 - 6 ))
 # Hack for working with vifm, passing preview window size as the second argument.
@@ -117,6 +117,7 @@ process_html() {
         echo "Cannot generate file with w3m. Showing raw text instead."
     fi
     printbreak
+    printf 'SOURCE:\n'
     process_struct_text
     exit 0
 }
@@ -129,6 +130,33 @@ process_struct_text() {
     fi
     exit 0
 }
+
+process_json () {
+    if command -v bat > /dev/null && command -v js > /dev/null ; then
+        jq '.' -C "${FILE_PATH}" | \
+            bat --style="numbers,changes" --color=always --italic-text=always "${FILE_PATH}"
+    else
+        cat -n "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    fi
+    printbreak
+    printf 'SOURCE:\n'
+    process_struct_text
+    exit 0
+}
+
+process_markdown () {
+    if command -v bat > /dev/null && command -v glow > /dev/null; then
+        glow --style auto | \
+            bat --style="numbers,changes" --color=always --italic-text=always "${FILE_PATH}"
+    else
+        cat -n "${FILE_PATH}" | fold -s -w "${WINDOW_WIDTH}"
+    fi
+    printbreak
+    printf 'SOURCE:\n'
+    process_struct_text
+    exit 0
+}
+
 
 process_image() {
     if command -v img2txt > /dev/null ; then
@@ -204,6 +232,9 @@ handle_extension() {
         nix|md|markdown|txt)
             process_struct_text
             ;;
+        json)
+            process_json
+            ;;
         pdf)
             process_pdf
             ;;
@@ -213,9 +244,9 @@ handle_extension() {
         torrent)
             process_torrent
             ;;
-        # odt|ods|odp|sxw)
-        #     process_odt
-        #     ;;
+        odt)
+            process_odt
+            ;;
         htm|html|xhtml)
             process_html
             ;;
@@ -243,6 +274,9 @@ handle_mime() {
             ;;
         application/msword)
             process_ms_word
+            ;;
+        application/json)
+            process_json
             ;;
         application/vnd.oasis.opendocument.text|application/vnd.oasis.opendocument.spreadsheet|\
         application/vnd.oasis.opendocument.presentation)
@@ -300,5 +334,6 @@ handle_missing_viewer() {
 
 examine_file_path "${1}"
 MIMETYPE="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
+handle_extension
 handle_mime "${MIMETYPE}"
 handle_fallback "${MIMETYPE}"

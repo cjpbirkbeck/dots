@@ -27,12 +27,15 @@ in
       stateVersion = "19.09"; # DO NOT CHANGE!
       sessionVariables = {
         BROWSER = "firefox";
+        # Default file for rem(1)
+        DOTREMINDERS = "$HOME/.config/remind/main.rem";
         LESSHISTFILE = "$HOME/.local/share/less/history";
         LESSKEY = "$HOME/.config/less/lesskey";
         QT_QPA_PLATFORMTHEME = "qt5ct";
         TMUXP_CONFIGDIR = "$HOME/.config/tmuxp";
         UNICODE_CHARS = "$HOME/.local/share/unicode-chars";
         XCOMPOSECACHE = "$HOME/.cache/Xcompose/";
+        YTFZF_THUMB_DISP_METHOD = "catimg";
 
         # Setup for pfetch
         PF_INFO = "ascii os host kernel shell wm editor uptime";
@@ -50,19 +53,38 @@ in
           target = ".weatherrc";
         };
 
-        vimpc = {
-          source = homeConfigFiles + /vimpcrc;
-          target = ".vimpcrc";
-        };
-
         XCompose = {
           source = homeConfigFiles + /XCompose;
           target = ".XCompose";
         };
 
         peekat = {
-          source = homeConfigFiles + /local/bin/peekat;
+          source = homeConfigFiles + /local/bin/peekat.bash;
           target = ".local/bin/peekat";
+          executable = true;
+        };
+
+        new-sh-script = {
+          source = homeConfigFiles + /local/bin/new-sh-script.sh;
+          target = ".local/bin/new-sh-script";
+          executable = true;
+        };
+
+        new-dash-script = {
+          source = homeConfigFiles + /local/bin/new-dash-script.sh;
+          target = ".local/bin/new-dash-script";
+          executable = true;
+        };
+
+        new-bash-script = {
+          source = homeConfigFiles + /local/bin/new-bash-script.sh;
+          target = ".local/bin/new-bash-script";
+          executable = true;
+        };
+
+        getanytime = {
+          source = homeConfigFiles + /local/bin/getanytime.sh;
+          target = ".local/bin/getanytime";
           executable = true;
         };
 
@@ -72,13 +94,43 @@ in
         };
 
         openup = {
-          source = homeConfigFiles + /local/bin/openup;
+          source = homeConfigFiles + /local/bin/openup.bash;
           target = ".local/bin/openup";
           executable = true;
         };
 
+        move-and-link = {
+          source = homeConfigFiles + /local/bin/move-and-link.sh;
+          target = ".local/bin/move-and-link";
+          executable = true;
+        };
+
+        lookupaman = {
+          source = homeConfigFiles + /local/bin/lookupaman.sh;
+          target = ".local/bin/lookupaman";
+          executable = true;
+        };
+
+        agenda = {
+          source = homeConfigFiles + /local/bin/agenda.bash;
+          target = ".local/bin/agenda";
+          executable = true;
+        };
+
+        rem-summary = {
+          source = homeConfigFiles + /local/bin/rem-summary.bash;
+          target = ".local/bin/rem-summary";
+          executable = true;
+        };
+
+        tw-summary = {
+          source = homeConfigFiles + /local/bin/tw-summary.bash;
+          target = ".local/bin/tw-summary";
+          executable = true;
+        };
+
         localbackup = {
-          source = homeConfigFiles + /local/bin/localbackup;
+          source = homeConfigFiles + /local/bin/localbackup.bash;
           target = ".local/bin/localbackup";
           executable = true;
         };
@@ -133,9 +185,12 @@ in
 
     manual = {
       manpages.enable = true;
+
+      json.enable = true;
     };
 
     programs = {
+
       bat = {
         enable = true;
         config = {
@@ -145,6 +200,13 @@ in
         themes = {
           desert = builtins.readFile /home/cjpbirkbeck/code/dots/home/config/bat/themes/Desert.tmTheme;
         };
+      };
+
+      bash = {
+        enable = true;
+        historyFile = "\$HOME/.local/share/bash/history";
+        historyFileSize = largest32Int;
+        shellAliases = commonAliases;
       };
 
       dircolors = {
@@ -168,6 +230,9 @@ in
           "--preview='$HOME/.local/bin/peekat {}'"
           "--history=$HOME/.cache/fzf/file-widget-history"
         ];
+        tmux = {
+          enableShellIntegration = true;
+        };
       };
 
       gh = {
@@ -184,6 +249,9 @@ in
           pull = {
             rebase = false;
           };
+          merge = {
+            tool = "nvimdiff3";
+          };
         };
         delta = {
           enable = true;
@@ -194,28 +262,37 @@ in
         enable = true;
       };
 
+      man = {
+        generateCaches = true;
+      };
+
+      nix-index = {
+        enable = true;
+      };
+
       readline = {
         enable = true;
-        extraConfig = ''
-          
-        '';
       };
 
       rofi = {
         enable = true;
-        theme = "~/.config/rofi/themes/flat-ocean";
+        theme = "my-dmenu";
         extraConfig = {
-          opacity = 80;
           modi = "window,run,combi,drun";
         };
       };
 
       password-store = {
         enable = true;
+        package = with pkgs; pass.withExtensions (exts: [ exts.pass-audit exts.pass-update ]);
         settings = {
           PASSWORD_STORE_DIR = "$HOME/.secrets/pass";
           PASSWORD_STORE_GENERATED_LENGTH = "31";
         };
+      };
+
+      pidgin = {
+        enable = true;
       };
 
       pazi = {
@@ -224,6 +301,7 @@ in
 
       taskwarrior = {
         enable = true;
+        colorTheme = "dark-blue-256";
       };
 
       tmux = {
@@ -248,6 +326,9 @@ in
           }
           {
             plugin = open;
+          }
+          {
+            plugin = urlview;
           }
         ];
         extraConfig = ''
@@ -281,18 +362,30 @@ in
           # Reload source code
           bind r source $HOME/.config/tmux/tmux.conf
 
+          # Show the tmux man page.
+          bind F1 split-window -v "export FROM_TMUX=true; lookupaman"
+
+          # Show the tmux man page.
+          bind C-F1 split-window -v "export FROM_TMUX=true; lookupaman"
+
+          # Show the tmux man page.
+          bind S-F1 split-window -v man tmux
+
+          # Show copycat searches
+          bind M-F1 display-popup -h 16 -w 60 -E "less $HOME/.local/share/tmux/copycat-searches.txt"
+
           # Enable the mouse
           set -g mouse on
 
           # Setup the status bar.
-          set -g status-left '#[fg=#4D4D4D,bg=#98C379] ❰#{=/16/…:session_name}❱ #[default] '
+          set -g status-left '#[fg=#4D4D4D,bg=#98C379] #{=/16/…:session_name} #[default] '
           set -g status-left-length 20
           set -g window-status-current-format '#[reverse] {#I} #{=/16/…:window_name}#F #[noreverse]'
           set -g window-status-format '[#I] #{=/16/…:window_name}#F'
           set -g status-right ' #{?client_prefix, #[reverse](Prefix)#[noreverse],} #P/#{window_panes} #{=/16/…:pane_title}'
           set -g status-style 'fg=#87ceeb,bold,bg=#4d4d4d'
-          set -g window-status-activity-style 'fg=#ee2b2a,bg=#4d4d4d,bold,reverse'
-          set -g window-status-bell-style 'fg=#ee2b2a,bg=#4d4d4d,bold,reverse'
+          set -g window-status-activity-style 'fg=#ffffff,bg=#ee2b2a,bold'
+          set -g window-status-bell-style 'fg=#ffffff,bg=#ee2b2a,bold'
           set -g status-position top
 
           # Pane border style
@@ -327,13 +420,6 @@ in
         shellAliases = commonAliases;
       };
 
-      bash = {
-        enable = true;
-        historyFile = "\$HOME/.local/share/bash/history";
-        historyFileSize = largest32Int;
-        shellAliases = commonAliases;
-      };
-
       zathura = {
         enable = true;
         options = {
@@ -350,6 +436,10 @@ in
     services = {
       gnome-keyring = {
         enable = (if config.networking.hostName == "humboldt" then true else false);
+      };
+
+      flameshot = {
+        enable = true;
       };
 
       mpd = {
@@ -384,6 +474,14 @@ in
       };
 
       picom = {
+        enable = true;
+      };
+
+      playerctld = {
+        enable = true;
+      };
+
+      udiskie = {
         enable = true;
       };
     };
@@ -426,8 +524,16 @@ in
           source = xdgConfigFiles + /rofi/themes/flat-ocean.rasi;
         };
 
-        "tmuxp/general.yaml" = {
-          source = xdgConfigFiles + /tmuxp/general.yaml;
+        "rofi/themes/my-dmenu.rasi" = {
+          source = xdgConfigFiles + /rofi/themes/my-dmenu.rasi;
+        };
+
+        "vimpc/vimpcrc" = {
+          source = homeConfigFiles + /vimpcrc;
+        };
+
+        "tmuxp/scratch.yaml" = {
+          source = xdgConfigFiles + /tmuxp/scratch.yaml;
         };
       };
 
@@ -446,6 +552,7 @@ in
           "image/png" = [ "sxiv.desktop" "kolourpaint.desktop" ];
           "image/jpeg" = [ "sxiv.desktop" "kolourpaint.desktop" ];
           "x-scheme-handler/mailto" = [ "userapp-Thunderbird-6DZAV0.desktop" ];
+          "x-scheme-handler/ferdi" = [ "ferdi.desktop" ];
           "message/rfc822" = [ "userapp-Thunderbird-6DZAV0.desktop" ];
         };
       };
@@ -509,15 +616,15 @@ in
         "XTerm.*color12" = "#54a4f3";
 
         # Magenta
-        "XTerm.*color5" = "#8800a0";
-        "XTerm.*color13" = "#aa4dbc";
+        "XTerm.*color5" = "#c900ed";
+        "XTerm.*color13" = "#c585d1";
 
         # Cyan
         "XTerm.*color6" = "#16afca";
         "XTerm.*color14" = "#42c7da";
 
         # White
-        "XTerm.*color7" = "#a4a4a4";
+        "XTerm.*color7" = "#e3e3e3";
         "XTerm.*color15" = "#ffffff";
 
         # Bold, Italic, Underline

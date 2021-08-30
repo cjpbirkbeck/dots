@@ -138,19 +138,21 @@ let
         # Should go into opt, unless it doesn't work.
         vim-go                       # Plugin for extra support with Go
         vim-markdown                 # Extra markdown support
+        vim-tmux                     # Adds support for modifying tmux config files.
         neorg                        # New org-like notetake format
         vim-nix                      # Adds nix syntax colouring and file detection to vim.
+        vim-toml                     # Add syntax support for toml files
 
         # Misc
         firenvim                     # Inserts neovim into browser text boxes.
-        glow-nvim
+        glow-nvim                    # Previews for markdown with the terminal
+        himalaya-vim
       ];
       # For optional plugins, loaded only when meeting certain conditions:
       # e.g. autocmd FileType foo :packadd fooCompletion
       opt = [
         emmet-vim                    # Support for writing HTML/CSS
         vim-orgmode                  # Add support for org file.
-        vim-tmux                     # Adds support for modifying tmux config files.
         zig-vim                      # Add support for the Zig language
       ];
     };

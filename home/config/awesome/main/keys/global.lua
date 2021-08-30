@@ -35,13 +35,10 @@ local global_keys = gears.table.join(
               { description = "Spawn a terminal", group = "Launch" }),
 
     awful.key({ super, shift }, "Return", function() awful.spawn.with_shell(rc.float_term_em) end,
-              { description = "Create a floating terminal", group = "Launch"}),
+              { description = "Spawn a floating terminal", group = "Launch"}),
 
-    awful.key({ super }, "space", function () awful.spawn(rc.exec_d .. "rofi-tmux.sh") end,
+    awful.key({ super, control }, "Return", function () awful.spawn(rc.exec_d .. "rofi-tmux.sh") end,
               {description = "Create new tmux client", group = "Launch" }),
-
-    awful.key({ super, shift }, "space", function () awful.spawn(rc.exec_d .. "rofi-tmuxp.sh") end,
-              {description = "Create new tmuxp session", group = "Launch" }),
 
     awful.key({ super }, "p", function() awful.spawn.with_shell(rc.passwords) end,
               { description = "Open password vault", group = "Launch" }),
@@ -121,57 +118,63 @@ local global_keys = gears.table.join(
               { description = "Toggle all tags off", group = "Tag" }),
 
     -- Layout controls
-    awful.key({ super }, "x",
-        function()
-            local t = awful.screen.focused().selected_tag
+    awful.key({ super, }, "space", function () awful.layout.inc( 1)                end,
+              {description = "select next", group = "Layout"}),
+    awful.key({ super, shift }, "space", function () awful.layout.inc(-1)                end,
+              {description = "select previous", group = "Layout"}),
 
-            t.layout = awful.layout.suit.max
-        end,
-        { description = "Switch to max layout", group = "Layouts" }),
+    -- Layout controls
+    -- awful.key({ super }, "x",
+    --     function()
+    --         local t = awful.screen.focused().selected_tag
 
-    awful.key({ super }, "v",
-        function ()
-            local s = awful.client.focus.screen
-            local curr = awful.layout.getname(awful.layout.get(s))
-            local t = awful.screen.focused().selected_tag
+    --         t.layout = awful.layout.suit.max
+    --     end,
+    --     { description = "Switch to max layout", group = "Layouts" }),
 
-            if curr == "deck" then
-                t.layout = awful.layout.suit.tile
-            else
-                t.layout = deck
-            end
-        end,
-        { description = "Switch to vertical deck layout", group = "Layouts" }),
+    -- awful.key({ super }, "v",
+    --     function ()
+    --         local s = awful.client.focus.screen
+    --         local curr = awful.layout.getname(awful.layout.get(s))
+    --         local t = awful.screen.focused().selected_tag
 
-    awful.key({ super, shift }, "v",
-        function ()
-            local t = awful.screen.focused().selected_tag
+    --         if curr == "deck" then
+    --             t.layout = awful.layout.suit.tile
+    --         else
+    --             t.layout = deck
+    --         end
+    --     end,
+    --     { description = "Switch to vertical deck layout", group = "Layouts" }),
 
-            t.layout = awful.layout.suit.tile
-        end,
-        { description = "Switch to vertical tile layout", group = "Layouts" }),
+    -- awful.key({ super, shift }, "v",
+    --     function ()
+    --         local t = awful.screen.focused().selected_tag
 
-    awful.key({ super }, "z",
-        function ()
-            local s = awful.client.focus.screen
-            local curr = awful.layout.getname(awful.layout.get(s))
-            local t = awful.screen.focused().selected_tag
+    --         t.layout = awful.layout.suit.tile
+    --     end,
+    --     { description = "Switch to vertical tile layout", group = "Layouts" }),
 
-            if curr == "horideck" then
-                t.layout = awful.layout.suit.tile.bottom
-            else
-                t.layout = deck.horizontal
-            end
-        end,
-        { description = "Switch to horizontal deck layout", group = "Layouts" }),
+    -- awful.key({ super }, "z",
+    --     function ()
+    --         local s = awful.client.focus.screen
+    --         local curr = awful.layout.getname(awful.layout.get(s))
+    --         local t = awful.screen.focused().selected_tag
 
-    awful.key({ super, shift }, "z",
-        function()
-            local t = client.focus and client.focus.first_tag or nil
+    --         if curr == "horideck" then
+    --             t.layout = awful.layout.suit.tile.bottom
+    --         else
+    --             t.layout = deck.horizontal
+    --         end
+    --     end,
+    --     { description = "Switch to horizontal deck layout", group = "Layouts" }),
 
-            t.layout = awful.layout.suit.tile.bottom
-        end,
-        { description = "Switch to horizontal tile layout", group = "Layouts" }),
+    -- awful.key({ super, shift }, "z",
+    --     function()
+    --         local t = client.focus and client.focus.first_tag or nil
+
+    --         t.layout = awful.layout.suit.tile.bottom
+    --     end,
+    --     { description = "Switch to horizontal tile layout", group = "Layouts" }),
 
     -- General window controls
     awful.key({ super, shift }, "n",
@@ -268,32 +271,20 @@ local global_keys = gears.table.join(
     awful.key({}, "Print", function() awful.spawn("flameshot gui") end,
               { description = "Take a screenshot of selected region", group = "Screenshots"}),
 
-    awful.key({ "Shift" }, "Print", function() awful.spawn.with_shell("flameshot screen --path $HOME/imgs/screnshots") end,
-              { description = "Take a screenshot of selected region", group = "Screenshots"}),
-
-    awful.key({ "Control" }, "Print", function() awful.spawn("flameshot full --path $HOME/imgs/screenshots") end,
-              { description = "Screenshot menu", group = "Screenshots"}),
-
     -- Insert Unicode character
     awful.key({ super }, "c", function() awful.spawn.with_shell(rc.exec_d .. "rofi-unicode.sh") end),
 
     awful.key({ super, shift }, "c", function() awful.spawn.with_shell(rc.exec_d .. "rofi-unicode.sh clipboard") end),
 
     -- System functions
-    -- awful.key({ super }, "Escape", function() awful.spawn.with_shell(rc.exec_d .. "rofi-system.sh") end,
-    --            {description = "Show system menu", group = "System"}),
-
     awful.key({ super }, "q", function() create_prompt("\"Quit AwesomeWM?\"", "awesome-client \"awesome.quit()\"") end,
               { description = "Quit Awesome", group = "System"}),
 
-    -- awful.key({ super, shift }, "q", function() awful.spawn.with_shell(rc.exec_d .. "portable_poweroff.sh") end,
-    --           { description = "Shutdown Computer", group = "System"}),
+    awful.key({ super, shift }, "q", function() awful.spawn.with_shell(rc.exec_d .. "portable_poweroff.sh") end,
+              { description = "Shutdown Computer", group = "System"}),
 
-    -- awful.key({ super }, "r", function() create_prompt("\"Restart AwesomeWM?\"", "awesome-client \"awesome.restart()\"") end,
-    --     { description = "Restart AwesomeWM", group = "System"}),
-
-    -- awful.key({ super, shift }, "r", function () awful.spawn.with_shell(rc.exec_d .. "portable_reboot.sh") end ,
-    --     { description = "Reboot", group = "System"}),
+    awful.key({ super, shift }, "r", function () awful.spawn.with_shell(rc.exec_d .. "portable_reboot.sh") end ,
+        { description = "Reboot", group = "System"}),
 
     awful.key({ super, "Control" }, "r", function() awesome.restart() end,
         { description = "Restarts AwesomeWM", group = "System"}),

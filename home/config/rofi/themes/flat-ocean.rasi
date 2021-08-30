@@ -12,6 +12,7 @@
 
    fgwhite:          #cfcfcf;
    blackdarkest:     #1d1d1d;
+   blackdarkesttr:   #1d1d1dcc;
    blackwidget:      #262626;
    blackentry:       #292929;
    blackselect:      #606060;

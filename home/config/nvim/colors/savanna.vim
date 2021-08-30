@@ -61,7 +61,7 @@ hi Special	guifg=navajowhite
 "hi Underlined
 hi Ignore	guifg=grey40
 "hi Error
-hi Todo		guifg=orangered guibg=yellow2
+hi Todo		guifg=#000000 guibg=yellow2
 
 " color terminal definitions
 hi SpecialKey	ctermfg=darkgreen

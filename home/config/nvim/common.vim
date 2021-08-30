@@ -30,7 +30,7 @@ function! ListSnippets(findstart, base) abort
             if m =~ a:base
                 let n = {
                             \ 'word': m,
-                            \ 'menu': '[snip] '. g:current_ulti_dict_info[m]['description']
+                           \ 'menu': '[snip] '. g:current_ulti_dict_info[m]['description']
                             \ }
                 call add(res, n)
             endif
@@ -246,6 +246,9 @@ nnoremap <silent> ]B :blast<CR>
 " Open list of buffers, then search currently open buffers
 nnoremap <leader>b :buffers<CR>:b<Space>
 
+" Move between the alternate buffer
+nnoremap <leader>t <C-^>
+
 " }}}
 
 " {{{ FZF Menus
@@ -330,16 +333,16 @@ if has('nvim')
     " Either insert pairs for punctation that can, but normally isn't used for
     " pairs, or insert a opening bracket with the matching pair. Also can insert
     " bracket pairs on seperate lines, and start new typing with in th bracket.
-    inoremap <A-(> ()<Left>
-    inoremap <A-)> (<CR><CR>)<CR><Up><Up><C-o>i
-    inoremap <A-[> []<Left>
-    inoremap <A-]> [<CR><CR>]<CR><Up><Up><C-o>i
-    inoremap <A-{> {}<Left>
-    inoremap <A-}> {<CR><CR>}<CR><Up><Up><C-o>i
-    inoremap <A-<> <><Left>
-    inoremap <A-'> ''<Left>
-    inoremap <A-"> ""<Left>
-    inoremap <A-`> ``<Left>
+    inoremap <A-(> <C-g>u()<Left>
+    inoremap <A-)> <C-g>u(<CR>);<Up><C-o>o
+    inoremap <A-[> <C-g>u[]<Left>
+    inoremap <A-]> <C-g>u[<CR>];<Up><C-o>o
+    inoremap <A-{> <C-g>u{}<Left>
+    inoremap <A-}> <C-g>u{<CR>};<Up><C-o>o
+    inoremap <A-<> <C-g>u<><Left>
+    inoremap <A-'> <C-g>u''<Left>
+    inoremap <A-"> <C-g>u""<Left>
+    inoremap <A-`> <C-g>u``<Left>
 endif
 
 " Use abbreviations to insert completely empty pairs
@@ -350,7 +353,7 @@ iabbrev ;b []
 iabbrev ;{ {}
 iabbrev ;B {}
 
-" Insert undo breakpoint after certian punctuation.
+" Insert undo breakpoint after certian punctuation marks.
 inoremap , ,<C-g>u
 inoremap . .<C-g>u
 inoremap ! !<C-g>u
@@ -611,7 +614,7 @@ if has('nvim') && has('nvim-0.5')
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches
     -- vim-go handles gopls
-    local servers = { "pyright", "gopls", "rust_analyzer", "tsserver" }
+    local servers = { "rust_analyzer", "tsserver" }
     for _, lsp in ipairs(servers) do
       nvim_lsp[lsp].setup {
         on_attach = on_attach,
@@ -650,6 +653,14 @@ if exists('g:started_by_firenvim')
     " Delete words with alt-backspace, useful of firenvim.
     inoremap <C-BS> <C-w>
     cnoremap <C-BS> <C-w>
+endif
+
+" }}}
+
+" Gnvim {{{
+
+if exists('g:gnvim')
+    :colorscheme savanna
 endif
 
 " }}}

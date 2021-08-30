@@ -2,7 +2,7 @@
 "                                                                             "
 " INIT.VIM                                                                    "
 " For most OS'es, this file will initalize the editor and manages plugins.    "
-" For NixOS, the plugins are managed by the OS.                               "
+" For NixOS, the plugins are managed by the OS and this file is not read.     "
 " For all others, I am using vim-plug for plugin management.                  "
 "                                                                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -15,6 +15,7 @@ Plug 'tpope/vim-characterize'              " Display Unicode character metadata.
 Plug 'kshenoy/vim-signature'               " Displays marks in the gutter.
 Plug 'mbbill/undotree'                     " Visual Vim's undos with a tree.
 Plug 'kassio/neoterm'                      " Neovim terminal enhancements.
+Plug 'norcalli/nvim-colorizer.lua'
 if has('nvim-0.5')
     Plug 'tversteeg/registers.nvim'        " Show registers contents while inserting text.
 endif
@@ -53,6 +54,9 @@ Plug 'roxma/nvim-yarp'                     " Remote Plugin framework.
 Plug 'janko/vim-test'                      " Automatic testing.
 if has('nvim-0.2')
     Plug 'dense-analysis/ale'              " Multi-language linter.
+endif
+if has('nvim-0.5')
+    Plug 'neovim/nvim-lspconfig'
 endif
 
 " Filetype specific plugins
