@@ -1,3 +1,4 @@
+# gitignore
 config/nvim/plug.vim
 .tmuxp.yaml
 tags
@@ -16,3 +17,4 @@ emacs.nix
 vim-plug.vim
 home/config/nvim/cache/
 reference.*
+bling
