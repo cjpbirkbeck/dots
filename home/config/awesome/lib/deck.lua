@@ -70,6 +70,7 @@ local function do_deck(p, splith)
 
         local mwfact = t.master_width_factor
         local mcount = t.master_count
+        local start  = 2
 
         if #cls <= 0 then return end
 
@@ -113,9 +114,7 @@ local function do_deck(p, splith)
         -- Remaining clients stacked in slave column, new ones on top.
         if #cls <= 1 then return end
 
-        if deck.single_master then
-            start = 2
-        else
+        if not deck.single_master then
             start = mcount + 1
         end
 
@@ -153,6 +152,7 @@ local function do_deck(p, splith)
 
         local mwfact = t.master_width_factor
         local mcount = t.master_count
+        local start  = 2
 
         -- Rounding is necessary to prevent the rendered size of slavewid
         -- from being 1 pixel off when the result is not an integer.
@@ -194,9 +194,7 @@ local function do_deck(p, splith)
         -- Remaining clients stacked in slave column, new ones on top.
         if #cls <= 1 then return end
 
-        if deck.single_master then
-            start = 2
-        else
+        if not deck.single_master then
             start = mcount + 1
         end
 

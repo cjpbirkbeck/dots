@@ -12,6 +12,8 @@ local volume     = require("main.widgets.volume")
 local keyboard   = require("main.widgets.keyboard")
 local weather    = require("main.widgets.weather")
 local time       = require("main.widgets.clock-calendar")
+local mytemp     = lain.widget.temp()
+-- local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
 
 function setup_bar_for_screen(s)
     local bar = awful.wibar({ position = "top", screen = s })
@@ -35,6 +37,7 @@ function setup_bar_for_screen(s)
         {
             layout  = wibox.layout.fixed.horizontal,
             s.systray,
+            mytemp,
             removable,
             keyboard,
             volume,

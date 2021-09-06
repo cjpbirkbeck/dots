@@ -5,6 +5,7 @@ local gears = require("gears")
 local awful = require("awful")
 local naughty = require("naughty")
 local deck = require("lib.deck")
+
 -- Help for various keybindings
 require("awful.hotkeys_popup.keys")
 
@@ -18,8 +19,8 @@ local mwf_increment = 0.05
 local mwf_default = 0.5
 
 -- Programs
-local finder = rc.float_term_em .. "-A 0.75 -t Finder -g 140x45 -e " .. rc.exec_d .. "find-file.sh"
-local _SYS_MON = rc.float_term_em .. "-A 0.75 -e gotop"
+local finder = "st -c stfloat -A 0.75 -t Finder -g 140x45 -e " .. rc.exec_d .. "find-file.sh"
+local _SYS_MON = "st -c stfloat -A 0.75 -e gotop"
 
 -- Functions
 
@@ -250,22 +251,22 @@ local global_keys = gears.table.join(
 
     -- Media buttons
     awful.key({}, "XF86AudioMute", function() awful.spawn("pamixer --toggle-mute") end,
-             { description = "Mute", group = "Music controls"}),
+             { description = "Mute", group = "Audio"}),
 
     awful.key({}, "XF86AudioLowerVolume", function() awful.spawn("pamixer --decrease 2") end,
-             {description = "Lower Volume", group = "Music controls"}),
+             {description = "Lower Volume", group = "Audio"}),
 
     awful.key({}, "XF86AudioRaiseVolume", function() awful.spawn("pamixer --increase 2") end,
-             {description = "Raise Volume", group = "Music controls"}),
+             {description = "Raise Volume", group = "Audio"}),
 
     awful.key({}, "XF86AudioPlay", function() awful.spawn("playerctl play-pause") end,
-             {description = "Toggle playing", group = "Music control"}),
+             {description = "Toggle playing", group = "Audio"}),
 
     awful.key({}, "XF86AudioPrev", function() awful.spawn("playerctl previous") end,
-             {description = "Play previous song", group = "Music control"}),
+             {description = "Play previous song", group = "Audio"}),
 
     awful.key({}, "XF86AudioNext", function() awful.spawn("playerctl next") end,
-             {description = "Play next song", group = "Music control"}),
+             {description = "Play next song", group = "Audio"}),
 
     -- Screenshots
     awful.key({}, "Print", function() awful.spawn("flameshot gui") end,

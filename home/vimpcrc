@@ -39,7 +39,7 @@ set incsearch
 set smartcase
 
 " Rearrange windows and set default as playlist.
-set windows playlist,lists,library
+set windows playlist,lists,library,browse,directory,help
 set window playlist
 
 " Colours
@@ -58,9 +58,9 @@ map J gt
 map K gT
 
 " Move quiting a tab to the sequence gq.
+" Only in the info tab should the tab be closed with q.
 map gq q
 tmap info q q
-tmap help q q
 map q <Nop>
 
 map <F1> :help<Enter>

@@ -9,6 +9,6 @@ lo.layouts = {
     deck,
     lo.suit.tile,
     deck.horizontal,
-    lo.suit.tile.bottom
+    lo.suit.tile.bottom,
 }
 

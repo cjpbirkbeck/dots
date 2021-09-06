@@ -117,6 +117,8 @@ set colorcolumn=80,100         " Colour the 80th and 100th columns.
 " Switch between relative and absolute line numbering.
 map <silent> <leader>n :set relativenumber!<CR>
 
+" lua require("which-key").setup {}
+
 " }}}
 
 " Appearance {{{
@@ -313,6 +315,9 @@ augroup command_line_appearance
     autocmd CmdwinEnter * setlocal colorcolumn=
 augroup END
 
+" Show mark locations
+nnoremap <leader>m :marks<CR>
+
 " }}}
 
 " Insertion {{{
@@ -419,7 +424,7 @@ if has('nvim')
 
     " Settings for the registers.nvim plugin.
     let g:registers_tab_symbol         = '⇥'
-    let g:registers_window_border      = 'none'
+    let g:registers_window_border      = 'shadow'
 
     " When yanking, make yanked text flash
     augroup high_on_yank

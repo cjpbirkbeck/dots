@@ -73,7 +73,8 @@
 
     # TUI programs
     abook                     # Terminal address book.
-    alot                      # TUI for notmuch email.
+    amfora
+    unstable.alot                      # TUI for notmuch email.
     bombadillo                # Alternate protocol browser
     bvi                       # vi-like hex editor
     cava                      # Visualiser for the terminal
@@ -107,6 +108,8 @@
     toot       # Mastadon client
     turses     # Twitter client
     (import ./pkgs/castero.nix)
+    beets
+    streamlink
 
     # GUI applications
     astroid                   # GUI client for notmuch
@@ -134,6 +137,8 @@
     thunderbird               # GUI email client
     unstable.torbrowser       # Browser using the tor network
     zathura                   # Lightweight PDF/EPUB/Dejv reader
+    lagrange
+    chatterino2
 
     # Icons for theming GTK and Qt applications with the breeze theme.
     breeze-gtk

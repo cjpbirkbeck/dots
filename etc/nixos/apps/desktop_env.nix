@@ -190,7 +190,6 @@ in
     };
 
     programs = {
-
       bat = {
         enable = true;
         config = {
@@ -236,7 +235,8 @@ in
       };
 
       gh = {
-        enable = true;
+        enable = false;
+        gitProtocol = "ssh";
       };
 
       git = {
@@ -286,7 +286,7 @@ in
         enable = true;
         package = with pkgs; pass.withExtensions (exts: [ exts.pass-audit exts.pass-update ]);
         settings = {
-          PASSWORD_STORE_DIR = "$HOME/.secrets/pass";
+          PASSWORD_STORE_DIR = "$HOME/.local/share/pass";
           PASSWORD_STORE_GENERATED_LENGTH = "31";
         };
       };
@@ -383,7 +383,7 @@ in
           set -g window-status-current-format '#[reverse] {#I} #{=/16/…:window_name}#F #[noreverse]'
           set -g window-status-format '[#I] #{=/16/…:window_name}#F'
           set -g status-right ' #{?client_prefix, #[reverse](Prefix)#[noreverse],} #P/#{window_panes} #{=/16/…:pane_title}'
-          set -g status-style 'fg=#87ceeb,bold,bg=#4d4d4d'
+          set -g status-style 'fg=#87ceeb,bg=#4d4d4d,bold'
           set -g window-status-activity-style 'fg=#ffffff,bg=#ee2b2a,bold'
           set -g window-status-bell-style 'fg=#ffffff,bg=#ee2b2a,bold'
           set -g status-position top
@@ -578,6 +578,9 @@ in
 
         luaModules = with pkgs.luaPackages; [
           vicious
+          (import ./pkgs/awesome-wm-widgets.nix )
+          (import ./pkgs/lain.nix )
+          # (import ./pkgs/bling.nix )
         ];
       };
     };

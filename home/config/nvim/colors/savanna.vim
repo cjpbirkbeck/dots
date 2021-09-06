@@ -50,8 +50,14 @@ hi WarningMsg	guifg=salmon
 "hi Scrollbar
 "hi Tooltip
 
+" Menu highlighting
+highlight Pmenu ctermbg=8 ctermfg=7 guibg=grey30 guifg=white
+" highlight PmenuSel
+" highlight PmenuSbar
+" highlight PmenuThumb
+
 " syntax highlighting groups
-hi Comment	guifg=SkyBlue gui=italic
+hi Comment	gui=italic guifg=SkyBlue
 hi Constant	guifg=#ffa0a0
 hi Identifier	guifg=palegreen
 hi Statement	guifg=khaki
@@ -61,7 +67,7 @@ hi Special	guifg=navajowhite
 "hi Underlined
 hi Ignore	guifg=grey40
 "hi Error
-hi Todo		guifg=#000000 guibg=yellow2
+hi Todo		gui=italic,bold guifg=red guibg=yellow2
 
 " color terminal definitions
 hi SpecialKey	ctermfg=darkgreen
@@ -98,6 +104,7 @@ hi Underlined	cterm=underline ctermfg=5
 hi Ignore	cterm=bold ctermfg=7
 hi Ignore	ctermfg=darkgrey
 hi Error	cterm=bold ctermfg=7 ctermbg=1
+highlight Pmenu ctermbg=8 ctermfg=7
 
 " Custom highlight defintions
 

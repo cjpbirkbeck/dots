@@ -59,6 +59,7 @@ config.bind('<Ctrl-Space>d',
         'hint links spawn youtube-dl --add-metadata -f 140 -o "~/audio/YouTube/%(title)s.%(ext)s" {hint-url}' )
 
 # Add emacs-like keybindings (used in command line) to insert mode.
+config.bind('<Ctrl-Shift-a>', 'fake-key <Ctrl-a>', mode='insert')
 
 # Navigation
 config.bind('<Ctrl-f>', 'fake-key <Right> ', mode='insert')

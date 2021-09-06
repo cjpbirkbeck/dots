@@ -22,6 +22,10 @@ require("lib.error-handling")
 -- Autofocus library
 require("awful.autofocus")
 
+-- Extra libraries
+vicious = require('vicious')
+lain = require('lain')
+
 -- Global Variables --
 
 -- Store in a single table, to better keep track them.
@@ -43,8 +47,8 @@ rc.control = "Control"
 rc.launcher     = "rofi -show-icons -show drun"
 rc.win_switcher = "rofi -show window"
 
-rc.term_emu      = "st"
-rc.float_term_em = "xterm"
+rc.term_emu      = "st "
+rc.float_term_em = "xterm "
 rc.browser       = os.getenv("BROWSER")
 rc.email         = "thunderbird"
 rc.file_man      = "pcmanfm-qt"
@@ -56,6 +60,7 @@ rc.passwords     = "rofi-pass --last-used"
 beautiful.init(rc.theme_d .. "/theme.lua")
 beautiful.gap_single_client = false
 
+-- local bling = require("bling")
 -- Set layouts
 require("main.layouts")
 
