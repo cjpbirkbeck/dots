@@ -66,17 +66,27 @@ endfunction
 
 " }}}
 
-" Prelude {{{
+" Interface {{{
 
-set modelines=0                              " Modelines set to 0.
-set nomodeline                               " Turns off modelines for security.
+" User Interface {{{
+
+" Detect file types.
+filetype indent plugin on
+
+set modelines=0 " Modelines set to 0.
+set nomodeline  " Turns off modelines for security.
+set title       " Set title of terminal.
+set mouse=a     " Allow mouse usage in all modes.
+set confirm     " Always confirm irreversible commands.
+set lazyredraw  " Does not redraws screen during operations.
+
 if has('nvim')
-    " Sha(red) da(ta) settings
+    " Sha(red) da(ta) settings.
     " Save the marks of the last 100 files.
     " Remember the last 50 lines of registers.
-    " Items with more than 10 KiB are ignored
-    " Do not highlight last searches
-    " Save and restore the buffer list
+    " Items with more than 10 KiB are ignored.
+    " Do not highlight last searches.
+    " Save and restore the buffer list.
     " Forget anything in the following directories:
     " * /run/media
     " * /temp
@@ -84,40 +94,11 @@ if has('nvim')
     set shada=!,'100,<50,s10,h,%,r/run/media,r/temp,r/tmp
 endif
 
-" }}}
-
-" Interface {{{
-
-" General {{{
-
-" Detect file types.
-filetype indent plugin on
-
 " Set leader to spacebar.
 let mapleader=" "
 
 " Set localleader to backslash.
 let maplocalleader="\\"
-
-set title                      " Set title of terminal.
-set number                     " Prints the line numbers on the left margin.
-set relativenumber             " Prints the relative line numbers on the left margin.
-set showmatch                  " Prints the matching bracket.
-set showmode                   " Show non-normal mode status.
-set lazyredraw                 " Does not redraws screen during operations.
-set confirm                    " Always a confirmation failable commands.
-set scrolloff=3                " Cursor will always be 3 lines above or below the screen margins.
-set list                       " Show tabs and EOL.
-set wildmenu                   " Use the advanced 'wildcard' menu for completion.
-set wildmode=longest,list,full " Complete to longest string, list all matches, complete to next fullest match.
-set mouse=a                    " Allow mouse usage in all modes.
-set wrap                       " Turns on word wrap.
-set colorcolumn=80,100         " Colour the 80th and 100th columns.
-
-" Switch between relative and absolute line numbering.
-map <silent> <leader>n :set relativenumber!<CR>
-
-" lua require("which-key").setup {}
 
 " }}}
 
@@ -141,9 +122,32 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
 " }}}
 
+" Text {{{
+" i.e. the part of the UI that shows the text.
+
+set showmatch          " Prints the matching bracket.
+set scrolloff=3        " Cursor will always be 3 lines above or below the screen margins.
+set list               " Show tabs and EOL.
+set wrap               " Turns on word wrap.
+set colorcolumn=80,100 " Colour the 80th and 100th columns.
+
+" }}}
+
+" Gutter {{{
+" Columns to the right, displaying line numbers and (with plugins) git status
+" and marks.
+
+set number         " Prints the line numbers on the left margin.
+set relativenumber " Prints the relative line numbers on the left margin.
+
+" Switch between relative and absolute line numbering.
+nnoremap <silent> <leader>n :set relativenumber!<CR>
+
+" }}}
+
 " Status Line {{{
 
-set laststatus=2                " Keeps the status bar on screen.
+set laststatus=2 " Keeps the status bar on screen.
 
 " Setup lightline
 " cursorpos: current line number:column line number/total lines.
@@ -166,7 +170,9 @@ let g:lightline = {
 
 " }}}
 
-" Command Line {{{
+" Command Line and Messages {{{
+
+set showmode " Show non-normal mode status.
 
 " Quit application with 'Q' at the command line
 cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
@@ -176,6 +182,20 @@ nnoremap <C-g> 1<C-g>
 
 " Auto search help
 nnoremap <leader>h :help<Space>
+
+" Highlight command line ranges
+if has('nvim') && has('nvim-0.5')
+    lua require("range-highlight").setup { highlight = "RangeHighlight" }
+endif
+
+" Get to the command history easier
+nnoremap q; q:
+
+" No colorcolumns in Command Line windows
+augroup command_line_appearance
+    autocmd!
+    autocmd CmdwinEnter * setlocal colorcolumn=
+augroup END
 
 " }}}
 
@@ -220,13 +240,14 @@ let g:netrw_winsize = 25                " Specifies netrw default size.
 let g:netrw_dirhistmax = 100            " Please does not liter my directories with .netrwhist files; thank you.
 let g:netrw_sizestyle = 'h'             " Human-readable file sizes
 let g:netrw_special_syntax = 1          " Syntax highlighting for various files
+" Save bookmarks and history in a special directory
 if has('nvim')
-    let g:netrw_home = '~/.cache/nvim/' " Save bookmarks and history in a special directory
+    let g:netrw_home = '~/.cache/nvim/'
 else
     let g:netrw_home = '~/.vim/cache/'
 endif
 let g:netrw_browser_viewer = 'xdg-open' " Open files with DE's file-opener.
-let g:netrw_preview = 1
+let g:netrw_preview = 1                 " Open preview windows in vertical split.
 
 " Open netrw in a sidebar.
 if has('nvim')
@@ -239,47 +260,11 @@ endif
 
 " Buffers {{{
 
-" Navigational shortcuts for moving between buffers.
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
-
-" Open list of buffers, then search currently open buffers
+" Open list of buffers, then search currently open buffers.
 nnoremap <leader>b :buffers<CR>:b<Space>
 
-" Move between the alternate buffer
+" Move between the alternate buffer more easily.
 nnoremap <leader>t <C-^>
-
-" }}}
-
-" {{{ FZF Menus
-
-" Creat keybindings for various fzf.vim functions.
-if has('nvim')
-    " Search files within the directory.
-    nnoremap <silent> <A-b>f     :Files<CR>
-    nnoremap <silent> <A-b><A-f> :Files<CR>
-
-    " Search loaded buffers
-    nnoremap <silent> <A-b>b     :Buffers<CR>
-    nnoremap <silent> <A-b><A-b> :Buffers<CR>
-
-    nnoremap <silent> <A-b>l     :Lines<CR>
-    nnoremap <silent> <A-b><A-l> :Lines<CR>
-
-    nnoremap <silent> <A-b>r     :Rg<CR>
-    nnoremap <silent> <A-b><A-r> :Rg<CR>
-
-    nnoremap <silent> <A-b>s     :Snippets<CR>
-    nnoremap <silent> <A-b><A-s> :Snippets<CR>
-
-    nnoremap <silent> <A-b>;     :History:<CR>
-    nnoremap <silent> <A-b><A-;> :History:<CR>
-
-    nnoremap <silent> <A-b>/     :History/<CR>
-    nnoremap <silent> <A-b><A-/> :History/<CR>
-endif
 
 " }}}
 
@@ -306,15 +291,6 @@ set infercase  " Will match cases in auto-completions.
 " Clear search highlighting.
 nnoremap <silent> <leader>l :nohlsearch<CR>
 
-" Get to the command history easier
-nnoremap q; q:
-
-" No colorcolumns in Command Line windows
-augroup command_line_appearance
-    autocmd!
-    autocmd CmdwinEnter * setlocal colorcolumn=
-augroup END
-
 " Show mark locations
 nnoremap <leader>m :marks<CR>
 
@@ -322,7 +298,8 @@ nnoremap <leader>m :marks<CR>
 
 " Insertion {{{
 
-" Tabbing and indenting
+" Indentation
+" These are often changed for specific filetypes or projects.
 set smartindent  " Turns on smart-indenting.
 set expandtab    " Replaces default tab with number of spaces.
 set shiftwidth=4 " Set the number of spaces for each indent.
@@ -331,10 +308,6 @@ set shiftwidth=4 " Set the number of spaces for each indent.
 nnoremap <silent> <leader>a :abbreviate<CR>
 
 if has('nvim')
-    " Delete words with alt-backspace, useful of firenvim.
-    inoremap <A-BS> <C-w>
-    vnoremap <A-BS> <C-w>
-
     " Either insert pairs for punctation that can, but normally isn't used for
     " pairs, or insert a opening bracket with the matching pair. Also can insert
     " bracket pairs on seperate lines, and start new typing with in th bracket.
@@ -364,9 +337,36 @@ inoremap . .<C-g>u
 inoremap ! !<C-g>u
 inoremap ? ?<C-g>u
 
-" Insert a blank line above or below the current line.
-nnoremap <leader>o m`A<CR><ESC>``
-nnoremap <leader>O m`ko<ESC>``
+" }}}
+
+" Snippets {{{
+
+if has('nvim')
+    let g:UltiSnipsExpandTrigger="<a-j>"
+    let g:UltiSnipsListSnippets="<a-S-j>"
+
+    let g:UltiSnipsJumpForwardTrigger="<a-j>"
+    let g:UltiSnipsJumpBackwardTrigger="<a-k>"
+
+    let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
+
+    set completefunc=ListSnippets
+endif
+
+" }}}
+
+" Completion {{{
+
+set wildmenu                   " Use the advanced 'wildcard' menu for completion.
+set wildmode=longest,list,full " Complete to longest string, list all matches, complete to next fullest match.
+
+" Completion should never insert nor select a suggestion until the user chooses an option.
+" Also should always show a menu, even if there is only one choice.
+set completeopt=menu,preview,noinsert,menuone,noselect
+" Enable omni-completion.
+set omnifunc=syntaxcomplete#Complete
+" When using generic autocompletion, also get suggestions from the spelling dictionary.
+set complete+=kspell
 
 " }}}
 
@@ -413,9 +413,6 @@ nnoremap <leader>dd "_dd
 
 " Registers {{{
 
-" Remap Y to y$
-nnoremap Y y$
-
 " Show all registers in normal mode
 nnoremap <silent> <leader>r :registers<CR>
 
@@ -424,19 +421,21 @@ if has('nvim')
 
     " Settings for the registers.nvim plugin.
     let g:registers_tab_symbol         = '⇥'
-    let g:registers_window_border      = 'shadow'
 
     " When yanking, make yanked text flash
-    augroup high_on_yank
-        autocmd!
-        autocmd TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
-    augroup END
+    if has('nvim-0.5')
+        augroup high_on_yank
+            autocmd!
+            autocmd TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
+        augroup END
+    endif
 endif
 
 " }}}
 
 " Spell Checking {{{
 
+" Set default language to English.
 set spelllang=en
 
 " Quickly toggle spell check.
@@ -455,33 +454,72 @@ if has('nvim')
     nnoremap <silent> <leader>g :Git<CR>
 endif
 
-" }}}
+lua << EOF
+require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  -- keymaps = {
+    -- Default keymap options
+    --noremap = true,
 
-" Snippets {{{
+    --['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+    --['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
 
-if has('nvim')
-    let g:UltiSnipsExpandTrigger="<a-j>"
-    let g:UltiSnipsListSnippets="<a-S-j>"
+    --['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+    --['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+    --['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+    --['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+    --['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+    --['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+    --['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+    --['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+    --['n <leader>hS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
+    --['n <leader>hU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
 
-    let g:UltiSnipsJumpForwardTrigger="<a-j>"
-    let g:UltiSnipsJumpBackwardTrigger="<a-k>"
-
-    let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
-
-    set completefunc=ListSnippets
-endif
-
-" }}}
-
-" Autocompletion {{{
-
-" Autocompletion should never insert nor select a suggestion until the user chooses an option.
-" Also should always show a menu, even if there is only one choice.
-set completeopt=menu,preview,noinsert,menuone,noselect
-" Enable omni-completion.
-set omnifunc=syntaxcomplete#Complete
-" When using generic autocompletion, also get suggestions from the spelling dictionary.
-set complete+=kspell
+    ---- Text objects
+    --['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+    --['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+  --},
+  watch_index = {
+    interval = 1000,
+    follow_files = true
+  },
+  attach_to_untracked = true,
+  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  -- current_line_blame_opts = {
+    -- virt_text = true,
+    -- virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    -- delay = 1000,
+  -- },
+  current_line_blame_formatter_opts = {
+    relative_time = false
+  },
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  max_file_length = 40000,
+  preview_config = {
+    -- Options passed to nvim_open_win
+    border = 'single',
+    style = 'minimal',
+    relative = 'cursor',
+    row = 0,
+    col = 1
+  },
+  yadm = {
+    enable = false
+  },
+}
+EOF
 
 " }}}
 
@@ -499,8 +537,9 @@ augroup END
 
 " }}}
 
-" Neovim terminal {{{
-" Would be better if it were a filetype instead.
+" }}}
+
+" Terminal {{{
 
 if has('nvim')
     augroup nvim_term
@@ -516,23 +555,10 @@ endif
 
 " }}}
 
-" Yank Highlight {{{
-
-if has('nvim') && has('nvim-0.5')
-    augroup high_on_yank
-        autocmd!
-        autocmd TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
-    augroup END
-endif
-
-" }}}
-
-" }}}
-
 " Treesitter {{{
 
 if has('nvim') && has('nvim-0.5')
-    lua <<EOF
+    lua << EOF
     require'nvim-treesitter.configs'.setup {
         highlight = {
             enable = true,
@@ -572,13 +598,12 @@ EOF
     " Use treesitter's folding functions.
     set foldmethod=expr
     set foldexpr=nvim_treesitter#foldexpr()
-
 endif
 
 
 " }}}
 
-" Native LSP {{{
+" LSP {{{
 
 if has('nvim') && has('nvim-0.5')
     lua << EOF
@@ -619,7 +644,7 @@ if has('nvim') && has('nvim-0.5')
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches
     -- vim-go handles gopls
-    local servers = { "rust_analyzer", "tsserver" }
+    local servers = { "tsserver", "rnix", "pylsp" }
     for _, lsp in ipairs(servers) do
       nvim_lsp[lsp].setup {
         on_attach = on_attach,
@@ -633,11 +658,22 @@ endif
 
 " }}}
 
+" REPL {{{
+
+if has('nvim')
+    let g:neoterm_default_mod = ':belowright'
+endif
+
 " }}}
+
+" }}}
+
+" Auxiliary {{{
 
 " Firenvim {{{
 
 if has('nvim') && has('nvim-0.4')
+    " Firenvim should never automatically activate.
     let g:firenvim_config = {
         \ 'globalSettings': {
             \ 'alt': 'all',
@@ -654,10 +690,27 @@ if has('nvim') && has('nvim-0.4')
     \ }
 endif
 
-if exists('g:started_by_firenvim')
+if has('nvim') && exists('g:started_by_firenvim')
     " Delete words with alt-backspace, useful of firenvim.
     inoremap <C-BS> <C-w>
     cnoremap <C-BS> <C-w>
+
+    " This should point to an environment variable.
+    let g:post_archive_dir='/home/cjpbirkbeck/docs/notes/posts/'
+
+    function! SaveInPostDir()
+        let g:current_file_name=expand('%:t')
+        execute ':write ' . g:post_archive_dir . g:current_file_name
+    endf
+
+    " Write to a file in the notes directory.
+    nnoremap <localleader>w :call SaveInPostDir()<CR>
+
+    " After writing to the real buffer, write to the archive directory.
+    augroup write_to_archive
+        autocmd!
+        autocmd BufWritePost * call SaveInPostDir()<CR>
+    augroup END
 endif
 
 " }}}
@@ -680,5 +733,7 @@ if exists("$EXTRA_VIM")
     exec "source ".path
   endfor
 endif
+
+" }}}
 
 " }}}

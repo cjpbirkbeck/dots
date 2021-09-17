@@ -37,5 +37,20 @@ set statusline+=\ {%B}
 set statusline+=\ %l:%c/%L
 set statusline+=\ %P
 
+" Some remappin that are useful, but handled with plugins in my neovim config.
+
+" Align Y with D, C, etc.
+nnoremap Y y$
+
+" Navigational shortcuts for moving between buffers.
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
+" Insert a blank line above or below the current line.
+nnoremap <leader>o m`A<CR><ESC>``
+nnoremap <leader>O m`ko<ESC>``
+
 " Source the common configuration file.
 source $HOME/.vim/common.vim
