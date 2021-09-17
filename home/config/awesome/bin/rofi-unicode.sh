@@ -12,6 +12,6 @@ test -z "$char" && exit
 if test -z "$1"; then
     xdotool type "$char"
 else
-    echo "$char" | xclip -selection clipboard
+    echo "$char" | xclip --clipboard
     notify-send "Unicode glyph" "Copied \"$char\" to the clipboard"
 fi
