@@ -64,14 +64,44 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "glacambre";
       repo = "firenvim";
-      rev = "da665b10bd528e62ba68978b38b17183a4aa8da5";
-      sha256 = "158dak0wddcjxil3sj26zn130c6xlz6n093gri7j5q85jdka9zv8";
+      rev = "ce080a1c80534054263d7ae30c9c59b0c4b69235";
+      sha256 = "0linil04ar23dgr0fxsrvsy2yxxzy5x6zalzwda1dlazfgs94lhs";
+    };
+  };
+
+  customPlugins.range-highlight = pkgs.vimUtils.buildVimPlugin {
+    name = "range-highlight";
+    src = pkgs.fetchFromGitHub {
+      owner = "winston0410";
+      repo = "range-highlight.nvim";
+      rev = "8b5e8ccb3460b2c3675f4639b9f54e64eaab36d9";
+      sha256 = "1yswni0p1w7ja6cddxyd3m4hi8gsdyh8hm8rlk878b096maxkgw1";
+    };
+  };
+
+  customPlugins.cmd-parser_nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "cmd-parser_nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "winston0410";
+      repo = "cmd-parser.nvim";
+      rev = "70813af493398217cb1df10950ae8b99c58422db";
+      sha256 = "0rfa8cpykarcal8qcfp1dax1kgcbq7bv1ld6r1ia08n9vnqi5vm6";
+    };
+  };
+
+  customPlugins.nvim-gdb = pkgs.vimUtils.buildVimPlugin {
+    name = "nvim-gdb";
+    src = pkgs.fetchFromGitHub {
+      owner = "sakhnik";
+      repo = "nvim-gdb";
+      rev = "f2c8d5b70f4cad18db5f15e897ba006aeba08f80";
+      sha256 = "0vq9lb2vir0am85nwjqphdmlx7akvpvcfgw3mr15rvnc9spzh8ix";
     };
   };
 
   neovim_configuration = {
     customRC = ''
-      " Let neovim know it is using NixOS plugin.
+      " Let neovim know it is using plugins install with Nix.
       let g:is_nixos = 1
 
       " common.vim should hold all the settings to be used across all systems.
@@ -87,14 +117,16 @@ let
     packages.neovim = with unstable.pkgs.vimPlugins // customPlugins; {
       start = [
         # Interface enhancements
+        cmd-parser_nvim              # Required for range-highlights
         lightline-vim                # Lightweight but pretty statusline.
-        vim-lastplace                # Open files with cursor at last cursor position.
-        vim-characterize             # Display Unicode character metadata.
-        vim-signature                # Displays marks in the gutter.
-        undotree                     # Visualize vim's undos with a tree.
-        neoterm                      # Neovim terminal enhancements.
         nvim-colorizer-lua           # Show various colour words (e.g. 'Black' or #87fe8e) in that colour.
+        range-highlight              # Highlight command line ranges
         registers-nvim               # Dynamically show register contents
+        undotree                     # Visualize vim's undos with a tree.
+        vim-characterize             # Display Unicode character metadata.
+        vim-lastplace                # Open files with cursor at last cursor position.
+        vim-signature                # Displays marks in the gutter.
+        vim-unimpaired               # Miscellaneous bracket pairings.
 
         # Custom operators
         surround                     # Manipulate elements that surrounds text, like brackets or quotation marks.
@@ -114,46 +146,42 @@ let
         # Other text manipulation
         vim-visualstar               # Allows */# keys to use arbitrarily defined text (with visual mode).
         vim-easy-align               # Align text elements some characters.
-        vim-speeddating              # Increment dates and times.
         vim-endwise                  # Adds ending elements for various structures.
 
-        # Fuzzy finding
-        fzfWrapper                   # Fuzzy finding with fzf.
-        fzf-vim                      # Collection of commands using fzf.
-
         # Git integration
-        gitgutter                    # Shows Git changes in gutter.
+        gitsigns-nvim                # Shows Git changes in gutter.
         fugitive                     # Git frontend for Vim.
 
         # IDE-like plugins
         ultisnips                    # Snippet manager.
         vim-snippets                 # Collection of prebuilt snippets.
         nvim-treesitter              # Supports tree-sitter within nvim.
-        nvim-treesitter-textobjects  # Add text objects for tree-sitter objects
+        nvim-treesitter-textobjects  # Add text objects for tree-sitter objects.
         nvim-lspconfig               # Quick configuration of native LSP
         vim-test                     # Automatic testing.
         ale                          # Multi-language linter.
+        neoterm                      # Terminal improvements, in particular RELP support
 
         # Filetype specific plugins
-        # Should go into opt, unless it doesn't work.
         vim-go                       # Plugin for extra support with Go
         vim-markdown                 # Extra markdown support
         vim-tmux                     # Adds support for modifying tmux config files.
-        neorg                        # New org-like notetake format
         vim-nix                      # Adds nix syntax colouring and file detection to vim.
         vim-toml                     # Add syntax support for toml files
+        vim-orgmode                  # Add support for org file.
+        zig-vim                      # Add support for the Zig language.
 
         # Misc
         firenvim                     # Inserts neovim into browser text boxes.
-        glow-nvim                    # Previews for markdown with the terminal
-        himalaya-vim
       ];
       # For optional plugins, loaded only when meeting certain conditions:
       # e.g. autocmd FileType foo :packadd fooCompletion
       opt = [
+        glow-nvim                    # Previews for markdown with the terminal
+        vim-speeddating              # Increment dates and times.
         emmet-vim                    # Support for writing HTML/CSS
-        vim-orgmode                  # Add support for org file.
-        zig-vim                      # Add support for the Zig language
+        nvim-gdb                     # Wrapper for C, C++, python and bash debuggers.
+        nvim-dap                     # Adapter for the DAP for debugging.
       ];
     };
   };

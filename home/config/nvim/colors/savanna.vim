@@ -51,7 +51,7 @@ hi WarningMsg	guifg=salmon
 "hi Tooltip
 
 " Menu highlighting
-highlight Pmenu ctermbg=8 ctermfg=7 guibg=grey30 guifg=white
+highlight Pmenu ctermbg=8 ctermfg=7 guibg=grey23 guifg=white
 " highlight PmenuSel
 " highlight PmenuSbar
 " highlight PmenuThumb
@@ -109,9 +109,16 @@ highlight Pmenu ctermbg=8 ctermfg=7
 " Custom highlight defintions
 
 " Change Signature.vim mark colours.
-highlight SignatureMarkText guifg=Yellow gui=bold
+highlight SignatureMarkText gui=italic guifg=Yellow
 
 " Make the mispelling indicator more visible.
 highlight SpellBad guisp=LightRed
 
+" For the GitSigns plugins.
+highlight GitSignsAdd gui=bold guifg=DarkBlue guibg=grey50
+highlight GitSignsChange gui=bold guifg=DarkMagenta guibg=grey50
+highlight GitSignsDelete gui=bold guifg=DarkCyan guibg=grey50
+
+" For the RangeHighlight plugin.
+highlight RangeHighlight guibg=grey40
 "vim: sw=4

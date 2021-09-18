@@ -65,7 +65,7 @@
     weather                   # Weather command line
     wyrd                      # TUI frontend for remind
     xcape                     # Binding a modifier key when press by itself.
-    xclip                     # Command line ultity for manuplating the system clipboard.
+    xsel                      # Command line ultity for manuplating the system clipboard.
     xdotool                   # Automation tool for X11
     xlsx2csv                  # Converts Excel (post-2007) files to csv files
     youtube-dl                # Video downloader
