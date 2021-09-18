@@ -14,8 +14,12 @@ Plug 'farmergreg/vim-lastplace'            " Open files with cursor at last curs
 Plug 'tpope/vim-characterize'              " Display Unicode character metadata.
 Plug 'kshenoy/vim-signature'               " Displays marks in the gutter.
 Plug 'mbbill/undotree'                     " Visual Vim's undos with a tree.
-Plug 'kassio/neoterm'                      " Neovim terminal enhancements.
-Plug 'norcalli/nvim-colorizer.lua'
+Plug 'tpope/vim-unimpaired'                " Miscellaneous bracket pairings.
+Plug 'winston0410/cmd-parser.nvim'         " Required for range-highlights.
+Plug 'winston0410/range-highlight.nvim'    " Highlights command line ranges.
+if has('nvim-0.4')
+    Plug 'norcalli/nvim-colorizer.lua'     " Add colours to words like 'Black' and '#2bf211'.
+endif
 if has('nvim-0.5')
     Plug 'tversteeg/registers.nvim'        " Show registers contents while inserting text.
 endif
@@ -37,14 +41,11 @@ Plug 'vim-scripts/argtextobj.vim'          " Text object for function arguments.
 " Other text manipulation
 Plug 'thinca/vim-visualstar'               " Allows */# keys to used in visual mode.
 Plug 'junegunn/vim-easy-align'             " Align text elements some characters.
-Plug 'tpope/vim-speeddating'               " Increment dates and times.
 Plug 'tpope/vim-endwise'                   " Adds ending elements for various structures.
 
-" Fuzzy finding
-Plug 'junegunn/fzf.vim'                    " Collection of commands using fzf.
-
 " Git integration
-Plug 'airblade/vim-gitgutter'              " Shows Git changes in gutter.
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'             " Shows Git changes in gutter.
 Plug 'tpope/vim-fugitive'                  " Git frontend for Vim.
 
 " IDE-like plugins
@@ -52,17 +53,25 @@ Plug 'SirVer/ultisnips'                    " Snippet manager.
 Plug 'honza/vim-snippets'                  " Collection of prebuilt snippets.
 Plug 'roxma/nvim-yarp'                     " Remote Plugin framework.
 Plug 'janko/vim-test'                      " Automatic testing.
+Plug 'kassio/neoterm'                      " Neovim terminal enhancements.
 if has('nvim-0.2')
     Plug 'dense-analysis/ale'              " Multi-language linter.
 endif
+" LSP supports language servers for better go to defintion, etc.
+" Tree supports better syntax highlighting, text object based on syntax, etc.
 if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 endif
 
 " Filetype specific plugins
 Plug 'LnL7/vim-nix'                        " Adds nix syntax colouring and file detection to vim.
 Plug 'jceb/vim-orgmode'                    " Add support for org file.
 Plug 'tmux-plugins/vim-tmux'               " Adds support for modifying tmux config files.
+Plug 'cespare/vim-toml'
+Plug 'ziglang/zig.vim'
+Plug 'plasticboy/vim-markdown'
 if has('nvim-0.5')
     Plug 'fatih/vim-go'                    " Extra support for working the Go language.
 endif
@@ -70,11 +79,20 @@ endif
 " Misc
 if has('nvim-0.5')
     " Allows nvim to run within browsers
-    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-    " Treesitter plugin for better syntax highlighting, etc.
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate' }
-    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    " Keep this for windows version only now.
+    if has('win32')
+        Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+    endif
 endif
+
+" Optional plugins
+" Use an empty array so vim-plug install but does not load it,
+" using ftplugins files and autocommands to do that for us.
+Plug 'ellisonleao/glow.nvim', {  'for': [] }
+Plug 'tpope/vim-speeddating', {  'for': [] } " Increment dates and times.
+Plug 'mattn/emmet-vim', {  'for': [] }
+Plug 'sakhnik/nvim-gdb', {  'for': [] }
+Plug 'mfussenegger/nvim-dap', {  'for': [] }
 call plug#end()
 
 if has('win32')

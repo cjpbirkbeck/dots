@@ -1,4 +1,4 @@
-if has('nvim')
+if has('win32') && has('nvim')
     packadd glow-nvim
 endif
 
