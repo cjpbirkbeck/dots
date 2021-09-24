@@ -157,7 +157,6 @@ process_markdown () {
     exit 0
 }
 
-
 process_image() {
     if command -v img2txt > /dev/null ; then
         img2txt -W "${WINDOW_WIDTH}" "${FILE_PATH}" 2>/dev/null
