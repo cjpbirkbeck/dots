@@ -18,3 +18,5 @@ vim-plug.vim
 home/config/nvim/cache/
 reference.*
 bling
+etc/nixos/laptop/*
+taskserver.nix

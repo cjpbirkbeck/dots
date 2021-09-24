@@ -20,6 +20,7 @@ in
   # Import home-manager
   imports = [
     <home-manager/nixos>
+    ./taskserver.nix
   ];
 
   home-manager.users.cjpbirkbeck = { pkgs, ... }: {
@@ -158,6 +159,7 @@ in
       '';
       gtk3 = {
         bookmarks = [
+          "file:///home/cjpbirkbeck/Reference"
         ];
         extraConfig = {
           gtk-button-images = 0;
@@ -302,6 +304,14 @@ in
       taskwarrior = {
         enable = true;
         colorTheme = "dark-blue-256";
+        config = {
+          taskd = {
+            certificate = "~/.secrets/taskwarrior/private.certificate.pem";
+            key = "~/.secrets/taskwarrior/private.key.pem";
+            ca = "~/.secrets/taskwarrior/ca.crt";
+            trust = "strict";
+          };
+        };
       };
 
       tmux = {
@@ -559,14 +569,9 @@ in
 
       userDirs = {
         enable = true;
-        desktop = "\$HOME/dt";
-        download = "\$HOME/dls";
         templates = "\$HOME/tpls";
-        music = "\$HOME/audio";
-        pictures = "\$HOME/imgs";
-        publicShare = "\$HOME/pub";
-        videos = "\$HOME/vids";
-        documents = "\$HOME/docs";
+        music = "\$HOME/Audio";
+        pictures = "\$HOME/Images";
       };
     };
 

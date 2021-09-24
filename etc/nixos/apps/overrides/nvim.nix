@@ -64,8 +64,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "glacambre";
       repo = "firenvim";
-      rev = "ce080a1c80534054263d7ae30c9c59b0c4b69235";
-      sha256 = "0linil04ar23dgr0fxsrvsy2yxxzy5x6zalzwda1dlazfgs94lhs";
+      rev = "35caecb28119e1935f72e846eee118243ba3beb0";
+      sha256 = "0ly2wcn49z1f2208199pmsjgh8fsqhl3ch0j1biqw0jcb1m1yji3";
     };
   };
 
