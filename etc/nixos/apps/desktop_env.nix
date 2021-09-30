@@ -491,6 +491,11 @@ in
         enable = true;
       };
 
+
+      syncthing = {
+        enable = true;
+      };
+
       udiskie = {
         enable = true;
       };
