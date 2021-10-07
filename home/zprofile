@@ -3,7 +3,7 @@
 # Set language
 export LANG="en_CA.UTF-8"
 
-# Add bin directory to path.
+# Add local bin directory to path.
 export PATH="$HOME/.local/bin:$PATH"
 
 # If there is a nix store, initalize it.

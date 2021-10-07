@@ -2,6 +2,9 @@
 # This file is read by ALL zsh shells, regardless if they are login shell, interactive shells, or some
 # combination of the two, so only setting of key environment variables should be set here.
 
+# Load the paths from the nix-profile.
+export FPATH="$HOME/.nix-profile/share/zsh/site-functions:$FPATH"
+
 # Set editor to neovim.
 export EDITOR=nvim
 export VISUAL=nvim

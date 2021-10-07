@@ -49,3 +49,4 @@ alias egrep="egrep --color=auto"
 # Program aliases
 alias more="less"
 alias dff="df -hH -x tmpfs -x devtmpfs"
+alias nev="nix-env"

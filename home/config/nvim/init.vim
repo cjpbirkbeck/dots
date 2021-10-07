@@ -44,7 +44,7 @@ Plug 'junegunn/vim-easy-align'             " Align text elements some characters
 Plug 'tpope/vim-endwise'                   " Adds ending elements for various structures.
 
 " Git integration
-Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/plenary.nvim'               " Nvim lua lib; required for gitsigns.
 Plug 'lewis6991/gitsigns.nvim'             " Shows Git changes in gutter.
 Plug 'tpope/vim-fugitive'                  " Git frontend for Vim.
 
@@ -66,14 +66,14 @@ if has('nvim-0.5')
 endif
 
 " Filetype specific plugins
-Plug 'LnL7/vim-nix'                        " Adds nix syntax colouring and file detection to vim.
-Plug 'jceb/vim-orgmode'                    " Add support for org file.
-Plug 'tmux-plugins/vim-tmux'               " Adds support for modifying tmux config files.
+Plug 'LnL7/vim-nix'
+Plug 'jceb/vim-orgmode'
+Plug 'tmux-plugins/vim-tmux'
 Plug 'cespare/vim-toml'
 Plug 'ziglang/zig.vim'
 Plug 'plasticboy/vim-markdown'
 if has('nvim-0.5')
-    Plug 'fatih/vim-go'                    " Extra support for working the Go language.
+    Plug 'fatih/vim-go'      " Extra support for working the Go language.
 endif
 
 " Misc
@@ -88,11 +88,13 @@ endif
 " Optional plugins
 " Use an empty array so vim-plug install but does not load it,
 " using ftplugins files and autocommands to do that for us.
-Plug 'ellisonleao/glow.nvim', {  'for': [] }
-Plug 'tpope/vim-speeddating', {  'for': [] } " Increment dates and times.
-Plug 'mattn/emmet-vim', {  'for': [] }
-Plug 'sakhnik/nvim-gdb', {  'for': [] }
-Plug 'mfussenegger/nvim-dap', {  'for': [] }
+if ! has('win32')
+    Plug 'ellisonleao/glow.nvim', { 'for': [] } " use glow(1) to preview markdown files.
+endif
+Plug 'tpope/vim-speeddating', { 'for': [] } " Increment dates and times.
+Plug 'mattn/emmet-vim',       { 'for': [] } " Dynamically generate HTML/CSS code.
+Plug 'sakhnik/nvim-gdb',      { 'for': [] } " Front end of gdb and other debuggers.
+Plug 'mfussenegger/nvim-dap', { 'for': [] } " Adapter for other debuggers with DAP.
 call plug#end()
 
 if has('win32')
