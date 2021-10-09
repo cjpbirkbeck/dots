@@ -183,10 +183,10 @@ nnoremap <C-g> 1<C-g>
 " Auto search help
 nnoremap <leader>h :help<Space>
 
-" Highlight command line ranges
-if has('nvim') && has('nvim-0.5')
-    lua require("range-highlight").setup { highlight = "RangeHighlight" }
-endif
+" " Highlight command line ranges
+" if has('nvim') && has('nvim-0.5')
+"     lua require("range-highlight").setup { highlight = "RangeHighlight" }
+" endif
 
 " Get to the command history easier
 nnoremap q; q:
@@ -380,12 +380,6 @@ if has('nvim')
     nmap gl <Plug>(EasyAlign)
     xmap gl <Plug>(EasyAlign)
 endif
-
-" Move lines in normal and visual mode
-nnoremap <silent> <leader>j :move .+1<CR>==
-nnoremap <silent> <leader>k :move .-2<CR>==
-vnoremap <silent> <C-j> :move '>+1<CR>gv=gv
-vnoremap <silent> <C-k> :move '<-2<CR>gv=gv
 
 " }}}
 

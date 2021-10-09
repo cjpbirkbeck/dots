@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # zprofile: init file for zsh login shells
 
 # Set language
@@ -7,8 +8,10 @@ export LANG="en_CA.UTF-8"
 export PATH="$HOME/.local/bin:$PATH"
 
 # If there is a nix store, initalize it.
+# Load the paths from the nix-profile.
 if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
     source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    export FPATH="$HOME/.nix-profile/share/zsh/site-functions:$FPATH"
 fi
 
 # If tmux exists, and the shell is not currently within a tmux session,

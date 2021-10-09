@@ -52,5 +52,11 @@ nnoremap <silent> ]B :blast<CR>
 nnoremap <leader>o m`A<CR><ESC>``
 nnoremap <leader>O m`ko<ESC>``
 
+" Move lines in normal and visual mode
+nnoremap <silent> <leader>j :move .+1<CR>==
+nnoremap <silent> <leader>k :move .-2<CR>==
+vnoremap <silent> <C-j> :move '>+1<CR>gv=gv
+vnoremap <silent> <C-k> :move '<-2<CR>gv=gv
+
 " Source the common configuration file.
 source $HOME/.vim/common.vim

@@ -15,8 +15,8 @@ Plug 'tpope/vim-characterize'              " Display Unicode character metadata.
 Plug 'kshenoy/vim-signature'               " Displays marks in the gutter.
 Plug 'mbbill/undotree'                     " Visual Vim's undos with a tree.
 Plug 'tpope/vim-unimpaired'                " Miscellaneous bracket pairings.
-Plug 'winston0410/cmd-parser.nvim'         " Required for range-highlights.
-Plug 'winston0410/range-highlight.nvim'    " Highlights command line ranges.
+" Plug 'winston0410/cmd-parser.nvim'         " Required for range-highlights.
+" Plug 'winston0410/range-highlight.nvim'    " Highlights command line ranges.
 if has('nvim-0.4')
     Plug 'norcalli/nvim-colorizer.lua'     " Add colours to words like 'Black' and '#2bf211'.
 endif
