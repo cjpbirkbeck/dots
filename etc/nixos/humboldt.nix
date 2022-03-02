@@ -41,6 +41,14 @@
     ./apps/devlopement/golang.nix
   ];
 
+  programs.evolution = {
+    enable = true;
+  };
+
+  programs.dconf = {
+    enable = true;
+  };
+
   services = {
     avahi = {
       enable = true;
@@ -52,7 +60,7 @@
     };
 
     xserver.xautolock = {
-      enable = true;
+      enable = false;
 
       locker = "${pkgs.xsecurelock}/bin/xsecurelock";
     };

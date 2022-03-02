@@ -30,8 +30,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "tpope";
       repo = "vim-characterize";
-      rev = "885a00a3c21dd52ca8f2fd7d62850134934179d9";
-      sha256 = "14gr7w313gk2xs548s8gv5nf45dhma5y3hjl36zkvy9z8lw45dhj";
+      rev = "967ac3ab4c2a7ee670d5368faac7b53ba2d07b82";
+      sha256 = "166fl7il98fkckgp8ld2licbf0f9xqfx06ww93lafz29llmfa4kf";
     };
   };
 
@@ -41,8 +41,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "julian";
       repo = "vim-textobj-variable-segment";
-      rev = "78457d4322b44bf89730e708b62b69df48c39aa3";
-      sha256 = "14dcrnk83hj4ixrkdgjrk9cf0193f82wqckdzd4w0b76adf3habj";
+      rev = "30f7bc94bc8a87d923631f5e440200b662becb1a";
+      sha256 = "1168qylhs0f0xzvy68kh07p8w01ypc78h2cb4pklv8079c869k30";
     };
   };
 
@@ -64,8 +64,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "glacambre";
       repo = "firenvim";
-      rev = "35caecb28119e1935f72e846eee118243ba3beb0";
-      sha256 = "0ly2wcn49z1f2208199pmsjgh8fsqhl3ch0j1biqw0jcb1m1yji3";
+      rev = "668b350ce88cc9a2257644c67945c9abbdd36cb5";
+      sha256 = "0ngfiv0vi455pszpcf3isxaynj1bppb95k889y14n90fas4ngrkv";
     };
   };
 
@@ -89,15 +89,15 @@ let
     };
   };
 
-  customPlugins.nvim-gdb = pkgs.vimUtils.buildVimPlugin {
-    name = "nvim-gdb";
-    src = pkgs.fetchFromGitHub {
-      owner = "sakhnik";
-      repo = "nvim-gdb";
-      rev = "f2c8d5b70f4cad18db5f15e897ba006aeba08f80";
-      sha256 = "0vq9lb2vir0am85nwjqphdmlx7akvpvcfgw3mr15rvnc9spzh8ix";
-    };
-  };
+  # customPlugins.nvim-gdb = pkgs.vimUtils.buildVimPlugin {
+  #   name = "nvim-gdb";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "sakhnik";
+  #     repo = "nvim-gdb";
+  #     rev = "c2a0d076383b8a0991681c33efe80bcba6dd3608";
+  #     sha256 = "19yc51bhfaw53rc9awdr145i8k2i2gnnl3faw85afsqs9dr4hi7i";
+  #   };
+  # };
 
   neovim_configuration = {
     customRC = ''
@@ -117,10 +117,8 @@ let
     packages.neovim = with unstable.pkgs.vimPlugins // customPlugins; {
       start = [
         # Interface enhancements
-        cmd-parser_nvim              # Required for range-highlights
         lightline-vim                # Lightweight but pretty statusline.
         nvim-colorizer-lua           # Show various colour words (e.g. 'Black' or #87fe8e) in that colour.
-        range-highlight              # Highlight command line ranges
         registers-nvim               # Dynamically show register contents
         undotree                     # Visualize vim's undos with a tree.
         vim-characterize             # Display Unicode character metadata.

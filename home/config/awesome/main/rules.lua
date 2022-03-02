@@ -91,6 +91,9 @@ awful.rules.rules = {
       { rule_any = { class = { "Tilda", ".guake-wrapped" } },
         properties = { floating = true } },
 
+    -- { rule_any = { class = { "Thunderbird" }, name = { "Instant messaging status" } },
+    --     properties = { floating = true } },
+
     -- Assign applications to tags
 
     { rule_any = { class = { "pcmanfm-qt", "pcmanfm", "dolphin", "Gnome-disks", "ark", "Qalculate-gtk" } },
@@ -104,7 +107,7 @@ awful.rules.rules = {
 
       -- LibreOffice doesn't seem to quite work with the rules here.
     { rule_any = { class = { "Zathura", "okular", "libreoffice", "libreoffice-writer", "libreoffice-calc",
-                         "libreoffice-impress", "libreoffice-draw", "libreoffice-base", "Soffice", "Anki" } },
+                         "libreoffice-impress", "libreoffice-draw", "libreoffice-base", "Soffice", "Anki", "Zotero" } },
       properties = { tag = "Documents" } },
 
     { rule_any = { class = { "kolourpaint", "Sxiv", "GIMP", "Inkscape", "gwenview", "imv" } },

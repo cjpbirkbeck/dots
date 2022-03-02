@@ -122,7 +122,7 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
 " }}}
 
-" Text {{{
+" Text Area {{{
 " i.e. the part of the UI that shows the text.
 
 set showmatch          " Prints the matching bracket.
