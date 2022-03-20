@@ -7,23 +7,22 @@
 let
   unstable = import <unstable> {};
 
-  makeTSParserOption = lang:
-    "parser/" + lang + ".so";
-
-  makeTSParserPath = lang:
-  let
-    pkgPathForTSParser = "\${pkgs.tree-sitter.builtGrammars.tree-sitter-" + lang "}";
-  in
-    "${pkgPathForTSParser}/path";
-
-  neovim-pkgs = with pkgs; [
-    neovim_with_plugins    # Customized neovim.
-    neovim-qt_with_plugins # GUI frontend using Qt.
-    neovim-remote          # Control remote instances of neovim.
-
-    miscfiles              # Misc files have a dictionary list that is useful for vim autocompletions.
-    universal-ctags        # Tags files that will hold keyword information.
-  ];
+  tree-sitter-with-parsers = pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: [
+    pkgs.tree-sitter-grammars.tree-sitter-bash
+    pkgs.tree-sitter-grammars.tree-sitter-c
+    pkgs.tree-sitter-grammars.tree-sitter-comment
+    pkgs.tree-sitter-grammars.tree-sitter-css
+    pkgs.tree-sitter-grammars.tree-sitter-go
+    pkgs.tree-sitter-grammars.tree-sitter-html
+    pkgs.tree-sitter-grammars.tree-sitter-json
+    pkgs.tree-sitter-grammars.tree-sitter-latex
+    pkgs.tree-sitter-grammars.tree-sitter-lua
+    pkgs.tree-sitter-grammars.tree-sitter-markdown
+    pkgs.tree-sitter-grammars.tree-sitter-nix
+    pkgs.tree-sitter-grammars.tree-sitter-norg
+    pkgs.tree-sitter-grammars.tree-sitter-python
+    pkgs.tree-sitter-grammars.tree-sitter-vim
+  ]);
 
   customPlugins.vim-characterize = pkgs.vimUtils.buildVimPlugin {
     name = "vim-characterize";
@@ -89,15 +88,25 @@ let
     };
   };
 
-  # customPlugins.nvim-gdb = pkgs.vimUtils.buildVimPlugin {
-  #   name = "nvim-gdb";
-  #   src = pkgs.fetchFromGitHub {
-  #     owner = "sakhnik";
-  #     repo = "nvim-gdb";
-  #     rev = "c2a0d076383b8a0991681c33efe80bcba6dd3608";
-  #     sha256 = "19yc51bhfaw53rc9awdr145i8k2i2gnnl3faw85afsqs9dr4hi7i";
-  #   };
-  # };
+  customPlugins.dirbuf_nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "dirbuf_nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "elihunter173";
+      repo = "dirbuf.nvim";
+      rev = "9e89ce6e24daa048ae5b3cf6f8ed32aa179932ed";
+      sha256 = "0s81ywf8nif7gw0s8dvvg9szpy8ssfbwi1lfndnfwxcrva17wz8h";
+    };
+  };
+
+  customPlugins.luasnip-snippets_nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "luasnip-snippets_nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "molleweide";
+      repo = "LuaSnip-snippets.nvim";
+      rev = "d7e40e4cce622eab2316607dbcd8d6039bcb9fe0";
+      sha256 = "063fz3f9byzmb1qavhrjdcphr3nk4l4d19h7mzj5sx4wv7cn8nl8";
+    };
+  };
 
   neovim_configuration = {
     customRC = ''
@@ -106,6 +115,9 @@ let
 
       " common.vim should hold all the settings to be used across all systems.
       source $HOME/.config/nvim/common.vim
+
+      " Source dev.lua for some advanced plugins configured with lua
+      source $HOME/.config/nvim/dev.lua
 
       " Add NixOS' of the GNU collection's dictionaries to nvim's dictionaries list.
       " Useful for autocompletions.
@@ -125,15 +137,18 @@ let
         vim-lastplace                # Open files with cursor at last cursor position.
         vim-signature                # Displays marks in the gutter.
         vim-unimpaired               # Miscellaneous bracket pairings.
+        dirbuf_nvim                  # Improved file manager
 
-        # Custom operators
+        # Text manipulation
+
+        ## Custom operators
         surround                     # Manipulate elements that surrounds text, like brackets or quotation marks.
         ReplaceWithRegister          # Replace text objects with register contents directly.
         commentary                   # Operates on comments and comment blocks.
         vim-swap                     # Swap elements of list structures.
         repeat                       # Repeat compatible custom operators.
 
-        # Custom text objects
+        ## Custom text objects
         vim-textobj-user             # Easily create your own text objects
         vim-textobj-comment          # Comment block text objects
         vim-textobj-variable-segment # Snake/CamelCase text objects
@@ -141,23 +156,38 @@ let
         vim-indent-object            # Manipulate lines of same indentation as a single object.
         argtextobj-vim               # Text object for function arguments.
 
-        # Other text manipulation
+        ## Other text manipulation
         vim-visualstar               # Allows */# keys to use arbitrarily defined text (with visual mode).
         vim-easy-align               # Align text elements some characters.
         vim-endwise                  # Adds ending elements for various structures.
 
-        # Git integration
+        # Advanced plugins
+
+        ## Git integration
         gitsigns-nvim                # Shows Git changes in gutter.
         fugitive                     # Git frontend for Vim.
 
-        # IDE-like plugins
-        ultisnips                    # Snippet manager.
+        ## Snippets
+        luasnip                      # Snippet Engine
         vim-snippets                 # Collection of prebuilt snippets.
-        nvim-treesitter              # Supports tree-sitter within nvim.
-        nvim-treesitter-textobjects  # Add text objects for tree-sitter objects.
+
+        ## (Auto-)Completion
+        nvim-cmp                     # Autocompletion engine
+        cmp_luasnip                  # Completion source from luasnip
+        cmp-buffer                   # Completion source from words in the buffer
+        cmp-path                     # Completion source from filesystem path
+        cmp-nvim-lsp                 # Completion source from the LSP
+
+        ## Treesitter
+        tree-sitter-with-parsers     # Incremental parser
+        nvim-treesitter-textobjects  # Text objects for treesitter objects
+
+        ## LSP config
         nvim-lspconfig               # Quick configuration of native LSP
+
+        ## Other
         vim-test                     # Automatic testing.
-        ale                          # Multi-language linter.
+        ale                          # Asynchronous language linter.
         neoterm                      # Terminal improvements, in particular RELP support
 
         # Filetype specific plugins
@@ -183,7 +213,6 @@ let
       ];
     };
   };
-
 in {
   nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
     neovim_with_plugins = unstable.neovim.override {
@@ -197,11 +226,6 @@ in {
     gnvim_with_plugins = unstable.gnvim.override {
       neovim = neovim_with_plugins;
     };
-
-    tree_sitter_with_packages = pkgs.tree-sitter.withPlugins (p: [
-      p.tree-sitter-c
-      p.tree-sitter-go
-    ]);
   };
 
   programs.neovim = {
@@ -211,41 +235,5 @@ in {
     viAlias = true;
     package = unstable.neovim-unwrapped;
     configure = neovim_configuration;
-    runtime = {
-      "parser/bash.so" = {
-        source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-bash}/parser";
-      };
-      "parser/css.so" = {
-        source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-css}/parser";
-      };
-      "parser/go.so" = {
-        source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-go}/parser";
-      };
-      "parser/html.so" = {
-        source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-html}/parser";
-      };
-      "parser/javascript.so" = {
-        source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-javascript}/parser";
-      };
-      # "parser/lua.so" = {
-      #   source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-lua}/parser";
-      # };
-      "parser/markdown.so" = {
-        source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-markdown}/parser";
-      };
-      "parser/nix.so" = {
-        source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-nix}/parser";
-      };
-      "parser/python.so" = {
-        source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-python}/parser";
-      };
-      "parser/yaml.so" = {
-        source = "${pkgs.tree-sitter.builtGrammars.tree-sitter-yaml}/parser";
-      };
-    };
   };
-
-  # programs.neovim.runtime = {
-  #   "parser/yaml.so".source = (makeTSParserPath "yaml");
-  # };
 }

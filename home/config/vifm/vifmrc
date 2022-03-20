@@ -79,4 +79,4 @@ set previewprg='export PEEKAT_WITH_VIFM=true; ~/.local/bin/peekat %c %pw'
 filetype * open-file.sh %c
 
 " Set what is saved in vifminfo
-set vifminfo='bookmarks,bmarks,dhistory,savedirs,chistory,shistory'
+set vifminfo='bookmarks,bmarks,dhistory,chistory,shistory'

@@ -17,7 +17,6 @@
     catdoc                    # Converts Mircosoft Office to text
     catdocx                   # Converts Mircosoft Office (post-2007) to text
     catimg                    # A much better image to text converter
-    dante                     # SOCKS server; need for aerc
     ddgr                      # Search DuckDuckGo from the command line
     detox                     # Automatically make cli-friendly file names
     exiftool                  # Image file information
@@ -42,7 +41,7 @@
     msmtp                     # SMTP client
     neofetch                  # An "About" screen for the terminal
     nix-index                 # Locate for nix
-    # unstable.notmuch          # Email indexer
+    # unstable.notmuch        # Email indexer
     odt2txt                   # Converts odt (LibreOffice) to text
     pamixer                   # Pulse Audio mixer
     pandoc                    # Universal document converter
@@ -58,8 +57,6 @@
     taskwarrior               # Tasks and TODOs
     translate-shell           # Search for translations (e.g. Google, Yandex) from the command line.
     trash-cli                 # CLI program for working with Trash bin.
-    # tree-sitter
-    # tree_sitter_with_packages
     units                     # Convert between units
     universal-ctags           # Tags files that will hold keyword information.
     weather                   # Weather command line
@@ -87,26 +84,24 @@
     lnav                      # vi-like log viewer
     meli                      # TUI email client
     ncdu                      # Filesystem size browser
-    # neomutt                   # Ncurses email client
     neovim-qt_with_plugins    # GUI frontend using Qt.
     neovim-remote             # Control remote instances of neovim.
     newsboat                  # RSS/Atom feed reader
     rlwrap                    # Wrap readline library around certian prompts
     sc-im                     # Terminal spreadsheet program
     tig                       # Git frontend
-    # unstable.aerc             # Terminal email client
     unstable.calcurse         # Calendar
     unstable.tuir             # Read reddit in a terminal
     vifm-full                 # Terminal file manager
-    latest_vimpc                     # TUI frontend for mpd
+    latest_vimpc              # TUI frontend for mpd
     visidata                  # Tabular data viewer
     vit                       # Frontend for taskwarrior
     w3m                       # Terminal web browser
     unstable.weechat          # IRC client
     ytfzf                     # Console search for Youtube
-    gomuks     # Matrix client
-    toot       # Mastadon client
-    turses     # Twitter client
+    gomuks                    # Matrix client
+    toot                      # Mastadon client
+    turses                    # Twitter client
     (import ./pkgs/castero.nix)
     beets
     streamlink
@@ -116,7 +111,7 @@
     anki                      # Flashcard application
     arc-theme                 # Theme for GUI programs
     firefox                   # GUI web browser
-    unstable.flameshot                 # Screenshot tool
+    unstable.flameshot        # Screenshot tool
     gromit-mpx                # On-screen annotator
     kolourpaint               # Kolourpaint, a simple MS Paint clone
     imv                       # Lightweight image viewer
@@ -135,13 +130,12 @@
     qutebrowser               # Another GUI browser
     sxiv                      # Lightweight image viewer
     thunderbird               # GUI email client
-    # unstable.torbrowser       # Browser using the tor network
-    torbrowser       # Browser using the tor network
+    torbrowser                # Browser using the tor network
     zathura                   # Lightweight PDF/EPUB/Dejv reader
     lagrange
     chatterino2
     unrar
-    zotero
+    zotero                    # Bibiographic reference manager
 
     # Icons for theming GTK and Qt applications with the breeze theme.
     breeze-gtk

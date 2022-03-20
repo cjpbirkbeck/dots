@@ -15,13 +15,12 @@ Plug 'tpope/vim-characterize'              " Display Unicode character metadata.
 Plug 'kshenoy/vim-signature'               " Displays marks in the gutter.
 Plug 'mbbill/undotree'                     " Visual Vim's undos with a tree.
 Plug 'tpope/vim-unimpaired'                " Miscellaneous bracket pairings.
-" Plug 'winston0410/cmd-parser.nvim'         " Required for range-highlights.
-" Plug 'winston0410/range-highlight.nvim'    " Highlights command line ranges.
 if has('nvim-0.4')
     Plug 'norcalli/nvim-colorizer.lua'     " Add colours to words like 'Black' and '#2bf211'.
 endif
 if has('nvim-0.5')
     Plug 'tversteeg/registers.nvim'        " Show registers contents while inserting text.
+    Plug 'elihunter173/dirbuf.nvim'        " Directory buffer
 endif
 
 " Custom operators
@@ -91,18 +90,20 @@ endif
 if ! has('win32')
     Plug 'ellisonleao/glow.nvim', { 'for': [] } " use glow(1) to preview markdown files.
 endif
-Plug 'tpope/vim-speeddating', { 'for': [] } " Increment dates and times.
-Plug 'mattn/emmet-vim',       { 'for': [] } " Dynamically generate HTML/CSS code.
-Plug 'sakhnik/nvim-gdb',      { 'for': [] } " Front end of gdb and other debuggers.
-Plug 'mfussenegger/nvim-dap', { 'for': [] } " Adapter for other debuggers with DAP.
+Plug 'tpope/vim-speeddating', { 'for': [] }     " Increment dates and times.
+Plug 'mattn/emmet-vim',       { 'for': [] }     " Dynamically generate HTML/CSS code.
+Plug 'sakhnik/nvim-gdb',      { 'for': [] }     " Front end of gdb and other debuggers.
+Plug 'mfussenegger/nvim-dap', { 'for': [] }     " Adapter for other debuggers with DAP.
 call plug#end()
 
 if has('win32')
     source $HOME\AppData\Local\nvim\common.vim
+    source $HOME\AppData\Local\nvim\dev.lua
     let g:python3_host_prog = 'C:\Python39\python.EXE'
     lua require 'nvim-treesitter.install'.compilers = { "clang", "gcc" }
 else
     source $HOME/.config/nvim/common.vim
+    source $HOME/.config/nvim/dev.lua
 endif
 
 if has('nvim') && has('nvim-0.5')

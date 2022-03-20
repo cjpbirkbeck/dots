@@ -20,3 +20,5 @@ reference.*
 bling
 etc/nixos/laptop/*
 taskserver.nix
+# Temporary for now
+home/config/lf/*

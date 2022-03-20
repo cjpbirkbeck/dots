@@ -2,10 +2,10 @@
 -- Note that it does not stop them from being changed or moved after placement.
 
 -- Import Libraries
-local gears = require("gears")
-local awful = require("awful")
-local beautiful = require("beautiful")
-local naughty = require("naughty")
+local gears      = require("gears")
+local awful      = require("awful")
+local beautiful  = require("beautiful")
+local naughty    = require("naughty")
 local clientkeys = require("main.keys.client")
 
 -- Mouse keybindings

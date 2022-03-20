@@ -4,10 +4,10 @@
  * Copyright: Dave Davenport
  */
 * {
-    background-color:      #1d1d1d;
-    border-color:          White;
-    text-color:           White;
-    font:            "DejaVu Sans 12";
+    background-color: #1d1d1d;
+    border-color:     White;
+    text-color:       White;
+    font:             "DejaVu Sans 12";
 }
 
 window {
@@ -25,8 +25,8 @@ horibox {
 
 prompt {
     background-color: #70BE71;
-    text-color: White;
-    style: italic;
+    text-color:       White;
+    style:            italic;
 }
 
 listview {
@@ -43,7 +43,13 @@ entry {
 element {
     padding: 0px 2px;
 }
+
 element selected {
     background-color: #87CEEB;
-    text-color: Black;
+    text-color:       Black;
+}
+
+element-text, element-icon {
+  background-color: inherit;
+  text-color:       inherit;
 }

@@ -20,6 +20,7 @@ set ttyfast                             " Assume that I am using a fast terminal
 set smarttab                            " Tab smartly
 set encoding=utf-8                      " Encode everything in UTF-8
 set display="lastline,msgsep"           " Show results of last line
+set laststatus=2                        " Keeps the status bar on screen.
 
 set backupdir=~/.cache/vim//,.          " Set backup directory to cache directory.
 set directory=~/.cache/vim//,.          " Put swap files in a seperate directory.
@@ -37,7 +38,7 @@ set statusline+=\ {%B}
 set statusline+=\ %l:%c/%L
 set statusline+=\ %P
 
-" Some remappin that are useful, but handled with plugins in my neovim config.
+" Some remappings that are useful, but handled with plugins in my neovim config.
 
 " Align Y with D, C, etc.
 nnoremap Y y$
@@ -57,6 +58,33 @@ nnoremap <silent> <leader>j :move .+1<CR>==
 nnoremap <silent> <leader>k :move .-2<CR>==
 vnoremap <silent> <C-j> :move '>+1<CR>gv=gv
 vnoremap <silent> <C-k> :move '<-2<CR>gv=gv
+
+" Settings for netrw, vim's native file explorer.
+
+let g:netrw_banner = 0                  " Do not open with the banner.
+let g:netrw_liststyle = 3               " Uses a tree format by default.
+let g:netrw_browse_split = 4            " When pressing return on an item, it opens in the previous window.
+let g:netrw_winsize = 25                " Specifies netrw default size.
+let g:netrw_dirhistmax = 100            " Please does not liter my directories with .netrwhist files; thank you.
+let g:netrw_sizestyle = 'h'             " Human-readable file sizes
+let g:netrw_special_syntax = 1          " Syntax highlighting for various files
+
+" Save bookmarks and history in a special directory
+if has('nvim')
+    let g:netrw_home = '~/.cache/nvim/'
+else
+    let g:netrw_home = '~/.vim/cache/'
+endif
+
+let g:netrw_browser_viewer = 'xdg-open' " Open files with DE's file-opener.
+let g:netrw_preview = 1                 " Open preview windows in vertical split.
+
+" Open netrw in a sidebar.
+if has('nvim')
+    nnoremap <silent> <leader>e :UndotreeHide<CR>:Lexplore<CR>
+else
+    nnoremap <silent> <leader>e :Lexplore<CR>
+endif
 
 " Source the common configuration file.
 source $HOME/.vim/common.vim
