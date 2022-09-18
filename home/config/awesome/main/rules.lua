@@ -99,7 +99,7 @@ awful.rules.rules = {
     { rule_any = { class = { "pcmanfm-qt", "pcmanfm", "dolphin", "Gnome-disks", "ark", "Qalculate-gtk" } },
       properties = { tag = "Home" } },
 
-    { rule_any = { class = { "qutebrowser", "Firefox", "Brave", "Tor Browser", "Vieb", "Vimb", "LibreWolf" } },
+    { rule_any = { class = { "qutebrowser", "firefox", "Firefox", "Brave", "Tor Browser", "Vieb", "Vimb", "LibreWolf" } },
       properties = { tag = "Web" } },
 
     { rule_any = { class = { "Astroid", "Daily", "Thunderbird", "nheko", "qTox", "zoom" } },

@@ -10,7 +10,6 @@
   # Programs that should be on any machine with X server on it.
   general = with pkgs; [
     # Command line tools
-    afew                      # Notmuch tagger
     asciinema                 # Record terminal sessions
     atool                     # Compressed file mangement
     boxes                     # Create text boxes
@@ -22,26 +21,19 @@
     exiftool                  # Image file information
     ffmpeg                    # Video encoder
     ffmpegthumbnailer         # Create video thumbnails
-    gcal                      # Prints out almost any calendar and some holiday
-    googler                   # Search Google from command line
     graphicsmagick            # Command line graphic process
     gron                      # JSON command line processor
     hunspell                  # Spell checker
     hunspellDicts.en_CA-large # Canadian English dictionary
     hunspellDicts.fr-moderne  # French language dictionary
-    isync                     # POP/IMAP client
     jrnl                      # Command line journal system.
-    khard                     # Address books
     libcaca                   # Image to text converter
     libqalculate              # Advanced calculator for the command line
-    mailcap                   # Open non-plain-text emails
     mediainfo                 # Multimedia file information
     miscfiles                 # Misc files have a dictionary list that is useful for vim autocompletions.
     mpc_cli                   # Barebones command line interface for mpd
-    msmtp                     # SMTP client
     neofetch                  # An "About" screen for the terminal
     nix-index                 # Locate for nix
-    # unstable.notmuch        # Email indexer
     odt2txt                   # Converts odt (LibreOffice) to text
     pamixer                   # Pulse Audio mixer
     pandoc                    # Universal document converter
@@ -69,22 +61,18 @@
     lowdown
 
     # TUI programs
-    abook                     # Terminal address book.
     amfora
-    # unstable.alot                      # TUI for notmuch email.
     bombadillo                # Alternate protocol browser
     bvi                       # vi-like hex editor
     cava                      # Visualiser for the terminal
     clac                      # Fancy RPN calculator
     glow                      # Terminal markdown reader
-    gnvim_with_plugins        # Another GUI frontend using Qt, but with Rust.
     gotop                     # Terminal base system monitor
     htop                      # System resources monitor
     ledger                    # Financial management with plain text
     lnav                      # vi-like log viewer
     meli                      # TUI email client
     ncdu                      # Filesystem size browser
-    neovim-qt_with_plugins    # GUI frontend using Qt.
     neovim-remote             # Control remote instances of neovim.
     newsboat                  # RSS/Atom feed reader
     rlwrap                    # Wrap readline library around certian prompts
@@ -105,16 +93,15 @@
     (import ./pkgs/castero.nix)
     beets
     streamlink
+    lf
 
     # GUI applications
-    # astroid                   # GUI client for notmuch
     anki                      # Flashcard application
     arc-theme                 # Theme for GUI programs
-    firefox                   # GUI web browser
+    unstable.firefox          # GUI web browser
     unstable.flameshot        # Screenshot tool
     gromit-mpx                # On-screen annotator
     kolourpaint               # Kolourpaint, a simple MS Paint clone
-    imv                       # Lightweight image viewer
     mpv-with-scripts          # Customized mpv file
     nheko                     # Matrix client
     networkmanagerapplet      # Applet for connecting to wifi
@@ -122,7 +109,6 @@
     rofi-pass                 # Frontend for quickly entering passwords with rofi.
     rofi                      # Program launcher/Window switcher/dmenu replacement
     pcmanfm-qt                # GUI file manager
-    qtox                      # Tox client
     qt5ct                     # Configure Qt5 outside of KDE Plasma
     qalculate-gtk             # Graphical calculator
     screenkey                 # Show keypress on the screen.
@@ -130,7 +116,7 @@
     qutebrowser               # Another GUI browser
     sxiv                      # Lightweight image viewer
     thunderbird               # GUI email client
-    torbrowser                # Browser using the tor network
+    temp_tor
     zathura                   # Lightweight PDF/EPUB/Dejv reader
     lagrange
     chatterino2
@@ -141,17 +127,21 @@
     breeze-gtk
     breeze-icons
     breeze-qt5
-    gnome-breeze
+    libsForQt5.breeze-gtk
 
     # Keep these here for now
     gimp                      # Complex raster editor
     inkscape                  # Vector editor
     libreoffice               # Office suite
 
-    # UGH
-    zoom-us
-
     appimage-run
+    libwebp
+    # lxqt-themes
+    rnix-lsp
+    ueberzug
+    unzip
+    urlscan
+    binutils
   ];
 
   # Packages that only need to be on my desktop
@@ -170,6 +160,8 @@
 
     zoom-us     # Proprietary videoconferencing client
   ];
+
+  tor_version = "11.5.3";
 in
 {
   imports = [
@@ -178,6 +170,7 @@ in
     ./overrides/mpv.nix
     ./overrides/st.nix
     ./overrides/vimpc.nix
+    ./overrides/tor-browser.nix
   ];
 
   # Packages that should be accessible to all user, including root.

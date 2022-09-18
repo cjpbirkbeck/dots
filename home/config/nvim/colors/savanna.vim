@@ -117,7 +117,7 @@ highlight SpellBad guisp=LightRed
 " For the GitSigns plugins.
 highlight GitSignsAdd gui=bold guifg=DarkBlue guibg=grey50
 highlight GitSignsChange gui=bold guifg=DarkMagenta guibg=grey50
-highlight GitSignsDelete gui=bold guifg=DarkCyan guibg=grey50
+highlight GitSignsDelete gui=bold guifg=DarkRed guibg=grey50
 
 " For the RangeHighlight plugin.
 highlight RangeHighlight guibg=grey40

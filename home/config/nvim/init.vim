@@ -76,12 +76,10 @@ if has('nvim-0.5')
 endif
 
 " Misc
-if has('nvim-0.5')
+if has('nvim-0.5') && has('win32')
     " Allows nvim to run within browsers
     " Keep this for windows version only now.
-    if has('win32')
-        Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-    endif
+    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 endif
 
 " Optional plugins

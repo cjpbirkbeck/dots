@@ -114,7 +114,7 @@ let g:lightline = {
 " Show non-normal mode status.
 set showmode
 
-" Quit neovim with 'Q' at the command line
+" Quit vim with 'Q' at the command line
 cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
 
 " Always show buffer absolute path with Ctrl-G
@@ -167,8 +167,8 @@ nnoremap <leader>f :find<Space>
 " recursively.
 set path=.,,**
 
+" Disble Netrw in neovim and load dirbuf.
 if has('nvim')
-    " Disable netrwPlugin
     let g:loaded_netrwPlugin = 1
     let g:loaded_netrw = 1
 lua << EOF
@@ -269,13 +269,10 @@ set wildmode=longest,list,full " Complete to longest string, list all matches, c
 " Completion should never insert nor select a suggestion until the user chooses an option.
 " Also should always show a menu, even if there is only one choice.
 set completeopt=menu,preview,noinsert,menuone,noselect
+" Enable omni-completion.
+set omnifunc=syntaxcomplete#Complete
 " When using generic autocompletion, also get suggestions from the spelling dictionary.
 set complete+=kspell
-
-if ! has('nvim')
-    " Enable omni-completion.
-    set omnifunc=syntaxcomplete#Complete
-endif
 
 " }}}
 

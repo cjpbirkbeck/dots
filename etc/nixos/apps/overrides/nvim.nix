@@ -1,5 +1,6 @@
 # Configuration for neovim and related programs.
-# Here, I am installing vim plugins with nix, which may require manually specifying its location if not in nixpkgs.
+# Here, I am installing vim plugins with nix,
+# which may require manually specifying its location if not in nixpkgs.
 # Most of the actual configuration is kept seperate in common.vim.
 
 { config, pkgs, ... }:
@@ -7,6 +8,7 @@
 let
   unstable = import <unstable> {};
 
+  # Add grammars for treesitter
   tree-sitter-with-parsers = pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: [
     pkgs.tree-sitter-grammars.tree-sitter-bash
     pkgs.tree-sitter-grammars.tree-sitter-c
@@ -23,6 +25,8 @@ let
     pkgs.tree-sitter-grammars.tree-sitter-python
     pkgs.tree-sitter-grammars.tree-sitter-vim
   ]);
+
+  # Plugins not in the nixos archives
 
   customPlugins.vim-characterize = pkgs.vimUtils.buildVimPlugin {
     name = "vim-characterize";
@@ -63,28 +67,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "glacambre";
       repo = "firenvim";
-      rev = "668b350ce88cc9a2257644c67945c9abbdd36cb5";
-      sha256 = "0ngfiv0vi455pszpcf3isxaynj1bppb95k889y14n90fas4ngrkv";
-    };
-  };
-
-  customPlugins.range-highlight = pkgs.vimUtils.buildVimPlugin {
-    name = "range-highlight";
-    src = pkgs.fetchFromGitHub {
-      owner = "winston0410";
-      repo = "range-highlight.nvim";
-      rev = "8b5e8ccb3460b2c3675f4639b9f54e64eaab36d9";
-      sha256 = "1yswni0p1w7ja6cddxyd3m4hi8gsdyh8hm8rlk878b096maxkgw1";
-    };
-  };
-
-  customPlugins.cmd-parser_nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "cmd-parser_nvim";
-    src = pkgs.fetchFromGitHub {
-      owner = "winston0410";
-      repo = "cmd-parser.nvim";
-      rev = "70813af493398217cb1df10950ae8b99c58422db";
-      sha256 = "0rfa8cpykarcal8qcfp1dax1kgcbq7bv1ld6r1ia08n9vnqi5vm6";
+      rev = "56a49d79904921a8b4405786e12b4e12fbbf171b";
+      sha256 = "sha256-aFRrOJr34newCyJ5glqd15Xz0vxRGR6XIRFz1Zy39XI=";
     };
   };
 
@@ -97,6 +81,16 @@ let
       sha256 = "0s81ywf8nif7gw0s8dvvg9szpy8ssfbwi1lfndnfwxcrva17wz8h";
     };
   };
+
+  # customPlugins.gitsigns-for-nvim = pkgs.vimUtils.buildVimPlugin {
+  #   name = "gitsigns-for-nvim";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "lewis6991";
+  #     repo = "gitsigns.nvim";
+  #     rev = "231fa923fbc2797eef92b24860ab882cebf645b2";
+  #     sha256 = "sha256-yj1x1Kf/lto0zuZYgShR5LA7X8iogpkOlPu+Zgl7Ouw=";
+  #   };
+  # };
 
   customPlugins.luasnip-snippets_nvim = pkgs.vimUtils.buildVimPlugin {
     name = "luasnip-snippets_nvim";
@@ -164,7 +158,7 @@ let
         # Advanced plugins
 
         ## Git integration
-        gitsigns-nvim                # Shows Git changes in gutter.
+        # gitsigns-for-nvim                # Shows Git changes in gutter.
         fugitive                     # Git frontend for Vim.
 
         ## Snippets
@@ -177,6 +171,8 @@ let
         cmp-buffer                   # Completion source from words in the buffer
         cmp-path                     # Completion source from filesystem path
         cmp-nvim-lsp                 # Completion source from the LSP
+        cmp-tmux                     # Completion source from tmux
+        cmp-spell                    # Completion source from spelling
 
         ## Treesitter
         tree-sitter-with-parsers     # Incremental parser
@@ -197,6 +193,7 @@ let
         vim-nix                      # Adds nix syntax colouring and file detection to vim.
         vim-toml                     # Add syntax support for toml files
         vim-orgmode                  # Add support for org file.
+        neorg                        # New notetaking format
         zig-vim                      # Add support for the Zig language.
 
         # Misc
@@ -217,14 +214,6 @@ in {
   nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
     neovim_with_plugins = unstable.neovim.override {
       configure = neovim_configuration;
-    };
-
-    neovim-qt_with_plugins = unstable.neovim-qt.override {
-      neovim = neovim_with_plugins;
-    };
-
-    gnvim_with_plugins = unstable.gnvim.override {
-      neovim = neovim_with_plugins;
     };
   };
 
