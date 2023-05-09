@@ -2,7 +2,7 @@
 
 {
   nixpkgs.config.packageOverrides = pkgs: with pkgs; rec {
-    mpv-with-scripts = pkgs.mpv-with-scripts.override {
+    mpv = pkgs.mpv.override {
       scripts = with pkgs.mpvScripts; [
         mpris
         thumbnail

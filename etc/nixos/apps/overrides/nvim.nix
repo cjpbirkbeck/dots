@@ -67,8 +67,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "glacambre";
       repo = "firenvim";
-      rev = "56a49d79904921a8b4405786e12b4e12fbbf171b";
-      sha256 = "sha256-aFRrOJr34newCyJ5glqd15Xz0vxRGR6XIRFz1Zy39XI=";
+      rev = "a96710eaf6e6c2de78341c32d8dc7b39727ad54c";
+      sha256 = "sha256-/Zr6Sdj8NZToMCQznh7fKEzew0wpV2cA9BIG4JMkxLE=";
     };
   };
 
@@ -82,7 +82,7 @@ let
     };
   };
 
-  # customPlugins.gitsigns-for-nvim = pkgs.vimUtils.buildVimPlugin {
+  # customPlugins.gitsigns-for-nvim = pkgs.vimUtils.buildNeovimPlugin {
   #   name = "gitsigns-for-nvim";
   #   src = pkgs.fetchFromGitHub {
   #     owner = "lewis6991";
@@ -159,6 +159,7 @@ let
 
         ## Git integration
         # gitsigns-for-nvim                # Shows Git changes in gutter.
+        # unstable.lua53Packages.gitsigns-nvim
         fugitive                     # Git frontend for Vim.
 
         ## Snippets

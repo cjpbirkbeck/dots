@@ -10,7 +10,7 @@
     # Hardware-specific settings
     ./hardware/disks.nix
     ./hardware/sound.nix
-    ./hardware/printer.nix
+    # ./hardware/printer.nix
     ./hardware/yubikey.nix
     ./hardware/io.nix
 
@@ -87,7 +87,7 @@
   };
 
   # Doesn't seem to activate on its own.
-  boot.kernelParams = [ "intel_pstate=active" ];
+  # boot.kernelParams = [ "intel_pstate=active" ];
 
   system.stateVersion = "19.09";
 }

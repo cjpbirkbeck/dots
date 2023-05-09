@@ -60,7 +60,7 @@
     youtube-dl                # Video downloader
     lowdown
 
-    # TUI programs
+    # # TUI programs
     amfora
     bombadillo                # Alternate protocol browser
     bvi                       # vi-like hex editor
@@ -95,14 +95,14 @@
     streamlink
     lf
 
-    # GUI applications
+    # # GUI applications
     anki                      # Flashcard application
     arc-theme                 # Theme for GUI programs
     unstable.firefox          # GUI web browser
     unstable.flameshot        # Screenshot tool
     gromit-mpx                # On-screen annotator
     kolourpaint               # Kolourpaint, a simple MS Paint clone
-    mpv-with-scripts          # Customized mpv file
+    # mpv          # Customized mpv file
     nheko                     # Matrix client
     networkmanagerapplet      # Applet for connecting to wifi
     notify-desktop            # Desktop notify
@@ -120,7 +120,7 @@
     zathura                   # Lightweight PDF/EPUB/Dejv reader
     lagrange
     chatterino2
-    unrar
+    # unrar
     zotero                    # Bibiographic reference manager
 
     # Icons for theming GTK and Qt applications with the breeze theme.

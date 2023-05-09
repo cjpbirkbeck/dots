@@ -186,9 +186,9 @@ in
     };
 
     manual = {
-      manpages.enable = true;
+      manpages.enable = false;
 
-      json.enable = true;
+      json.enable = false;
     };
 
     programs = {
