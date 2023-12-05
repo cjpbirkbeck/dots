@@ -86,6 +86,10 @@
     };
   };
 
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+  };
+
   # Doesn't seem to activate on its own.
   # boot.kernelParams = [ "intel_pstate=active" ];
 

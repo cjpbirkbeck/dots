@@ -1,32 +1,31 @@
 # Configuration file to lf.
 
 # Basic settings and user interface
-
-set shell zsh
-set shellopts '-ey'
+set shellopts '-eu'
 set ifs "\n"
 set period 5
 set number
 set relativenumber
 set drawbox
 set icons
+set autoquit true
 
 # Helper scripts
 set previewer ~/.config/lf/scripts/preview.sh
 cmd open $~/.config/lf/scripts/open.sh $f
 
 # Create files
-# Add directories and empty files.
 
+# Add directories and empty files.
 cmd mkdir %mkdir -p "$@"
 cmd touch %touch "$@"
 
-map td push :mkdir<space>
-map tf push :touch<space>
+map Td push :mkdir<space>
+map Tf push :touch<space>
 
 # Renaming
 # Use the native lf buildin.
-# Note that these function assume that the file extension consists of only
+# Note that these functions assume that the file extension consists of only
 # two UNIX words. This is not true for some archive files, like .gz.tar.
 
 # Unmap default rename
@@ -46,14 +45,27 @@ map rI push :rename<space><enter><c-a>
 # This should use the xdg-tash
 
 # Put selection contents into the trash
-cmd trash %trash-put $fx
+cmd trash-put ${{
+    printf "%s\n\t" "$fx"
+    printf "Delete? [y/n] "
+    read ans
+    [ $ans = "y" || $ans = "Y" ] && trash-put $fx
+}}
+cmd trash-list !trash-list
+cmd trash-restore !trash-restore
 
 # Commands
 cmd q :quit
-map X trash
 
 # Key bindings
 map ZZ quit
+map xx trash
+map xl trash-list
+map xr trash-restore
+
+# Move to next/previous sibling directory
+map J :updir; set dironly true; down; set dironly! ; open
+map K :updir; set dironly true; up; set dironly! ; open
 
 # Set pager
 map i !~/.config/lf/scripts/page.sh $f
