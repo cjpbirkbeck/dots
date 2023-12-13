@@ -5,10 +5,6 @@
 {
   programs = {
     bash = {
-      enableCompletion = true;
-      shellInit = ''
-        export HISTFILE="$HOME/.local/share/bash/history"
-      '';
       promptInit = ''
         if [ "$TERM" = "dumb" -o -n "$INSIDE_EMACS" ]; then
           PS1="[\w]\$ "
@@ -38,13 +34,13 @@
         HISTCONTROL=ignoreboth
 
         # Ignore ls and any aliases, bg, fg, history and clear.
-        HISTIGNORE='ls:l:lx:la:lz:ll:la:lA:bg:fg:history:clear'
+        HISTIGNORE='bg:fg:history:clear'
 
         # Save date in the locales date-time representation.
         HISTTIMEFORMAT='%c '
 
         # Store each line in history immediately.
-        PROMPT_COMMAND="$PROMPT_COMMAND history -a"
+        PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
 
         # Trim any paths with more than 5 elements
         PROMPT_DIRTRIM=3

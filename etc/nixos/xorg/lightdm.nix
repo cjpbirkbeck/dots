@@ -22,10 +22,10 @@
       };
 
       # Set Numlock on by default.
-      extraConfig = ''
-        [Seat:*]
-        greeter-setup-script=${pkgs.numlockx}/bin/numlockx on
-      '';
+      # extraConfig = ''
+      #   [Seat:*]
+      #   greeter-setup-script=${pkgs.numlockx}/bin/numlockx on
+      # '';
     };
   };
 

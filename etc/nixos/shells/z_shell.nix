@@ -9,6 +9,7 @@
     zsh = {
       enable = true;
       enableCompletion = true;
+      enableBashCompletion = true;
       autosuggestions = {
         enable = true;
       };
@@ -21,12 +22,11 @@
         ];
       };
       histSize = 2147483647;
-      histFile = "$HOME/.local/share/zsh/history";
-      vteIntegration = true;
+      histFile = "$HOME/.local/state/zsh/history";
       setOptions = [
         # History options
         "APPEND_HISTORY"     # Sessions will append to history file.
-        "SHARE_HISTORY"      # Session imports from history file.
+        "INC_APPEND_HISTORY" # Session will incrementally append to the history file.
         "EXTENDED_HISTORY"   # Saves history with UNIX epoch timestamp and duration.
         "HISTIGNOREALLDUPS"  # Ignore immediate duplicated entries.
         "HIST_IGNORE_SPACE"  # Ignores commands with a space.
@@ -135,10 +135,6 @@
       zle -N zle-line-init
       '';
 
-      shellInit = ''
-        export PATH="$HOME/.local/bin/:$PATH"
-      '';
-
       interactiveShellInit = ''
         stty -ixon    # Disable C-s and C-q in terminals
 
@@ -220,16 +216,6 @@
         # Partial completion suggestions
         zstyle ':completion:*' list-suffixes
         zstyle ':completion:*' expand prefix suffix
-
-        # Modify menu keybindings:
-        # Use alt-{hjkl} to navigate menus
-        # Use alt-i to pick an item but stay on the menu
-        zmodload zsh/complist
-        bindkey -M menuselect '^[h' vi-backward-char
-        bindkey -M menuselect '^[k' vi-up-line-or-history
-        bindkey -M menuselect '^[l' vi-forward-char
-        bindkey -M menuselect '^[j' vi-down-line-or-history
-        bindkey -M menuselect '^[i' accept-and-menu-complete
 
         # Add digraph insertion support.
         # Insert with alt-k

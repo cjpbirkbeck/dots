@@ -90,7 +90,7 @@
     gomuks                    # Matrix client
     toot                      # Mastadon client
     turses                    # Twitter client
-    (import ./pkgs/castero.nix)
+    # (import ./pkgs/castero.nix)
     beets
     streamlink
     lf
@@ -116,7 +116,7 @@
     qutebrowser               # Another GUI browser
     sxiv                      # Lightweight image viewer
     thunderbird               # GUI email client
-    temp_tor
+    # temp_tor
     zathura                   # Lightweight PDF/EPUB/Dejv reader
     lagrange
     chatterino2
@@ -170,7 +170,7 @@ in
     ./overrides/mpv.nix
     ./overrides/st.nix
     ./overrides/vimpc.nix
-    ./overrides/tor-browser.nix
+    # ./overrides/tor-browser.nix
   ];
 
   # Packages that should be accessible to all user, including root.
@@ -188,10 +188,9 @@ in
     borgbackup           # Deduplication backup tool
     inxi                 # Command line system information
     usbutils             # Info about usb ports
+    fnott
         # Battery information
   ] ++ (if config.networking.hostName == "humboldt" then [ acpi ] else []);
 
-  users.users.cjpbirkbeck.packages = core ++
-    (if config.services.xserver.enable then general else []) ++
-    (if config.networking.hostName == "archimedes" then full else []);
+  users.users.cjpbirkbeck.packages = core ++ general;
 }

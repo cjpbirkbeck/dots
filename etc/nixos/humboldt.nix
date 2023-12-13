@@ -8,11 +8,11 @@
     /etc/nixos/hardware-configuration.nix
 
     # Hardware-specific settings
-    ./hardware/disks.nix
-    ./hardware/sound.nix
+    # ./hardware/disks.nix
+    # ./hardware/sound.nix
     # ./hardware/printer.nix
-    ./hardware/yubikey.nix
-    ./hardware/io.nix
+    # ./hardware/yubikey.nix
+    # ./hardware/io.nix
 
     # System-wide settings
     ./system/boot.nix
@@ -25,46 +25,36 @@
     ./shells/shells.nix
     ./shells/bash.nix
     ./shells/z_shell.nix
-    ./shells/tmux.nix
-    ./shells/ssh.nix
+    # ./shells/tmux.nix
+    # ./shells/ssh.nix
 
     # Xorg Server configuration
-    ./xorg/lightdm.nix
-    ./xorg/awesome.nix
+    # ./xorg/lightdm.nix
+    # ./xorg/awesome.nix
+    ./xorg/hyprland.nix
 
     # Application specific settings
     ./apps/desktop_env.nix
     ./apps/applications.nix
-    ./apps/bitlbee.nix
-    ./apps/gaming.nix
-    ./apps/overrides/scripts.nix
-    ./apps/devlopement/golang.nix
+    # ./apps/bitlbee.nix
+    # ./apps/gaming.nix
+    # ./apps/overrides/scripts.nix
+    # ./apps/devlopement/golang.nix
   ];
 
-  programs.evolution = {
-    enable = true;
-  };
+  # programs.evolution = {
+  #   enable = true;
+  # };
 
   programs.dconf = {
     enable = true;
   };
 
-  services = {
-    avahi = {
-      enable = true;
-      nssmdns = true;
-    };
-
-    tlp = {
-      enable = true;
-    };
-
-    xserver.xautolock = {
-      enable = false;
-
-      locker = "${pkgs.xsecurelock}/bin/xsecurelock";
-    };
-  };
+  # services = {
+  #   tlp = {
+  #     enable = true;
+  #   };
+  # };
 
   networking = {
     hostName = "humboldt";
@@ -86,9 +76,15 @@
     };
   };
 
+  services.udisks2.enable = true;
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
   };
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "libxls-1.6.2"
+  ];
 
   # Doesn't seem to activate on its own.
   # boot.kernelParams = [ "intel_pstate=active" ];

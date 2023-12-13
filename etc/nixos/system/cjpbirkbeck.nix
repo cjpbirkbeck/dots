@@ -21,24 +21,24 @@
     Xserver:   Disabled
   '');
 
-  security = {
-    doas = {
-      enable = true;
+  # security = {
+  #   doas = {
+  #     enable = true;
 
-      extraRules = [
-        {
-          groups = [ "wheel" ];
-          persist = true;
-        }
-        {
-          users = [ "cjpbirkbeck" ];
-          cmd = "${config.system.build.nixos-rebuild}/bin/nixos-rebuild";
-          persist = true;
-          setEnv = [ "NIX_CONFIG" ];
-        }
-      ];
-    };
-  };
+  #     extraRules = [
+  #       {
+  #         groups = [ "wheel" ];
+  #         persist = true;
+  #       }
+  #       {
+  #         users = [ "cjpbirkbeck" ];
+  #         cmd = "${config.system.build.nixos-rebuild}/bin/nixos-rebuild";
+  #         persist = true;
+  #         setEnv = [ "NIX_CONFIG" ];
+  #       }
+  #     ];
+  #   };
+  # };
 
   # Define my basic user details.
   users = {
@@ -53,7 +53,7 @@
     users.cjpbirkbeck = {
       description = "Christopher Birkbeck";
       isNormalUser = true;
-      extraGroups = [ "wheel" "lp" "scanner" "networkmanager" "vboxusers" ];
+      extraGroups = [ "input" "wheel" "lp" "scanner" "networkmanager" "vboxusers" ];
     };
   };
 }

@@ -10,5 +10,5 @@
     pcscd.enable = true;
   };
 
-  environment.systemPackages = [ pkgs.yubioath-desktop ];
+  # environment.systemPackages = [ pkgs.yubioath-desktop ];
 }

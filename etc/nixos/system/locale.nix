@@ -9,8 +9,9 @@
 
   # Select internationalisation properties.
   console = {
+    packages = with pkgs; [ terminus_font ];
     font = "Lat2-Terminus16";
-    useXkbConfig = (if config.services.xserver.enable then true else false);
+    # useXkbConfig = (if config.services.xserver.enable then true else false);
     # Use the Oceanic Material colours
     colors = [
       "000000"

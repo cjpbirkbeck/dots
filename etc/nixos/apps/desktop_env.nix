@@ -205,7 +205,7 @@ in
 
       bash = {
         enable = true;
-        historyFile = "\$HOME/.local/share/bash/history";
+        historyFile = "\$HOME/.local/state/bash/history";
         historyFileSize = largest32Int;
         shellAliases = commonAliases;
       };
@@ -225,21 +225,24 @@ in
           "--preview='ls -gAGh --color --group-directories-first {}'"
           "--ansi"
           "--no-multi"
-          "--history=$HOME/.cache/fzf/change-directory-history"
+          "--history=$HOME/.local/state/fzf/change-directory-history"
         ];
         fileWidgetOptions = [
           "--preview='$HOME/.local/bin/peekat {}'"
-          "--history=$HOME/.cache/fzf/file-widget-history"
+          "--history=$HOME/.local/state/fzf/file-widget-history"
         ];
         tmux = {
           enableShellIntegration = true;
+          shellIntegrationOptions = [
+            "-p 60%,60%"
+          ];
         };
       };
 
-      gh = {
-        enable = false;
-        gitProtocol = "ssh";
-      };
+      # gh = {
+      #   enable = false;
+      #   gitProtocol = "ssh";
+      # };
 
       git = {
         enable = true;
@@ -293,55 +296,55 @@ in
         };
       };
 
-      pidgin = {
-        enable = true;
-      };
+      # pidgin = {
+      #   enable = true;
+      # };
 
       pazi = {
         enable = true;
       };
 
-      taskwarrior = {
-        enable = true;
-        colorTheme = "dark-blue-256";
-        config = {
-          taskd = {
-            certificate = "~/.secrets/taskwarrior/private.certificate.pem";
-            key = "~/.secrets/taskwarrior/private.key.pem";
-            ca = "~/.secrets/taskwarrior/ca.crt";
-            trust = "strict";
-          };
-        };
-      };
+      # taskwarrior = {
+      #   enable = true;
+      #   colorTheme = "dark-blue-256";
+      #   config = {
+      #     taskd = {
+      #       certificate = "~/.secrets/taskwarrior/private.certificate.pem";
+      #       key = "~/.secrets/taskwarrior/private.key.pem";
+      #       ca = "~/.secrets/taskwarrior/ca.crt";
+      #       trust = "strict";
+      #     };
+      #   };
+      # };
 
       tmux = {
         enable = true;
         baseIndex = 1;
         escapeTime = 10;
         keyMode = "vi";
-        customPaneNavigationAndResize = true;
         shortcut = "Space";
         sensibleOnTop = false;
         terminal = "tmux-256color";
         tmuxp.enable = true;
         plugins = with pkgs.tmuxPlugins; [
+          # {
+          #   plugin = logging;
+          #   extraConfig = ''
+          #     set -g @logging-path '$HOME/.local/share/tmux/logs'
+          #   '';
+          # }
+          # {
+          #   plugin = copycat;
+          # }
+          # {
+          #   plugin = open;
+          # }
           {
-            plugin = logging;
-            extraConfig = ''
-              set -g @logging-path '$HOME/.local/share/tmux/logs'
-            '';
-          }
-          {
-            plugin = copycat;
-          }
-          {
-            plugin = open;
-          }
-          {
-            plugin = urlview;
+            plugin = tmux-fzf;
           }
         ];
         extraConfig = ''
+
           # Enable true color and dynamic cusors shapes.
           set-option -sa terminal-overrides ',alacritty:RGB,st-256color:RGB'
           set-option -sa terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
@@ -349,7 +352,7 @@ in
 
           # Show title in terminal emulator title
           set-option -g set-titles on
-          set-option -g set-titles-string "#S:#W:#T [#I/#{session_windows}:#P/#{window_panes}] - Tmux"
+          set-option -g set-titles-string "#S/#W/#T [Tmux]"
 
           # Use the system clipboard
           set -g set-clipboard on
@@ -363,26 +366,37 @@ in
 
           bind C-- delete-buffer
 
-          # Rebind switch client with C-i, which should be the same as Tab
-          bind C-i switch-client -lZ
+          # Dynamically move and manage panes
+          # h will move to the first pane
+          # j goes to the next pane
+          # j goes to the previous pane
+          bind-key h select-pane -Z -t 1
+          bind-key j select-pane -Z -t :.+
+          bind-key k select-pane -Z -t :.-
+
+          # TODO: Add keys for swapping panes
+          bind-key J rotate-window -DZ
+          bind-key K rotate-window -UZ
 
           # Cycle layouts
-          bind ` next-layout
+          # TODO: Figure out better layout keybindings
+          bind u select-layout main-vertical
+          bind U select-layout main-horizontal
+
+          # Rebind switch client with C-i, which should be the same as Tab
+          bind C-i switch-client -lZ
 
           # Reload source code
           bind r source $HOME/.config/tmux/tmux.conf
 
-          # Show the tmux man page.
+          # Look up manpages interactively.
           bind F1 split-window -v "export FROM_TMUX=true; lookupaman"
 
-          # Show the tmux man page.
+          # Look up manpages interactively.
           bind C-F1 split-window -v "export FROM_TMUX=true; lookupaman"
 
           # Show the tmux man page.
           bind S-F1 split-window -v man tmux
-
-          # Show copycat searches
-          bind M-F1 display-popup -h 16 -w 60 -E "less $HOME/.local/share/tmux/copycat-searches.txt"
 
           # Enable the mouse
           set -g mouse on
@@ -405,7 +419,7 @@ in
           set -g focus-events on
 
           # Set history file for tmux
-          set -g history-file $HOME/.cache/tmux/history
+          set -g history-file $HOME/.local/state/tmux/history
         '';
       };
 
@@ -424,7 +438,7 @@ in
           extended = true;
           size = largest32Int;
           save = largest32Int;
-          path = ".local/share/zsh/history";
+          path = ".local/state/zsh/history";
         };
         initExtra = builtins.readFile /home/cjpbirkbeck/code/dots/home/local/share/zsh/functions.sh;
         shellAliases = commonAliases;
@@ -448,9 +462,9 @@ in
         enable = (if config.networking.hostName == "humboldt" then true else false);
       };
 
-      flameshot = {
-        enable = true;
-      };
+      # flameshot = {
+      #   enable = true;
+      # };
 
       mpd = {
         enable = true;
@@ -483,18 +497,17 @@ in
         notifications = true;
       };
 
-      picom = {
-        enable = true;
-      };
+      # picom = {
+      #   enable = true;
+      # };
 
       playerctld = {
         enable = true;
       };
 
-
-      syncthing = {
-        enable = true;
-      };
+      # syncthing = {
+      #   enable = true;
+      # };
 
       udiskie = {
         enable = true;
@@ -580,20 +593,20 @@ in
       };
     };
 
-    xsession = {
-      enable = true;
+    # xsession = {
+    #   enable = true;
 
-      windowManager.awesome = {
-        enable = true;
+    #   windowManager.awesome = {
+    #     enable = true;
 
-        luaModules = with pkgs.luaPackages; [
-          vicious
-          (import ./pkgs/awesome-wm-widgets.nix )
-          (import ./pkgs/lain.nix )
-          # (import ./pkgs/bling.nix )
-        ];
-      };
-    };
+    #     luaModules = with pkgs.luaPackages; [
+    #       vicious
+    #       (import ./pkgs/awesome-wm-widgets.nix )
+    #       (import ./pkgs/lain.nix )
+    #       # (import ./pkgs/bling.nix )
+    #     ];
+    #   };
+    # };
 
     xresources = {
       properties = {

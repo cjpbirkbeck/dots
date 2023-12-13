@@ -331,6 +331,8 @@ if has('nvim')
     endif
 endif
 
+
+
 " }}}
 
 " Spell Checking {{{
@@ -463,6 +465,15 @@ if exists("$EXTRA_VIM")
     exec "source ".path
   endfor
 endif
+
+lua << EOF
+    local registers = require("registers")
+    registers.setup{
+        symbols = {
+            tabs = "->"
+        }
+    }
+EOF
 
 " }}}
 
