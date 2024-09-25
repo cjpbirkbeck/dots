@@ -18,6 +18,14 @@
       inconsolata
       fira-mono
       ubuntu_font_family
+      jetbrains-mono
+      iosevka
+      source-code-pro
+      hack-font
+      ibm-plex
+      tamzen
+      fira-mono
+      terminus_font
     ];
 
     fontconfig.defaultFonts = {

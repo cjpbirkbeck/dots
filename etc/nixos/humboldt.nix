@@ -30,7 +30,8 @@
 
     # Xorg Server configuration
     # ./xorg/lightdm.nix
-    # ./xorg/awesome.nix
+    ./xorg/ssdm.nix
+    ./xorg/awesome.nix
     ./xorg/hyprland.nix
 
     # Application specific settings
@@ -50,12 +51,13 @@
     enable = true;
   };
 
-  # services = {
-  #   tlp = {
-  #     enable = true;
-  #   };
-  # };
+  services = {
+    tlp = {
+      enable = true;
+    };
+  };
 
+  programs.gnome-disks.enable = true;
   networking = {
     hostName = "humboldt";
 
@@ -76,6 +78,7 @@
     };
   };
 
+  programs.fuse.userAllowOther = true;
   services.udisks2.enable = true;
 
   nix.settings = {

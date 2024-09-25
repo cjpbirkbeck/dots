@@ -1,4 +1,4 @@
-# Configure common boot sequence settings, 
+# Configure common boot sequence settings,
 # using UEFI and GNU GRUB instead of the awful systemd-boot.
 
 { pkgs, config, ... }:

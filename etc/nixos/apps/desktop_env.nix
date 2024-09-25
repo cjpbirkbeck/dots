@@ -344,7 +344,6 @@ in
           }
         ];
         extraConfig = ''
-
           # Enable true color and dynamic cusors shapes.
           set-option -sa terminal-overrides ',alacritty:RGB,st-256color:RGB'
           set-option -sa terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
@@ -517,9 +516,9 @@ in
     # Use nix to manage the plugins globally, while configuring them per-user.
     xdg = {
       configFile = {
-        "alacritty/alacritty.yml" = {
-          source = xdgConfigFiles + "/alacritty/alacritty.yml";
-        };
+        # "alacritty/alacritty.yml" = {
+        #   source = xdgConfigFiles + "/alacritty/alacritty.yml";
+        # };
 
         "khard/config,conf" = {
           source = xdgConfigFiles + /khard/khard.conf;
@@ -596,8 +595,8 @@ in
     # xsession = {
     #   enable = true;
 
-    #   windowManager.awesome = {
-    #     enable = true;
+      # windowManager.awesome = {
+      #   enable = true;
 
     #     luaModules = with pkgs.luaPackages; [
     #       vicious

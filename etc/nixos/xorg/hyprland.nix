@@ -2,6 +2,8 @@
 
 let
 
+unstable = import <unstable> {};
+
 text_greeting = with config; ''
 Welcome!
 
@@ -24,45 +26,11 @@ in
   services.xserver.windowManager.qtile = {
     enable = true;
     backend = "wayland";
-    # extraPackages = with pkgs.python3Packages; [
-    #   qtile-extras
-    # ];
-  };
-
-  xdg.portal = {
-    enable = true;
-    wlr = {
-      enable = true;
-    };
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
+    extraPackages = python3Packages: with python3Packages; [
+      # qtile-extras
+      pyxdg
     ];
   };
-
-  services.greetd = {
-    enable = true;
-    vt = 6;
-    package = pkgs.greetd.tuigreet;
-    settings = {
-      default_session.command = with config; ''
-        ${pkgs.greetd.tuigreet}/bin/tuigreet \
-          --time \
-          --time-format "%c" \
-          --greeting "${text_greeting}" \
-          --asterisks \
-          --user-menu \
-          --cmd river
-        '';
-      };
-  };
-
-  environment.etc."greetd/environments".text = ''
-    river
-    hikari
-    qtile start -b wayland
-    Hyprland
-    sway
-  '';
 
   sound.enable = true;
   security.rtkit.enable = true;
@@ -77,15 +45,53 @@ in
   };
 
   security.polkit.enable = true;
+  security.pam.services.waylock = {};
+
+  xdg.portal = {
+    enable = true;
+    wlr = {
+      enable = true;
+    };
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+  };
+
+  # services.greetd = {
+  #   enable = true;
+  #   vt = 6;
+  #   package = pkgs.greetd.tuigreet;
+  #   settings = {
+  #     default_session.command = with config; ''
+  #       ${pkgs.greetd.tuigreet}/bin/tuigreet \
+  #         --time \
+  #         --time-format "%c" \
+  #         --greeting "${text_greeting}" \
+  #         --asterisks \
+  #         --user-menu \
+  #         --cmd river
+  #       '';
+  #     };
+  # };
 
   environment.systemPackages = with pkgs; [
     libsForQt5.polkit-kde-agent
-    # dbus-sway-environment
     glib
     xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
     hikari
+    labwc
+    unstable.swww
+    unstable.swayimg
     breeze-icons
     fortune
+    unstable.wl-clipboard
+    unstable.foot
+    unstable.fastfetch
+    unstable.fuzzel
+    unstable.waybar
+    unstable.wlr-randr
+    usbimager
+    unstable.waylock
   ];
 }

@@ -268,7 +268,7 @@ handle_mime() {
     local MIMETYPE="${1}"
 
     case "${MIMETYPE}" in
-        text/* | */*xml)
+        application/javascript | text/* | */*xml)
             process_struct_text
             ;;
         application/msword)

@@ -39,7 +39,7 @@
     pandoc                    # Universal document converter
     pass                      # Password manager
     pdd                       # Date/time calculator
-    pfetch                    # Minimalist text fetch program
+    # pfetch                    # Minimalist text fetch program
     playerctl                 # Command-line MPRIS controller
     poppler_utils             # Converts pdf to text
     qrencode                  # Prints out QR codes, when given a string of letters.
@@ -166,7 +166,7 @@ in
 {
   imports = [
     <home-manager/nixos>
-    ./overrides/nvim.nix
+    # ./overrides/nvim.nix
     ./overrides/mpv.nix
     ./overrides/st.nix
     ./overrides/vimpc.nix
@@ -189,8 +189,29 @@ in
     inxi                 # Command line system information
     usbutils             # Info about usb ports
     fnott
+    unstable.alacritty
+    
         # Battery information
   ] ++ (if config.networking.hostName == "humboldt" then [ acpi ] else []);
+
+  programs.neovim = {
+      enable = true;
+      defaultEditor = true;
+      package = unstable.neovim-unwrapped;
+      configure = {
+          customRC = ''
+              " Let neovim know it is using plugins install with Nix.
+              let g:is_nixos = 1
+
+              source ~/.config/nvim/init.lua
+          '';
+          packages.neovim = with unstable.pkgs.vimPlugins; {
+              start = [
+                  nvim-treesitter.withAllGrammars
+              ];
+          };
+      };
+  };
 
   users.users.cjpbirkbeck.packages = core ++ general;
 }

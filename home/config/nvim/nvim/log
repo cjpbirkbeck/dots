@@ -1,0 +1,152 @@
+ERR 2023-12-10T15:24:35.196 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:24:35.590 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:24:36.321 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:24:36.737 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:24:37.865 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:24:43.930 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:24:44.894 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:24:45.412 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:24:50.087 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:24:52.198 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:25:02.847 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:25:03.093 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:25:03.323 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:25:03.610 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:25:03.847 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:25:04.775 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:25:05.116 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:25:08.683 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
+ERR 2023-12-10T15:25:10.890 nvim.9091.0 decor_provider_invoke:47: error in provider treesitter/highlighter:buf: Error executing lua: ...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: query: invalid node type at position 195 for language bash
+stack traceback:
+	[C]: in function '_ts_parse_query'
+	...ed-0.9.4/share/nvim/runtime/lua/vim/treesitter/query.lua:259: in function 'get'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:114: in function 'new'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:365: in function 'add_child'
+	...4/share/nvim/runtime/lua/vim/treesitter/languagetree.lua:294: in function 'parse'
+	....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:315: in function <....4/share/nvim/runtime/lua/vim/treesitter/highlighter.lua:312>
