@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+init_minutes="$(date '+%M')"
+after_first=false
+first_cycle_remainder="$((12 - (init_minutes % 12)))"
+
+while true; do
+    case "$(date '+%M')" in
+        00 | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 11)
+            swww img "$HOME/imgs/wallpapers/the_course_of_empires/1-the-savage-state.jpg"
+            notify-send -a "SWWW" "Change" "<i>The Savage State</i> - Thomas Cole"
+            # echo "$HOME/imgs/wallpapers/the_course_of_empires/1-the-savage-state.jpg, case is $(date '+%S')"
+            ;;
+        12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23)
+            swww img "$HOME/imgs/wallpapers/the_course_of_empires/2-the-arcadian-state.jpg"
+            notify-send -a "SWWW" "Change" "<i>The Arcadian or Pastoral State</i> - Thomas Cole"
+            # echo "$HOME/imgs/wallpapers/the_course_of_empires/2-the-arcadian-state.jpg, case is $(date '+%S')"
+            ;;
+        24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35)
+            swww img "$HOME/imgs/wallpapers/the_course_of_empires/3-consumation-of-empire.jpg"
+            notify-send -a "SWWW" "Change" "<i>The Consummation of Empire</i> - Thomas Cole"
+            # echo "$HOME/imgs/wallpapers/the_course_of_empires/3-consumation-of-empire.jpg, case is $(date '+%S')"
+            ;;
+        36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47)
+            swww img "$HOME/imgs/wallpapers/the_course_of_empires/4-destruction.jpg"
+            notify-send -a "SWWW" "Change" "<i>Distruction</i> - Thomas Cole"
+            # echo "$HOME/imgs/wallpapers/the_course_of_empires/4-destruction.jpg, case is $(date '+%S')"
+            ;;
+        48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59)
+            swww img "$HOME/imgs/wallpapers/the_course_of_empires/5-desolation.jpg"
+            notify-send -a "SWWW" "Change" "<i>Desolation</i> - Thomas Cole"
+            # echo "$HOME/imgs/wallpapers/the_course_of_empires/5-desolation.jpg, case is $(date '+%S')"
+            ;;
+    esac
+    if test $after_first = false ; then
+        # echo "init loop, remainder is ${first_cycle_remainder}"
+        sleep ${first_cycle_remainder}s
+        after_first=true
+        continue
+    else
+        # echo "other loop"
+        sleep 12m
+    fi
+done

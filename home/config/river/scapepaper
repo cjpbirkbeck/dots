@@ -1,0 +1,16 @@
+#!/usr/bin/env dash
+# Switch between two directories, one after another, then randomly choose one of those wallpapers.
+
+# Randomly choose to start with a cityscape or landscape
+is_cityscape="$(shuf -i 0-1 -n 1)"
+
+while true; do
+    if test "$is_cityscape" -eq 1; then
+        swww img "$(find "$HOME/imgs/wallpapers/cityscapes/" -name "*.jpg" | shuf -n 1)"
+        is_cityscape="0"
+    else
+        swww img "$(find "$HOME/imgs/wallpapers/landscapes/" -name "*.jpg" | shuf -n 1)"
+        is_cityscape="1"
+    fi
+    sleep 10m
+done

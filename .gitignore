@@ -22,3 +22,4 @@ etc/nixos/laptop/*
 taskserver.nix
 # Temporary for now
 home/config/lf/*
+home/config/qtile/__pycache__/*

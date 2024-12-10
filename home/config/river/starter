@@ -1,0 +1,5 @@
+#/usr/bin/env dash
+
+fastfetch
+echo -e "\e[1mYour riddle/platitude/piece of widom of the day:\e[0m"
+echo -e "\e[3m$(fortune wisdom riddles platitudes -s)\e[0m"

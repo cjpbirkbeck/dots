@@ -1,0 +1,129 @@
+{
+    "height": 32, // Waybar height (to be removed for auto height)
+    "spacing": 2, // Gaps between modules (4px)
+    "modules-left": ["river/tags", "river/mode"],
+    "modules-center": ["wlr/taskbar"],
+    "modules-right": ["temperature", "keyboard-state", "wireplumber", "idle_inhibitor", "network", "custom/weather", "tray", "clock"],
+
+    // TODO: Add proper keybindings for my keyboard.
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": {
+            "capslock": "C {icon}",
+            "numlock": "N {icon}"
+        },
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "river/mode": {
+        "max-length": 32
+    },
+    "river/window": {
+        "format": "{}"
+    },
+    "wlr/taskbar": {
+        "icon-size": 24,
+        "on-click": "activate",
+        "tooltip-format": "{title} ({name}, {app_id})",
+    },
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-muted": "",
+        "on-click": "helvum",
+        "format-icons": ["", "", ""]
+    },
+    "river/tags": {
+        "disable-click": false
+    },
+    // Keeps screen from locking
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 21,
+        "show-passive-items": true,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%T}",
+        "tooltip-format": "<tt><big>{calendar}</big></tt>",
+        "format-alt": "{:%Y-%m-%d (%a)}",
+        "calendar": {
+            "weeks-pos": "left",
+            "format": {
+                "months": "<b><u>{}</u></b>",
+                "today": "<span color='#ffff00'><b>{}</b></span>"
+            }
+        },
+        "interval": 1
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "custom/weather": {
+        "format": "{} °",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "wttrbar --location Montreal",
+        "return-type": "json"
+    },
+    "pulseaudio": {
+        "scroll-step": 2,
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+}
+

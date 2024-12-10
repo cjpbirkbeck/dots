@@ -1,0 +1,6 @@
+#!/usr/bin/env dash
+
+if ! tmux run 2> /dev/null; then
+    tmux new-session -d -x 100 -c "$HOME" -s "main" "$HOME/.config/river/starter; zsh" &
+
+tmux attach
