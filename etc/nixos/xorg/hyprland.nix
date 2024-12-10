@@ -19,20 +19,20 @@ $(${pkgs.fortune.out}/bin/fortune wisdom riddles platitudes -s)
 
 in
 {
-
+  programs.labwc.enable = true;
   programs.sway.enable = true;
   programs.hyprland.enable = true;
   programs.river.enable = true;
+  programs.waybar.enable = true;
   services.xserver.windowManager.qtile = {
     enable = true;
-    backend = "wayland";
     extraPackages = python3Packages: with python3Packages; [
       # qtile-extras
       pyxdg
     ];
   };
 
-  sound.enable = true;
+  # sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -44,6 +44,7 @@ in
     };
   };
 
+  services.dbus.enable = true;
   security.polkit.enable = true;
   security.pam.services.waylock = {};
 
@@ -54,6 +55,7 @@ in
     };
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
+      # xdg-desktop-portal-kde
     ];
   };
 
@@ -79,7 +81,7 @@ in
     glib
     xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
-    hikari
+    # hikari
     labwc
     unstable.swww
     unstable.swayimg

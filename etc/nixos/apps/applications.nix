@@ -57,7 +57,7 @@
     xsel                      # Command line ultity for manuplating the system clipboard.
     xdotool                   # Automation tool for X11
     xlsx2csv                  # Converts Excel (post-2007) files to csv files
-    youtube-dl                # Video downloader
+    # youtube-dl                # Video downloader
     lowdown
 
     # # TUI programs
@@ -87,7 +87,7 @@
     w3m                       # Terminal web browser
     unstable.weechat          # IRC client
     ytfzf                     # Console search for Youtube
-    gomuks                    # Matrix client
+    # gomuks                    # Matrix client
     toot                      # Mastadon client
     turses                    # Twitter client
     # (import ./pkgs/castero.nix)
@@ -103,13 +103,13 @@
     gromit-mpx                # On-screen annotator
     kolourpaint               # Kolourpaint, a simple MS Paint clone
     # mpv          # Customized mpv file
-    nheko                     # Matrix client
+    # nheko                     # Matrix client
     networkmanagerapplet      # Applet for connecting to wifi
     notify-desktop            # Desktop notify
     rofi-pass                 # Frontend for quickly entering passwords with rofi.
     rofi                      # Program launcher/Window switcher/dmenu replacement
     pcmanfm-qt                # GUI file manager
-    qt5ct                     # Configure Qt5 outside of KDE Plasma
+    # LibsForQt5.qt5ct                     # Configure Qt5 outside of KDE Plasma
     qalculate-gtk             # Graphical calculator
     screenkey                 # Show keypress on the screen.
     st_patched                # Terminal emulator
@@ -137,7 +137,7 @@
     appimage-run
     libwebp
     # lxqt-themes
-    rnix-lsp
+    # rnix-lsp
     ueberzug
     unzip
     urlscan
